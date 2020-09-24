@@ -1,0 +1,10 @@
+.coverage
+.DS_Store
+.mypy_cache
+.pylintrc
+*.pyc
+*.tmp
+Icon?
+latex
+my-makefile
+.vscode
