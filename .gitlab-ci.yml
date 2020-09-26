@@ -3,10 +3,10 @@ before_script:
     - uname -a
     - printenv | sort
 
-# python:
-#     image: gpdowning/python
-#     script:
-#     - ls -al
+python:
+    image: gpdowning/python
+    script:
+    - ls -al
 #     - cat makefile
 #     - make versions
 #     - make run
