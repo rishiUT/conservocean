@@ -13,3 +13,11 @@ python:
 #     - make test
 #     - make tests
 #     - make check
+
+#node:
+#   image: joewallery/node
+#   script:
+#   - ls -al
+#   - cat makefile
+#   - make versions
+#   - make test
