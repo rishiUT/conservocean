@@ -76,11 +76,11 @@ push:
 all:
 
 # # auto format the code
-# format:
+format:
+	npx prettier --write .
 # 	$(BLACK) Collatz.py
 # 	$(BLACK) RunCollatz.py
 # 	$(BLACK) TestCollatz.py
-# 	npx prettier --write .
 
 # remove temporary files
 clean:
