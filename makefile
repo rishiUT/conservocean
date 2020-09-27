@@ -1,6 +1,6 @@
-# .DEFAULT_GOAL := all
-# MAKEFLAGS += --no-builtin-rules
-# SHELL         := bash
+.DEFAULT_GOAL := all
+MAKEFLAGS += --no-builtin-rules
+SHELL         := bash
 
 # ifeq ($(shell uname -s), Darwin)
 #     BLACK         := black
@@ -31,6 +31,9 @@
 # # run docker
 # docker:
 # 	docker run -it -v $(PWD):/usr/python -w /usr/python gpdowning/python
+
+docker-front:
+	docker run -it -v $(PWD)/frontend:/app -w /app joewallery/node
 
 # # get git config
 # config:
