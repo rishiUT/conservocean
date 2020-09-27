@@ -33,7 +33,7 @@ SHELL         := bash
 # 	docker run -it -v $(PWD):/usr/python -w /usr/python gpdowning/python
 
 docker-front:
-	docker run -it -v $(PWD)/frontend:/app -w /app joewallery/node
+	docker run -it -p 3001:3000 -v $(PWD)/frontend:/app -w /app joewallery/node
 
 # # get git config
 # config:

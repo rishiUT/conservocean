@@ -6,9 +6,13 @@ RUN apt-get update
 RUN apt-get -y install vim
 
 # set working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# installs any npm dependencies specified in package_json
+# install any npm dependencies specified in package_json
+COPY package*.json ./
 RUN npm install
+
+# expose port 8080 for local web server
+EXPOSE 8080
 
 CMD bash
