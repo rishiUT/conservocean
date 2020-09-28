@@ -7,40 +7,58 @@ import {
   useParams,
 } from "react-router-dom";
 
+const SPECIES = [
+  {
+    name: "fish",
+    size: "big",
+  },
+  {
+    name: "shark",
+    size: "big",
+  },
+  {
+    name: "squid",
+    size: "big",
+  },
+];
+
+// Display a grid of all available species
 function Species() {
   let match = useRouteMatch();
 
   return (
     <div>
-      <h2>Species</h2>
-
-      <ul>
-        <li>
-          <Link to={`${match.url}/species-1`}>Species 1</Link>
-        </li>
-        <li>
-          <Link to={`${match.url}/species-2`}>Species 2</Link>
-        </li>
-        <li>
-          <Link to={`${match.url}/species-3`}>Species 3</Link>
-        </li>
-      </ul>
-
       <Switch>
-        <Route path={`${match.path}/:specieId`}>
-          <Specie />
+        <Route exact path="/species">
+          <div>
+            <h2>Species</h2>
+            <ul>
+              {SPECIES.map((specie) => (
+                <li key={specie.name}>
+                  <Link to={`${match.url}/${specie.name}`}>{specie.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Route>
-        <Route path={match.path}>
-          <h3>Please select a species.</h3>
-        </Route>
+        <Route path={`${match.path}/:specieId`} children={<Specie />} />
       </Switch>
     </div>
   );
 }
 
+// Display content for an individual species page
 function Specie() {
   let { specieId }: any = useParams();
-  return <h3>Requested specie ID: {specieId} </h3>;
+  let specie = SPECIES.find((specie) => specie.name === specieId);
+  if (specie) {
+    return (
+      <h3>
+        Requested species ID: {specie.name} {specie.size}
+      </h3>
+    );
+  }
+  return <h3>Species not found</h3>;
 }
 
 export default Species;

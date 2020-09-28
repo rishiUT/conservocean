@@ -12,9 +12,9 @@
 
 - GitLab Pipelines: https://gitlab.com/joewallery/cs373-group12/-/pipelines
 
-- Website:
+- Website: https://conservocean.me
 
-- Estimated completion time:
+- Estimated completion time (Phase 1):
 
   - Joe: 15
   - Andy:
