@@ -1,35 +1,16 @@
-# CS 373: Software Engineering - 11am Group 12
-
-- Names: Joseph Wallery, Andy Weng, Christine Tsou, Rishi Salem, Serena Zamarripa, Dane Strandboge
-
-- EIDs: jbw2756, aw33252, cjt2538, ras5832, snz252, des2923
-
-- GitLab IDs: @joewallery, @AndyWeng33252, @ChristineTsou, @rishi312, @renaz6, @DStrand1
-
-- Git SHA:
-
-- Project Leader: Joe (Phase I)
-
-- GitLab Pipelines: https://gitlab.com/joewallery/cs373-group12/-/pipelines
+# CS 373: Software Engineering - 11am Group 12 - **ConservOcean**
 
 - Website: https://conservocean.me
+- Git SHA:
+- GitLab Pipelines: https://gitlab.com/joewallery/cs373-group12/-/pipelines
 
-- Estimated completion time (Phase 1):
-
-  - Joe: 15
-  - Andy:
-  - Christine:
-  - Rishi:
-  - Serena:
-  - Dane:
-
-- Actual completion time:
-
-  - Joe:
-  - Andy:
-  - Christine:
-  - Rishi:
-  - Serena:
-  - Dane:
+| Name                                    | EID       | GitLab ID      | Estimated Time (hours)                | Actual Time (hours)|
+| ------                                  | ------    | ------         | ------                                | ------      |
+| Joseph Wallery (Phase 1 Leader)         | jbw2756   | @joewallery    |**I:** 15<br>**II:**<br>**III:**<br>**IV:**|**I:** <br>**II:**<br>**III:**<br>**IV:**|
+| Andy Weng                               | aw33252   | @AndyWeng33252 |**I:**   <br>**II:**<br>**III:**<br>**IV:**|**I:** <br>**II:**<br>**III:**<br>**IV:**|
+| Christine Tsou                          | cjt2538   | @ChristineTsou |**I:**   <br>**II:**<br>**III:**<br>**IV:**|**I:** <br>**II:**<br>**III:**<br>**IV:**|
+| Rishi Salem                             | ras5832   | @rishi312      |**I:**   <br>**II:**<br>**III:**<br>**IV:**|**I:** <br>**II:**<br>**III:**<br>**IV:**|
+| Serena Zamarripa                        | snz252    | @renaz6        |**I:**   <br>**II:**<br>**III:**<br>**IV:**|**I:** <br>**II:**<br>**III:**<br>**IV:**|
+| Dane Strandboge                         | des2923   | @DStrand1      |**I:**   <br>**II:**<br>**III:**<br>**IV:**|**I:** <br>**II:**<br>**III:**<br>**IV:**|
 
 - Comments:
