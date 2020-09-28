@@ -22,28 +22,55 @@ const IMPACTS = [
   },
 ];
 
-// Display a grid of all available impacts
+// Display a table of all available impacts
 function Impacts() {
   let match = useRouteMatch();
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Switch>
         <Route exact path="/impacts">
-          <div>
-            <h2>Impacts</h2>
-            <ul>
-              {IMPACTS.map((impact) => (
-                <li key={impact.name}>
-                  <Link to={`${match.url}/${impact.name}`}>{impact.name}</Link>
-                </li>
-              ))}
-            </ul>
+          <div className="py-5 bg-light" style={{ height: "100%" }}>
+            <div className="container">
+              <h2 className="text-center">Human Impacts</h2>
+
+              <table className="table">
+                <thead>
+                  <th scope="col">Impact</th>
+                  <th scope="col">Attribute 2</th>
+                  <th scope="col">Attribute 3</th>
+                  <th scope="col">Attribute 4</th>
+                  <th scope="col">Attribute 5</th>
+                </thead>
+                <tbody>
+                  {IMPACTS.map((impact) => (
+                    <ImpactTableData key={impact.name} impact={impact} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </Route>
         <Route path={`${match.path}/:impactId`} children={<Impact />} />
       </Switch>
     </div>
+  );
+}
+
+function ImpactTableData({ impact }: any) {
+  let match = useRouteMatch();
+  return (
+    <tr>
+      <th scope="row">
+        <Link to={`${match.url}/${impact.name}`} className="card-link">
+          {impact.name}
+        </Link>
+      </th>
+      <td>Attribute 2</td>
+      <td>Attribute 3</td>
+      <td>Attribute 4</td>
+      <td>Attribute 5</td>
+    </tr>
   );
 }
 

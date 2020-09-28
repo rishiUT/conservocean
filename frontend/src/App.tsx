@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Page Components
 import Home from "./pages/Home";
@@ -14,9 +14,9 @@ import Navbar from "./parts/Navbar";
 function App() {
   return (
     <Router>
-      <div>
+      <div style={{ height: "100%" }}>
         {/* Site-wide navigation bar */}
-        <Navbar></Navbar>
+        <Navbar />
 
         {/* <Switch> renders the first route that matches current URL */}
         <Switch>
