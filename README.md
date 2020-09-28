@@ -4,7 +4,7 @@
 
 - EIDs: jbw2756, aw33252, cjt2538, ras5832, snz252, des2923
 
-- GitLab IDs: joewallery, AndyWeng33252, ChristineTsou, rishi312, renaz6, DStrand1
+- GitLab IDs: @joewallery, @AndyWeng33252, @ChristineTsou, @rishi312, @renaz6, @DStrand1
 
 - Git SHA:
 
