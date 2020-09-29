@@ -34,6 +34,7 @@ function Impacts() {
             <div className="container">
               <h2 className="text-center">Human Impacts</h2>
 
+              <div className="table-responsive">
               <table className="table">
                 <thead>
                   <th scope="col">Impact</th>
@@ -48,6 +49,7 @@ function Impacts() {
                   ))}
                 </tbody>
               </table>
+            </div>
             </div>
           </div>
         </Route>
