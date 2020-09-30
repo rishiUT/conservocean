@@ -14,6 +14,7 @@ class About extends React.Component {
       {
         name: "Joe Wallery",
         id: "Joe Wallery",
+        maj_resp: "Frontend",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -21,6 +22,7 @@ class About extends React.Component {
       {
         name: "Rishi Salem",
         id: "Rishi Salem",
+        maj_resp: "Frontend",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -28,6 +30,7 @@ class About extends React.Component {
       {
         name: "Serena Zamarripa",
         id: "Serena Zamarripa",
+        maj_resp: "Frontend",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -35,6 +38,7 @@ class About extends React.Component {
       {
         name: "Andy Weng",
         id: "AndyWeng33252",
+        maj_resp: "Backend",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -42,6 +46,7 @@ class About extends React.Component {
       {
         name: "Christine Tsou",
         id: "Christine Tsou",
+        maj_resp: "Backend",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -49,6 +54,7 @@ class About extends React.Component {
       {
         name: "Dane Strandboge",
         id: "Dane Strandboge",
+        maj_resp: "Backend",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -139,6 +145,7 @@ function UserCard({ user }: any) {
             <h5 className="card-title">{user.name}</h5>
           </div>
           <ul className="list-group list-group-flush">
+            <li className="list-group-item">Major Responsibilities: {user.maj_resp}</li>
             <li className="list-group-item">Commits: {user.commits}</li>
             <li className="list-group-item">Issues: {user.issues}</li>
             <li className="list-group-item">Unit Tests: {user.unitTests}</li>
