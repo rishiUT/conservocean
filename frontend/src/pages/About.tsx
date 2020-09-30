@@ -48,7 +48,8 @@ export default function About() {
 
   var toPrint = document.createElement("div")
 
-
+  req_commits.send()
+  req_issues.send()
   console.log(map_commits);
   console.log(map_issues);
 
