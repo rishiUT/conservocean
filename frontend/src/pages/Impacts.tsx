@@ -9,16 +9,20 @@ import {
 
 const IMPACTS = [
   {
-    name: "oil",
-    size: "big",
+    name: "Maine Independence Station Gas Plant ME USA",
+    category: "power plant",
+    subcategory: "GAS",
+    environmentRating: "Environmentally Responsible",
+    latitude: "-68.7106",
+    longitude: "44.8236",
+    country: "United States of America",
+    capacity: "550.2",
   },
   {
     name: "fishery",
-    size: "big",
   },
   {
     name: "hurricane",
-    size: "big",
   },
 ];
 
@@ -30,26 +34,26 @@ function Impacts() {
     <div style={{ height: "100%" }}>
       <Switch>
         <Route exact path="/impacts">
-          <div className="py-5 bg-light" style={{ height: "100%" }}>
+          <div className="bg-light" style={{ height: "100%" }}>
             <div className="container">
-              <h2 className="text-center">Human Impacts</h2>
+              <h2 className="py-5 text-center">Human Impacts</h2>
 
               <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <th scope="col">Impact</th>
-                  <th scope="col">Attribute 2</th>
-                  <th scope="col">Attribute 3</th>
-                  <th scope="col">Attribute 4</th>
-                  <th scope="col">Attribute 5</th>
-                </thead>
-                <tbody>
-                  {IMPACTS.map((impact) => (
-                    <ImpactTableData key={impact.name} impact={impact} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                <table className="table">
+                  <thead>
+                    <th scope="col">Impact Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                  </thead>
+                  <tbody>
+                    {IMPACTS.map((impact) => (
+                      <ImpactTableData key={impact.name} impact={impact} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </Route>
@@ -64,14 +68,17 @@ function ImpactTableData({ impact }: any) {
   return (
     <tr>
       <th scope="row">
-        <Link to={`${match.url}/${impact.name}`} className="card-link">
+        <Link
+          to={`${match.url}/${impact.name.replaceAll(" ", "-")}`}
+          className="card-link"
+        >
           {impact.name}
         </Link>
       </th>
-      <td>Attribute 2</td>
-      <td>Attribute 3</td>
-      <td>Attribute 4</td>
-      <td>Attribute 5</td>
+      <td>{impact.category}</td>
+      <td>{impact.subcategory?.toLowerCase()}</td>
+      <td>{impact.latitude}</td>
+      <td>{impact.longitude}</td>
     </tr>
   );
 }
@@ -81,11 +88,7 @@ function Impact() {
   let { impactId }: any = useParams();
   let impact = IMPACTS.find((impact) => impact.name === impactId);
   if (impact) {
-    return (
-      <h3>
-        Requested impact ID: {impact.name} {impact.size}
-      </h3>
-    );
+    return <h3>Requested impact ID: {impact.name}</h3>;
   }
   return <h3>Impact not found</h3>;
 }

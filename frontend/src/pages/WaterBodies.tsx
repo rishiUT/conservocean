@@ -9,16 +9,28 @@ import {
 
 const BODIES = [
   {
-    name: "Atlantic",
-    size: "big",
+    name: "Atlantic Ocean",
+    latitude: `4° 18' 42.5" N`,
+    longitude: `31° 30' 14.5" W`,
+    salinity: "35.17",
+    seaLevel: "0.2",
+    waterTemperature: "27.84",
   },
   {
-    name: "Pacific",
-    size: "big",
+    name: "Southern Ocean",
+    latitude: `68° 2' 23.3" S`,
+    longitude: `26° 37' 58.3" W`,
+    salinity: "34.45",
+    seaLevel: "-1.89",
+    waterTemperature: "-18.43",
   },
   {
-    name: "Antarctic",
-    size: "big",
+    name: "Ashmore Reef",
+    latitude: `-12.24174549`,
+    longitude: `123.04165997`,
+    salinity: "34.76",
+    seaLevel: "0.62",
+    waterTemperature: "29.12",
   },
 ];
 
@@ -30,9 +42,9 @@ function WaterBodies() {
     <div style={{ height: "100%" }}>
       <Switch>
         <Route exact path="/water-bodies">
-          <div className="py-5 bg-light" style={{ height: "100%" }}>
+          <div className="bg-light" style={{ height: "100%" }}>
             <div className="container">
-              <h2 className="text-center">Bodies of Water</h2>
+              <h2 className="py-5 text-center">Bodies of Water</h2>
               <div className="card-deck">
                 {BODIES.map((body) => (
                   <WBCard key={body.name} body={body} />
@@ -51,7 +63,10 @@ function WBCard({ body }: any) {
   let match = useRouteMatch();
   return (
     <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
-      <Link to={`${match.url}/${body.name}`} className="card-link">
+      <Link
+        to={`${match.url}/${body.name.replace(" ", "-")}`}
+        className="card-link"
+      >
         <span
           style={{
             position: "absolute",
@@ -63,7 +78,7 @@ function WBCard({ body }: any) {
           }}
         ></span>
       </Link>
-      <svg
+      {/* <svg
         className="bd-placeholder-img card-img-top"
         width="100%"
         height="225"
@@ -78,15 +93,19 @@ function WBCard({ body }: any) {
         <text x="50%" y="50%" fill="#eceeef" dy=".3em">
           Thumbnail
         </text>
-      </svg>
+      </svg> */}
       <div className="card-body">
         <h5 className="card-title">{body.name}</h5>
       </div>
       <ul className="list-group list-group-flush">
-        <li className="list-group-item">Attribute 1</li>
-        <li className="list-group-item">Attribute 2</li>
-        <li className="list-group-item">Attribute 3</li>
-        <li className="list-group-item">Attribute 4</li>
+        <li className="list-group-item">Latitude: {body.latitude}</li>
+        <li className="list-group-item">Longitude: {body.longitude}</li>
+        <li className="list-group-item">
+          Salinity: {body.salinity} g salt per kg water
+        </li>
+        <li className="list-group-item">
+          Temperature {body.waterTemperature}°C
+        </li>
       </ul>
     </div>
   );
@@ -97,11 +116,7 @@ function WaterBody() {
   let { waterbodyId }: any = useParams();
   let body = BODIES.find((body) => body.name === waterbodyId);
   if (body) {
-    return (
-      <h3>
-        Requested water body ID: {body.name} {body.size}
-      </h3>
-    );
+    return <h3>Requested water body ID: {body.name}</h3>;
   }
   return <h3>Body not found</h3>;
 }
