@@ -6,6 +6,9 @@ import {
   useRouteMatch,
   useParams,
 } from "react-router-dom";
+import atlantic from "../assets/atlantic.png";
+import southern from "../assets/southern.png";
+import ashmore from "../assets/ashmore.png";
 
 const BODIES = [
   {
@@ -15,6 +18,16 @@ const BODIES = [
     salinity: "35.17",
     seaLevel: "0.2",
     waterTemperature: "27.84",
+    mapImgPath: atlantic,
+    chlorophyll: "0.11",
+    iron: "0.0",
+    nitrate: "0.01",
+    oxygen: "201.97",
+    ph: "8.04",
+    phosphate: "0.05",
+    phyto: "4.6",
+    phytoplankton: "1.45",
+    silicate: "2.25",
   },
   {
     name: "Southern Ocean",
@@ -23,14 +36,34 @@ const BODIES = [
     salinity: "34.45",
     seaLevel: "-1.89",
     waterTemperature: "-18.43",
+    mapImgPath: southern,
+    chlorophyll: "0.03",
+    iron: "0.0",
+    nitrate: "29.31",
+    oxygen: "324.73",
+    ph: "8.03",
+    phosphate: "2.07",
+    phyto: "0.0",
+    phytoplankton: "0.08",
+    silicate: "73.89",
   },
   {
     name: "Ashmore Reef",
-    latitude: `-12.24174549`,
-    longitude: `123.04165997`,
+    latitude: `12° 14' 30.3" S`,
+    longitude: `123° 2' 30" E`,
     salinity: "34.76",
     seaLevel: "0.62",
     waterTemperature: "29.12",
+    mapImgPath: ashmore,
+    chlorophyll: "0.14",
+    iron: "0.0",
+    nitrate: "0.0",
+    oxygen: "203.65",
+    ph: "8.01",
+    phosphate: "0.15",
+    phyto: "4.21",
+    phytoplankton: "1.86",
+    silicate: "2.27",
   },
 ];
 
@@ -39,23 +72,21 @@ function WaterBodies() {
   let match = useRouteMatch();
 
   return (
-    <div style={{ height: "100%" }}>
-      <Switch>
-        <Route exact path="/water-bodies">
-          <div className="bg-light" style={{ height: "100%" }}>
-            <div className="container">
-              <h2 className="py-5 text-center">Bodies of Water</h2>
-              <div className="card-deck">
-                {BODIES.map((body) => (
-                  <WBCard key={body.name} body={body} />
-                ))}
-              </div>
+    <Switch>
+      <Route exact path="/water-bodies">
+        <div className="bg-light" style={{ height: "100%" }}>
+          <div className="container">
+            <h2 className="py-5 text-center">Bodies of Water</h2>
+            <div className="card-deck">
+              {BODIES.map((body) => (
+                <WBCard key={body.name} body={body} />
+              ))}
             </div>
           </div>
-        </Route>
-        <Route path={`${match.path}/:waterbodyId`} children={<WaterBody />} />
-      </Switch>
-    </div>
+        </div>
+      </Route>
+      <Route path={`${match.path}/:waterbodyId`} children={<WaterBody />} />
+    </Switch>
   );
 }
 
@@ -78,22 +109,7 @@ function WBCard({ body }: any) {
           }}
         ></span>
       </Link>
-      {/* <svg
-        className="bd-placeholder-img card-img-top"
-        width="100%"
-        height="225"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid slice"
-        focusable="false"
-        role="img"
-        aria-label="Placeholder: Thumbnail"
-      >
-        <title>Placeholder</title>
-        <rect width="100%" height="100%" fill="#55595c" />
-        <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-          Thumbnail
-        </text>
-      </svg> */}
+      <img className="card-image" src={body.mapImgPath} width="100%"></img>
       <div className="card-body">
         <h5 className="card-title">{body.name}</h5>
       </div>
@@ -114,11 +130,55 @@ function WBCard({ body }: any) {
 // Display data page on a particular body of water
 function WaterBody() {
   let { waterbodyId }: any = useParams();
-  let body = BODIES.find((body) => body.name === waterbodyId);
+  let body = BODIES.find(
+    (body) => body.name === waterbodyId.replaceAll("-", " ")
+  );
   if (body) {
-    return <h3>Requested water body ID: {body.name}</h3>;
+    return (
+      <div className="bg-light">
+        <main className="container py-5" style={{ height: "100%" }}>
+          <h1 className="text-center">{body.name} </h1>
+          <div className="container" style={{ width: "80%" }}>
+            <div className="text-center py-3">
+              <img
+                style={{ borderRadius: "5px" }}
+                src={body.mapImgPath}
+                width="100%"
+              ></img>
+            </div>
+            <h3>Region Data</h3>
+            <ul>
+              <li>Latitude: {body.latitude}</li>
+              <li>Longitude: {body.longitude}</li>
+              <li>Salinity: {body.salinity} g salt per kg water</li>
+              <li>Water Temperature: {body.waterTemperature}°C</li>
+              <li>Sea Level (from mean): {body.seaLevel}m</li>
+              <li>pH: {body.ph}</li>
+            </ul>
+            <h3>
+              Chemical Solutes{" "}
+              <small className="text-muted">(mole concentration)</small>
+            </h3>
+            <ul>
+              <li>Chlorophyll: {body.chlorophyll}</li>
+              <li>Iron: {body.iron}</li>
+              <li>Nitrate: {body.nitrate}</li>
+              <li>Oxygen: {body.oxygen}</li>
+              <li>Phosphate: {body.phosphate}</li>
+              <li>Phyto: {body.phyto}</li>
+              <li>Phytoplankton: {body.phytoplankton}</li>
+              <li>Silicate: {body.silicate}</li>
+            </ul>
+          </div>
+        </main>
+      </div>
+    );
   }
-  return <h3>Body not found</h3>;
+  return (
+    <div className="py-5 container">
+      <h3 className="text-center">Ocean region not found.</h3>
+    </div>
+  );
 }
 
 export default WaterBodies;
