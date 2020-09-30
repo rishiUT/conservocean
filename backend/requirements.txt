@@ -1,0 +1,7 @@
+Flask
+requests
+Flask-restless
+sqlalchemy
+Black
+pylint
+Mypy
