@@ -37,7 +37,16 @@ const IMPACTS = [
     mapImgPath: persianGulf,
   },
   {
-    name: "hurricane",
+    name: "Impact 3",
+    category: "category",
+    subcategory: "subcategory",
+    description: "description",
+    latitude: "0",
+    longitude: "0",
+    location: "location",
+    capacity: "0",
+    date: "1/1/2020",
+    mapImgPath: "",
   },
 ];
 
