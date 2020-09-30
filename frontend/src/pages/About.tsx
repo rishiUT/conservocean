@@ -126,9 +126,16 @@ class About extends React.Component {
     return (
       <div className="container">
         <h2 className="text-center py-5">About</h2>
-        <h2>Total Commits: {this.state.totalCommits}</h2>
-        <h2>Total Issues: {this.state.totalIssues}</h2>
-        <h2>Total Unit Tests: {this.state.totalUnitTests}</h2>
+        <h3 className="text-center py-5"> Our site provides information about various types of ocean 
+        wildlife, the bodies of water in which they live, and the impacts of human activities on both.</h3>
+        <h3 className="text-center py-5">By educating people on the aquatic creatures that share this 
+        world with us, and providing information on how our actions impact them, we hope to help people 
+        understand which of their behaviors they may want to change and which sea creatures they could help by doing so.</h3>
+        <h3 className="text-center py-5">The intended users of this site are the people who are curious 
+        about aquatic wildlife, would like to be more environmentally conscious, or both.</h3>
+        <h3>Total Commits: {this.state.totalCommits}</h3>
+        <h3>Total Issues: {this.state.totalIssues}</h3>
+        <h3>Total Unit Tests: {this.state.totalUnitTests}</h3>
         {/* <h2>Total Unit Tests: 0</h2> */}
         <div className="row py-5"> {result}</div>
       </div>
