@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .hero-section{
     display: flex;
     background-color: #FFFFFA;
@@ -42,13 +41,6 @@
 .image-cont{
     /* position: relative;
 	padding-bottom: 30%; */
-=======
-.heading {
-  /* padding: 15rem; */
-  /* font-size: 2.5rem; */
-
-  padding-left: 15rem;
->>>>>>> refs/remotes/origin/master
 }
 
 .list {
