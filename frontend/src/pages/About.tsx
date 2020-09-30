@@ -1,5 +1,6 @@
 import React from "react";
 import "./About.css";
+import { Link } from "react-router-dom";
 import joe from "./Media/joe_profile.jpg";
 import rishi from "./Media/rishi.png";
 import serena from "./Media/serena.jpg";
@@ -139,35 +140,34 @@ class About extends React.Component {
 
     return (
       <div className="container">
-        <h2 className="text-center py-5">About</h2>
-        <h3 className="text-center py-5">
+        <h2 className="header">About</h2>
+        <h3 className="description">
           {" "}
           Our site provides information about various types of ocean wildlife,
           the bodies of water in which they live, and the impacts of human
           activities on both.
         </h3>
-        <h3 className="text-center py-5">
+        <h3 className="description">
           By educating people on the aquatic creatures that share this world
           with us, and providing information on how our actions impact them, we
           hope to help people understand which of their behaviors they may want
           to change and which sea creatures they could help by doing so.
         </h3>
-        <h3 className="text-center py-5">
+        <h3 className="description">
           The intended users of this site are the people who are curious about
           aquatic wildlife, would like to be more environmentally conscious, or
           both.
         </h3>
-        <h3>Total Commits: {this.state.totalCommits}</h3>
-        <h3>Total Issues: {this.state.totalIssues}</h3>
-        <h3>Total Unit Tests: {this.state.totalUnitTests}</h3>
-        <h3>
-          Link to the GitLab Repository:
-          https://gitlab.com/joewallery/cs373-group12
-        </h3>
-        <h3>
-          Link to API Documentation:
-          https://documenter.getpostman.com/view/12800288/TVKJxaRw
-        </h3>
+        <h2 className="header">Statistics</h2>
+
+        <h3 className="description">Total Commits: {this.state.totalCommits}</h3>
+        <h3 className="description">Total Issues: {this.state.totalIssues}</h3>
+        <h3 className="description">Total Unit Tests: {this.state.totalUnitTests}</h3>
+
+        <a href="https://documenter.getpostman.com/view/12800288/TVKJxaRw" className='theme-link'>Link to API Documentation</a>
+        <br/>
+        <a href="https://gitlab.com/joewallery/cs373-group12" className='theme-link'>Link to the GitLab Repository</a>
+
         {/* <h2>Total Unit Tests: 0</h2> */}
         <div className="row py-5"> {result}</div>
       </div>
