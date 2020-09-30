@@ -56,6 +56,7 @@ class About extends React.Component {
     ],
     totalIssues: 0,
     totalCommits: 0,
+    totalUnitTests: 0
   };
 
   componentDidMount() {
@@ -121,6 +122,7 @@ class About extends React.Component {
         <h2 className="text-center py-5">About</h2>
         <h2>Total Commits: {this.state.totalCommits}</h2>
         <h2>Total Issues: {this.state.totalIssues}</h2>
+        <h2>Total Unit Tests: {this.state.totalUnitTests}</h2>
         {/* <h2>Total Unit Tests: 0</h2> */}
         <div className="row py-5"> {result}</div>
       </div>
@@ -139,6 +141,7 @@ function UserCard({ user }: any) {
           <ul className="list-group list-group-flush">
             <li className="list-group-item">Commits: {user.commits}</li>
             <li className="list-group-item">Issues: {user.issues}</li>
+            <li className="list-group-item">Unit Tests: {user.unitTests}</li>
           </ul>
         </div>
       </div>
