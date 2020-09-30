@@ -9,16 +9,38 @@ import {
 
 const SPECIES = [
   {
-    name: "fish",
-    size: "big",
+    name: "Shortfin Squid",
+    genus: "Illex",
+    species: "illecebrosus",
+    region: "Greater Atlantic",
+    fishingRate: "At recommended level.",
+    populationStatus: "LC",
+    habitatImpacts: "",
+    physicalDescription: "",
+    imagePath: "",
   },
   {
-    name: "shark",
-    size: "big",
+    name: "Black Grouper",
+    genus: "Mycteroperca",
+    species: "bonaci",
+    region: "Southeast",
+    fishingRate:
+      "Above target population levels in the Gulf of Mexico and South Atlantic.",
+    populationStatus: "NT",
+    habitatImpacts: "",
+    physicalDescription: "",
+    imagePath: "",
   },
   {
-    name: "squid",
-    size: "big",
+    name: "Atlantic Sharpnose Shark",
+    genus: "Rhizoprionodon",
+    species: "terraenovae",
+    region: "Greater Atlantic, Southeast",
+    fishingRate: "At recommended levels.",
+    populationStatus: "",
+    habitatImpacts: "",
+    physicalDescription: "",
+    imagePath: "",
   },
 ];
 
@@ -30,9 +52,9 @@ function Species() {
     <div style={{ height: "100%" }}>
       <Switch>
         <Route exact path="/species">
-          <div className="py-5 bg-light" style={{ height: "100%" }}>
+          <div className="bg-light" style={{ height: "100%" }}>
             <div className="container">
-              <h2 className="text-center">Species</h2>
+              <h2 className="py-5 text-center">Species</h2>
               <div className="card-deck">
                 {SPECIES.map((species) => (
                   <SpeciesCard key={species.name} species={species} />
@@ -83,10 +105,10 @@ function SpeciesCard({ species }: any) {
         <h5 className="card-title">{species.name}</h5>
       </div>
       <ul className="list-group list-group-flush">
-        <li className="list-group-item">Attribute 1</li>
-        <li className="list-group-item">Attribute 2</li>
-        <li className="list-group-item">Attribute 3</li>
-        <li className="list-group-item">Attribute 4</li>
+        <li className="list-group-item">Genus: {species.genus}</li>
+        <li className="list-group-item">Species: {species.species}</li>
+        <li className="list-group-item">Region: {species.region}</li>
+        <li className="list-group-item">Fishing Rate: {species.fishingRate}</li>
       </ul>
     </div>
   );
@@ -97,11 +119,7 @@ function Specie() {
   let { specieId }: any = useParams();
   let specie = SPECIES.find((specie) => specie.name === specieId);
   if (specie) {
-    return (
-      <h3>
-        Requested species ID: {specie.name} {specie.size}
-      </h3>
-    );
+    return <h3>Requested species ID: {specie.name}</h3>;
   }
   return <h3>Species not found</h3>;
 }

@@ -1,11 +1,11 @@
-.heading{
-    /* padding: 15rem; */
-    /* font-size: 2.5rem; */
+.heading {
+  /* padding: 15rem; */
+  /* font-size: 2.5rem; */
 
-    padding-left: 15rem;
+  padding-left: 15rem;
 }
 
-.list{
-    display: flex;
-    list-style: none;
+.list {
+  display: flex;
+  list-style: none;
 }
