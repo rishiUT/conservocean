@@ -136,6 +136,8 @@ class About extends React.Component {
         <h3>Total Commits: {this.state.totalCommits}</h3>
         <h3>Total Issues: {this.state.totalIssues}</h3>
         <h3>Total Unit Tests: {this.state.totalUnitTests}</h3>
+        <h3>Link to the GitLab Repository: https://gitlab.com/joewallery/cs373-group12</h3>
+        <h3>Link to API Documentation: https://documenter.getpostman.com/view/12800288/TVKJxaRw</h3>
         {/* <h2>Total Unit Tests: 0</h2> */}
         <div className="row py-5"> {result}</div>
       </div>
