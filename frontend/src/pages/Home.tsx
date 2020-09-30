@@ -12,17 +12,20 @@ import drops from './Media/water-drops.png';
 function Home() {
   return (
     <div>
-
       <div className="hero-section">
         <div className="heading-content">
           <div className="img-cont">
-            <img className="image-1" src={fish} alt="fish"/>
+            <img className="image-1" src={fish} alt="fish" />
           </div>
           <h2 className="heading">Welcome!</h2>
-          <h2 className="subheading">ConservOcean is an educational tool with the mission to bring awareness to how human activity impacts bodies of water and aquatic animals. </h2>
+          <h2 className="subheading">
+            ConservOcean is an educational tool with the mission to bring
+            awareness to how human activity impacts bodies of water and aquatic
+            animals.{" "}
+          </h2>
         </div>
         <div className="img-cont">
-          <img className="image" src={waves} alt="waves"/>
+          <img className="image" src={waves} alt="waves" />
         </div>
       </div>
 
