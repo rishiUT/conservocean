@@ -76,7 +76,7 @@ function ImpactTableData({ impact }: any) {
         </Link>
       </th>
       <td>{impact.category}</td>
-      <td>{impact.type?.toLowerCase()}</td>
+      <td>{impact.subcategory?.toLowerCase()}</td>
       <td>{impact.latitude}</td>
       <td>{impact.longitude}</td>
     </tr>

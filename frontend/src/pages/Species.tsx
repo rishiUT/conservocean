@@ -17,7 +17,7 @@ const SPECIES = [
     populationStatus: "LC",
     habitatImpacts: "",
     physicalDescription: "",
-    imagePath: "",
+    imagePath: "https://www.fishwatch.gov/sites/default/files/Squid_Illex_NB_W.png",
   },
   {
     name: "Black Grouper",
@@ -29,7 +29,7 @@ const SPECIES = [
     populationStatus: "NT",
     habitatImpacts: "",
     physicalDescription: "",
-    imagePath: "",
+    imagePath: "https://www.fishwatch.gov/sites/default/files/black-grouper-illustration.png",
   },
   {
     name: "Atlantic Sharpnose Shark",
@@ -40,7 +40,7 @@ const SPECIES = [
     populationStatus: "",
     habitatImpacts: "",
     physicalDescription: "",
-    imagePath: "",
+    imagePath: "https://www.fishwatch.gov/sites/default/files/Atlantic_Sharpnosed_Shark_NB_W_smaller_0.png",
   },
 ];
 
@@ -85,28 +85,13 @@ function SpeciesCard({ species }: any) {
           }}
         ></span>
       </Link>
-      <svg
-        className="bd-placeholder-img card-img-top"
-        width="100%"
-        height="225"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid slice"
-        focusable="false"
-        role="img"
-        aria-label="Placeholder: Thumbnail"
-      >
-        <title>Placeholder</title>
-        <rect width="100%" height="100%" fill="#55595c" />
-        <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-          Thumbnail
-        </text>
-      </svg>
+      <img className="card-img-top" width="100%" src={species.imagePath}></img>
       <div className="card-body">
         <h5 className="card-title">{species.name}</h5>
       </div>
       <ul className="list-group list-group-flush">
-        <li className="list-group-item">Genus: {species.genus}</li>
-        <li className="list-group-item">Species: {species.species}</li>
+        <li className="list-group-item">Genus: <span className="font-italic">{species.genus}</span></li>
+        <li className="list-group-item">Species: <span className="font-italic">{species.species}</span></li>
         <li className="list-group-item">Region: {species.region}</li>
         <li className="list-group-item">Fishing Rate: {species.fishingRate}</li>
       </ul>
