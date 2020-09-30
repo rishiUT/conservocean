@@ -1,102 +1,150 @@
 import React from "react";
 
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-      <h2>total number of commits: </h2>
-      <h2>total number of issues: </h2>
-      <h2>Total number of unit tests: 0</h2>
-    </div>
-  );
+interface user {
+  name: string;
+  id: string;
+  commits: number;
+  issues: number;
+  unitTests: number;
 }
-/*
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JSON Test</title>
-</head>
-<body>
-    <div id="myData"></div>
-    <script>
-        fetch('https://gitlab.com/api/v4/projects/21238278/issues')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                getIssueData(data);
-            })
-            .catch(function (err) {
-                console.log('error: ' + err);
-            });
-        function getIssueData(data) {
-            var mainContainer = document.getElementById("myData");
-            let issues = new Map();
-            for (var i = 0; i < data.length; i++) {
-                let curr = data[i].author.name;
-                if (issues.has(curr)) {
-                    issues.set(curr, issues.get(curr) + 1)
-                } else {
-                    issues.set(curr, 1)
-                }
-            }
 
-            let total = 0;
-            for (let entry of issues) {
-                var div = document.createElement("div");
-                div.innerHTML = 'Total Issues: ' + entry[0] + ' ' + entry[1];
-                total += entry[1];
-                mainContainer.appendChild(div);
-            }
+class About extends React.Component {
+  state = {
+    users: [
+      {
+        name: "Joe Wallery",
+        id: "Joe Wallery",
+        commits: 0,
+        issues: 0,
+        unitTests: 0,
+      },
+      {
+        name: "Rishi Salem",
+        id: "Rishi Salem",
+        commits: 0,
+        issues: 0,
+        unitTests: 0,
+      },
+      {
+        name: "Serena Zamarripa",
+        id: "Serena Zamarripa",
+        commits: 0,
+        issues: 0,
+        unitTests: 0,
+      },
+      {
+        name: "Andy Weng",
+        id: "AndyWeng33252",
+        commits: 0,
+        issues: 0,
+        unitTests: 0,
+      },
+      {
+        name: "Christine Tsou",
+        id: "Christine Tsou",
+        commits: 0,
+        issues: 0,
+        unitTests: 0,
+      },
+      {
+        name: "Dane Strandboge",
+        id: "Dane Strandboge",
+        commits: 0,
+        issues: 0,
+        unitTests: 0,
+      },
+    ],
+    totalIssues: 0,
+    totalCommits: 0,
+  };
 
-            var div = document.createElement("div");
-            div.innerHTML = 'Project Total Issues: ' + total;
-            mainContainer.appendChild(div);
-        }
+  componentDidMount() {
+    // GET the number of issues per user and the total number of issues
+    fetch("https://gitlab.com/api/v4/projects/21238278/issues?per_page=9999")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data.forEach((issue: any) => {
+          let name = issue.author.name;
+          this.setState({
+            users: this.state.users.map((user: user) => {
+              if (user.id === name) {
+                user.issues += 1;
+                return user;
+              }
+              return user;
+            }),
+            totalIssues: this.state.totalIssues + 1,
+          });
+        });
+      })
+      .catch((err) => {
+        console.log("error: " + err);
+      });
 
-        fetch('https://gitlab.com/api/v4/projects/21238278/repository/commits')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                getCommitData(data);
-            })
-            .catch(function (err) {
-                console.log('error: ' + err);
-            });
-        function getCommitData(data) {
-            var mainContainer = document.getElementById("myData");
-            let commits = new Map();
-            for (var i = 0; i < data.length; i++) {
-                let curr_committer = data[i].committer_name;
-                if (commits.has(curr_committer)) {
-                    commits.set(curr_committer, commits.get(curr_committer) + 1)
-                } else {
-                    commits.set(curr_committer, 1)
-                }
-            }
+    // GET the number of commits per user and the total number of commits
+    fetch(
+      "https://gitlab.com/api/v4/projects/21238278/repository/commits?per_page=9999"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data.forEach((commit: any) => {
+          let name = commit.author_name;
+          this.setState({
+            users: this.state.users.map((user: user) => {
+              if (user.id === name) {
+                user.commits += 1;
+                return user;
+              }
+              return user;
+            }),
+            totalCommits: this.state.totalCommits + 1,
+          });
+        });
+      })
+      .catch(function (err) {
+        console.log("error: " + err);
+      });
+  }
 
-            let total = 0;
-            for (let entry of commits) {
-                var div = document.createElement("div");
-                div.innerHTML = 'Total Commits: ' + entry[0] + ' ' + entry[1];
-                total += entry[1];
-                mainContainer.appendChild(div);
-            }
+  render() {
+    const { users }: any = this.state;
+    const result = users.map((user: user, index: number) => {
+      return <UserCard key={index} user={user} />;
+    });
 
-            var div = document.createElement("div");
-            div.innerHTML = 'Project Total Commits: ' + total;
-            mainContainer.appendChild(div);
-        }
-    </script>
-</body>
-</html>
-*/
+    return (
+      <div className="container">
+        <h2 className="text-center py-5">About</h2>
+        <h2>Total Commits: {this.state.totalCommits}</h2>
+        <h2>Total Issues: {this.state.totalIssues}</h2>
+        {/* <h2>Total Unit Tests: 0</h2> */}
+        <div className="row py-5"> {result}</div>
+      </div>
+    );
+  }
+}
 
-//GET /projects/:id/repository/commits
-//sort through commits, get total number and number for each user id
+function UserCard({ user }: any) {
+  if (user) {
+    return (
+      <div className="col-md-4">
+        <div className="card mb-4 shadow-sm">
+          <div className="card-body">
+            <h5 className="card-title">{user.name}</h5>
+          </div>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">Commits: {user.commits}</li>
+            <li className="list-group-item">Issues: {user.issues}</li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+  return null;
+}
 
-//gitlab access token = XyyzhHPKZLhojG-Z_3Qg
 export default About;
