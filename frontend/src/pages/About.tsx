@@ -62,7 +62,7 @@ class About extends React.Component {
     ],
     totalIssues: 0,
     totalCommits: 0,
-    totalUnitTests: 0
+    totalUnitTests: 0,
   };
 
   componentDidMount() {
@@ -126,18 +126,34 @@ class About extends React.Component {
     return (
       <div className="container">
         <h2 className="text-center py-5">About</h2>
-        <h3 className="text-center py-5"> Our site provides information about various types of ocean 
-        wildlife, the bodies of water in which they live, and the impacts of human activities on both.</h3>
-        <h3 className="text-center py-5">By educating people on the aquatic creatures that share this 
-        world with us, and providing information on how our actions impact them, we hope to help people 
-        understand which of their behaviors they may want to change and which sea creatures they could help by doing so.</h3>
-        <h3 className="text-center py-5">The intended users of this site are the people who are curious 
-        about aquatic wildlife, would like to be more environmentally conscious, or both.</h3>
+        <h3 className="text-center py-5">
+          {" "}
+          Our site provides information about various types of ocean wildlife,
+          the bodies of water in which they live, and the impacts of human
+          activities on both.
+        </h3>
+        <h3 className="text-center py-5">
+          By educating people on the aquatic creatures that share this world
+          with us, and providing information on how our actions impact them, we
+          hope to help people understand which of their behaviors they may want
+          to change and which sea creatures they could help by doing so.
+        </h3>
+        <h3 className="text-center py-5">
+          The intended users of this site are the people who are curious about
+          aquatic wildlife, would like to be more environmentally conscious, or
+          both.
+        </h3>
         <h3>Total Commits: {this.state.totalCommits}</h3>
         <h3>Total Issues: {this.state.totalIssues}</h3>
         <h3>Total Unit Tests: {this.state.totalUnitTests}</h3>
-        <h3>Link to the GitLab Repository: https://gitlab.com/joewallery/cs373-group12</h3>
-        <h3>Link to API Documentation: https://documenter.getpostman.com/view/12800288/TVKJxaRw</h3>
+        <h3>
+          Link to the GitLab Repository:
+          https://gitlab.com/joewallery/cs373-group12
+        </h3>
+        <h3>
+          Link to API Documentation:
+          https://documenter.getpostman.com/view/12800288/TVKJxaRw
+        </h3>
         {/* <h2>Total Unit Tests: 0</h2> */}
         <div className="row py-5"> {result}</div>
       </div>
@@ -154,7 +170,9 @@ function UserCard({ user }: any) {
             <h5 className="card-title">{user.name}</h5>
           </div>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">Major Responsibilities: {user.maj_resp}</li>
+            <li className="list-group-item">
+              Major Responsibilities: {user.maj_resp}
+            </li>
             <li className="list-group-item">Commits: {user.commits}</li>
             <li className="list-group-item">Issues: {user.issues}</li>
             <li className="list-group-item">Unit Tests: {user.unitTests}</li>
