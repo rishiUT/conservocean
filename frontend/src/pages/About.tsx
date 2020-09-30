@@ -1,4 +1,11 @@
 import React from "react";
+import "./About.css";
+import joe from "./Media/joe_profile.jpg";
+import rishi from "./Media/rishi.png";
+import serena from "./Media/serena.jpg";
+import andy from "./Media/andy.jpg";
+import christine from "./Media/christine.jpg";
+import dane from "./Media/fish.png";
 
 interface user {
   name: string;
@@ -6,6 +13,7 @@ interface user {
   commits: number;
   issues: number;
   unitTests: number;
+  image: string;
 }
 
 class About extends React.Component {
@@ -18,6 +26,7 @@ class About extends React.Component {
         commits: 0,
         issues: 0,
         unitTests: 0,
+        image: joe,
       },
       {
         name: "Rishi Salem",
@@ -26,6 +35,7 @@ class About extends React.Component {
         commits: 0,
         issues: 0,
         unitTests: 0,
+        image: rishi,
       },
       {
         name: "Serena Zamarripa",
@@ -34,6 +44,7 @@ class About extends React.Component {
         commits: 0,
         issues: 0,
         unitTests: 0,
+        image: serena,
       },
       {
         name: "Andy Weng",
@@ -42,6 +53,7 @@ class About extends React.Component {
         commits: 0,
         issues: 0,
         unitTests: 0,
+        image: andy,
       },
       {
         name: "Christine Tsou",
@@ -50,6 +62,7 @@ class About extends React.Component {
         commits: 0,
         issues: 0,
         unitTests: 0,
+        image: christine,
       },
       {
         name: "Dane Strandboge",
@@ -58,6 +71,7 @@ class About extends React.Component {
         commits: 0,
         issues: 0,
         unitTests: 0,
+        image: dane,
       },
     ],
     totalIssues: 0,
@@ -167,6 +181,7 @@ function UserCard({ user }: any) {
       <div className="col-md-4">
         <div className="card mb-4 shadow-sm">
           <div className="card-body">
+            <img className="card-image" src={user.image} alt={user.name}/>
             <h5 className="card-title">{user.name}</h5>
           </div>
           <ul className="list-group list-group-flush">
