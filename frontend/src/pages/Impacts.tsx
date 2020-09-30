@@ -130,13 +130,18 @@ function Impact() {
               <li>Longitude: {impact.longitude}</li>
               <li>Location: {impact.location}</li>
               <li>Date: {impact.date}</li>
-              <li>Description: {impact.description}</li>
+              <li>
+                {impact.category === "power plant"
+                  ? "Environmental Rating: "
+                  : "Description: "}
+                {impact.description}
+              </li>
               <li>Category: {impact.category?.toLowerCase()}</li>
               <li>Type: {impact.subcategory?.toLowerCase()}</li>
               <li>
                 {impact.category === "power plant" ? "Capacity: " : "Volume: "}
                 {impact.capacity?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                {impact.category === "power plant" ? "mWh" : " gallons"}
+                {impact.category === "power plant" ? " MW" : " gallons"}
               </li>
             </ul>
           </div>
