@@ -7,6 +7,8 @@ import serena from "./Media/serena.jpg";
 import andy from "./Media/andy.jpg";
 import christine from "./Media/christine.jpg";
 import dane from "./Media/fish.png";
+import fishwatch from "./Media/fishwatch.jpg";
+import stormglass from "./Media/stormglass.svg";
 
 interface user {
   name: string;
@@ -73,6 +75,16 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: dane,
+      },
+    ],
+    dataSource: [
+      {
+        name: "FishWatch",
+        image: fishwatch,
+      },
+      {
+        name: "Storm Glass",
+        image: stormglass,
       },
     ],
     totalIssues: 0,
@@ -143,18 +155,17 @@ class About extends React.Component {
         <h2 className="header">About</h2>
         <h3 className="description">
           {" "}
-          Our site provides information about various types of ocean wildlife,
+          We are a group of developers dedicated to educating people about the world's oceans, lakes, and rivers. Our site provides information about various types of marine wildlife,
           the bodies of water in which they live, and the impacts of human
           activities on both.
         </h3>
         <h3 className="description">
           By educating people on the aquatic creatures that share this world
           with us, and providing information on how our actions impact them, we
-          hope to help people understand which of their behaviors they may want
-          to change and which sea creatures they could help by doing so.
+          hope to help people contemplate how their daily activities could be affecting marine life.
         </h3>
         <h3 className="description">
-          The intended users of this site are the people who are curious about
+          The intended users of this site are people who are curious about
           aquatic wildlife, would like to be more environmentally conscious, or
           both.
         </h3>
@@ -169,7 +180,40 @@ class About extends React.Component {
         <a href="https://gitlab.com/joewallery/cs373-group12" className='theme-link'>Link to the GitLab Repository</a>
 
         {/* <h2>Total Unit Tests: 0</h2> */}
+        <h2 className="header">Our Team</h2>
         <div className="row py-5"> {result}</div>
+
+        <h2 className="header">Data Sources</h2>
+        <ul>
+          <li>
+            <a href="https://www.fishwatch.gov/" className="theme-link"> FishWatch</a>
+          </li>
+          <li>
+            <a href="https://www.marineregions.org/" className="theme-link"> Marine Regions</a>
+          </li>
+          <li>
+            <a href="https://fishbaseapi.readme.io/" className="theme-link"> Fishbaseapi</a>
+          </li>
+          <li>
+            <a href="https://stormglass.io/" className="theme-link"> Storm Glass</a>
+          </li>
+        </ul>
+        <h2 className="header">Tools</h2>
+        <ul>
+          <li>
+            <a href="https://www.postman.com/" className="theme-link"> Postman</a>
+          </li>
+          <li>
+            <a href="https://slack.com/" className="theme-link"> Slack</a>
+          </li>
+          <li>
+            <a href="https://gitlab.com/explore" className="theme-link"> Gitlab</a>
+          </li>
+          <li>
+            <a href="https://reactjs.org/" className="theme-link"> React</a>
+          </li>
+        </ul>
+
       </div>
     );
   }
