@@ -11,6 +11,6 @@
 | Christine Tsou                  | cjt2538 | @ChristineTsou | **I:** 15<br>**II:**<br>**III:**<br>**IV:** | **I21:** 16<br>**II:**<br>**III:**<br>**IV:** |
 | Rishi Salem                     | ras5832 | @rishi312      | **I:** 15<br>**II:**<br>**III:**<br>**IV:** | **I:** 20<br>**II:**<br>**III:**<br>**IV:** |
 | Serena Zamarripa                | snz252  | @renaz6        | **I:** 11<br>**II:**<br>**III:**<br>**IV:**   | **I:** 21<br>**II:**<br>**III:**<br>**IV:**   |
-| Dane Strandboge                 | des2923 | @DStrand1      | **I:** <br>**II:**<br>**III:**<br>**IV:**   | **I:** <br>**II:**<br>**III:**<br>**IV:**   |
+| Dane Strandboge                 | des2923 | @DStrand1      | **I:** N/A<br>**II:**<br>**III:**<br>**IV:**   | **I:** N/A<br>**II:**<br>**III:**<br>**IV:**   |
 
 - Comments:
