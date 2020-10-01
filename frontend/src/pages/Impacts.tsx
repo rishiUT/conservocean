@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import maine from "../assets/maine.png";
 import persianGulf from "../assets/persian-gulf.png";
+import taeanKorea from "../assets/taean-korea.png"
 
 const IMPACTS = [
   {
@@ -37,16 +38,16 @@ const IMPACTS = [
     mapImgPath: persianGulf,
   },
   {
-    name: "Impact 3",
-    category: "category",
-    subcategory: "subcategory",
-    description: "description",
-    latitude: "0",
-    longitude: "0",
-    location: "location",
-    capacity: "0",
-    date: "1/1/2020",
-    mapImgPath: "",
+    name: "Heibei Spirit Oil Spill",
+    category: "spill",
+    subcategory: "Oil",
+    description: "On 7th December 2007, the HEBEI SPIRIT Ship was struck by a crane barge whilst at anchor off Taean, South Korea. The barge broke free from its tow in poor weather, puncturing three port-side cargo tanks. Despite mitigating efforts by the crew of HEBEI SPIRIT, approximately 10,900 tonnes of Iranian Heavy, Upper Zakum and Kuwait Export crude oils were released to the sea.",
+    latitude: "36.893",
+    longitude: "126.055",
+    location: "Taean, South Korea",
+    capacity: "109000",
+    date: "12/7/2007",
+    mapImgPath: taeanKorea,
   },
 ];
 
