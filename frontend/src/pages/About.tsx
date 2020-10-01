@@ -212,7 +212,21 @@ class About extends React.Component {
           <li>
             <a href="https://reactjs.org/" className="theme-link"> React</a>
           </li>
+          <li>
+            <a href="https://www.docker.com/" className="theme-link"> Docker</a>
+          </li>
+          <li>
+            <a href="https://getbootstrap.com/" className="theme-link"> Bootstrap</a>
+          </li>
+          <li>
+            <a href="https://nodejs.org/en/" className="theme-link"> Node.js and npm</a>
+          </li>
+          <li>
+            <a href="https://aws.amazon.com/amplify/" className="theme-link">AWS Amplify</a>
+          </li>
         </ul>
+        
+        
 
       </div>
     );
