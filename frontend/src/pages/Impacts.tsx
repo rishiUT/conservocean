@@ -12,6 +12,7 @@ import maine from "../assets/maine.png";
 import persianGulf from "../assets/persian-gulf.png";
 import taeanKorea from "../assets/taean-korea.png"
 
+
 const IMPACTS = [
   {
     name: "Maine Independence Station Gas Plant ME USA",
@@ -52,8 +53,8 @@ const IMPACTS = [
   },
 ];
 
-class pages extends Component {
-  constructor(props : any) {
+class pages extends React.Component<{}, any>{
+  constructor(props: any) {
     super(props);
     this.state = {
       activePage : 1
@@ -65,7 +66,7 @@ class pages extends Component {
     this.setState({activePage: pageNumber});
   }
  
-  render() {
+  render() { 
     return (
       <div>
         <Pagination
