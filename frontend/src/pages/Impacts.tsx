@@ -1,5 +1,6 @@
 import { mainModule } from "process";
-import React from "react";
+import React, { Component } from "react";
+import Pagination from "react-js-pagination";
 import {
   Switch,
   Route,
@@ -50,6 +51,34 @@ const IMPACTS = [
     mapImgPath: taeanKorea,
   },
 ];
+
+class pages extends Component {
+  constructor(props : any) {
+    super(props);
+    this.state = {
+      activePage : 1
+    };
+  }
+
+  handlePageChange(pageNumber : number) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({activePage: pageNumber});
+  }
+ 
+  render() {
+    return (
+      <div>
+        <Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={20}
+          totalItemsCount={450}
+          pageRangeDisplayed={5}
+          onChange={this.handlePageChange.bind(this)}
+        />
+      </div>
+    );
+  }
+}
 
 // Display a table of all available impacts
 function Impacts() {
