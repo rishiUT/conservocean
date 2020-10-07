@@ -155,14 +155,16 @@ class About extends React.Component {
         <h2 className="header">About</h2>
         <h3 className="description">
           {" "}
-          We are a group of developers dedicated to educating people about the world's oceans, lakes, and rivers. Our site provides information about various types of marine wildlife,
-          the bodies of water in which they live, and the impacts of human
-          activities on both.
+          We are a group of developers dedicated to educating people about the
+          world's oceans, lakes, and rivers. Our site provides information about
+          various types of marine wildlife, the bodies of water in which they
+          live, and the impacts of human activities on both.
         </h3>
         <h3 className="description">
           By educating people on the aquatic creatures that share this world
           with us, and providing information on how our actions impact them, we
-          hope to help people contemplate how their daily activities could be affecting marine life.
+          hope to help people contemplate how their daily activities could be
+          affecting marine life.
         </h3>
         <h3 className="description">
           The intended users of this site are people who are curious about
@@ -171,13 +173,27 @@ class About extends React.Component {
         </h3>
         <h2 className="header">Statistics</h2>
 
-        <h3 className="description">Total Commits: {this.state.totalCommits}</h3>
+        <h3 className="description">
+          Total Commits: {this.state.totalCommits}
+        </h3>
         <h3 className="description">Total Issues: {this.state.totalIssues}</h3>
-        <h3 className="description">Total Unit Tests: {this.state.totalUnitTests}</h3>
+        <h3 className="description">
+          Total Unit Tests: {this.state.totalUnitTests}
+        </h3>
 
-        <a href="https://documenter.getpostman.com/view/12800288/TVKJxaRw" className='theme-link'>Link to API Documentation</a>
-        <br/>
-        <a href="https://gitlab.com/joewallery/cs373-group12" className='theme-link'>Link to the GitLab Repository</a>
+        <a
+          href="https://documenter.getpostman.com/view/12800288/TVKJxaRw"
+          className="theme-link"
+        >
+          Link to API Documentation
+        </a>
+        <br />
+        <a
+          href="https://gitlab.com/joewallery/cs373-group12"
+          className="theme-link"
+        >
+          Link to the GitLab Repository
+        </a>
 
         {/* <h2>Total Unit Tests: 0</h2> */}
         <h2 className="header">Our Team</h2>
@@ -186,48 +202,80 @@ class About extends React.Component {
         <h2 className="header">Data Sources</h2>
         <ul>
           <li>
-            <a href="https://www.fishwatch.gov/" className="theme-link"> FishWatch</a>
+            <a href="https://www.fishwatch.gov/" className="theme-link">
+              {" "}
+              FishWatch
+            </a>
           </li>
           <li>
-            <a href="https://www.marineregions.org/" className="theme-link"> Marine Regions</a>
+            <a href="https://www.marineregions.org/" className="theme-link">
+              {" "}
+              Marine Regions
+            </a>
           </li>
           <li>
-            <a href="https://fishbaseapi.readme.io/" className="theme-link"> Fishbaseapi</a>
+            <a href="https://fishbaseapi.readme.io/" className="theme-link">
+              {" "}
+              Fishbaseapi
+            </a>
           </li>
           <li>
-            <a href="https://stormglass.io/" className="theme-link"> Storm Glass</a>
+            <a href="https://stormglass.io/" className="theme-link">
+              {" "}
+              Storm Glass
+            </a>
           </li>
         </ul>
         <h2 className="header">Tools</h2>
         <ul>
           <li>
-            <a href="https://www.postman.com/" className="theme-link"> Postman</a>
+            <a href="https://www.postman.com/" className="theme-link">
+              {" "}
+              Postman
+            </a>
           </li>
           <li>
-            <a href="https://slack.com/" className="theme-link"> Slack</a>
+            <a href="https://slack.com/" className="theme-link">
+              {" "}
+              Slack
+            </a>
           </li>
           <li>
-            <a href="https://gitlab.com/explore" className="theme-link"> Gitlab</a>
+            <a href="https://gitlab.com/explore" className="theme-link">
+              {" "}
+              Gitlab
+            </a>
           </li>
           <li>
-            <a href="https://reactjs.org/" className="theme-link"> React</a>
+            <a href="https://reactjs.org/" className="theme-link">
+              {" "}
+              React
+            </a>
           </li>
           <li>
-            <a href="https://www.docker.com/" className="theme-link"> Docker</a>
+            <a href="https://www.docker.com/" className="theme-link">
+              {" "}
+              Docker
+            </a>
           </li>
           <li>
-            <a href="https://getbootstrap.com/" className="theme-link"> Bootstrap</a>
+            <a href="https://getbootstrap.com/" className="theme-link">
+              {" "}
+              Bootstrap
+            </a>
           </li>
           <li>
-            <a href="https://nodejs.org/en/" className="theme-link"> Node.js and npm</a>
+            <a href="https://nodejs.org/en/" className="theme-link">
+              {" "}
+              Node.js and npm
+            </a>
           </li>
           <li>
-            <a href="https://aws.amazon.com/amplify/" className="theme-link">AWS Amplify</a>
+            <a href="https://aws.amazon.com/amplify/" className="theme-link">
+              AWS Amplify
+            </a>
           </li>
         </ul>
-        
-        
-
       </div>
     );
   }
@@ -239,7 +287,7 @@ function UserCard({ user }: any) {
       <div className="col-md-4">
         <div className="card mb-4 shadow-sm">
           <div className="card-body">
-            <img className="card-image" src={user.image} alt={user.name}/>
+            <img className="card-image" src={user.image} alt={user.name} />
             <h5 className="card-title">{user.name}</h5>
           </div>
           <ul className="list-group list-group-flush">
