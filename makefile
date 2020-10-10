@@ -35,6 +35,7 @@ SHELL         := bash
 docker-front:
 	docker run -it -p 3000:3000 -v $(PWD)/frontend:/usr/src/app joewallery/node
 
+# In Windows, switch to frontend and run: docker run -it -p 3000:3000 -v ${PWD}:/usr/src/app joewallery/node
 # docker-back:
 # 	docker run -it -v $(PWD)/backend:/{workingdir} -w /{working dir} {docker id}/flask
 

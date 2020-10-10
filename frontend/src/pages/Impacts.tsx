@@ -1,6 +1,6 @@
 import { mainModule } from "process";
 import React, { Component } from "react";
-import Pagination from "react-js-pagination";
+import ReactPaginate from "react-paginate";
 import {
   Switch,
   Route,
@@ -56,12 +56,12 @@ const IMPACTS = [
 // Display a table of all available impacts
 class Impacts extends Component {
   state = {
-    activePage: 1,
+    pageCount: 20,
   };
 
-  handlePageChange(pageNumber: number) {
-    console.log(`active page is ${pageNumber}`);
-    this.setState({ activePage: pageNumber });
+  handlePageClick = (data: any) => {
+    console.log(data);
+    console.log("Go to the selected page.")
   }
 
   render() {
@@ -71,13 +71,22 @@ class Impacts extends Component {
           <div className="bg-light" style={{ height: "100%" }}>
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
-              <Pagination
-                activePage={this.state.activePage}
-                itemsCountPerPage={20}
-                totalItemsCount={450}
-                pageRangeDisplayed={10}
-                onChange={this.handlePageChange.bind(this)}
+              
+              {/* Pagination */}
+              <ReactPaginate
+                previousLabel={'previous'}
+                nextLabel={'next'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                pageCount={this.state.pageCount}
+                marginPagesDisplayed={3}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick}
+                containerClassName={'pagination'}
+                //subContainerClassName={'pages pagination'}
+                activeClassName={'active'}
               />
+
               <div className="table-responsive">
                 <table className="table">
                   <thead>
