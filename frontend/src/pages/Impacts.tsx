@@ -12,6 +12,7 @@ import maine from "../assets/maine.png";
 import persianGulf from "../assets/persian-gulf.png";
 import taeanKorea from "../assets/taean-korea.png";
 
+
 const IMPACTS = [
   {
     name: "Maine Independence Station Gas Plant ME USA",
@@ -56,12 +57,12 @@ const IMPACTS = [
 // Display a table of all available impacts
 class Impacts extends Component {
   state = {
-    pageCount: 20,
+    pageCount: 1000,
   };
 
   handlePageClick = (data: any) => {
     console.log(data);
-    console.log("Go to the selected page.")
+    console.log(`Go to the selected page, page ${data.selected + 1}`)
   }
 
   render() {
@@ -71,21 +72,6 @@ class Impacts extends Component {
           <div className="bg-light" style={{ height: "100%" }}>
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
-              
-              {/* Pagination */}
-              <ReactPaginate
-                previousLabel={'previous'}
-                nextLabel={'next'}
-                breakLabel={'...'}
-                breakClassName={'break-me'}
-                pageCount={this.state.pageCount}
-                marginPagesDisplayed={3}
-                pageRangeDisplayed={5}
-                onPageChange={this.handlePageClick}
-                containerClassName={'pagination'}
-                //subContainerClassName={'pages pagination'}
-                activeClassName={'active'}
-              />
 
               <div className="table-responsive">
                 <table className="table">
@@ -102,6 +88,31 @@ class Impacts extends Component {
                     ))}
                   </tbody>
                 </table>
+
+                {/* Pagination */}
+                <nav>
+                  <ReactPaginate
+                    previousLabel={'previous'}
+                    nextLabel={'next'}
+                    breakLabel={'...'}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={1} 
+                    pageRangeDisplayed={3} 
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination'}
+                    breakClassName={'break-me'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={'active'}
+                    activeLinkClassName={'page-link'}
+                    pageClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousClassName={'page-item'}
+                    previousLinkClassName={'page-link'}
+                    nextClassName={'page-item'}
+                    nextLinkClassName={'page-link'}
+                    disabledClassName={'disabled'}
+                  />
+                </nav>
               </div>
             </div>
           </div>
