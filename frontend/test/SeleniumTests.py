@@ -9,5 +9,13 @@ options.binary_location = "C:\Program Files (x86)\BraveSoftware\Brave-Browser\Ap
 driver = webdriver.Chrome(options=options, executable_path=PATH, )
 
 driver.get("https://conservocean.me")
+
 print(driver.title)
+print(driver.current_url)
+#driver.forward()
+#driver.back()
+#driver.refresh()
+print(driver.title)
+
 driver.close()
+driver.quit()
