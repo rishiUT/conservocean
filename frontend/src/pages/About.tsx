@@ -1,6 +1,5 @@
 import React from "react";
 import "./About.css";
-import { Link } from "react-router-dom";
 import joe from "./Media/joe_profile.jpg";
 import rishi from "./Media/rishi.png";
 import serena from "./Media/serena.jpg";

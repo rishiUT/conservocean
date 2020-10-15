@@ -1,16 +1,15 @@
-import { mainModule } from "process";
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
 import {
   Switch,
   Route,
   Link,
-  useRouteMatch,
   useParams,
 } from "react-router-dom";
 import maine from "../assets/maine.png";
 import persianGulf from "../assets/persian-gulf.png";
 import taeanKorea from "../assets/taean-korea.png";
+import axios from "axios";
 
 
 const IMPACTS = [
@@ -57,12 +56,31 @@ const IMPACTS = [
 // Display a table of all available impacts
 class Impacts extends Component {
   state = {
-    pageCount: 1000,
+    data: [],
+    offset: 0,
+    pageCount: 1000
   };
+
+  loadData() {
+    // Axios API request
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
 
   handlePageClick = (data: any) => {
     console.log(data);
     console.log(`Go to the selected page, page ${data.selected + 1}`)
+
+    this.loadData();
   }
 
   render() {
