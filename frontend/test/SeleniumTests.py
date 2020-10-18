@@ -1,6 +1,14 @@
 import selenium
 from selenium import webdriver
+
 from selenium.webdriver.chrome.options import Options
+
+from selenium.webdriver.common.by import By
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+import time
 PATH = ".\chromedriver.exe"
 
 options = Options()
@@ -22,10 +30,38 @@ driver.get("https://conservocean.me")
 
 print(driver.title)
 print(driver.current_url)
+
+link = driver.find_element_by_link_text("Bodies of Water")
+link.click()
+print(driver.current_url)
+driver.back()
+
+link = driver.find_element_by_link_text("Aquatic Animals")
+link.click()
+print(driver.current_url)
+driver.back()
+
+link = driver.find_element_by_link_text("Human Impacts")
+link.click()
+print(driver.current_url)
+driver.back()
+
+time.sleep(5)
+
+buttons = driver.find_elements_by_class_name("button")
+for button in buttons:
+    print(button.text)
+    #button.click() Don't do this, it invalidates the buttons selenium stores
+    #driver.back()
+    
+#Useful commands:
 #driver.forward()
 #driver.back()
 #driver.refresh()
+#Can use Try-Except Block to wait for a slow page
 print(driver.title)
+
+time.sleep(5)
 
 driver.close()
 driver.quit()
