@@ -10,60 +10,75 @@ import atlantic from "../assets/atlantic.png";
 import southern from "../assets/southern.png";
 import ashmore from "../assets/ashmore.png";
 
-const BODIES = [
+interface waterBody {
+  id?: number,
+  latitude?: string,
+  longitude?: string,
+  max_latitude?: string,
+  max_longitude?: string,
+  min_latitude?: string,
+  min_longitude?: string,
+  name?: string,
+  salinity?: string,
+  size?: number,
+  type?: string,
+  water_temp?: string
+}
+
+const BODIES: waterBody[] = [
   {
     name: "Atlantic Ocean",
     latitude: `4° 18' 42.5" N`,
     longitude: `31° 30' 14.5" W`,
     salinity: "35.17",
-    seaLevel: "0.2",
-    waterTemperature: "27.84",
-    mapImgPath: atlantic,
-    chlorophyll: "0.11",
-    iron: "0.0",
-    nitrate: "0.01",
-    oxygen: "201.97",
-    ph: "8.04",
-    phosphate: "0.05",
-    phyto: "4.6",
-    phytoplankton: "1.45",
-    silicate: "2.25",
+    // seaLevel: "0.2",
+    water_temp: "27.84",
+    // mapImgPath: atlantic,
+    // chlorophyll: "0.11",
+    // iron: "0.0",
+    // nitrate: "0.01",
+    // oxygen: "201.97",
+    // ph: "8.04",
+    // phosphate: "0.05",
+    // phyto: "4.6",
+    // phytoplankton: "1.45",
+    // silicate: "2.25",
   },
   {
     name: "Southern Ocean",
     latitude: `68° 2' 23.3" S`,
     longitude: `26° 37' 58.3" W`,
     salinity: "34.45",
-    seaLevel: "-1.89",
-    waterTemperature: "-18.43",
-    mapImgPath: southern,
-    chlorophyll: "0.03",
-    iron: "0.0",
-    nitrate: "29.31",
-    oxygen: "324.73",
-    ph: "8.03",
-    phosphate: "2.07",
-    phyto: "0.0",
-    phytoplankton: "0.08",
-    silicate: "73.89",
+    // seaLevel: "-1.89",
+    water_temp: "-18.43",
+    // mapImgPath: southern,
+    // chlorophyll: "0.03",
+    // iron: "0.0",
+    // nitrate: "29.31",
+    // oxygen: "324.73",
+    // ph: "8.03",
+    // phosphate: "2.07",
+    // phyto: "0.0",
+    // phytoplankton: "0.08",
+    // silicate: "73.89",
   },
   {
     name: "Ashmore Reef",
     latitude: `12° 14' 30.3" S`,
     longitude: `123° 2' 30" E`,
     salinity: "34.76",
-    seaLevel: "0.62",
-    waterTemperature: "29.12",
-    mapImgPath: ashmore,
-    chlorophyll: "0.14",
-    iron: "0.0",
-    nitrate: "0.0",
-    oxygen: "203.65",
-    ph: "8.01",
-    phosphate: "0.15",
-    phyto: "4.21",
-    phytoplankton: "1.86",
-    silicate: "2.27",
+    // seaLevel: "0.62",
+    water_temp: "29.12",
+    // mapImgPath: ashmore,
+    // chlorophyll: "0.14",
+    // iron: "0.0",
+    // nitrate: "0.0",
+    // oxygen: "203.65",
+    // ph: "8.01",
+    // phosphate: "0.15",
+    // phyto: "4.21",
+    // phytoplankton: "1.86",
+    // silicate: "2.27",
   },
 ];
 
@@ -120,7 +135,7 @@ function WBCard({ body }: any) {
           Salinity: {body.salinity} g salt per kg water
         </li>
         <li className="list-group-item">
-          Temperature {body.waterTemperature}°C
+          Temperature {body.water_temp}°C
         </li>
       </ul>
     </div>
@@ -139,35 +154,17 @@ function WaterBody() {
         <main className="container py-5" style={{ height: "100%" }}>
           <h1 className="text-center">{body.name} </h1>
           <div className="container" style={{ width: "80%" }}>
-            <div className="text-center py-3">
-              <img
-                style={{ borderRadius: "5px" }}
-                src={body.mapImgPath}
-                width="100%"
-              ></img>
-            </div>
+            
+            {/* Insert map here */}
+
             <h3>Region Data</h3>
             <ul>
-              <li>Latitude: {body.latitude}</li>
-              <li>Longitude: {body.longitude}</li>
-              <li>Salinity: {body.salinity} g salt per kg water</li>
-              <li>Water Temperature: {body.waterTemperature}°C</li>
-              <li>Sea Level (from mean): {body.seaLevel}m</li>
-              <li>pH: {body.ph}</li>
-            </ul>
-            <h3>
-              Chemical Solutes{" "}
-              <small className="text-muted">(mole concentration)</small>
-            </h3>
-            <ul>
-              <li>Chlorophyll: {body.chlorophyll}</li>
-              <li>Iron: {body.iron}</li>
-              <li>Nitrate: {body.nitrate}</li>
-              <li>Oxygen: {body.oxygen}</li>
-              <li>Phosphate: {body.phosphate}</li>
-              <li>Phyto: {body.phyto}</li>
-              <li>Phytoplankton: {body.phytoplankton}</li>
-              <li>Silicate: {body.silicate}</li>
+              {body.name ? <li>Name: {body.name}</li> : null}
+              {body.type ? <li>Type: {body.type}</li> : null}
+              {body.latitude ? <li>Latitude: {body.latitude}</li> : null}
+              {body.longitude ? <li>Longitude: {body.longitude}</li> : null}
+              {body.water_temp ? <li>Water Temperature: {body.water_temp}°C</li> : null}
+              {body.salinity ? <li>Salinity: {body.salinity} g salt per kg water</li> : null}
             </ul>
           </div>
         </main>

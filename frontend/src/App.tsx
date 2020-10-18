@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // Page Components
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Species from "./pages/Species";
+import SpeciesGrid from "./pages/Species";
 import Impacts from "./pages/Impacts";
 import WaterBodies from "./pages/WaterBodies";
 
@@ -20,7 +20,7 @@ function App() {
 
         {/* <Switch> renders the first route that matches current URL */}
         <Switch>
-          <Route path="/species" children={<Species />} />
+          <Route path="/species" children={<SpeciesGrid />} />
           <Route path="/water-bodies" children={<WaterBodies />} />
           <Route path="/impacts" children={<Impacts />} />
           <Route path="/about" children={<About />} />

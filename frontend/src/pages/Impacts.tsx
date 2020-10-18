@@ -11,8 +11,29 @@ import persianGulf from "../assets/persian-gulf.png";
 import taeanKorea from "../assets/taean-korea.png";
 import axios from "axios";
 
+interface impact {
+  name?: string
+  category?: string
+  subcategory?: string
+  description?: string
+  date?: string
+  latitude?: string
+  longitude?: string
+  oil_amount?: string
+  count_density_1?: string
+  count_density_2?: string
+  count_density_3?: string
+  count_density_4?: string
+  plant_rating?: string
+  plant_location?: string
+  plant_water_source?: string
 
-const IMPACTS = [
+  location?: string
+  capacity?: string
+  mapImgPath?: string
+}
+
+const IMPACTS: impact[] = [
   {
     name: "Maine Independence Station Gas Plant ME USA",
     category: "power plant",
@@ -51,27 +72,48 @@ const IMPACTS = [
     date: "12/7/2007",
     mapImgPath: taeanKorea,
   },
+  {
+    name: "Maine Independence Station Gas Plant ME USA (no lat)",
+    category: "power plant",
+    subcategory: "GAS",
+    description: "Environmentally Responsible",
+    longitude: "-68.7106",
+    location: "United States of America",
+    capacity: "550.2",
+    date: "Present",
+    mapImgPath: maine,
+  },
 ];
 
 // Display a table of all available impacts
 class Impacts extends Component {
   state = {
-    data: [],
+    data: IMPACTS,
     offset: 0,
-    pageCount: 1000
+    perPage: 20,
+    numInstances: 500,
   };
 
   loadData() {
     // Axios API request
+    // axios.get(`https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`)
     axios.get(`https://jsonplaceholder.typicode.com/users`)
       .then(response => {
         console.log(response);
+        this.setState({
+          // Update the data and number of instances
+          data: this.state.data.concat(IMPACTS),
+          // data: response.data.impacts,
+          numInstances: this.state.numInstances,
+          // numInstances: response.data.numInstances,
+        })
       })
       .catch(error => {
         console.log(error);
       })
   }
 
+  // Component initially loads
   componentDidMount() {
     this.loadData();
   }
@@ -80,7 +122,10 @@ class Impacts extends Component {
     console.log(data);
     console.log(`Go to the selected page, page ${data.selected + 1}`)
 
-    this.loadData();
+    // Change Offset: offset = (page number) x (# per page)
+    this.setState({ offset: data.selected * this.state.perPage }, () => {
+      this.loadData();
+    });
   }
 
   render() {
@@ -101,7 +146,7 @@ class Impacts extends Component {
                     <th scope="col">Longitude</th>
                   </thead>
                   <tbody>
-                    {IMPACTS.map((impact) => (
+                    {this.state.data.map((impact) => (
                       <ImpactTableData key={impact.name} impact={impact} />
                     ))}
                   </tbody>
@@ -113,7 +158,7 @@ class Impacts extends Component {
                     previousLabel={'previous'}
                     nextLabel={'next'}
                     breakLabel={'...'}
-                    pageCount={this.state.pageCount}
+                    pageCount={this.state.numInstances / this.state.perPage}
                     marginPagesDisplayed={1} 
                     pageRangeDisplayed={3} 
                     onPageChange={this.handlePageClick}
@@ -172,32 +217,26 @@ function Impact() {
         <main className="container py-5">
           <h1 className="text-center">{impact.name} </h1>
           <div className="container" style={{ width: "80%" }}>
-            <div className="text-center py-3">
-              <img
-                style={{ borderRadius: "5px" }}
-                src={impact.mapImgPath}
-                width="100%"
-              ></img>
-            </div>
+
+            {/* Display map here. */}
+
             <h3>Impact Details</h3>
             <ul>
-              <li>Latitude: {impact.latitude}</li>
-              <li>Longitude: {impact.longitude}</li>
-              <li>Location: {impact.location}</li>
-              <li>Date: {impact.date}</li>
-              <li>
-                {impact.category === "power plant"
-                  ? "Environmental Rating: "
-                  : "Description: "}
-                {impact.description}
-              </li>
-              <li>Category: {impact.category?.toLowerCase()}</li>
-              <li>Type: {impact.subcategory?.toLowerCase()}</li>
-              <li>
-                {impact.category === "power plant" ? "Capacity: " : "Volume: "}
-                {impact.capacity?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                {impact.category === "power plant" ? " MW" : " gallons"}
-              </li>
+              {impact.name ? <li>Name: {impact.name}</li> : null}
+              {impact.category ? <li>Category: {impact.category}</li> : null}
+              {impact.subcategory ? <li>Subcategory: {impact.subcategory}</li> : null}
+              {impact.description ? <li>Description: {impact.description}</li> : null}
+              {impact.date ? <li>Date: {impact.date}</li> : null}
+              {impact.latitude ? <li>Latitude: {impact.latitude}</li> : null}
+              {impact.longitude ? <li>Longitude: {impact.longitude}</li> : null}
+              {impact.oil_amount ? <li>Oil Spilled: {impact.oil_amount} gallons</li> : null}
+              {impact.count_density_1 ? <li>Num 0.33-1.00mm pieces of plastic per km^2: {impact.count_density_1}</li> : null}
+              {impact.count_density_2 ? <li>Num 1.01-4.75mm pieces of plastic per km^2: {impact.count_density_2}</li> : null}
+              {impact.count_density_3 ? <li>Num 4.76-200mm pieces of plastic per km^2: {impact.count_density_3}</li> : null}
+              {impact.count_density_4 ? <li>Num 200+mm pieces of plastic per km^2: {impact.count_density_4}</li> : null}
+              {impact.plant_rating ? <li>Plant Rating: {impact.plant_rating}</li> : null}
+              {impact.plant_location ? <li>Plant Location: {impact.plant_location}</li> : null}
+              {impact.plant_water_source ? <li>Plant Water Source: {impact.plant_water_source}</li> : null}
             </ul>
           </div>
         </main>
