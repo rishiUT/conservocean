@@ -12,6 +12,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 
+RUN pip install selenium
+
 # expose port 8080 for local web server
 EXPOSE 8080
 

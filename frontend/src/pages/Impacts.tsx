@@ -1,15 +1,16 @@
-import { mainModule } from "process";
-import React from "react";
+import React, { Component } from "react";
+import ReactPaginate from "react-paginate";
 import {
   Switch,
   Route,
   Link,
-  useRouteMatch,
   useParams,
 } from "react-router-dom";
 import maine from "../assets/maine.png";
 import persianGulf from "../assets/persian-gulf.png";
-import taeanKorea from "../assets/taean-korea.png"
+import taeanKorea from "../assets/taean-korea.png";
+import axios from "axios";
+
 
 const IMPACTS = [
   {
@@ -41,7 +42,8 @@ const IMPACTS = [
     name: "Heibei Spirit Oil Spill",
     category: "spill",
     subcategory: "Oil",
-    description: "On 7th December 2007, the HEBEI SPIRIT Ship was struck by a crane barge whilst at anchor off Taean, South Korea. The barge broke free from its tow in poor weather, puncturing three port-side cargo tanks. Despite mitigating efforts by the crew of HEBEI SPIRIT, approximately 10,900 tonnes of Iranian Heavy, Upper Zakum and Kuwait Export crude oils were released to the sea.",
+    description:
+      "On 7th December 2007, the HEBEI SPIRIT Ship was struck by a crane barge whilst at anchor off Taean, South Korea. The barge broke free from its tow in poor weather, puncturing three port-side cargo tanks. Despite mitigating efforts by the crew of HEBEI SPIRIT, approximately 10,900 tonnes of Iranian Heavy, Upper Zakum and Kuwait Export crude oils were released to the sea.",
     latitude: "36.893",
     longitude: "126.055",
     location: "Taean, South Korea",
@@ -52,47 +54,99 @@ const IMPACTS = [
 ];
 
 // Display a table of all available impacts
-function Impacts() {
-  let match = useRouteMatch();
+class Impacts extends Component {
+  state = {
+    data: [],
+    offset: 0,
+    pageCount: 1000
+  };
 
-  return (
-    <Switch>
-      <Route exact path="/impacts">
-        <div className="bg-light" style={{ height: "100%" }}>
-          <div className="container">
-            <h2 className="py-5 text-center">Human Impacts</h2>
+  loadData() {
+    // Axios API request
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
 
-            <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <th scope="col">Impact</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Latitude</th>
-                  <th scope="col">Longitude</th>
-                </thead>
-                <tbody>
-                  {IMPACTS.map((impact) => (
-                    <ImpactTableData key={impact.name} impact={impact} />
-                  ))}
-                </tbody>
-              </table>
+  componentDidMount() {
+    this.loadData();
+  }
+
+  handlePageClick = (data: any) => {
+    console.log(data);
+    console.log(`Go to the selected page, page ${data.selected + 1}`)
+
+    this.loadData();
+  }
+
+  render() {
+    return (
+      <Switch>
+        <Route exact path="/impacts">
+          <div className="bg-light" style={{ height: "100%" }}>
+            <div className="container">
+              <h2 className="py-5 text-center">Human Impacts</h2>
+
+              <div className="table-responsive">
+                <table className="table">
+                  <thead>
+                    <th scope="col">Impact</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                  </thead>
+                  <tbody>
+                    {IMPACTS.map((impact) => (
+                      <ImpactTableData key={impact.name} impact={impact} />
+                    ))}
+                  </tbody>
+                </table>
+
+                {/* Pagination */}
+                <nav>
+                  <ReactPaginate
+                    previousLabel={'previous'}
+                    nextLabel={'next'}
+                    breakLabel={'...'}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={1} 
+                    pageRangeDisplayed={3} 
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination'}
+                    breakClassName={'break-me'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={'active'}
+                    activeLinkClassName={'page-link'}
+                    pageClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousClassName={'page-item'}
+                    previousLinkClassName={'page-link'}
+                    nextClassName={'page-item'}
+                    nextLinkClassName={'page-link'}
+                    disabledClassName={'disabled'}
+                  />
+                </nav>
+              </div>
             </div>
           </div>
-        </div>
-      </Route>
-      <Route path={`${match.path}/:impactId`} children={<Impact />} />
-    </Switch>
-  );
+        </Route>
+        <Route path={`/impacts/:impactId`} children={<Impact />} />
+      </Switch>
+    );
+  }
 }
 
 function ImpactTableData({ impact }: any) {
-  let match = useRouteMatch();
   return (
     <tr>
       <th scope="row">
         <Link
-          to={`${match.url}/${impact.name.replaceAll(" ", "-")}`}
+          to={`/impacts/${impact.name.replaceAll(" ", "-")}`}
           className="card-link"
         >
           {impact.name}
