@@ -5,10 +5,6 @@ import waves from "./Media/waves.png";
 import fish from "./Media/fish.png";
 import drops from "./Media/water-drops.png";
 
-// function Home() {
-//   return (<h2>Conservocean is an educational tool with the mission to bring awareness to how human avtivity impacts bodies of water and aquatic animals. </h2>);
-// }
-
 function Home() {
   return (
     <div>
