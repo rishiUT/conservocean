@@ -5,7 +5,7 @@ import rishi from "./Media/rishi.png";
 import serena from "./Media/serena.jpg";
 import andy from "./Media/andy.jpg";
 import christine from "./Media/christine.jpg";
-import dane from "./Media/fish.png";
+import dane from "./Media/dane.jpg";
 import fishwatch from "./Media/fishwatch.jpg";
 import stormglass from "./Media/stormglass.svg";
 
@@ -84,7 +84,7 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: dane,
-        bio: "",
+        bio: "Hey, I'm Dane! I'm a 4th year CS major from Georgetown. I primarily work on back-end development for ConservOcean. I like listening to music and playing games in my free time.",
       },
     ],
     dataSource: [
