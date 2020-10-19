@@ -11,6 +11,8 @@ import persianGulf from "../assets/persian-gulf.png";
 import taeanKorea from "../assets/taean-korea.png";
 import axios from "axios";
 
+import Map from "../parts/Map";
+
 interface impact {
   name?: string
   category?: string
@@ -218,7 +220,9 @@ function Impact() {
           <h1 className="text-center">{impact.name} </h1>
           <div className="container" style={{ width: "80%" }}>
 
-            {/* Display map here. */}
+            <div style={{width: "100%", height: "500px"}}>
+              <Map lat={Number(impact.latitude)} lng={Number(impact.longitude)} zoom={4.75}/>
+            </div>
 
             <h3>Impact Details</h3>
             <ul>

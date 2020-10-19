@@ -10,6 +10,8 @@ import atlantic from "../assets/atlantic.png";
 import southern from "../assets/southern.png";
 import ashmore from "../assets/ashmore.png";
 
+import Map from "../parts/Map";
+
 interface waterBody {
   id?: number,
   latitude?: string,
@@ -28,8 +30,8 @@ interface waterBody {
 const BODIES: waterBody[] = [
   {
     name: "Atlantic Ocean",
-    latitude: `4° 18' 42.5" N`,
-    longitude: `31° 30' 14.5" W`,
+    latitude: `4.31167`,
+    longitude: `-31.504167`,
     salinity: "35.17",
     // seaLevel: "0.2",
     water_temp: "27.84",
@@ -44,42 +46,42 @@ const BODIES: waterBody[] = [
     // phytoplankton: "1.45",
     // silicate: "2.25",
   },
-  {
-    name: "Southern Ocean",
-    latitude: `68° 2' 23.3" S`,
-    longitude: `26° 37' 58.3" W`,
-    salinity: "34.45",
-    // seaLevel: "-1.89",
-    water_temp: "-18.43",
-    // mapImgPath: southern,
-    // chlorophyll: "0.03",
-    // iron: "0.0",
-    // nitrate: "29.31",
-    // oxygen: "324.73",
-    // ph: "8.03",
-    // phosphate: "2.07",
-    // phyto: "0.0",
-    // phytoplankton: "0.08",
-    // silicate: "73.89",
-  },
-  {
-    name: "Ashmore Reef",
-    latitude: `12° 14' 30.3" S`,
-    longitude: `123° 2' 30" E`,
-    salinity: "34.76",
-    // seaLevel: "0.62",
-    water_temp: "29.12",
-    // mapImgPath: ashmore,
-    // chlorophyll: "0.14",
-    // iron: "0.0",
-    // nitrate: "0.0",
-    // oxygen: "203.65",
-    // ph: "8.01",
-    // phosphate: "0.15",
-    // phyto: "4.21",
-    // phytoplankton: "1.86",
-    // silicate: "2.27",
-  },
+  // {
+  //   name: "Southern Ocean",
+  //   latitude: `68° 2' 23.3" S`,
+  //   longitude: `26° 37' 58.3" W`,
+  //   salinity: "34.45",
+  //   // seaLevel: "-1.89",
+  //   water_temp: "-18.43",
+  //   // mapImgPath: southern,
+  //   // chlorophyll: "0.03",
+  //   // iron: "0.0",
+  //   // nitrate: "29.31",
+  //   // oxygen: "324.73",
+  //   // ph: "8.03",
+  //   // phosphate: "2.07",
+  //   // phyto: "0.0",
+  //   // phytoplankton: "0.08",
+  //   // silicate: "73.89",
+  // },
+  // {
+  //   name: "Ashmore Reef",
+  //   latitude: `12° 14' 30.3" S`,
+  //   longitude: `123° 2' 30" E`,
+  //   salinity: "34.76",
+  //   // seaLevel: "0.62",
+  //   water_temp: "29.12",
+  //   // mapImgPath: ashmore,
+  //   // chlorophyll: "0.14",
+  //   // iron: "0.0",
+  //   // nitrate: "0.0",
+  //   // oxygen: "203.65",
+  //   // ph: "8.01",
+  //   // phosphate: "0.15",
+  //   // phyto: "4.21",
+  //   // phytoplankton: "1.86",
+  //   // silicate: "2.27",
+  // },
 ];
 
 // Display a grid of all bodies of water
@@ -156,6 +158,9 @@ function WaterBody() {
           <div className="container" style={{ width: "80%" }}>
             
             {/* Insert map here */}
+            <div style={{width: "100%", height: "500px"}}>
+              <Map lat={Number(body.latitude)} lng={Number(body.longitude)} zoom={2.5}/>
+            </div>
 
             <h3>Region Data</h3>
             <ul>
