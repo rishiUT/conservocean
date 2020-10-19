@@ -120,6 +120,7 @@ class HumanList(Resource):
 
             if subcategory != None:
                 if impact.subcategory != subcategory:
+                    add = False
 
             if latitude != None:
                 if (abs(impact.latitude - latitude) > 0.5) and (abs(impact.longitude - longitude) > 0.5):

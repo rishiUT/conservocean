@@ -16,3 +16,14 @@ applications:
         paths:
           - node_modules/**/*
     appRoot: frontend/
+
+  - backend:
+      phases:
+        preBuild:
+          commands:
+            - docker pull andy33252/backend
+            - docker run -it -p 5001:5000  —name=backendDocker -v ($PWD):/usr/conservOcean -w /usr/conservOcean andy33252/backend
+        build:
+          commands:
+            - python conservOcean.py
+    appRoot: backend/
