@@ -59,7 +59,6 @@ for button in buttons:
 #driver.back()
 #driver.refresh()
 #Can use Try-Except Block to wait for a slow page
-print(driver.title)
 
 time.sleep(5)
 
