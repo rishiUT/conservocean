@@ -29,15 +29,12 @@ SHELL         := bash
 # endif
 
 # # run docker
-# docker:
-# 	docker run -it -v $(PWD):/usr/python -w /usr/python gpdowning/python
-
 docker-front:
-	docker run -it -p 3000:3000 -v $(PWD)/frontend:/usr/src/app joewallery/node
+	docker run -it -p 3000:3000 -v ${PWD}/frontend:/usr/src/app joewallery/node
+	# In Windows, switch to frontend and run: docker run -it -p 3000:3000 -v ${PWD}:/usr/src/app joewallery/node
 
-# In Windows, switch to frontend and run: docker run -it -p 3000:3000 -v ${PWD}:/usr/src/app joewallery/node
-# docker-back:
-# 	docker run -it -v $(PWD)/backend:/{workingdir} -w /{working dir} {docker id}/flask
+docker-back:
+	docker run -it -p 5000:5000 -v ${PWD}:/conservocean joewallery/python
 
 # get git config
 config:
