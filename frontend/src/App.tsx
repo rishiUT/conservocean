@@ -11,7 +11,6 @@ import WaterBodies from "./pages/WaterBodies";
 
 import Navbar from "./parts/Navbar";
 
-
 function App() {
   return (
     <Router>

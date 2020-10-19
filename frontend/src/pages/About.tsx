@@ -5,7 +5,7 @@ import rishi from "./Media/rishi.png";
 import serena from "./Media/serena.jpg";
 import andy from "./Media/andy.jpg";
 import christine from "./Media/christine.jpg";
-import dane from "./Media/fish.png";
+import dane from "./Media/dane.jpg";
 import fishwatch from "./Media/fishwatch.jpg";
 import stormglass from "./Media/stormglass.svg";
 
@@ -29,7 +29,8 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: joe,
-        bio: " Hi, I’m Joe! I’m a junior CS and math major from Houston. For ConservOcean, I am primarily working on front-end development. In my free time, I also enjoy reading, cooking, and watching movies!",
+        bio:
+          " Hi, I’m Joe! I’m a junior CS and math major from Houston. For ConservOcean, I am primarily working on front-end development. In my free time, I also enjoy reading, cooking, and watching movies!",
       },
       {
         name: "Rishi Salem",
@@ -39,7 +40,8 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: rishi,
-        bio: "Hi, my name is Rishi! I’m majoring in Computer Science and Psychology. For this website, I primarily work on the frontend. Also, I love to cook!",
+        bio:
+          "Hi, my name is Rishi! I’m majoring in Computer Science and Psychology. For this website, I primarily work on the frontend. Also, I love to cook!",
       },
       {
         name: "Serena Zamarripa",
@@ -49,7 +51,8 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: serena,
-        bio: "Hi, I'm Serena! This is my last semester here at UT. For this project, I work on the frontend. Outside of CS I enjoy painting, reading, and theatre.",
+        bio:
+          "Hi, I'm Serena! This is my last semester here at UT. For this project, I work on the frontend. Outside of CS I enjoy painting, reading, and theatre.",
       },
       {
         name: "Andy Weng",
@@ -59,7 +62,8 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: andy,
-        bio: "Hi, I'm Andy! I’m a senior CS major and business minor from Plano. For ConservOcean, I primarily work on back-end development. I enjoy listening to music and watching TV shows on my free time. I also have a pug called Bean.",
+        bio:
+          "Hi, I'm Andy! I’m a senior CS major and business minor from Plano. For ConservOcean, I primarily work on back-end development. I enjoy listening to music and watching TV shows on my free time. I also have a pug called Bean.",
       },
       {
         name: "Christine Tsou",
@@ -69,7 +73,8 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: christine,
-        bio: "Hi, I'm Christine! I'm in my third year studying CS, and I primarily work on back-end development for ConservOcean. Some things I enjoy are listening to music and reading!",
+        bio:
+          "Hi, I'm Christine! I'm in my third year studying CS, and I primarily work on back-end development for ConservOcean. Some things I enjoy are listening to music and reading!",
       },
       {
         name: "Dane Strandboge",
@@ -79,7 +84,7 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: dane,
-        bio: "",
+        bio: "Hey, I'm Dane! I'm a 4th year CS major from Georgetown. I primarily work on back-end development for ConservOcean. I like listening to music and playing games in my free time.",
       },
     ],
     dataSource: [
@@ -299,9 +304,7 @@ function UserCard({ user }: any) {
             <li className="list-group-item">
               Major Responsibilities: {user.maj_resp}
             </li>
-            <li className="list-group-item">
-             About: {user.bio}
-            </li>
+            <li className="list-group-item">About: {user.bio}</li>
             <li className="list-group-item">Commits: {user.commits}</li>
             <li className="list-group-item">Issues: {user.issues}</li>
             <li className="list-group-item">Unit Tests: {user.unitTests}</li>
