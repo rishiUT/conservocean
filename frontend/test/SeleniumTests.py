@@ -16,7 +16,7 @@ options.binary_location = "C:\Program Files (x86)\BraveSoftware\Brave-Browser\Ap
 
 driver = webdriver.Chrome(options=options, executable_path=PATH, )
 
-driver.get("https://conservocean.me")
+driver.get("http://conservocean.me")
 
 #Start at homepage
 #Ensure you can open about page
@@ -36,7 +36,7 @@ link = driver.find_element_by_link_text("About")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "https://www.conservocean.me/about"
+    assert driver.current_url == "http://www.conservocean.me/about"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
@@ -49,7 +49,7 @@ link = driver.find_element_by_link_text("Bodies of Water")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "https://www.conservocean.me/water-bodies"
+    assert driver.current_url == "http://www.conservocean.me/water-bodies"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
@@ -60,9 +60,9 @@ link.click()
 # Test to see if the page is different, somehow
 #testElem = driver.find_element_by_class_name("page-item active")
 try:
-    print(testElem)
+    #print(testElem)
 except:
-    print("Assert failed, url = " + driver.current_url)
+    print("Failed the Water Bodies Pagination tests")
     driver.quit()
 
 driver.back()
@@ -75,7 +75,7 @@ link = driver.find_element_by_link_text("Species")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "https://www.conservocean.me/species"
+    assert driver.current_url == "http://www.conservocean.me/species"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
@@ -95,7 +95,7 @@ link = driver.find_element_by_link_text("Human Impacts")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "https://www.conservocean.me/impacts"
+    assert driver.current_url == "http://www.conservocean.me/impacts"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
