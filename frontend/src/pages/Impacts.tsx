@@ -95,7 +95,7 @@ class Impacts extends Component {
   // Make API request for the current page of data using Axios
   loadData() {
     // axios.get(`https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`)
-    axios.get(`/api/impacts?offset=${this.state.offset}&limit=${this.state.perPage}`)
+    axios.get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`)
     // axios.get(`https://jsonplaceholder.typicode.com/users`)
       .then((response) => {
         console.log(response);
