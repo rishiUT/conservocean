@@ -8,7 +8,5 @@ Icon?
 latex
 my-makefile
 .vscode
-frontend/node_modules/
-frontend/build/
-frontend/package-lock.json
+*/node_modules/
 */.devcontainer

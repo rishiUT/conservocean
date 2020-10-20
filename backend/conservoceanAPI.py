@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-from flask import request, render_template
+from flask import request
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 from flask import Flask, jsonify, abort
@@ -9,11 +9,6 @@ from flask_cors import CORS
 from database import db, Fish, BodiesOfWater, HumanImpact, app
 
 api = Api(app)
-
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def index(path):
-  return render_template("index.html")
 
 # https: // conservocean.me/api/fish/location
 
@@ -251,4 +246,4 @@ api.add_resource(WaterList, '/api/water')
 api.add_resource(WaterID, '/api/water/<int:id>/')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, threaded=True, debug=True)
+    app.run(host='0.0.0.0', debug=True)
