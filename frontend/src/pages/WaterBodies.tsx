@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect }  from "react";
 import ReactPaginate from "react-paginate";
 import {
   Switch,
@@ -172,7 +172,7 @@ class WaterBodies extends Component {
             </div>
           </div>
         </Route>
-        <Route path={`/water-bodies/:waterbodyId`} children={<WaterBody />} />
+        <Route path={`/water-bodies/:id`} component={WaterBody} />
       </Switch>
     );
   }
@@ -183,8 +183,10 @@ function WBCard({ body }: any) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12">
       <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
+        
+        {/* Link card to instance page */}
         <Link
-          to={`${match.url}/${body.name.replace(" ", "-")}`}
+          to={`${match.url}/${body.id}`}
           className="card-link"
         >
           <span
@@ -198,6 +200,7 @@ function WBCard({ body }: any) {
             }}
           ></span>
         </Link>
+
         <img className="card-image" src={body.mapImgPath} width="100%"></img>
         <div className="card-body">
           <h5 className="card-title">{body.name}</h5>
@@ -216,25 +219,44 @@ function WBCard({ body }: any) {
 }
 
 // Display data page on a particular body of water
-function WaterBody() {
-  let { waterbodyId }: any = useParams();
-  let body = BODIES.find(
-    (body) => body.name === waterbodyId.replaceAll("-", " ")
-  );
-  if (body) {
-    return (
-      <div className="bg-light full-height">
+function WaterBody(props: any) {
+  // Set initial state
+  const initialWaterState: waterBody = {
+  }
+
+  // Getter and setter for species state
+  const [body, setWaterBody] = useState(initialWaterState);
+
+  // Use useEffect to retrieve data from API
+  useEffect(() => {
+    const getWaterBody = async () => {
+      // Pass param to the API call
+      const { data }: any = await axios(`http://localhost:5000/api/water/${props.match.params.id}`);
+      // Update state
+      setWaterBody(data.data);
+    }
+    // Invoke the async function
+    getWaterBody();
+  }, []);
+
+  // Return data
+  return (
+    <div className="bg-light full-height">
         <main className="container py-5" style={{ height: "100%" }}>
           <h1 className="text-center">{body.name} </h1>
           <div className="container" style={{ width: "80%" }}>
-            <div style={{ width: "100%", height: "500px" }}>
-              <Map
+              {
+                body.latitude && body.longitude ? 
+                <div style={{ width: "100%", height: "500px" }}>
+                <Map
                 lat={Number(body.latitude)}
                 lng={Number(body.longitude)}
-                zoom={2.5}
-              />
-            </div>
-
+                zoom={4}
+                />
+                </div>
+              : <div></div>
+              }
+              
             <h3>Region Data</h3>
             <ul>
               {body.name ? <li>Name: {body.name}</li> : null}
@@ -251,13 +273,7 @@ function WaterBody() {
           </div>
         </main>
       </div>
-    );
-  }
-  return (
-    <div className="py-5 container">
-      <h3 className="text-center">Ocean region not found.</h3>
-    </div>
-  );
+  )
 }
 
 export default WaterBodies;

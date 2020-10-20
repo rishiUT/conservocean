@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useState, useEffect }  from "react";
 import ReactPaginate from "react-paginate";
 import { Switch, Route, Link, useParams } from "react-router-dom";
 import axios from "axios";
@@ -8,7 +8,6 @@ import persianGulf from "../assets/persian-gulf.png";
 import taeanKorea from "../assets/taean-korea.png";
 
 import Map from "../parts/Map";
-import { updateStatement } from "typescript";
 
 interface impact {
   name?: string;
@@ -182,7 +181,7 @@ class Impacts extends Component {
             </div>
           </div>
         </Route>
-        <Route path={`/impacts/:impactId`} children={<Impact />} />
+        <Route path={`/impacts/:id`} component={Impact} />
       </Switch>
     );
   }
@@ -193,7 +192,7 @@ function ImpactTableData({ impact }: any) {
     <tr>
       <th scope="row">
         <Link
-          to={`/impacts/${impact.name.replaceAll(" ", "-")}`}
+          to={`/impacts/${impact.id}`}
           className="card-link"
         >
           {impact.name}
@@ -209,24 +208,38 @@ function ImpactTableData({ impact }: any) {
 
 // Display an information page for a specific impact
 function Impact(props: any) {
+  // Set initial state
+  const initialImpactState: impact = { 
+  }
 
-  let { impactId }: any = useParams();
-  let impact = IMPACTS.find(
-    (impact) => impact.name === impactId.replaceAll("-", " ")
-  );
-  if (impact) {
-    return (
-      <div className="bg-light full-height">
+  // Getter and setter for impact state
+  const [impact, setImpact] = useState(initialImpactState);
+
+  // Use useEffect to retrieve data from API
+  useEffect(() => {
+    const getImpact = async () => {
+      const { data }: any = await axios(`http://localhost:5000/api/impact/${props.match.params.id}`);
+      setImpact(data.data);
+    }
+    getImpact()
+  }, []);
+
+  return (
+    <div className="bg-light full-height">
         <main className="container py-5">
           <h1 className="text-center">{impact.name} </h1>
           <div className="container" style={{ width: "80%" }}>
-            <div style={{ width: "100%", height: "500px" }}>
+            {
+              impact.latitude && impact.longitude ? 
+              <div style={{ width: "100%", height: "500px" }}>
               <Map
                 lat={Number(impact.latitude)}
                 lng={Number(impact.longitude)}
                 zoom={4.75}
               />
-            </div>
+              </div>
+              : <div/>
+            }
 
             <h3>Impact Details</h3>
             <ul>
@@ -281,12 +294,6 @@ function Impact(props: any) {
           </div>
         </main>
       </div>
-    );
-  }
-  return (
-    <div className="py-5 container">
-      <h3 className="text-center">Impact not found.</h3>
-    </div>
   );
 }
 
