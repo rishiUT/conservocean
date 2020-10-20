@@ -276,15 +276,12 @@ function Species(props: any) {
 
           <h3>Species Details</h3>
           <ul>
-            {species.scientific_name ? (
+            {/* {species.scientific_name ? (
               <li>Scientific Name: {species.scientific_name}</li>
-            ) : null}
-            {species.common_name ? (
-              <li>Common Name: {species.common_name}</li>
-            ) : null}
-            {species.species ? <li>Species: {species.species}</li> : null}
-            {species.genus ? <li>Genus: {species.genus}</li> : null}
+            ) : null} */}
             {species.family ? <li>Family: {species.family}</li> : null}
+            {species.genus ? <li>Genus: {species.genus}</li> : null}
+            {species.species ? <li>Species: {species.species}</li> : null}
             {species.habitat ? <li>Habitat: {species.habitat}</li> : null}
             {species.endanger_status ? (
               <li>Endangered Status: {species.endanger_status}</li>
