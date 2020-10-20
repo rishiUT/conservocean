@@ -147,7 +147,7 @@ class Impacts extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.data.map((impact) => (
+                    {this.state.data.map((impact: impact) => (
                       <ImpactTableData key={impact.name} impact={impact} />
                     ))}
                   </tbody>
