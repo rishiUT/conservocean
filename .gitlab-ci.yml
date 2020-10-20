@@ -21,3 +21,15 @@ node:
 #   - cat makefile
 #   - make versions
 #   - make test
+
+stages:
+  - test
+
+postman_tests:
+  stage: test
+  image:
+    name: postman/newman_alpine33
+    entrypoint: [""]
+  script:
+    - newman --version
+    - newman run collection.json
