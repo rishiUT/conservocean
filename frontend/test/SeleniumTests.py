@@ -31,6 +31,20 @@ driver.get("https://conservocean.me")
 print(driver.title)
 print(driver.current_url)
 
+# Test About page
+link = driver.find_element_by_link_text("About")
+link.click()
+print(driver.current_url)
+try:
+    assert driver.current_url == "https://www.conservocean.me/about"
+except:
+    print("Assert failed, url = " + driver.current_url)
+    driver.quit()
+driver.back()
+#About Page Tests End
+
+
+# Test Bodies of Water Page
 link = driver.find_element_by_link_text("Bodies of Water")
 link.click()
 print(driver.current_url)
@@ -39,9 +53,25 @@ try:
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
-driver.back()
 
-link = driver.find_element_by_link_text("Aquatic Animals")
+#Test Pagination (Does it exist?)
+link = driver.find_element_by_link_text("2")
+link.click()
+# Test to see if the page is different, somehow
+#testElem = driver.find_element_by_class_name("page-item active")
+try:
+    print(testElem)
+except:
+    print("Assert failed, url = " + driver.current_url)
+    driver.quit()
+
+driver.back()
+# Water Bodies Page Tests End
+
+
+
+# Test Species Page
+link = driver.find_element_by_link_text("Species")
 link.click()
 print(driver.current_url)
 try:
@@ -49,8 +79,18 @@ try:
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
-driver.back()
 
+#Test Pagination (Does it exist?)
+link = driver.find_element_by_link_text("2")
+link.click()
+# Test to see if the page is different, somehow
+
+driver.back()
+# Species Page Tests End
+
+
+
+# Test Human Impacts Page
 link = driver.find_element_by_link_text("Human Impacts")
 link.click()
 print(driver.current_url)
@@ -59,23 +99,24 @@ try:
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
-driver.back()
 
-time.sleep(5)
+#Test Pagination (Does it exist?)
+link = driver.find_element_by_link_text("2")
+link.click()
+# Test to see if the page is different, somehow
+
+driver.back()
+# Human Impacts Page Tests End
+
+
+
+time.sleep(5) #Before searching for elements, wait for the page to load
 
 buttons = driver.find_elements_by_class_name("button")
 for button in buttons:
     print(button.text)
     #button.click() Don't do this, it invalidates the buttons selenium stores
     #driver.back()
-    
-#Useful commands:
-#driver.forward()
-#driver.back()
-#driver.refresh()
-#Can use Try-Except Block to wait for a slow page
-
-time.sleep(5)
 
 driver.close()
 driver.quit()
