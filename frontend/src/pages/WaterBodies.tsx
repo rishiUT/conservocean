@@ -183,6 +183,8 @@ function WBCard({ body }: any) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12">
       <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
+        
+        {/* Link card to instance page */}
         <Link
           to={`${match.url}/${body.id}`}
           className="card-link"
@@ -198,6 +200,7 @@ function WBCard({ body }: any) {
             }}
           ></span>
         </Link>
+
         <img className="card-image" src={body.mapImgPath} width="100%"></img>
         <div className="card-body">
           <h5 className="card-title">{body.name}</h5>
@@ -254,7 +257,6 @@ function WaterBody(props: any) {
               : <div></div>
               }
               
-
             <h3>Region Data</h3>
             <ul>
               {body.name ? <li>Name: {body.name}</li> : null}
