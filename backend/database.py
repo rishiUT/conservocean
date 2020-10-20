@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../frontend/build/static", template_folder="../frontend/build")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:iloveocean@conservoceandb.c5r36pk562sk.us-east-2.rds.amazonaws.com:5432/conservocean'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)

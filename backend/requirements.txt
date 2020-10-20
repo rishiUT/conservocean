@@ -2,7 +2,8 @@ Flask
 requests
 Flask-restful
 flask-sqlalchemy
+flask-cors
 Black
 pylint
 Mypy
-psycopg2
+psycopg2-binary
