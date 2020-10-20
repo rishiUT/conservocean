@@ -5,7 +5,6 @@ from flask import request, render_template
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 from flask import Flask, jsonify, abort
-from flask_cors import CORS
 from database import db, Fish, BodiesOfWater, HumanImpact, app
 
 api = Api(app)
