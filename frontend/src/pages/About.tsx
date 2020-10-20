@@ -216,6 +216,7 @@ class About extends React.Component {
               {" "}
               FishWatch
             </a>
+            <p>Fishwatch is used to obtain information about fish species.</p>
           </li>
           <li>
             <a href="https://www.marineregions.org/" className="theme-link">
@@ -243,47 +244,48 @@ class About extends React.Component {
               {" "}
               Postman
             </a>
+            <p>Postman was used by our backend team to design our API.</p>
           </li>
           <li>
             <a href="https://slack.com/" className="theme-link">
               {" "}
               Slack
             </a>
+            <p>Slack is used for all official team communication.</p>
           </li>
           <li>
             <a href="https://gitlab.com/explore" className="theme-link">
               {" "}
               Gitlab
             </a>
+            <p>Gitlab is used for version control for our project's code.</p>
           </li>
           <li>
             <a href="https://reactjs.org/" className="theme-link">
               {" "}
               React
             </a>
+            <p>React is used for development by our frontend team</p>
           </li>
           <li>
             <a href="https://www.docker.com/" className="theme-link">
               {" "}
               Docker
             </a>
-          </li>
-          <li>
-            <a href="https://getbootstrap.com/" className="theme-link">
-              {" "}
-              Bootstrap
-            </a>
+            <p>Docker is used to create similar environments for us to work withing, making working seperately much easier. </p>
           </li>
           <li>
             <a href="https://nodejs.org/en/" className="theme-link">
               {" "}
               Node.js and npm
             </a>
+            <p>Node.js and npm are used to manage the project's installations and dependencies.</p>
           </li>
           <li>
             <a href="https://aws.amazon.com/amplify/" className="theme-link">
               AWS Amplify
             </a>
+            <p>AWS Amplify is used to host and deploy our project.</p>
           </li>
         </ul>
       </div>
