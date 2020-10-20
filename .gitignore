@@ -9,4 +9,6 @@ latex
 my-makefile
 .vscode
 */node_modules/
+*/build/
+*/package-lock.json/
 */.devcontainer
