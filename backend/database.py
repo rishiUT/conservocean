@@ -7,16 +7,20 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 link = db.Table('links',
-    db.Column('fish_id', db.Integer, db.ForeignKey('fish.id')),
-    db.Column('water_id', db.Integer, db.ForeignKey('bodies_of_water.id')),
-    db.Column('human_id', db.Integer, db.ForeignKey('human_impact.id')))
+                db.Column('fish_id', db.Integer, db.ForeignKey('fish.id')),
+                db.Column('water_id', db.Integer, db.ForeignKey('bodies_of_water.id')),
+                db.Column('human_id', db.Integer, db.ForeignKey('human_impact.id')))
+
 
 class Fish(db.Model):
     __tablename__ = "fish"
     id = db.Column(db.Integer, primary_key=True)
-    scientific_name = db.Column(db.String(100), unique=True, nullable=False, default="No Scientific Name")
-    common_name = db.Column(db.String(100), nullable=False, default="No Common Name")
-    species = db.Column(db.String(100), unique=False, nullable=False, default="No Species")
+    scientific_name = db.Column(
+        db.String(100), unique=True, nullable=False, default="No Scientific Name")
+    common_name = db.Column(
+        db.String(100), nullable=False, default="No Common Name")
+    species = db.Column(db.String(100), unique=False,
+                        nullable=False, default="No Species")
     genus = db.Column(db.String(100), nullable=False, default="No Genus")
     family = db.Column(db.String(100), nullable=False, default="No Family")
 
@@ -24,11 +28,12 @@ class Fish(db.Model):
     # -1 0 0: Freshwater fish
     # 0 -1 0: Brachish fish
     # 0 0 -1: Saltwater fish
-    # Can be a combination of those values to 
+    # Can be a combination of those values to
     # show it lives in more than one type of water
     habitat = db.Column(db.String(100), nullable=False, default="No Habitat")
 
-    endanger_status = db.Column(db.String(100), nullable=False, default="No Endanger Status")
+    endanger_status = db.Column(
+        db.String(100), nullable=False, default="No Endanger Status")
     population_trend = db.Column(db.String(100), nullable=False)
     preferred_temp = db.Column(db.Integer)
     average_size = db.Column(db.Integer)
@@ -41,7 +46,8 @@ class Fish(db.Model):
     catch_rate = db.Column(db.Integer)
 
     # Relationships
-    location = db.relationship('BodiesOfWater', secondary=link, backref=db.backref('fish', lazy='dynamic'))
+    location = db.relationship(
+        'BodiesOfWater', secondary=link, backref=db.backref('fish', lazy='dynamic'))
 
     @property
     def serialized(self):
@@ -65,36 +71,39 @@ class Fish(db.Model):
         }
 
     def get_water(self):
-        return [{"id":item.id, "name":item.name} for item in self.location]
+        return [{"id": item.id, "name": item.name} for item in self.location]
 
     def get_human(self):
-        return_dict = {'plastic_pollution': [], 'coal_power_plants': [], 'offshore_oil_spills': [], 'tanker_oil_spill':[]}
+        return_dict = {'plastic_pollution': [], 'coal_power_plants': [
+        ], 'offshore_oil_spills': [], 'tanker_oil_spills': []}
         added = []
         for water in self.location:
             for human_impact in water.humanimpact:
                 if human_impact.id not in added:
-                    return_dict[human_impact.subcategory].append(human_impact.id)
+                    return_dict[human_impact.subcategory].append(
+                        human_impact.id)
                     added.append(human_impact.id)
         return return_dict
 
     def __repr__(self):
         return f"Fish('{self.scientific_name}' '{self.catch_rate}')"
 
+
 class BodiesOfWater(db.Model):
-    __tablename__= "bodies_of_water"
+    __tablename__ = "bodies_of_water"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False, default="No Name")
     type = db.Column(db.String(100), nullable=False, default="No Type")
-    latitude = db.Column(db.Integer)
-    longitude = db.Column(db.Integer)
-    min_latitude = db.Column(db.Integer)
-    min_longitude = db.Column(db.Integer)
-    max_latitude = db.Column(db.Integer)
-    max_longitude = db.Column(db.Integer)
-    water_temp = db.Column(db.Integer)
-    tide_height = db.Column(db.Integer)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    min_latitude = db.Column(db.Float)
+    min_longitude = db.Column(db.Float)
+    max_latitude = db.Column(db.Float)
+    max_longitude = db.Column(db.Float)
+    water_temp = db.Column(db.Float)
+    tide_height = db.Column(db.Float)
     size = db.Column(db.Integer)
-    
+
     @property
     def serialized(self):
         """Return object data in serializeable format"""
@@ -112,14 +121,14 @@ class BodiesOfWater(db.Model):
             'tide_height': self.tide_height,
             'size': self.size
         }
-    
+
     def get_human(self):
         human_list = []
         for human_impact in self.humanimpact:
             if human_impact.id not in human_list:
                 human_list.append(human_impact.id)
         return human_list
-    
+
     def get_fish(self):
         fish_list = []
         for fish in self.fish:
@@ -136,12 +145,12 @@ class HumanImpact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(100), nullable=False, default="No Category")
     subcategory = db.Column(db.String(100))
-    latitude = db.Column(db.Integer)
-    longitude = db.Column(db.Integer)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
     date = db.Column(db.String(100))
     description = db.Column(db.Text)
     name = db.Column(db.String(200))
-    
+
     # For oil pollution
     oil_amount = db.Column(db.Integer)
 
@@ -151,10 +160,10 @@ class HumanImpact(db.Model):
     # count_density_2: 1.01-4.75mm sized pieces
     # count_density_3: 4.76-200mm sized pieces
     # count_density_4: 200+mm sized pieces
-    count_density_1 = db.Column(db.Integer)
-    count_density_2 = db.Column(db.Integer)
-    count_density_3 = db.Column(db.Integer)
-    count_density_4 = db.Column(db.Integer)
+    count_density_1 = db.Column(db.Float)
+    count_density_2 = db.Column(db.Float)
+    count_density_3 = db.Column(db.Float)
+    count_density_4 = db.Column(db.Float)
 
     # For power plants
     plant_rating = db.Column(db.String(200))
@@ -162,7 +171,8 @@ class HumanImpact(db.Model):
     plant_water_source = db.Column(db.String(200))
 
     # Relationships
-    water_relationship = db.relationship("BodiesOfWater", secondary=link, backref=db.backref('humanimpact', lazy='dynamic'))
+    water_relationship = db.relationship(
+        "BodiesOfWater", secondary=link, backref=db.backref('humanimpact', lazy='dynamic'))
 
     @property
     def serialized(self):
