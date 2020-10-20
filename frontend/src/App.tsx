@@ -14,7 +14,7 @@ import Navbar from "./parts/Navbar";
 function App() {
   return (
     <Router>
-      <div style={{ height: "100%" }}>
+      <div>
         {/* Site-wide navigation bar */}
         <Navbar />
 
