@@ -98,7 +98,7 @@ class WaterBodies extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    const URL = `http://localhost:5000/api/water?offset=${this.state.offset}&limit=${this.state.perPage}`;
+    const URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}`;
     // const URL = `https://jsonplaceholder.typicode.com/users`;
     // const URL = `https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`;
     axios.get(URL)
@@ -231,7 +231,7 @@ function WaterBody(props: any) {
   useEffect(() => {
     const getWaterBody = async () => {
       // Pass param to the API call
-      const { data }: any = await axios(`http://localhost:5000/api/water/${props.match.params.id}`);
+      const { data }: any = await axios(`/api/water/${props.match.params.id}`);
       // Update state
       setWaterBody(data.data);
     }

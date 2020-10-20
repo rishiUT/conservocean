@@ -2,6 +2,7 @@ Flask
 requests
 Flask-restful
 flask-sqlalchemy
+flask-cors
 Black
 pylint
 Mypy

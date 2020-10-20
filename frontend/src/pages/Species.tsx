@@ -112,7 +112,7 @@ class SpeciesGrid extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    const URL = `http://localhost:5000/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}`;
+    const URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}`;
     // const URL = `https://jsonplaceholder.typicode.com/users`;
     // const URL = `https://api.conservocean.me/api/fish?offset={this.state.offset}&limit={this.state.perPage}`;
     axios.get(URL)
@@ -251,7 +251,7 @@ function Species(props: any) {
   useEffect(() => {
     const getSpecies = async () => {
       // Pass param to the API call
-      const { data }: any = await axios(`http://localhost:5000/api/fish/${props.match.params.id}`);
+      const { data }: any = await axios(`/api/fish/${props.match.params.id}`);
       // Update state
       setSpecies(data.data);
     }
