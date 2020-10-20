@@ -34,16 +34,31 @@ print(driver.current_url)
 link = driver.find_element_by_link_text("Bodies of Water")
 link.click()
 print(driver.current_url)
+try:
+    assert driver.current_url == "https://www.conservocean.me/water-bodies"
+except:
+    print("Assert failed, url = " + driver.current_url)
+    driver.quit()
 driver.back()
 
 link = driver.find_element_by_link_text("Aquatic Animals")
 link.click()
 print(driver.current_url)
+try:
+    assert driver.current_url == "https://www.conservocean.me/species"
+except:
+    print("Assert failed, url = " + driver.current_url)
+    driver.quit()
 driver.back()
 
 link = driver.find_element_by_link_text("Human Impacts")
 link.click()
 print(driver.current_url)
+try:
+    assert driver.current_url == "https://www.conservocean.me/impacts"
+except:
+    print("Assert failed, url = " + driver.current_url)
+    driver.quit()
 driver.back()
 
 time.sleep(5)

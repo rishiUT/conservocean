@@ -34,7 +34,7 @@ docker-front:
 	# In Windows, switch to frontend and run: docker run -it -p 3000:3000 -v ${PWD}:/usr/src/app joewallery/node
 
 docker-back:
-	docker run -it -p 5000:5000 -v ${PWD}:/conservocean joewallery/python
+	docker run -it -p 5000:5000 -v ${PWD}/backend:/conservocean joewallery/python
 
 # get git config
 config:
