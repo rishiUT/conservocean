@@ -8,9 +8,9 @@ import {
   useParams,
 } from "react-router-dom";
 import axios from "axios";
-import atlantic from "../assets/atlantic.png";
-import southern from "../assets/southern.png";
-import ashmore from "../assets/ashmore.png";
+// import atlantic from "../assets/atlantic.png";
+// import southern from "../assets/southern.png";
+// import ashmore from "../assets/ashmore.png";
 
 import Map from "../parts/Map";
 
@@ -29,62 +29,63 @@ interface waterBody {
   water_temp?: string;
 }
 
-const BODIES: waterBody[] = [
-  {
-    name: "Atlantic Ocean",
-    latitude: `4.31167`,
-    longitude: `-31.504167`,
-    salinity: "35.17",
-    // seaLevel: "0.2",
-    water_temp: "27.84",
-    // mapImgPath: atlantic,
-    // chlorophyll: "0.11",
-    // iron: "0.0",
-    // nitrate: "0.01",
-    // oxygen: "201.97",
-    // ph: "8.04",
-    // phosphate: "0.05",
-    // phyto: "4.6",
-    // phytoplankton: "1.45",
-    // silicate: "2.25",
-  },
-  // {
-  //   name: "Southern Ocean",
-  //   latitude: `68° 2' 23.3" S`,
-  //   longitude: `26° 37' 58.3" W`,
-  //   salinity: "34.45",
-  //   // seaLevel: "-1.89",
-  //   water_temp: "-18.43",
-  //   // mapImgPath: southern,
-  //   // chlorophyll: "0.03",
-  //   // iron: "0.0",
-  //   // nitrate: "29.31",
-  //   // oxygen: "324.73",
-  //   // ph: "8.03",
-  //   // phosphate: "2.07",
-  //   // phyto: "0.0",
-  //   // phytoplankton: "0.08",
-  //   // silicate: "73.89",
-  // },
-  // {
-  //   name: "Ashmore Reef",
-  //   latitude: `12° 14' 30.3" S`,
-  //   longitude: `123° 2' 30" E`,
-  //   salinity: "34.76",
-  //   // seaLevel: "0.62",
-  //   water_temp: "29.12",
-  //   // mapImgPath: ashmore,
-  //   // chlorophyll: "0.14",
-  //   // iron: "0.0",
-  //   // nitrate: "0.0",
-  //   // oxygen: "203.65",
-  //   // ph: "8.01",
-  //   // phosphate: "0.15",
-  //   // phyto: "4.21",
-  //   // phytoplankton: "1.86",
-  //   // silicate: "2.27",
-  // },
-];
+const BODIES: waterBody[] = [];
+// const BODIES: waterBody[] = [
+//   {
+//     name: "Atlantic Ocean",
+//     latitude: `4.31167`,
+//     longitude: `-31.504167`,
+//     salinity: "35.17",
+//     // seaLevel: "0.2",
+//     water_temp: "27.84",
+//     // mapImgPath: atlantic,
+//     // chlorophyll: "0.11",
+//     // iron: "0.0",
+//     // nitrate: "0.01",
+//     // oxygen: "201.97",
+//     // ph: "8.04",
+//     // phosphate: "0.05",
+//     // phyto: "4.6",
+//     // phytoplankton: "1.45",
+//     // silicate: "2.25",
+//   },
+//   // {
+//   //   name: "Southern Ocean",
+//   //   latitude: `68° 2' 23.3" S`,
+//   //   longitude: `26° 37' 58.3" W`,
+//   //   salinity: "34.45",
+//   //   // seaLevel: "-1.89",
+//   //   water_temp: "-18.43",
+//   //   // mapImgPath: southern,
+//   //   // chlorophyll: "0.03",
+//   //   // iron: "0.0",
+//   //   // nitrate: "29.31",
+//   //   // oxygen: "324.73",
+//   //   // ph: "8.03",
+//   //   // phosphate: "2.07",
+//   //   // phyto: "0.0",
+//   //   // phytoplankton: "0.08",
+//   //   // silicate: "73.89",
+//   // },
+//   // {
+//   //   name: "Ashmore Reef",
+//   //   latitude: `12° 14' 30.3" S`,
+//   //   longitude: `123° 2' 30" E`,
+//   //   salinity: "34.76",
+//   //   // seaLevel: "0.62",
+//   //   water_temp: "29.12",
+//   //   // mapImgPath: ashmore,
+//   //   // chlorophyll: "0.14",
+//   //   // iron: "0.0",
+//   //   // nitrate: "0.0",
+//   //   // oxygen: "203.65",
+//   //   // ph: "8.01",
+//   //   // phosphate: "0.15",
+//   //   // phyto: "4.21",
+//   //   // phytoplankton: "1.86",
+//   //   // silicate: "2.27",
+//   // },
+// ];
 
 // Display a grid of all bodies of water
 class WaterBodies extends Component {
@@ -97,14 +98,15 @@ class WaterBodies extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    // axios.get(`https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`)
-    axios
-      .get(`https://jsonplaceholder.typicode.com/users`)
+    const URL = `http://localhost:5000/api/water?offset=${this.state.offset}&limit=${this.state.perPage}`;
+    // const URL = `https://jsonplaceholder.typicode.com/users`;
+    // const URL = `https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`;
+    axios.get(URL)
       .then((response) => {
         this.setState({
           // Update the data and number of instances
-          data: this.state.data.concat(BODIES),
-          // data: response.data.bodies,
+          // data: this.state.data.concat(BODIES),
+          data: response.data.data,
           numInstances: this.state.numInstances,
           // numInstances: response.data.numInstances,
         });
@@ -133,8 +135,8 @@ class WaterBodies extends Component {
     return (
       <Switch>
         <Route exact path="/water-bodies">
-          <div className="bg-light" style={{ height: "100%" }}>
-            <div className="container">
+          <div className="bg-light full-height">
+            <div className="container ">
               <h2 className="py-5 text-center">Bodies of Water</h2>
 
               <div className="row">
@@ -221,7 +223,7 @@ function WaterBody() {
   );
   if (body) {
     return (
-      <div className="bg-light">
+      <div className="bg-light full-height">
         <main className="container py-5" style={{ height: "100%" }}>
           <h1 className="text-center">{body.name} </h1>
           <div className="container" style={{ width: "80%" }}>

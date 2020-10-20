@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Switch, Route, Link, useParams } from "react-router-dom";
 import axios from "axios";
@@ -8,6 +8,7 @@ import persianGulf from "../assets/persian-gulf.png";
 import taeanKorea from "../assets/taean-korea.png";
 
 import Map from "../parts/Map";
+import { updateStatement } from "typescript";
 
 interface impact {
   name?: string;
@@ -95,14 +96,14 @@ class Impacts extends Component {
   // Make API request for the current page of data using Axios
   loadData() {
     // axios.get(`https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`)
-    axios
-      .get(`https://jsonplaceholder.typicode.com/users`)
+    axios.get(`http://localhost:5000/api/impacts?offset=${this.state.offset}&limit=${this.state.perPage}`)
+    // axios.get(`https://jsonplaceholder.typicode.com/users`)
       .then((response) => {
         console.log(response);
         this.setState({
           // Update the data and number of instances
-          data: this.state.data.concat(IMPACTS),
-          // data: response.data.impacts,
+          // data: this.state.data.concat(IMPACTS),
+          data: response.data.impacts,
           numInstances: this.state.numInstances,
           // numInstances: response.data.numInstances,
         });
@@ -131,18 +132,20 @@ class Impacts extends Component {
     return (
       <Switch>
         <Route exact path="/impacts">
-          <div className="bg-light" style={{ height: "100%" }}>
+          <div className="bg-light full-height">
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
 
               <div className="table-responsive">
                 <table className="table">
                   <thead>
+                    <tr>
                     <th scope="col">Impact</th>
                     <th scope="col">Category</th>
                     <th scope="col">Type</th>
                     <th scope="col">Latitude</th>
                     <th scope="col">Longitude</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {this.state.data.map((impact) => (
@@ -205,14 +208,15 @@ function ImpactTableData({ impact }: any) {
 }
 
 // Display an information page for a specific impact
-function Impact() {
+function Impact(props: any) {
+
   let { impactId }: any = useParams();
   let impact = IMPACTS.find(
     (impact) => impact.name === impactId.replaceAll("-", " ")
   );
   if (impact) {
     return (
-      <div className="bg-light">
+      <div className="bg-light full-height">
         <main className="container py-5">
           <h1 className="text-center">{impact.name} </h1>
           <div className="container" style={{ width: "80%" }}>
