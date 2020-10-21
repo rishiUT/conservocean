@@ -209,8 +209,9 @@ function WBCard({ body }: any) {
           <li className="list-group-item">Latitude: {body.latitude}</li>
           <li className="list-group-item">Longitude: {body.longitude}</li>
           <li className="list-group-item">
-            Salinity: {body.salinity} g salt per kg water
+            Size: {body.size} miles
           </li>
+          <li className="list-group-item">Tide Height: {body.tide_height}</li>
           <li className="list-group-item">Temperature {body.water_temp}°C</li>
         </ul>
       </div>
