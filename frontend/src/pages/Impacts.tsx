@@ -195,7 +195,7 @@ function ImpactTableData({ impact }: any) {
           to={`/impacts/${impact.id}`}
           className="card-link"
         >
-          {impact.name}
+          {impact.name ? impact.name : “Plastic Pollution Sample ” + impact.id}
         </Link>
       </th>
       <td>{impact.category}</td>
@@ -218,8 +218,8 @@ function Impact(props: any) {
   // Use useEffect to retrieve data from API
   useEffect(() => {
     const getImpact = async () => {
-      const { data }: any = await axios(`/api/impact/${props.match.params.id}`);
-      setImpact(data.data);
+      const { data }: any = await axios(`/api/human/${props.match.params.id}`);
+      setImpact(data.data[0]);
     }
     getImpact()
   }, []);
