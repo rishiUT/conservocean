@@ -32,4 +32,4 @@ postman_tests:
     entrypoint: [""]
   script:
     - newman --version
-    - newman run collection.json
+    - newman run postman.json
