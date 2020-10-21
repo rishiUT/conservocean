@@ -233,7 +233,7 @@ function WaterBody(props: any) {
       // Pass param to the API call
       const { data }: any = await axios(`/api/water/${props.match.params.id}`);
       // Update state
-      setWaterBody(data.data);
+      setWaterBody(data.data[0]);
     }
     // Invoke the async function
     getWaterBody();
