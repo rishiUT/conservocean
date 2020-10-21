@@ -212,29 +212,53 @@ class About extends React.Component {
         <h2 className="header">Data Sources</h2>
         <ul>
           <li>
-            <a href="https://www.fishwatch.gov/" className="theme-link">
+            <a href="https://fishbaseapi.readme.io/" className="theme-link">
               {" "}
-              FishWatch
+              FishBase API
             </a>
-            <p>Fishwatch is used to obtain information about fish species.</p>
+            <p>FishBase stores basic information about fish, such as species, common name, genus, etc.</p>
+          </li>
+          <li>
+            <a href="https://apiv3.iucnredlist.org/" className="theme-link">
+              {" "}
+              IUCN Red List API
+            </a>
+            <p>The IUCN Red List database stores information on the risk levels of several species, indicating their risk of extinction.</p>
+          </li>
+          <li>
+            <a href="https://bison.usgs.gov/" className="theme-link">
+              {" "}
+              Bison USGS
+            </a>
+            <p>Bison USGS stores information about the geographic location of fish around the United States.</p>
           </li>
           <li>
             <a href="https://www.marineregions.org/" className="theme-link">
               {" "}
               Marine Regions
             </a>
+            <p>Marine Regions contains a large variety of information about various geographic features, primarily features found in and around water.</p>
           </li>
           <li>
-            <a href="https://fishbaseapi.readme.io/" className="theme-link">
+            <a href="http://www.openfisheries.org/" className="theme-link">
               {" "}
-              Fishbaseapi
+              Open Fisheries
             </a>
+            <p>Open Fisheries has information regarding the yearly catch rate of various fish, given a species name for the fish.</p>
           </li>
           <li>
-            <a href="https://stormglass.io/" className="theme-link">
+            <a href="https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic-pollution-in-the-worlds-oceans-km2-200-mm/geoservice" className="theme-link">
               {" "}
-              Storm Glass
+              ArcGIS Hub
             </a>
+            <p>Arcgis Hub stores many API’s, one of which has information about the microplastic density present in many major bodies of water.</p>
+          </li>
+          <li>
+            <a href="https://data.opendatasoft.com/explore/dataset/world-power-plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive.plant_state&disjunctive.plant_status&disjunctive.plant_type_of_ownership&disjunctive.plant_operating_company&disjunctive.type" className="theme-link">
+              {" "}
+              OpenDataSoft
+            </a>
+            <p>OpenDataSoft contains many API’s, one of which contains information about world power plants, separated by category, such as coal plants.</p>
           </li>
         </ul>
         <h2 className="header">Tools</h2>
