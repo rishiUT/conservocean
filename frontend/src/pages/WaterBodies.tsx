@@ -271,8 +271,8 @@ function WaterBody(props: any) {
                 <li>Salinity: {body.salinity} g salt per kg water</li>
               ) : null}
               {(fish: body.fish) => (
-                      <li><Link to={`species/${fish.id}` className="card-link"}> {fish.scientific_name}</Link><li>
-                    ))}
+                      <li><Link to=`species/${fish.id}` className="card-link"> {fish.scientific_name}</Link><li>
+                    )}
             </ul>
           </div>
         </main>
