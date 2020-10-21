@@ -195,7 +195,7 @@ function ImpactTableData({ impact }: any) {
           to={`/impacts/${impact.id}`}
           className="card-link"
         >
-          {impact.name ? impact.name : “Plastic Pollution Sample ” + impact.id}
+          {impact.name ? impact.name:"Plastic Pollution Sample" + impact.id}
         </Link>
       </th>
       <td>{impact.category}</td>
