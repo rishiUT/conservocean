@@ -9,7 +9,7 @@ import taeanKorea from "../assets/taean-korea.png";
 
 import Map from "../parts/Map";
 
-import PPHM from "/Media/PlasticPollutionHeatMap.png";
+import PPHM from "./Media/PlasticPollutionHeatMap.png";
 
 interface impact {
   name?: string;
