@@ -244,10 +244,11 @@ function Impact(props: any) {
               </div>
               : <div/>
             }
+            
+            {impact.subcategory === "plastic_pollution" ? <img src={PPHM} alt="Plastic Pollution Heat Map" /> : null}
 
             <h3>Impact Details</h3>
             <ul>
-              {impact.subcategory === "plastic_pollution" ? <img src={PPHM} alt="Plastic Pollution Heat Map" /> : null}
               {impact.name ? <li>Name: {impact.name}</li> : null}
               {impact.category ? <li>Category: {impact.category}</li> : null}
               {impact.subcategory ? (
