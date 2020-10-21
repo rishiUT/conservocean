@@ -203,9 +203,6 @@ function ImpactTableData({ impact }: any) {
       <td>{impact.subcategory?.toLowerCase()}</td>
       <td>{impact.latitude}</td>
       <td>{impact.longitude}</td>
-      <td>{impact.size}</td>
-      <td>{impact.tide_height}</td>
-      <td>{impact.water_temp}</td>
     </tr>
   );
 }
