@@ -253,7 +253,7 @@ function Species(props: any) {
       // Pass param to the API call
       const { data }: any = await axios(`/api/fish/${props.match.params.id}`);
       // Update state
-      setSpecies(data.data[0].data);
+      setSpecies(data.data.data[0]);
     }
     // Invoke the async function
     getSpecies();
