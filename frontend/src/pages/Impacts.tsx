@@ -9,6 +9,8 @@ import taeanKorea from "../assets/taean-korea.png";
 
 import Map from "../parts/Map";
 
+import PPHM from "/Media/PlasticPollutionHeatMap.png";
+
 interface impact {
   name?: string;
   category?: string;
@@ -96,7 +98,6 @@ class Impacts extends Component {
   loadData() {
     // axios.get(`https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`)
     axios.get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`)
-    // axios.get(`https://jsonplaceholder.typicode.com/users`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -243,6 +244,7 @@ function Impact(props: any) {
 
             <h3>Impact Details</h3>
             <ul>
+              {impact.subcategory === "plastic_pollution" ? <img src={PPHM} alt="Plastic Pollution Heat Map" /> : null}
               {impact.name ? <li>Name: {impact.name}</li> : null}
               {impact.category ? <li>Category: {impact.category}</li> : null}
               {impact.subcategory ? (
