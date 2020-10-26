@@ -1509,11 +1509,6 @@
 									"    const keys = ['id', 'category', 'subcategory', 'latitude', 'longitude', 'date','description','name','oil_amount', 'count_density_1','count_density_2','count_density_3', 'count_density_4','plant_rating','plant_location', 'plant_water_source', 'location', 'fish'];\r",
 									"    pm.expect(data.name).to.eql('Odyssey')\r",
 									"    pm.expect(data.subcategory).to.eql('tanker_oil_spills')\r",
-									"});\r",
-									"pm.test(\"Check Returned Number\", function () {\r",
-									"    const jsonData = pm.response.json();\r",
-									"    const num = jsonData.total_impact_returned;\r",
-									"    pm.expect(num).to.eql(1);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1667,7 +1662,7 @@
 	],
 	"variable": [
 		{
-			"id": "cbf9f545-e9fb-4b55-881b-659ace7839b2",
+			"id": "ceb9c05c-624c-4714-82a2-f95dc5d2bac6",
 			"key": "base_url",
 			"value": "http://www.conservocean.me"
 		}

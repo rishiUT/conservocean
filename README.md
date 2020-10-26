@@ -1,7 +1,7 @@
 # CS 373: Software Engineering - 11am Group 12 - **ConservOcean**
 
 - Website: http://www.conservocean.me
-- Git SHA: bce1ea34c62397f14f67c2ab134c103a7e89f9d8 
+- Git SHA: 9c24377fe86ba6786e2a25c9c4a50d69e88a922b
 - GitLab Pipelines: https://gitlab.com/joewallery/cs373-group12/-/pipelines
 
 | Name                            | EID     | GitLab ID      | Estimated Time (hours)                       | Actual Time (hours)                          |
