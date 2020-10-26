@@ -33,76 +33,22 @@ interface impact {
   mapImgPath?: string;
 }
 
-// const IMPACTS: impact[] = [
-//   {
-//     name: "Maine Independence Station Gas Plant ME USA",
-//     category: "power plant",
-//     subcategory: "GAS",
-//     description: "Environmentally Responsible",
-//     latitude: "44.8236",
-//     longitude: "-68.7106",
-//     location: "United States of America",
-//     capacity: "550.2",
-//     date: "Present",
-//     mapImgPath: maine,
-//   },
-//   {
-//     name: "Arabian Gulf Spills",
-//     category: "spill",
-//     subcategory: "Oil",
-//     description:
-//       "During the 1991 Gulf War, tankers and oil terminals in Kuwait were destroyed, causing the release of an estimated 6-8 million barrels (252 - 336 million gallons) of oil into the waters of the Arabian (Persian) Gulf. Many oil wells in Kuwait were destroyed and set on fire, resulting in the release of much greater amounts of oil and combustion products to land, air, and water in Kuwait.",
-//     latitude: "29.5",
-//     longitude: "48",
-//     location: "Persian Gulf, Kuwait",
-//     capacity: "336000009",
-//     date: "1/19/91",
-//     mapImgPath: persianGulf,
-//   },
-//   {
-//     name: "Heibei Spirit Oil Spill",
-//     category: "spill",
-//     subcategory: "Oil",
-//     description:
-//       "On 7th December 2007, the HEBEI SPIRIT Ship was struck by a crane barge whilst at anchor off Taean, South Korea. The barge broke free from its tow in poor weather, puncturing three port-side cargo tanks. Despite mitigating efforts by the crew of HEBEI SPIRIT, approximately 10,900 tonnes of Iranian Heavy, Upper Zakum and Kuwait Export crude oils were released to the sea.",
-//     latitude: "36.893",
-//     longitude: "126.055",
-//     location: "Taean, South Korea",
-//     capacity: "109000",
-//     date: "12/7/2007",
-//     mapImgPath: taeanKorea,
-//   },
-//   {
-//     name: "Maine Independence Station Gas Plant ME USA (no lat)",
-//     category: "power plant",
-//     subcategory: "GAS",
-//     description: "Environmentally Responsible",
-//     longitude: "-68.7106",
-//     location: "United States of America",
-//     capacity: "550.2",
-//     date: "Present",
-//     mapImgPath: maine,
-//   },
-// ];
-
 // Display a table of all available impacts
 class Impacts extends Component {
   state = {
     data: [],
     offset: 0,
-    perPage: 20,
+    perPage: 9,
     numInstances: 500,
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
-    // axios.get(`https://api.conservocean.me/api/impacts?offset={this.state.offset}&limit={this.state.perPage}`)
     axios.get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`)
       .then((response) => {
         console.log(response);
         this.setState({
           // Update the data and number of instances
-          // data: this.state.data.concat(IMPACTS),
           data: response.data.data,
           numInstances: this.state.numInstances,
           // numInstances: response.data.numInstances,
@@ -196,7 +142,7 @@ function ImpactTableData({ impact }: any) {
           to={`/impacts/${impact.id}`}
           className="card-link"
         >
-          {impact.name ? impact.name:"Plastic Pollution Sample" + impact.id}
+          {impact.name ? impact.name : "Plastic Pollution Sample " + impact.id}
         </Link>
       </th>
       <td>{impact.category}</td>
@@ -210,10 +156,10 @@ function ImpactTableData({ impact }: any) {
 // Display an information page for a specific impact
 function Impact(props: any) {
   // Set initial state
-  const initialImpactState: impact = { 
-  }
+  const initialImpactState: impact = {}
 
   // Getter and setter for impact state
+  //impact is an impact, setImpact is a function you can use to change it
   const [impact, setImpact] = useState(initialImpactState);
 
   // Use useEffect to retrieve data from API
