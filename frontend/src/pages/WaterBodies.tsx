@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect }  from "react";
+import React, { Component, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import {
   Switch,
@@ -40,7 +40,8 @@ class WaterBodies extends Component {
   // Make API request for the current page of data using Axios
   loadData() {
     const URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}`;
-    axios.get(URL)
+    axios
+      .get(URL)
       .then((response) => {
         this.setState({
           // Update the data and number of instances
@@ -121,12 +122,8 @@ function WBCard({ body }: any) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12">
       <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
-        
         {/* Link card to instance page */}
-        <Link
-          to={`${match.url}/${body.id}`}
-          className="card-link"
-        >
+        <Link to={`${match.url}/${body.id}`} className="card-link">
           <span
             style={{
               position: "absolute",
@@ -146,9 +143,7 @@ function WBCard({ body }: any) {
         <ul className="list-group list-group-flush">
           <li className="list-group-item">Latitude: {body.latitude}</li>
           <li className="list-group-item">Longitude: {body.longitude}</li>
-          <li className="list-group-item">
-            Size: {body.size} miles
-          </li>
+          <li className="list-group-item">Size: {body.size} miles</li>
           <li className="list-group-item">Tide Height: {body.tide_height}</li>
           <li className="list-group-item">Temperature {body.water_temp}°C</li>
         </ul>
@@ -160,8 +155,7 @@ function WBCard({ body }: any) {
 // Display data page on a particular body of water
 function WaterBody(props: any) {
   // Set initial state
-  const initialWaterState: waterBody = {
-  }
+  const initialWaterState: waterBody = {};
 
   // Getter and setter for species state
   const [body, setWaterBody] = useState(initialWaterState);
@@ -173,7 +167,7 @@ function WaterBody(props: any) {
       const { data }: any = await axios(`/api/water/${props.match.params.id}`);
       // Update state
       setWaterBody(data.data[0]);
-    }
+    };
     // Invoke the async function
     getWaterBody();
   }, []);
@@ -181,41 +175,41 @@ function WaterBody(props: any) {
   // Return data
   return (
     <div className="bg-light full-height">
-        <main className="container py-5" style={{ height: "100%" }}>
-          <h1 className="text-center">{body.name} </h1>
-          <div className="container" style={{ width: "80%" }}>
-              {
-                body.latitude && body.longitude ? 
-                <div style={{ width: "100%", height: "500px" }}>
-                <Map
+      <main className="container py-5" style={{ height: "100%" }}>
+        <h1 className="text-center">{body.name} </h1>
+        <div className="container" style={{ width: "80%" }}>
+          {body.latitude && body.longitude ? (
+            <div style={{ width: "100%", height: "500px" }}>
+              <Map
                 lat={Number(body.latitude)}
                 lng={Number(body.longitude)}
                 zoom={4}
-                />
-                </div>
-              : <div></div>
-              }
-              
-            <h3>Region Data</h3>
-            <ul>
-              {body.name ? <li>Name: {body.name}</li> : null}
-              {body.type ? <li>Type: {body.type}</li> : null}
-              {body.latitude ? <li>Latitude: {body.latitude}</li> : null}
-              {body.longitude ? <li>Longitude: {body.longitude}</li> : null}
-              {body.water_temp ? (
-                <li>Water Temperature: {body.water_temp}°C</li>
-              ) : null}
-              {body.salinity ? (
-                <li>Salinity: {body.salinity} g salt per kg water</li>
-              ) : null}
-              {/* (fish: body.fish) => (
+              />
+            </div>
+          ) : (
+            <div></div>
+          )}
+
+          <h3>Region Data</h3>
+          <ul>
+            {body.name ? <li>Name: {body.name}</li> : null}
+            {body.type ? <li>Type: {body.type}</li> : null}
+            {body.latitude ? <li>Latitude: {body.latitude}</li> : null}
+            {body.longitude ? <li>Longitude: {body.longitude}</li> : null}
+            {body.water_temp ? (
+              <li>Water Temperature: {body.water_temp}°C</li>
+            ) : null}
+            {body.salinity ? (
+              <li>Salinity: {body.salinity} g salt per kg water</li>
+            ) : null}
+            {/* (fish: body.fish) => (
                       <li><Link to=`species/${fish.id}` className="card-link"> {fish.scientific_name}</Link><li>
                     ) */}
-            </ul>
-          </div>
-        </main>
-      </div>
-  )
+          </ul>
+        </div>
+      </main>
+    </div>
+  );
 }
 
 export default WaterBodies;

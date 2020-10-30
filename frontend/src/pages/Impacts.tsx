@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect }  from "react";
+import React, { Component, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Switch, Route, Link, useParams } from "react-router-dom";
 import axios from "axios";
@@ -44,7 +44,11 @@ class Impacts extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    axios.get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`)
+    axios
+      .get(
+        `/api/human?offset=${this.state.offset}
+                  &limit=${this.state.perPage}`
+      )
       .then((response) => {
         console.log(response);
         this.setState({
@@ -86,11 +90,11 @@ class Impacts extends Component {
                 <table className="table">
                   <thead>
                     <tr>
-                    <th scope="col">Impact</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Latitude</th>
-                    <th scope="col">Longitude</th>
+                      <th scope="col">Impact</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Latitude</th>
+                      <th scope="col">Longitude</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -138,10 +142,7 @@ function ImpactTableData({ impact }: any) {
   return (
     <tr>
       <th scope="row">
-        <Link
-          to={`/impacts/${impact.id}`}
-          className="card-link"
-        >
+        <Link to={`/impacts/${impact.id}`} className="card-link">
           {impact.name ? impact.name : "Plastic Pollution Sample " + impact.id}
         </Link>
       </th>
@@ -156,7 +157,7 @@ function ImpactTableData({ impact }: any) {
 // Display an information page for a specific impact
 function Impact(props: any) {
   // Set initial state
-  const initialImpactState: impact = {}
+  const initialImpactState: impact = {};
 
   // Getter and setter for impact state
   //impact is an impact, setImpact is a function you can use to change it
@@ -167,84 +168,83 @@ function Impact(props: any) {
     const getImpact = async () => {
       const { data }: any = await axios(`/api/human/${props.match.params.id}`);
       setImpact(data.data[0]);
-    }
-    getImpact()
+    };
+    getImpact();
   }, []);
 
   return (
     <div className="bg-light full-height">
-        <main className="container py-5">
-          <h1 className="text-center">{impact.name} </h1>
-          <div className="container" style={{ width: "80%" }}>
-            {
-              impact.latitude && impact.longitude ? 
-              <div style={{ width: "100%", height: "500px" }}>
+      <main className="container py-5">
+        <h1 className="text-center">{impact.name} </h1>
+        <div className="container" style={{ width: "80%" }}>
+          {impact.latitude && impact.longitude ? (
+            <div style={{ width: "100%", height: "500px" }}>
               <Map
                 lat={Number(impact.latitude)}
                 lng={Number(impact.longitude)}
                 zoom={4.75}
               />
-              </div>
-              : <div/>
-            }
+            </div>
+          ) : (
+            <div />
+          )}
 
-            {impact.subcategory === "plastic_pollution" ? (
-              <img src={PPHM} alt="Plastic Pollution Heat Map" /> 
+          {impact.subcategory === "plastic_pollution" ? (
+            <img src={PPHM} alt="Plastic Pollution Heat Map" />
+          ) : null}
+
+          <h3>Impact Details</h3>
+          <ul>
+            {impact.name ? <li>Name: {impact.name}</li> : null}
+            {impact.category ? <li>Category: {impact.category}</li> : null}
+            {impact.subcategory ? (
+              <li>Subcategory: {impact.subcategory}</li>
             ) : null}
-
-            <h3>Impact Details</h3>
-            <ul>
-              {impact.name ? <li>Name: {impact.name}</li> : null}
-              {impact.category ? <li>Category: {impact.category}</li> : null}
-              {impact.subcategory ? (
-                <li>Subcategory: {impact.subcategory}</li>
-              ) : null}
-              {impact.description ? (
-                <li>Description: {impact.description}</li>
-              ) : null}
-              {impact.date ? <li>Date: {impact.date}</li> : null}
-              {impact.latitude ? <li>Latitude: {impact.latitude}</li> : null}
-              {impact.longitude ? <li>Longitude: {impact.longitude}</li> : null}
-              {impact.oil_amount ? (
-                <li>Oil Spilled: {impact.oil_amount} gallons</li>
-              ) : null}
-              {impact.count_density_1 ? (
-                <li>
-                  Num 0.33-1.00mm pieces of plastic per km^2:{" "}
-                  {impact.count_density_1}
-                </li>
-              ) : null}
-              {impact.count_density_2 ? (
-                <li>
-                  Num 1.01-4.75mm pieces of plastic per km^2:{" "}
-                  {impact.count_density_2}
-                </li>
-              ) : null}
-              {impact.count_density_3 ? (
-                <li>
-                  Num 4.76-200mm pieces of plastic per km^2:{" "}
-                  {impact.count_density_3}
-                </li>
-              ) : null}
-              {impact.count_density_4 ? (
-                <li>
-                  Num 200+mm pieces of plastic per km^2:{" "}
-                  {impact.count_density_4}
-                </li>
-              ) : null}
-              {impact.plant_rating ? (
-                <li>Plant Rating: {impact.plant_rating}</li>
-              ) : null}
-              {impact.plant_location ? (
-                <li>Plant Location: {impact.plant_location}</li>
-              ) : null}
-              {impact.plant_water_source ? (
-                <li>Plant Water Source: {impact.plant_water_source}</li>
-              ) : null}
-            </ul>
-          </div>
-        </main>
-      </div>
+            {impact.description ? (
+              <li>Description: {impact.description}</li>
+            ) : null}
+            {impact.date ? <li>Date: {impact.date}</li> : null}
+            {impact.latitude ? <li>Latitude: {impact.latitude}</li> : null}
+            {impact.longitude ? <li>Longitude : {impact.longitude}</li> : null}
+            {impact.oil_amount ? (
+              <li>Oil Spilled: {impact.oil_amount} gallons</li>
+            ) : null}
+            {impact.count_density_1 ? (
+              <li>
+                Num 0.33-1.00mm pieces of plastic per km^2:{" "}
+                {impact.count_density_1}
+              </li>
+            ) : null}
+            {impact.count_density_2 ? (
+              <li>
+                Num 1.01-4.75mm pieces of plastic per km^2:{" "}
+                {impact.count_density_2}
+              </li>
+            ) : null}
+            {impact.count_density_3 ? (
+              <li>
+                Num 4.76-200mm pieces of plastic per km^2:{" "}
+                {impact.count_density_3}
+              </li>
+            ) : null}
+            {impact.count_density_4 ? (
+              <li>
+                Num 200+mm pieces of plastic per km^2: {impact.count_density_4}
+              </li>
+            ) : null}
+            {impact.plant_rating ? (
+              <li>Plant Rating: {impact.plant_rating}</li>
+            ) : null}
+            {impact.plant_location ? (
+              <li>Plant Location: {impact.plant_location}</li>
+            ) : null}
+            {impact.plant_water_source ? (
+              <li>Plant Water Source: {impact.plant_water_source}</li>
+            ) : null}
+          </ul>
+        </div>
+      </main>
+    </div>
   );
 }
 

@@ -30,7 +30,10 @@ class About extends React.Component {
         unitTests: 0,
         image: joe,
         bio:
-          " Hi, I’m Joe! I’m a junior CS and math major from Houston. For ConservOcean, I am primarily working on front-end development. In my free time, I also enjoy reading, cooking, and watching movies!",
+          " Hi, I’m Joe! I’m a junior CS and math major from Houston. " +
+          "For ConservOcean, I am primarily working on front-end development." +
+          " In my free time, I also enjoy reading, cooking, and " +
+          "watching movies!",
       },
       {
         name: "Rishi Salem",
@@ -41,7 +44,9 @@ class About extends React.Component {
         unitTests: 0,
         image: rishi,
         bio:
-          "Hi, my name is Rishi! I’m majoring in Computer Science and Psychology. For this website, I primarily work on the frontend. Also, I love to cook!",
+          "Hi, my name is Rishi! I’m majoring in Computer Science and " +
+          "Psychology. For this website, I primarily work on the frontend. " +
+          "Also, I love to cook!",
       },
       {
         name: "Serena Zamarripa",
@@ -52,7 +57,9 @@ class About extends React.Component {
         unitTests: 0,
         image: serena,
         bio:
-          "Hi, I'm Serena! This is my last semester here at UT. For this project, I work on the frontend. Outside of CS I enjoy painting, reading, and theatre.",
+          "Hi, I'm Serena! This is my last semester here at UT. " +
+          "For this project, I work on the frontend. Outside of CS I enjoy" +
+          " painting, reading, and theatre.",
       },
       {
         name: "Andy Weng",
@@ -63,7 +70,10 @@ class About extends React.Component {
         unitTests: 0,
         image: andy,
         bio:
-          "Hi, I'm Andy! I’m a senior CS major and business minor from Plano. For ConservOcean, I primarily work on back-end development. I enjoy listening to music and watching TV shows on my free time. I also have a pug called Bean.",
+          "Hi, I'm Andy! I’m a senior CS major and business minor from Plano." +
+          " For ConservOcean, I primarily work on back-end development. " +
+          "I enjoy listening to music and watching TV shows on my free time. " +
+          "I also have a pug called Bean.",
       },
       {
         name: "Christine Tsou",
@@ -74,7 +84,9 @@ class About extends React.Component {
         unitTests: 0,
         image: christine,
         bio:
-          "Hi, I'm Christine! I'm in my third year studying CS, and I primarily work on back-end development for ConservOcean. Some things I enjoy are listening to music and reading!",
+          "Hi, I'm Christine! I'm in my third year studying CS, and I " +
+          "primarily work on back-end development for ConservOcean. Some " +
+          "things I enjoy are listening to music and reading!",
       },
       {
         name: "Dane Strandboge",
@@ -84,7 +96,10 @@ class About extends React.Component {
         issues: 0,
         unitTests: 0,
         image: dane,
-        bio: "Hey, I'm Dane! I'm a 4th year CS major from Georgetown. I primarily work on back-end development for ConservOcean. I like listening to music and playing games in my free time.",
+        bio:
+          "Hey, I'm Dane! I'm a 4th year CS major from Georgetown. I " +
+          "primarily work on back-end development for ConservOcean. " +
+          "I like listening to music and playing games in my free time.",
       },
     ],
     dataSource: [
@@ -129,7 +144,8 @@ class About extends React.Component {
 
     // GET the number of commits per user and the total number of commits
     fetch(
-      "https://gitlab.com/api/v4/projects/21238278/repository/commits?per_page=9999"
+      "https://gitlab.com/api/v4/projects/21238278/repository/commits?" +
+        "per_page=9999"
     )
       .then((response) => {
         return response.json();
@@ -216,49 +232,83 @@ class About extends React.Component {
               {" "}
               FishBase API
             </a>
-            <p>FishBase stores basic information about fish, such as species, common name, genus, etc.</p>
+            <p>
+              FishBase stores basic information about fish, such as species,
+              common name, genus, etc.
+            </p>
           </li>
           <li>
             <a href="https://apiv3.iucnredlist.org/" className="theme-link">
               {" "}
               IUCN Red List API
             </a>
-            <p>The IUCN Red List database stores information on the risk levels of several species, indicating their risk of extinction.</p>
+            <p>
+              The IUCN Red List database stores information on the risk levels
+              of several species, indicating their risk of extinction.
+            </p>
           </li>
           <li>
             <a href="https://bison.usgs.gov/" className="theme-link">
               {" "}
               Bison USGS
             </a>
-            <p>Bison USGS stores information about the geographic location of fish around the United States.</p>
+            <p>
+              Bison USGS stores information about the geographic location of
+              fish around the United States.
+            </p>
           </li>
           <li>
             <a href="https://www.marineregions.org/" className="theme-link">
               {" "}
               Marine Regions
             </a>
-            <p>Marine Regions contains a large variety of information about various geographic features, primarily features found in and around water.</p>
+            <p>
+              Marine Regions contains a large variety of information about
+              various geographic features, primarily features found in and
+              around water.
+            </p>
           </li>
           <li>
             <a href="http://www.openfisheries.org/" className="theme-link">
               {" "}
               Open Fisheries
             </a>
-            <p>Open Fisheries has information regarding the yearly catch rate of various fish, given a species name for the fish.</p>
+            <p>
+              Open Fisheries has information regarding the yearly catch rate of
+              various fish, given a species name for the fish.
+            </p>
           </li>
           <li>
-            <a href="https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic-pollution-in-the-worlds-oceans-km2-200-mm/geoservice" className="theme-link">
+            <a
+              href="https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic
+            -pollution-in-the-worlds-oceans-km2-200-mm/geoservice"
+              className="theme-link"
+            >
               {" "}
               ArcGIS Hub
             </a>
-            <p>Arcgis Hub stores many API’s, one of which has information about the microplastic density present in many major bodies of water.</p>
+            <p>
+              Arcgis Hub stores many API’s, one of which has information about
+              the microplastic density present in many major bodies of water.
+            </p>
           </li>
           <li>
-            <a href="https://data.opendatasoft.com/explore/dataset/world-power-plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive.plant_state&disjunctive.plant_status&disjunctive.plant_type_of_ownership&disjunctive.plant_operating_company&disjunctive.type" className="theme-link">
+            <a
+              href="https://data.opendatasoft.com/explore/dataset/world-power
+            -plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive
+            .plant_state&disjunctive.plant_status&disjunctive.
+            plant_type_of_ownership&disjunctive.plant_operating_company&
+            disjunctive.type"
+              className="theme-link"
+            >
               {" "}
               OpenDataSoft
             </a>
-            <p>OpenDataSoft contains many API’s, one of which contains information about world power plants, separated by category, such as coal plants.</p>
+            <p>
+              OpenDataSoft contains many API’s, one of which contains
+              information about world power plants, separated by category, such
+              as coal plants.
+            </p>
           </li>
         </ul>
         <h2 className="header">Tools</h2>
@@ -296,14 +346,20 @@ class About extends React.Component {
               {" "}
               Docker
             </a>
-            <p>Docker is used to create similar environments for us to work withing, making working seperately much easier. </p>
+            <p>
+              Docker is used to create similar environments for us to work
+              within, making working seperately much easier.{" "}
+            </p>
           </li>
           <li>
             <a href="https://nodejs.org/en/" className="theme-link">
               {" "}
               Node.js and npm
             </a>
-            <p>Node.js and npm are used to manage the project's installations and dependencies.</p>
+            <p>
+              Node.js and npm are used to manage the project's installations and
+              dependencies.
+            </p>
           </li>
           <li>
             <a href="https://aws.amazon.com/amplify/" className="theme-link">

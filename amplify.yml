@@ -10,7 +10,7 @@ applications:
   #         commands:
   #           - python conservOcean.py
   #   appRoot: backend/
-    
+
   - frontend:
       phases:
         preBuild:

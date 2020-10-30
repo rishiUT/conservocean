@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect }  from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   Switch,
   Route,
@@ -49,7 +49,8 @@ class SpeciesGrid extends Component {
   // Make API request for the current page of data using Axios
   loadData() {
     const URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}`;
-    axios.get(URL)
+    axios
+      .get(URL)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -83,7 +84,7 @@ class SpeciesGrid extends Component {
     return (
       <Switch>
         <Route exact path="/species">
-          <div className="bg-light full-height" >
+          <div className="bg-light full-height">
             <div className="container">
               <h2 className="py-5 text-center">Species</h2>
 
@@ -131,10 +132,7 @@ function SpeciesCard({ species }: any) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12">
       <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
-        <Link
-          to={`${match.url}/${species.id}`}
-          className="card-link"
-        >
+        <Link to={`${match.url}/${species.id}`} className="card-link">
           <span
             style={{
               position: "absolute",
@@ -161,7 +159,9 @@ function SpeciesCard({ species }: any) {
           <li className="list-group-item">
             Species: <span className="font-italic">{species.species}</span>
           </li>
-          <li className="list-group-item">IUCN Status: {species.endanger_status}</li>
+          <li className="list-group-item">
+            IUCN Status: {species.endanger_status}
+          </li>
           <li className="list-group-item">
             Fishing Rate: {species.fishingRate}
           </li>
@@ -174,8 +174,7 @@ function SpeciesCard({ species }: any) {
 // Display content for an individual species page
 function Species(props: any) {
   // Set initial state
-  const initialSpeciesState: species = {
-  }
+  const initialSpeciesState: species = {};
 
   // Getter and setter for species state
   const [species, setSpecies] = useState(initialSpeciesState);
@@ -187,7 +186,7 @@ function Species(props: any) {
       const { data }: any = await axios(`/api/fish/${props.match.params.id}`);
       // Update state
       setSpecies(data.data[0]);
-    }
+    };
     // Invoke the async function
     getSpecies();
   }, []);
