@@ -9,7 +9,11 @@ import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+    <div>
+    <link rel="shortcut icon" href="../public/favicon.ico"/>
+  </div>
+  </React.StrictMode>
+  ,
   document.getElementById("root")
 );
 
