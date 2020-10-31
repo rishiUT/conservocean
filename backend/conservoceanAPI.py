@@ -158,7 +158,7 @@ class WaterID(Resource):
         water = BodiesOfWater.query.get(id)
         if water is None:
             return []
-        return {"data": makeWater(water)}
+        return {"data": makeWater(water, True)}
 
 
 class HumanList(Resource):
@@ -226,7 +226,7 @@ class HumanID(Resource):
         human = HumanImpact.query.get(id)
         if human is None:
             return []
-        return {"data": makeHuman(human)}
+        return {"data": makeHuman(human, True)}
 
 
 # Endpoints for the API
