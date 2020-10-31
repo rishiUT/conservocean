@@ -46,8 +46,7 @@ class Impacts extends Component {
   loadData() {
     axios
       .get(
-        `/api/human?offset=${this.state.offset}'+
-                  '&limit=${this.state.perPage}`
+        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`
       )
       .then((response) => {
         console.log(response);
