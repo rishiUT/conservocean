@@ -47,8 +47,7 @@ class Impacts extends Component {
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: this.state.numInstances,
-          // numInstances: response.data.numInstances,
+          numInstances: response.data.total_impact_count,
         });
       })
       .catch((error) => {
@@ -168,7 +167,7 @@ function Impact(props: any) {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return impact ? (

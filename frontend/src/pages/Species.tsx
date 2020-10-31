@@ -36,7 +36,7 @@ class SpeciesGrid extends Component {
   state = {
     data: [],
     offset: 0,
-    perPage: 20,
+    perPage: 12,
     numInstances: 500,
   };
 
@@ -50,8 +50,7 @@ class SpeciesGrid extends Component {
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: this.state.numInstances,
-          // numInstances: response.data.numInstances,
+          numInstances: response.data.total_fish_count,
         });
       })
       .catch((error) => {

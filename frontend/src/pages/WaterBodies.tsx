@@ -27,7 +27,7 @@ class WaterBodies extends Component {
   state = {
     data: BODIES,
     offset: 0,
-    perPage: 20,
+    perPage: 12,
     numInstances: 500,
   };
 
@@ -40,8 +40,7 @@ class WaterBodies extends Component {
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: this.state.numInstances,
-          // numInstances: response.data.numInstances,
+          numInstances: response.data.total_water_count,
         });
       })
       .catch((error) => {
