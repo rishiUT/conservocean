@@ -4,7 +4,8 @@ import mapboxgl from "mapbox-gl";
 import "./Map.css";
 
 mapboxgl.accessToken =
-  "pk.eyJ1Ijoiam9ld2FsbGVyeSIsImEiOiJja2dmdHd6bDMxbzB3MnptaXY0dDVxbW9tIn0.jBu51H8cQiBL8zeq6a81uQ";
+  "pk.eyJ1Ijoiam9ld2FsbGVyeSIsImEiOiJja2dmdHd6bDMxbzB3MnptaXY0dDVxbW9tIn0."+
+  "jBu51H8cQiBL8zeq6a81uQ";
 
 interface MapState {
   lng: number;

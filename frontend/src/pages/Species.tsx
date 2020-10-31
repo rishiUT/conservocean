@@ -48,7 +48,8 @@ class SpeciesGrid extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    const URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}`;
+    const URL = `/api/fish?offset=${this.state.offset}&limit='+
+                  '${this.state.perPage}`;
     axios
       .get(URL)
       .then((response) => {
