@@ -10,10 +10,9 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
     <div>
-    <link rel="shortcut icon" href="../public/favicon.ico"/>
-  </div>
-  </React.StrictMode>
-  ,
+      <link rel="shortcut icon" href="../public/favicon.ico" />
+    </div>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

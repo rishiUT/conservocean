@@ -1,10 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import {
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 
@@ -185,17 +180,18 @@ function Species(props: any) {
       // Pass param to the API call
       const { data }: any = await axios(`/api/fish/${props.match.params.id}`);
       // Update state
-      setSpecies(data.data[0]);
+      console.log(data.data);
+      setSpecies(data.data);
     };
     // Invoke the async function
     getSpecies();
   }, []);
 
   // Return data
-  return (
+  return species ? (
     <div className="bg-light full-height">
       <main className="container py-5">
-        {/* <h1 className="text-center">{species.common_name} </h1> */}
+        <h1 className="text-center">{species.common_name} </h1>
         <div className="container" style={{ width: "80%" }}>
           {species.picture_url ? (
             <img
@@ -244,6 +240,8 @@ function Species(props: any) {
         </div>
       </main>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 }
 

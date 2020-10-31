@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Switch, Route, Link} from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 
 import Map from "../parts/Map";
@@ -41,9 +41,7 @@ class Impacts extends Component {
   // Make API request for the current page of data using Axios
   loadData() {
     axios
-      .get(
-        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`
-      )
+      .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -162,12 +160,12 @@ function Impact(props: any) {
   useEffect(() => {
     const getImpact = async () => {
       const { data }: any = await axios(`/api/human/${props.match.params.id}`);
-      setImpact(data.data[0]);
+      setImpact(data.data);
     };
     getImpact();
   }, []);
 
-  return (
+  return impact ? (
     <div className="bg-light full-height">
       <main className="container py-5">
         <h1 className="text-center">{impact.name} </h1>
@@ -240,6 +238,8 @@ function Impact(props: any) {
         </div>
       </main>
     </div>
+  ) : (
+    <div>Loading... </div>
   );
 }
 

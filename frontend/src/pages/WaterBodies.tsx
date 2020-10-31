@@ -1,11 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import {
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 
 import Map from "../parts/Map";
@@ -135,7 +130,12 @@ function WBCard({ body }: any) {
           ></span>
         </Link>
 
-        <img className="card-image" src={body.mapImgPath} width="100%" alt=""></img>
+        <img
+          className="card-image"
+          src={body.mapImgPath}
+          width="100%"
+          alt=""
+        ></img>
         <div className="card-body">
           <h5 className="card-title">{body.name}</h5>
         </div>
@@ -165,14 +165,15 @@ function WaterBody(props: any) {
       // Pass param to the API call
       const { data }: any = await axios(`/api/water/${props.match.params.id}`);
       // Update state
-      setWaterBody(data.data[0]);
+      console.log(data);
+      setWaterBody(data.data);
     };
     // Invoke the async function
     getWaterBody();
   }, []);
 
   // Return data
-  return (
+  return body ? (
     <div className="bg-light full-height">
       <main className="container py-5" style={{ height: "100%" }}>
         <h1 className="text-center">{body.name} </h1>
@@ -209,6 +210,8 @@ function WaterBody(props: any) {
         </div>
       </main>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 }
 
