@@ -15,6 +15,11 @@ import re
 
 api = Api(app)
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    return render_template("index.html")
+
 
 class FishList(Resource):
     """
@@ -236,7 +241,7 @@ api.add_resource(HumanID, '/api/human/<int:id>/')
 
 
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, threaded=True, debug=True)
 
     #cProfile.run('app.run(host=\'0.0.0.0\', debug=True)', None, sort='cumtime')
-    app.run(host='0.0.0.0', debug=True)
+    #app.run(host='0.0.0.0', debug=True)
