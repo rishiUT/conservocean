@@ -13,6 +13,12 @@ water_dict = {}
 
 
 def scrapeFish(limit, offset):
+    """
+        Scrapes fishbase api for fish instances. Then uses common name to get 
+        endangered status and population trend from iucn redlist api. Uses
+        bison api to get the location of the fish.
+    """
+
     limit_size = limit
     offset_size = offset
     fishes = requests.get(
@@ -93,6 +99,11 @@ def scrapeFish(limit, offset):
 
 
 def scrapeOverfishing(fish_object):
+    """
+        scrapes overfishing data for a single fish using the openfisheries
+        api.
+    """
+
     url = "http://www.openfisheries.org/api/landings/species.json"
     overfishing = requests.get(url).json()
     a3_code = ""
@@ -122,6 +133,11 @@ def scrapeOverfishing(fish_object):
 
 
 def scrapeWater(lat, long):
+    """
+        Scrapes for the instances for bodies of water whose latitude and longitude
+        are within 0.3 degrees of the input parameters (lat, long).
+    """
+
     # For finding water bt lat/long
     # https://www.marineregions.org/rest/getGazetteerRecordsByLatLong.json/{lat}/{long}/{latRadius}/{longRadius}/
     valid_water = {"FAO Major Marine Fishing Areas": 0, "Ocean": 0, "Sea": 0, "Gulf": 0, "Basin": 0,
@@ -138,7 +154,7 @@ def scrapeWater(lat, long):
     while True:
         try:
             water = requests.get(
-                "https://www.marineregions.org/rest/getGazetteerRecordsByLatLong.json/"+str(lat)+"/"+str(long)+"/0.3/0.3/")
+                "https://www.marineregions.org/rest/getGazetteerRecordsByLatLong.json/"+str(lat)+"/"+str(long)+"/0.4/0.4/")
             water_json = water.json()
             break
         except ValueError as error:
@@ -175,6 +191,11 @@ def scrapeWater(lat, long):
 
 
 def calc_dist(lat1, lat2, long1, long2):
+    """
+        Helper function to calculate the distance between 2
+        coordinates in km^2
+    """
+
     dlon = long2 - long1
     dlat = lat2 - lat1
     a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
@@ -184,6 +205,10 @@ def calc_dist(lat1, lat2, long1, long2):
 
 
 def scrapeHuman():
+    """
+        Scrapes for human impact instances.
+    """
+
     water_list = BodiesOfWater.query.all()
     scrapeOil(water_list)
     scrapePollution(water_list)
@@ -195,9 +220,14 @@ def scrapeHuman():
 
 
 def checkWaters(entry, water_list):
+    """
+        Adds pollution instance to database if there is at least 1 body of 
+        water affected by it. 
+    """
+
     added = False
     for water in water_list:
-        if abs(entry.longitude - water.longitude) < 5 and abs(entry.latitude - water.latitude) < 5:
+        if abs(entry.longitude - water.longitude) < 10 and abs(entry.latitude - water.latitude) < 10:
             entry.water_relationship.append(water)
             added = True
     if added:
@@ -205,6 +235,10 @@ def checkWaters(entry, water_list):
 
 
 def scrapePollution(water_list):
+    """
+        Scrapes for pollution instances (plastic pollution).
+    """
+    
     url = "https://services6.arcgis.com/C0HVLQJI37vYnazu/arcgis/rest/services/Estimate_of_Plastic_Pollution_in_the_World_s_Oceans_1_01_4_75/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
     pollution = requests.get(url).json()
 
@@ -224,6 +258,10 @@ def scrapePollution(water_list):
 
 
 def scrapePowerPlants(water_list):
+    """
+        Scrapes for pollution instances (power plants).
+    """
+    
     url = "https://data.opendatasoft.com/api/records/1.0/search/?dataset=world-power-plants-list%40kapsarc&rows=750&facet=plant_country&facet=plant_state&facet=plant_status&facet=plant_type_of_ownership&facet=plant_operating_company&facet=type&refine.type=COAL&refine.plant_status=Operating+Fully"
     powerplant = requests.get(url).json()
     for instance in powerplant["records"]:
@@ -251,20 +289,59 @@ def create_dict():
     f.close()
 
 
+def rescrapeWater():
+    f = open("waterdict.txt")
+    key = "19ef7eb7e7d54162989230143201810"
+    water_dict = json.load(f)
+    for water in water_dict:
+        if water_dict[water] < 239:
+            continue
+        print(water)
+        returnedWater = []
+        url = "https://www.marineregions.org/rest/getGazetteerRecordsByName.json/"+water+"/false/{fuzzy}/"
+        for waterInstance in requests.get(url).json():
+            if waterInstance["preferredGazetteerName"] == water and waterInstance["minLatitude"] is not None:
+                returnedWater = waterInstance
+                break
+
+        oldWater = BodiesOfWater.query.get(water_dict[water])
+        oldWater.latitude = returnedWater["latitude"]
+        oldWater.longitude = returnedWater["longitude"]
+        oldWater.min_latitude = returnedWater["minLatitude"]
+        oldWater.max_latitude = returnedWater["maxLatitude"]
+        oldWater.min_longitude = returnedWater["minLongitude"]
+        oldWater.max_longitude = returnedWater["maxLongitude"]
+        oldWater.size = calc_dist(returnedWater["minLatitude"], returnedWater["maxLatitude"],
+                returnedWater["minLongitude"], returnedWater["maxLongitude"])
+        urlTemp = requests.get("http://api.worldweatheronline.com/premium/v1/past-marine.ashx?key=" +
+                            key+"&format=json&q="+str(oldWater.latitude)+","+str(oldWater.longitude)+"&date=2020-07-22").json()["data"]["weather"][0]
+        oldWater.water_temp = (
+            int(urlTemp["maxtempC"]) + int(urlTemp["mintempC"])) / 2
+        oldWater.wind_speedkmph = int(urlTemp["hourly"][0]["windspeedKmph"])
+        db.session.commit()
+    f.close()
+
 if __name__ == "__main__":
-    # create_dict()
-    limit = 100
-    offset = sys.argv[1]
-    water_dict = json.loads(sys.argv[2])
-    if water_dict != {}:
-        water_dict = json.loads(sys.argv[2])
-    offset = int(offset)
-    if offset == 0:
-        # db.drop_all()
-        # db.create_all()
-        text_dict = scrapeFish(limit, offset)
-    elif offset == 34400:
-        scrapeHuman()
-    else:
-        scrapeFish(100, offset)
+    #create_dict()
+    # f = open("waterdict.txt")
+    # water_dict =json.load(f)
+    # scrapeFish(100, 2750)
+    # f.close
+    # limit = 100
+    # offset = sys.argv[1]
+    # water_dict = json.loads(sys.argv[2])
+    # if water_dict != {}:
+    #     water_dict = json.loads(sys.argv[2])
+    # offset = int(offset)
+    # if offset == 0:
+    #     # db.drop_all()
+    #     # db.create_all()
+    #     text_dict = scrapeFish(limit, offset)
+    # elif offset == 34400:
+    #     scrapeHuman()
+    # else:
+    #     scrapeFish(100, offset)
     # scrapeHuman()
+    #finishWater()
+    #rescrapeWater()
+    scrapeHuman()

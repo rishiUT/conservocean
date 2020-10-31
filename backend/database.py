@@ -1,26 +1,33 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__, static_folder="../frontend/build/static", template_folder="../frontend/build")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:iloveocean@conservoceandb.c5r36pk562sk.us-east-2.rds.amazonaws.com:5432/conservocean'
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:iloveocean' + \
+    '@conservoceandb.c5r36pk562sk.us-east-2.rds.amazonaws.com:5432/conservocean'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+# Link table for maintaining relationships between models
 link = db.Table('links',
-                db.Column('fish_id', db.Integer, db.ForeignKey('fish.id')),
-                db.Column('water_id', db.Integer, db.ForeignKey('bodies_of_water.id')),
-                db.Column('human_id', db.Integer, db.ForeignKey('human_impact.id')))
+       db.Column('fish_id', db.Integer, db.ForeignKey('fish.id')),
+       db.Column('water_id', db.Integer,
+       db.ForeignKey('bodies_of_water.id')),
+       db.Column('human_id', db.Integer, db.ForeignKey('human_impact.id')))
 
 
 class Fish(db.Model):
+    """
+    SQLAlchemy Model of a Fish database entry.
+    """
+
     __tablename__ = "fish"
     id = db.Column(db.Integer, primary_key=True)
-    scientific_name = db.Column(
-        db.String(100), unique=True, nullable=False, default="No Scientific Name")
-    common_name = db.Column(
-        db.String(100), nullable=False, default="No Common Name")
+    scientific_name = db.Column(db.String(100), unique=True,
+        nullable=False, default="No Scientific Name")
+    common_name = db.Column(db.String(100), nullable=False,
+        default="No Common Name")
     species = db.Column(db.String(100), unique=False,
-                        nullable=False, default="No Species")
+        nullable=False, default="No Species")
     genus = db.Column(db.String(100), nullable=False, default="No Genus")
     family = db.Column(db.String(100), nullable=False, default="No Family")
 
@@ -28,30 +35,38 @@ class Fish(db.Model):
     # -1 0 0: Freshwater fish
     # 0 -1 0: Brachish fish
     # 0 0 -1: Saltwater fish
-    # Can be a combination of those values to
-    # show it lives in more than one type of water
+    # Can be a combination of values to show it lives in many types of water
     habitat = db.Column(db.String(100), nullable=False, default="No Habitat")
 
-    endanger_status = db.Column(
-        db.String(100), nullable=False, default="No Endanger Status")
+    endanger_status = db.Column(db.String(100),
+        nullable=False, default="No Endanger Status")
+
+    # String, with value "Stable", "Decreasing", "Increasing", or "Unknown"
     population_trend = db.Column(db.String(100), nullable=False)
-    preferred_temp = db.Column(db.Integer)
+
+    # Average length of the fish, in cm
     average_size = db.Column(db.Integer)
+
     picture_url = db.Column(db.String(200))
     description = db.Column(db.Text)
     speccode = db.Column(db.Integer)
 
     # For overfishing
     catch_year = db.Column(db.String(4))
+    # Total number of fish caught in above year
     catch_rate = db.Column(db.Integer)
 
     # Relationships
     location = db.relationship(
-        'BodiesOfWater', secondary=link, backref=db.backref('fish', lazy='dynamic'))
+        'BodiesOfWater', secondary=link,
+        backref=db.backref('fish', lazy='dynamic'))
 
     @property
     def serialized(self):
-        """Return object data in serializeable format"""
+        """
+        Return object data in serializable format.
+        """
+
         return {
             'id': self.id,
             'scientific_name': self.scientific_name,
@@ -71,12 +86,28 @@ class Fish(db.Model):
         }
 
     def get_water(self):
+        """
+        Gets the bodies of water where the fish is found.
+
+            Returns: A list of dictionaries containing the id and name of
+                     each body of water.
+        """
+
         return [{"id": item.id, "name": item.name} for item in self.location]
 
     def get_human(self):
-        return_dict = {'plastic_pollution': [], 'coal_power_plants': [
-        ], 'offshore_oil_spills': [], 'tanker_oil_spills': []}
+        """
+        Gets the human impacts which are located in the same area as where
+        the fish is found.
+
+            Returns: A dictionary containing the impacts, each in the array
+                     corresponding to the subcategory of that impact.
+        """
+
+        return_dict = {'plastic_pollution':[], 'coal_power_plants': [],
+                       'offshore_oil_spills':[], 'tanker_oil_spills':[]}
         added = []
+
         for water in self.location:
             for human_impact in water.humanimpact:
                 if human_impact.id not in added:
@@ -86,13 +117,18 @@ class Fish(db.Model):
         return return_dict
 
     def __repr__(self):
-        return f"Fish('{self.scientific_name}' '{self.catch_rate}')"
+        return f"Fish('{self.scientific_name}')"
 
 
 class BodiesOfWater(db.Model):
+    """
+    SQLAlchemy Model of a Water database entry.
+    """
+
     __tablename__ = "bodies_of_water"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True, nullable=False, default="No Name")
+    name = db.Column(db.String(100), unique=True,
+                    nullable=False, default="No Name")
     type = db.Column(db.String(100), nullable=False, default="No Type")
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
@@ -100,13 +136,22 @@ class BodiesOfWater(db.Model):
     min_longitude = db.Column(db.Float)
     max_latitude = db.Column(db.Float)
     max_longitude = db.Column(db.Float)
+
+    # Degrees C
     water_temp = db.Column(db.Float)
-    tide_height = db.Column(db.Float)
+
+    # Wind speed, in km/h
+    wind_speedkmph = db.Column(db.Float)
+
+    # Surface area of the water, in km^2
     size = db.Column(db.Integer)
 
     @property
     def serialized(self):
-        """Return object data in serializeable format"""
+        """
+        Return object data in serializeable format
+        """
+
         return {
             'id': self.id,
             'name': self.name,
@@ -118,11 +163,17 @@ class BodiesOfWater(db.Model):
             'max_latitude': self.max_latitude,
             'max_longitude': self.max_longitude,
             'water_temp': self.water_temp,
-            'tide_height': self.tide_height,
-            'size': self.size
+            'wind_speedkmph': self.wind_speedkmph,
+            'size': float(self.size)
         }
 
     def get_human(self):
+        """
+        Gets the human impacts which affect that body of water.
+
+            Returns: A list of the human impact id's.
+        """
+
         human_list = []
         for human_impact in self.humanimpact:
             if human_impact.id not in human_list:
@@ -130,6 +181,12 @@ class BodiesOfWater(db.Model):
         return human_list
 
     def get_fish(self):
+        """
+        Gets the fish which are found in this body of water.
+
+            Returns: A list of fish ids.
+        """
+
         fish_list = []
         for fish in self.fish:
             if fish.id not in fish_list:
@@ -141,17 +198,24 @@ class BodiesOfWater(db.Model):
 
 
 class HumanImpact(db.Model):
+    """
+    SQLAlchemy Model of a Human Impact database entry.
+    """
+
     __tablename__ = "human_impact"
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(100), nullable=False, default="No Category")
     subcategory = db.Column(db.String(100))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
+
+    # Date format: DD/MM/YYYY
     date = db.Column(db.String(100))
+
     description = db.Column(db.Text)
     name = db.Column(db.String(200))
 
-    # For oil pollution
+    # For oil pollution, in metric tons
     oil_amount = db.Column(db.Integer)
 
     # For plastic pollution
@@ -172,11 +236,15 @@ class HumanImpact(db.Model):
 
     # Relationships
     water_relationship = db.relationship(
-        "BodiesOfWater", secondary=link, backref=db.backref('humanimpact', lazy='dynamic'))
+        "BodiesOfWater", secondary=link, 
+        backref=db.backref('humanimpact', lazy='dynamic'))
 
     @property
     def serialized(self):
-        """Return object data in serializeable format"""
+        """
+        Return object data in serializeable format
+        """
+
         return {
             'id': self.id,
             'category': self.category,
@@ -197,19 +265,37 @@ class HumanImpact(db.Model):
         }
 
     def get_water(self):
-        return [{"id": item.id, "name": item.name} for item in self.water_relationship]
+        """
+        Gets the bodies of water affected by this human impact.
+            
+            Returns: A list of dictionaries containing the id and name of
+                     each body of water.
+        """
+        
+        return [{"id": item.id, "name": item.name} \
+                for item in self.water_relationship]
 
     def get_fish(self):
+        """
+        Gets the fish affected by this human impact.
+
+            Returns: A list of dictionaries containing the id and 
+                     scientific name of each fish.
+        """
+
         return_list = []
         added = []
         for water in self.water_relationship:
             for fish in water.fish:
                 if fish.id not in added:
                     return_list.append(
-                        {"id": fish.id, "scientific_name": fish.scientific_name})
+                        {"id": fish.id, "scientific_name": \
+                         fish.scientific_name})
                     added.append(fish.id)
         return return_list
 
     def __repr__(self):
         return f"Human Impact('{self.name}')"
 
+if __name__ == "__main__":
+    db.create_all()
