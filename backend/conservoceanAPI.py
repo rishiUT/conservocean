@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-from flask import request
+from flask import request, render_template
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 from flask import Flask, jsonify, abort
