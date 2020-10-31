@@ -151,6 +151,7 @@ function ImpactTableData({ impact }: any) {
 function Impact(props: any) {
   // Set initial state
   const initialImpactState: impact = {};
+  let loading = false;
 
   // Getter and setter for impact state
   //impact is an impact, setImpact is a function you can use to change it
@@ -161,9 +162,14 @@ function Impact(props: any) {
     const getImpact = async () => {
       const { data }: any = await axios(`/api/human/${props.match.params.id}`);
       setImpact(data.data);
+      loading = true;
     };
     getImpact();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   return impact ? (
     <div className="bg-light full-height">
