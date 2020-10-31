@@ -1,11 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Switch, Route, Link, useParams } from "react-router-dom";
+import { Switch, Route, Link} from "react-router-dom";
 import axios from "axios";
-
-import maine from "../assets/maine.png";
-import persianGulf from "../assets/persian-gulf.png";
-import taeanKorea from "../assets/taean-korea.png";
 
 import Map from "../parts/Map";
 

@@ -4,7 +4,6 @@ import {
   Route,
   Link,
   useRouteMatch,
-  useParams,
 } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
@@ -148,6 +147,7 @@ function SpeciesCard({ species }: any) {
           className="card-img-top"
           width="100%"
           src={species.picture_url}
+          alt=""
         ></img>
         <div className="card-body">
           <h5 className="card-title">{species.common_name}</h5>

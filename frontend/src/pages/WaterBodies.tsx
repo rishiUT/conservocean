@@ -5,7 +5,6 @@ import {
   Route,
   Link,
   useRouteMatch,
-  useParams,
 } from "react-router-dom";
 import axios from "axios";
 
@@ -136,7 +135,7 @@ function WBCard({ body }: any) {
           ></span>
         </Link>
 
-        <img className="card-image" src={body.mapImgPath} width="100%"></img>
+        <img className="card-image" src={body.mapImgPath} width="100%" alt=""></img>
         <div className="card-body">
           <h5 className="card-title">{body.name}</h5>
         </div>
