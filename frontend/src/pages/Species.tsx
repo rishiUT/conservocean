@@ -195,7 +195,7 @@ function Species(props: any) {
   return (
     <div className="bg-light full-height">
       <main className="container py-5">
-        //<h1 className="text-center">{species.common_name} </h1>
+        {/* <h1 className="text-center">{species.common_name} </h1> */}
         <div className="container" style={{ width: "80%" }}>
           {species.picture_url ? (
             <img
