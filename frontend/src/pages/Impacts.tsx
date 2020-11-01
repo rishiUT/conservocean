@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Switch, Route, Link} from "react-router-dom";
 import axios from "axios";
+import Select from 'react-select';
 
 import Map from "../parts/Map";
 
@@ -28,6 +29,18 @@ interface impact {
   capacity?: string;
   mapImgPath?: string;
 }
+
+const categories = [
+  { value: 'chocolate', label: 'Plastic Pollution' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
+
+const subcategories = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
 
 // Display a table of all available impacts
 class Impacts extends Component {
@@ -80,7 +93,7 @@ class Impacts extends Component {
           <div className="bg-light full-height">
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
-
+              <Select options={categories} />
               <div className="table-responsive">
                 <table className="table">
                   <thead>
