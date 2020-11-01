@@ -34,8 +34,7 @@ function Home() {
             Water covers over 70% of Earth's surface.{" "}
           </h2>
           <h2 className="subheading">
-            Explore Earth's oceans, marine life, and the impact of human 
-            factors
+            Explore Earth's oceans, marine life, and the impact of human factors
           </h2>
         </div>
 

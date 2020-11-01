@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Switch, Route, Link} from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Select from 'react-select';
 
@@ -54,16 +54,13 @@ class Impacts extends Component {
   // Make API request for the current page of data using Axios
   loadData() {
     axios
-      .get(
-        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`
-      )
+      .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`)
       .then((response) => {
         console.log(response);
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: this.state.numInstances,
-          // numInstances: response.data.numInstances,
+          numInstances: response.data.total_impact_count,
         });
       })
       .catch((error) => {
@@ -166,6 +163,7 @@ function ImpactTableData({ impact }: any) {
 function Impact(props: any) {
   // Set initial state
   const initialImpactState: impact = {};
+  let loading = false;
 
   // Getter and setter for impact state
   //impact is an impact, setImpact is a function you can use to change it
@@ -175,12 +173,17 @@ function Impact(props: any) {
   useEffect(() => {
     const getImpact = async () => {
       const { data }: any = await axios(`/api/human/${props.match.params.id}`);
-      setImpact(data.data[0]);
+      setImpact(data.data);
+      loading = true;
     };
     getImpact();
   }, []);
 
-  return (
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return impact ? (
     <div className="bg-light full-height">
       <main className="container py-5">
         <h1 className="text-center">{impact.name} </h1>
@@ -253,6 +256,8 @@ function Impact(props: any) {
         </div>
       </main>
     </div>
+  ) : (
+    <div>Loading... </div>
   );
 }
 

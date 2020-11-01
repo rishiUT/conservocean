@@ -1,5 +1,6 @@
-from APIHelper import makeFish, makeWater, makeHuman, checkArgs, endangerCodes
+from APIHelper import makeFish, makeWater, makeHuman, checkArgs, endangerCodes, habitatDict
 from database import Fish, BodiesOfWater, HumanImpact
+from flask import abort
 
 
 def filterFish(args, fish_list):
@@ -27,7 +28,7 @@ def filterFish(args, fish_list):
         abort(422, description="Status code not valid")
 
     if args['habitat'] != None and \
-        args['habitat'].upper() not in habitatDict:
+        args['habitat'].lower() not in habitatDict:
         abort(422, description="Habitat not valid")
 
     return_list = []
@@ -71,13 +72,12 @@ def filterFish(args, fish_list):
                 add = False
 
         if args['habitat'] != None:
-
             # Have to break down our stored String of habitat, where:
             # "-1 0 0" = Freshwater
             # "0 -1 0" = Brackish
             # "0 0 -1" = Saltwater
             splitHabitat = fish.habitat.split()
-            if splitHabitat[habitatDict[args['habitat']]] != -1:
+            if splitHabitat[habitatDict[args['habitat']]] != "-1":
                 add = False
 
         # Calculate for limit and offset, and leave early if limit is reached
@@ -124,7 +124,7 @@ def filterHuman(args, human_list):
     if checkArgs(args, "lat_min", "lat_max") or \
        checkArgs(args, "long_min", "long_max") or \
        checkArgs(args, "num_fish_min", "num_fish_max"):
-        return []
+        return {"message": "Please specify both ends of the range"}
 
     return_list = []
 
@@ -203,7 +203,7 @@ def filterWater(args, water_list):
        checkArgs(args, 'long_max', 'long_min') or \
        checkArgs(args, 'size_max', 'size_min') or \
        checkArgs(args, 'temp_max', 'temp_min'):
-        return []
+        return {"message": "Please specify both ends of the range"}
 
     return_list = []
 
@@ -222,7 +222,9 @@ def filterWater(args, water_list):
                 add = False
 
         if args['temp_min'] != None:
-            if water.water_temp < args['temp_min'] \
+            if water.water_temp is None:
+                add = False
+            elif water.water_temp < args['temp_min'] \
                or water.water_temp > args['temp_max']:
                 add = False
 

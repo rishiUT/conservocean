@@ -1,14 +1,10 @@
 import React, { Component, useState, useEffect } from "react";
-import {
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 
 interface species {
+  id?: number;
   scientific_name?: string;
   common_name?: string;
   species?: string;
@@ -36,12 +32,36 @@ interface species {
   imagePath?: string;
 }
 
+// Map each IUCN status code into its text description
+const IUCN_STATUS: { [key: string]: string } = {
+  NE: "Not evaluated",
+  DD: "Data deficient",
+  LC: "Least concern",
+  NT: "Near threatened",
+  VU: "Vulnerable",
+  EN: "Endangered",
+  CR: "Critically endangered",
+  EW: "Extinct in the wild",
+  EX: "Extinct",
+};
+
+// Map habitat code into text description
+const HABITATS: { [key: string]: string } = {
+  "-1 -1 -1": "freshwater, brackish water, saltwater",
+  "-1 -1 0": "freshwater, brackish water",
+  "-1 0 -1": "freshwater, saltwater",
+  "-1 0 0": "freshwater",
+  "0 -1 -1": "brackish water, saltwater",
+  "0 -1 0": "brackish water",
+  "0 0 -1": "saltwater",
+};
+
 // Display a grid of all available species
 class SpeciesGrid extends Component {
   state = {
     data: [],
     offset: 0,
-    perPage: 20,
+    perPage: 12,
     numInstances: 500,
   };
 
@@ -55,8 +75,7 @@ class SpeciesGrid extends Component {
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: this.state.numInstances,
-          // numInstances: response.data.numInstances,
+          numInstances: response.data.total_fish_count,
         });
       })
       .catch((error) => {
@@ -89,7 +108,7 @@ class SpeciesGrid extends Component {
 
               <div className="row">
                 {this.state.data.map((species: species) => (
-                  <SpeciesCard key={species.common_name} species={species} />
+                  <SpeciesCard key={species.common_name} sp={species} />
                 ))}
               </div>
 
@@ -126,12 +145,12 @@ class SpeciesGrid extends Component {
   }
 }
 
-function SpeciesCard({ species }: any) {
+function SpeciesCard(props: any) {
   let match = useRouteMatch();
   return (
     <div className="col-lg-4 col-md-6 col-sm-12">
       <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
-        <Link to={`${match.url}/${species.id}`} className="card-link">
+        <Link to={`${match.url}/${props.sp.id}`} className="card-link">
           <span
             style={{
               position: "absolute",
@@ -146,24 +165,29 @@ function SpeciesCard({ species }: any) {
         <img
           className="card-img-top"
           width="100%"
-          src={species.picture_url}
+          src={props.sp.picture_url}
           alt=""
         ></img>
         <div className="card-body">
-          <h5 className="card-title">{species.common_name}</h5>
+          <h5 className="card-title">{props.sp.common_name}</h5>
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
-            Genus: <span className="font-italic">{species.genus}</span>
+            Genus: <span className="font-italic">{props.sp.genus}</span>
           </li>
           <li className="list-group-item">
-            Species: <span className="font-italic">{species.species}</span>
+            Species: <span className="font-italic">{props.sp.species}</span>
           </li>
           <li className="list-group-item">
-            IUCN Status: {species.endanger_status}
+            IUCN Status:{" "}
+            {
+              IUCN_STATUS[
+                props.sp.endanger_status ? props.sp.endanger_status : "DD"
+              ]
+            }
           </li>
           <li className="list-group-item">
-            Fishing Rate: {species.fishingRate}
+            Average Size: {props.sp.average_size} cm
           </li>
         </ul>
       </div>
@@ -185,14 +209,15 @@ function Species(props: any) {
       // Pass param to the API call
       const { data }: any = await axios(`/api/fish/${props.match.params.id}`);
       // Update state
-      setSpecies(data.data[0]);
+      console.log(data.data);
+      setSpecies(data.data);
     };
     // Invoke the async function
     getSpecies();
   }, []);
 
   // Return data
-  return (
+  return species ? (
     <div className="bg-light full-height">
       <main className="container py-5">
         <h1 className="text-center">{species.common_name} </h1>
@@ -211,23 +236,38 @@ function Species(props: any) {
             {/* {species.scientific_name ? (
               <li>Scientific Name: {species.scientific_name}</li>
             ) : null} */}
-            {species.family ? <li>Family: {species.family}</li> : null}
-            {species.genus ? <li>Genus: {species.genus}</li> : null}
-            {species.species ? <li>Species: {species.species}</li> : null}
-            {species.habitat ? <li>Habitat: {species.habitat}</li> : null}
+            {species.family ? (
+              <li>
+                {" "}
+                Family: <i>{species.family}</i>
+              </li>
+            ) : null}
+            {species.genus ? (
+              <li>
+                Genus: <i>{species.genus}</i>
+              </li>
+            ) : null}
+            {species.species ? (
+              <li>
+                Species: <i>{species.species}</i>
+              </li>
+            ) : null}
+            {species.habitat ? (
+              <li>Habitat: {HABITATS[species.habitat]}</li>
+            ) : null}
             {species.endanger_status ? (
-              <li>Endangered Status: {species.endanger_status}</li>
+              <li>Endangered Status: {IUCN_STATUS[species.endanger_status]}</li>
             ) : null}
             {species.population_trend ? (
               <li>Population Trend: {species.population_trend}</li>
             ) : null}
             {species.average_size ? (
-              <li>Average Size: {species.average_size}</li>
+              <li>Average Size: {species.average_size} cm</li>
             ) : null}
             {species.description ? (
               <li>Description: {species.description}</li>
             ) : null}
-            {species.speccode ? <li>Spec Code: {species.speccode}</li> : null}
+            {species.speccode ? <li>Spec. Code: {species.speccode}</li> : null}
             {species.catch_year ? (
               <li>Catch Year: {species.catch_year}</li>
             ) : null}
@@ -244,6 +284,8 @@ function Species(props: any) {
         </div>
       </main>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 }
 
