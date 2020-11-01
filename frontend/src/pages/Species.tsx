@@ -58,27 +58,26 @@ const HABITATS: { [key: string]: string } = {
   "0 0 -1": "saltwater",
 };
 
-
 // Filtering Categories
 
 const population_trend = [
   { value: "Unknown", label: "Unknown" },
   { value: "Stable", label: "Stable" },
   { value: "Increasing", label: "Increasing" },
-  { value: "Decreasing", label: "Decreasing" }
-]
+  { value: "Decreasing", label: "Decreasing" },
+];
 
 const status = [
-  { value: 'NE', label: 'Not Evaluated' },
-  { value: 'DD', label: 'Data Deficient' },
-  { value: 'LC', label: 'Least Concern' },
-  { value: 'NT', label: 'Near Threatened' },
-  { value: 'VU', label: 'Vulnerable' },
-  { value: 'EN', label: 'Endangered' },
-  { value: 'CR', label: 'Critically Endangered' },
-  { value: 'EW', label: 'Extinct in the Wild' },
-  { value: 'EX', label: 'Extinct' },
-]
+  { value: "NE", label: "Not Evaluated" },
+  { value: "DD", label: "Data Deficient" },
+  { value: "LC", label: "Least Concern" },
+  { value: "NT", label: "Near Threatened" },
+  { value: "VU", label: "Vulnerable" },
+  { value: "EN", label: "Endangered" },
+  { value: "CR", label: "Critically Endangered" },
+  { value: "EW", label: "Extinct in the Wild" },
+  { value: "EX", label: "Extinct" },
+];
 
 const size = [
   { value: "1", label: "1 - 99" },
@@ -88,8 +87,8 @@ const size = [
   { value: "400", label: "400 - 499" },
   { value: "500", label: "500 - 599" },
   { value: "600", label: "600+" },
-  { value: 'null', label: 'Unknown' }
-]
+  { value: "null", label: "Unknown" },
+];
 
 const catch_rate = [
   { value: "1", label: "1 - 99" },
@@ -99,23 +98,22 @@ const catch_rate = [
   { value: "400", label: "400 - 499" },
   { value: "500", label: "500 - 599" },
   { value: "600", label: "600+" },
-  { value: 'null', label: 'Unknown' }
-]
+  { value: "null", label: "Unknown" },
+];
 
 const habitat = [
-  { value: 'Saltwater', label: 'Unknown' },
-  { value: 'Freshwater', label: 'Stable' },
-  { value: 'Brackish Water', label: 'Increasing' },
-]
+  { value: "Saltwater", label: "Unknown" },
+  { value: "Freshwater", label: "Stable" },
+  { value: "Brackish Water", label: "Increasing" },
+];
 
 const groupedFiltering = [
-  {label: "Population Trend", options: population_trend},
-  {label: "IUCN Status", options: status},
-  {label: "Average Size", options: size},
-  {label: "Catch Rate", options: catch_rate},
-  {label: "Habitat", options: habitat},
-
-]
+  { label: "Population Trend", options: population_trend },
+  { label: "IUCN Status", options: status },
+  { label: "Average Size", options: size },
+  { label: "Catch Rate", options: catch_rate },
+  { label: "Habitat", options: habitat },
+];
 
 // Display a grid of all available species
 class SpeciesGrid extends Component {
@@ -165,8 +163,8 @@ class SpeciesGrid extends Component {
         <Route exact path="/species">
           <div className="bg-light full-height">
             <div className="container">
-            <h2 className="py-5 text-center">Species</h2>
-            <div style={{zIndex: 100, position: "relative", width: "100%"}}>
+              <h2 className="py-5 text-center">Species</h2>
+              <div style={{ zIndex: 100, position: "relative", width: "100%" }}>
                 <Select
                   closeMenuOnSelect={false}
                   options={groupedFiltering}

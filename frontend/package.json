@@ -52,5 +52,5 @@
     "prettier": "2.1.2",
     "typescript": "^3.9.7"
   },
-  "proxy": "http://localhost:80/"
+  "proxy": "https://localhost:80/"
 }

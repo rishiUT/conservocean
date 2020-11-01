@@ -46,7 +46,7 @@ const latitude = [
 const temperature = [
   { value: "0", label: "0 - 9" },
   { value: "10", label: "10 - 19" },
-  { value: "20", label: "20 - 30" }
+  { value: "20", label: "20 - 30" },
 ];
 
 const size = [
@@ -57,8 +57,8 @@ const size = [
   { value: "4000", label: "4000 - 4999" },
   { value: "5000", label: "5000 - 5999" },
   { value: "6000", label: "6000+" },
-  { value: 'null', label: 'Unknown' }
-]
+  { value: "null", label: "Unknown" },
+];
 
 const type = [
   { value: "Bay", label: "Bay" },
@@ -71,16 +71,15 @@ const type = [
   { value: "Large Marine Ecosystem", label: "Large Marine Ecosystem" },
   { value: "Reef", label: "Reef" },
   { value: "Shoal", label: "Shoal" },
-]
+];
 
 const groupedFiltering = [
-  {label: "Longitude", options: longitude},
-  {label: "Latitude", options: latitude},
-  {label: "Temperature (Celsius)", options: temperature},
-  {label: "Size (Sq. Kilometers)", options: size},
-  {label: "Type", options: type},
-
-]
+  { label: "Longitude", options: longitude },
+  { label: "Latitude", options: latitude },
+  { label: "Temperature (Celsius)", options: temperature },
+  { label: "Size (Sq. Kilometers)", options: size },
+  { label: "Type", options: type },
+];
 
 // Display a grid of all bodies of water
 class WaterBodies extends Component {
@@ -130,7 +129,7 @@ class WaterBodies extends Component {
           <div className="bg-light full-height">
             <div className="container ">
               <h2 className="py-5 text-center">Bodies of Water</h2>
-              <div style={{zIndex: 100, position: "relative", width: "100%"}}>
+              <div style={{ zIndex: 100, position: "relative", width: "100%" }}>
                 <Select
                   closeMenuOnSelect={false}
                   options={groupedFiltering}
