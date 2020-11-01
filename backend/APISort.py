@@ -20,7 +20,7 @@ def sortFish(sortBy, ascending):
     """
 
     # Check for valid sortBy value
-    if sortBy not in ['common_name', 'genus', 'species', 'status', 'size']:
+    if sortBy not in ['common_name', 'genus', 'species', 'status', 'average_size']:
         abort(422, description="Sort category invalid")
 
     # Code block for if we are sorting by status code

@@ -1,10 +1,8 @@
 import os
 import json
 import requests
-from flask import request, render_template
-from flask import Flask
+from flask import request, render_template, jsonify, abort
 from flask_restful import Api, Resource, reqparse
-from flask import Flask, jsonify, abort
 from database import db, Fish, BodiesOfWater, HumanImpact, app
 from APIHelper import *
 from APIFilter import *
@@ -65,7 +63,13 @@ class FishList(Resource):
 
             # Sort the fish list, and then filter it. filterFish
             # generates a dictionary of the fish objects
-            return filterFish(args, sortFish(args['sort'].lower(), \
+            sortedList = sortFish(args['sort'].lower(), \
+                   1 if args['ascending'].lower() == "true" else 0)
+            if isinstance(sortedList, list):
+                return filterFish(args, sortFish(args['sort'].lower(), \
+                   1 if args['ascending'].lower() == "true" else 0))
+            else:
+                return filterFish(args, sortFish(args['sort'].lower(), \
                    1 if args['ascending'].lower() == "true" else 0).all())
         else:
             return filterFish(args, Fish.query.all())
