@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import Select from 'react-select';
 
 interface species {
   id?: number;

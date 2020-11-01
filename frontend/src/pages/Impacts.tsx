@@ -30,16 +30,35 @@ interface impact {
   mapImgPath?: string;
 }
 
-const categories = [
-  { value: 'chocolate', label: 'Plastic Pollution' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+const subcategories = [
+  { value: 'plastic_pollition', label: 'Plastic Pollution' },
+  { value: 'coal_power_plants', label: 'Coal Power Plants' },
+  { value: 'offshore_oil_spills', label: 'Offshore Oil Spills' },
+  { value: 'tanker_oil_spills', label: 'Tanker Oil Spills' }
 ]
 
-const subcategories = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+const longitude = [
+  { value: '0', label: 'longitude = 0 - 59' },
+  { value: '60', label: 'longitude = 60 - 119' },
+  { value: '120', label: 'longitude =  120 - 179' },
+  { value: '180', label: 'longitude = 180 - 239' },
+  { value: '240', label: 'longitude = 240 - 299' },
+  { value: '300', label: 'longitude = 300 - 359' }
+]
+
+const latitude = [
+  { value: '0', label: 'latitude = 0 - 59' },
+  { value: '60', label: 'latitude = 60 - 119' },
+  { value: '120', label: 'latitude =  120 - 179' },
+  { value: '180', label: 'latitude = 180 - 239' },
+  { value: '240', label: 'latitude = 240 - 299' },
+  { value: '300', label: 'latitude = 300 - 359' }
+]
+
+const groupedFiltering = [
+  {label: 'SubCategories', options: subcategories},
+  {label: 'Longitude', options: longitude},
+  {label: 'Latitude', options: latitude}
 ]
 
 // Display a table of all available impacts
@@ -90,7 +109,11 @@ class Impacts extends Component {
           <div className="bg-light full-height">
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
-              <Select options={categories} />
+              <Select 
+              closeMenuOnSelect={false}
+              options={groupedFiltering}
+              isMulti
+               />
               <div className="table-responsive">
                 <table className="table">
                   <thead>
