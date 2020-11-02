@@ -3,7 +3,6 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Select from "react-select";
-import { stat } from "fs";
 
 interface species {
   id?: number;
@@ -217,7 +216,7 @@ class SpeciesGrid extends Component {
 
               <div className="row">
                 {this.state.data.map((species: species) => (
-                  <SpeciesCard key={species.common_name} sp={species} />
+                  <SpeciesCard key={species.id} sp={species} />
                 ))}
               </div>
 
@@ -316,7 +315,7 @@ function Species(props: any) {
   useEffect(() => {
     const getSpecies = async () => {
       // Pass param to the API call
-      const { data }: any = await axios(`/api/fish/${props.match.params.id}`);
+      const { data }: any = await axios.get(`/api/fish/${props.match.params.id}`);
       // Update state
       console.log(data.data);
       setSpecies(data.data);

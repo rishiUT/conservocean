@@ -243,11 +243,11 @@ function WBCard({ body }: any) {
           <h5 className="card-title">{body.name}</h5>
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Latitude: {body.latitude}</li>
-          <li className="list-group-item">Longitude: {body.longitude}</li>
-          <li className="list-group-item">Size: {body.size} miles</li>
-          <li className="list-group-item">Tide Height: {body.tide_height}</li>
-          <li className="list-group-item">Temperature {body.water_temp}°C</li>
+          <li className="list-group-item">Latitude: {Number.parseFloat(body.latitude).toFixed(3)}</li>
+          <li className="list-group-item">Longitude: {Number.parseFloat(body.longitude).toFixed(3)}</li>
+          <li className="list-group-item">Size: {Number.parseFloat(body.size).toFixed(3)} sq. km</li>
+          <li className="list-group-item">Average Temperature: {body.water_temp}°C</li>
+          <li className="list-group-item">Local Wind Speed: {body.wind_speedkmph} km/h</li>
         </ul>
       </div>
     </div>
@@ -266,7 +266,7 @@ function WaterBody(props: any) {
   useEffect(() => {
     const getWaterBody = async () => {
       // Pass param to the API call
-      const { data }: any = await axios(`/api/water/${props.match.params.id}`);
+      const { data }: any = await axios.get(`/api/water/${props.match.params.id}`);
       // Update state
       console.log(data);
       setWaterBody(data.data);

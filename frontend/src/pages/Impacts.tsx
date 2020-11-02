@@ -89,7 +89,7 @@ class Impacts extends Component {
         console.log(response);
         this.setState({
           // Update the number of instances
-          numInstances: response.data.total_impacts_returned,
+          numInstances: response.data.total_impact_returned,
         });
       })
       .catch((error) => {
@@ -215,8 +215,8 @@ function ImpactTableData({ impact }: any) {
       </th>
       <td>{impact.category}</td>
       <td>{impact.subcategory?.toLowerCase()}</td>
-      <td>{impact.latitude}</td>
-      <td>{impact.longitude}</td>
+      <td>{Number.parseFloat(impact.latitude).toFixed(3)}</td>
+      <td>{Number.parseFloat(impact.longitude).toFixed(3)}</td>
     </tr>
   );
 }
@@ -234,7 +234,7 @@ function Impact(props: any) {
   // Use useEffect to retrieve data from API
   useEffect(() => {
     const getImpact = async () => {
-      const { data }: any = await axios(`/api/human/${props.match.params.id}`);
+      const { data }: any = await axios.get(`/api/human/${props.match.params.id}`);
       setImpact(data.data);
       loading = true;
     };
