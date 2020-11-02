@@ -61,22 +61,22 @@ const HABITATS: { [key: string]: string } = {
 // Filtering Categories
 
 const population_trend = [
-  { value: "Unknown", label: "Unknown" },
-  { value: "Stable", label: "Stable" },
-  { value: "Increasing", label: "Increasing" },
-  { value: "Decreasing", label: "Decreasing" },
+  { value: "population_trend=Unknown", label: "Unknown" },
+  { value: "population_trend=Stable", label: "Stable" },
+  { value: "population_trend=Increasing", label: "Increasing" },
+  { value: "population_trend=Decreasing", label: "Decreasing" },
 ];
 
 const status = [
-  { value: "NE", label: "Not Evaluated" },
-  { value: "DD", label: "Data Deficient" },
-  { value: "LC", label: "Least Concern" },
-  { value: "NT", label: "Near Threatened" },
-  { value: "VU", label: "Vulnerable" },
-  { value: "EN", label: "Endangered" },
-  { value: "CR", label: "Critically Endangered" },
-  { value: "EW", label: "Extinct in the Wild" },
-  { value: "EX", label: "Extinct" },
+  { value: "endanger_status=NE", label: "Not Evaluated" },
+  { value: "endanger_status=DD", label: "Data Deficient" },
+  { value: "endanger_status=LC", label: "Least Concern" },
+  { value: "endanger_status=NT", label: "Near Threatened" },
+  { value: "endanger_status=VU", label: "Vulnerable" },
+  { value: "endanger_status=EN", label: "Endangered" },
+  { value: "endanger_status=CR", label: "Critically Endangered" },
+  { value: "endanger_status=EW", label: "Extinct in the Wild" },
+  { value: "endanger_status=EX", label: "Extinct" },
 ];
 
 const size = [
@@ -102,9 +102,9 @@ const catch_rate = [
 ];
 
 const habitat = [
-  { value: "Saltwater", label: "Unknown" },
-  { value: "Freshwater", label: "Stable" },
-  { value: "Brackish Water", label: "Increasing" },
+  { value: "habitat=saltwater", label: "Saltwater" },
+  { value: "habitat=freshwater", label: "Freshwater" },
+  { value: "habitat=brackish", label: "Brackish Water" },
 ];
 
 const groupedFiltering = [
@@ -122,11 +122,12 @@ class SpeciesGrid extends Component {
     offset: 0,
     perPage: 12,
     numInstances: 500,
+    currentFilter: ""
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
-    const URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}`;
+    const URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
     axios
       .get(URL)
       .then((response) => {
@@ -157,6 +158,32 @@ class SpeciesGrid extends Component {
     });
   };
 
+  // Filter button handler that creates API path
+  // Queries API for the filter's selections
+  filter = () => {
+    console.log("Filtering...");
+    // Call API using currently applied filters
+    this.loadData();
+  }
+
+  // Update the filter state when selections change
+  handleFilterSelectChange = (selectedOptions: any) => {
+    console.log("Updating Selected Filter State");
+    console.log(selectedOptions);
+
+    let filters: any[] = selectedOptions;
+    let queryParams: string = "";
+
+    if (filters) {
+      filters.forEach(filter => {
+        queryParams += filter.value;
+      }); 
+    }
+
+    console.log(queryParams);
+    this.setState({currentFilter: queryParams})
+  }
+
   render() {
     return (
       <Switch>
@@ -168,8 +195,11 @@ class SpeciesGrid extends Component {
                 <Select
                   closeMenuOnSelect={false}
                   options={groupedFiltering}
+                  onChange={this.handleFilterSelectChange}
                   isMulti
                 />
+                <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
+
               </div>
 
               <div className="row">

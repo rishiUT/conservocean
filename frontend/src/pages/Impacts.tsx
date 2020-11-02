@@ -32,28 +32,24 @@ interface impact {
 }
 
 const subcategories = [
-  { value: "plastic_pollition", label: "Plastic Pollution" },
-  { value: "coal_power_plants", label: "Coal Power Plants" },
-  { value: "offshore_oil_spills", label: "Offshore Oil Spills" },
-  { value: "tanker_oil_spills", label: "Tanker Oil Spills" },
+  { value: "subcategory=plastic_pollition", label: "Plastic Pollution" },
+  { value: "subcategory=coal_power_plants", label: "Coal Power Plants" },
+  { value: "subcategory=offshore_oil_spills", label: "Offshore Oil Spills" },
+  { value: "subcategory=tanker_oil_spills", label: "Tanker Oil Spills" },
 ];
 
 const longitude = [
-  { value: "0", label: "longitude = 0 - 59" },
-  { value: "60", label: "longitude = 60 - 119" },
-  { value: "120", label: "longitude =  120 - 179" },
-  { value: "180", label: "longitude = 180 - 239" },
-  { value: "240", label: "longitude = 240 - 299" },
-  { value: "300", label: "longitude = 300 - 359" },
+  { value: "long_min=0&long_max=89", label: "longitude = 0 - 89" },
+  { value: "long_min=90&long_max=180", label: "longitude = 90 - 180" },
+  { value: "long_min=-180&long_max=-91", label: "longitude = -180 - -91" },
+  { value: "long_min=-90&long_max=-1", label: "longitude = -90 - -1" }
 ];
 
 const latitude = [
-  { value: "0", label: "latitude = 0 - 59" },
-  { value: "60", label: "latitude = 60 - 119" },
-  { value: "120", label: "latitude =  120 - 179" },
-  { value: "180", label: "latitude = 180 - 239" },
-  { value: "240", label: "latitude = 240 - 299" },
-  { value: "300", label: "latitude = 300 - 359" },
+  { value: "lat_min=-30&lat_max=-1", label: "latitude = -30 - -1" },
+  { value: "lat_min=0&lat_max=29", label: "latitude = 0 - 29" },
+  { value: "lat_min=30&lat_max=59", label: "latitude = 30 - 59" },
+  { value: "lat_min=60&lat_max=90", label: "latitude = 60 - 90" }
 ];
 
 const groupedFiltering = [
@@ -69,12 +65,13 @@ class Impacts extends Component {
     offset: 0,
     perPage: 9,
     numInstances: 500,
+    currentFilter: ""
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
     axios
-      .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}`)
+      .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -103,6 +100,32 @@ class Impacts extends Component {
     });
   };
 
+  // Filter button handler that creates API path
+  // Queries API for the filter's selections
+  filter = () => {
+    console.log("Filtering...");
+    // Call API using currently applied filters
+    this.loadData();
+  }
+
+  // Update the filter state when selections change
+  handleFilterSelectChange = (selectedOptions: any) => {
+    console.log("Updating Selected Filter State");
+    console.log(selectedOptions);
+
+    let filters: any[] = selectedOptions;
+    let queryParams: string = "";
+
+    if (filters) {
+      filters.forEach(filter => {
+        queryParams += filter.value;
+      }); 
+    }
+
+    console.log(queryParams);
+    this.setState({currentFilter: queryParams})
+  }
+
   render() {
     return (
       <Switch>
@@ -113,8 +136,11 @@ class Impacts extends Component {
               <Select
                 closeMenuOnSelect={false}
                 options={groupedFiltering}
+                onChange={this.handleFilterSelectChange}
                 isMulti
               />
+            <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
+
               <div className="table-responsive">
                 <table className="table">
                   <thead>

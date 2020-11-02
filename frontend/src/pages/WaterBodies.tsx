@@ -90,7 +90,6 @@ class WaterBodies extends Component {
   // Make API request for the current page of data using Axios
   loadData() {
     const URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
-    console.log("URL: " + URL);
     axios
       .get(URL)
       .then((response) => {
