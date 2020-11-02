@@ -77,7 +77,19 @@ class Impacts extends Component {
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: response.data.total_impact_count,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      axios
+      .get(`/api/human?${this.state.currentFilter}`)
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          // Update the number of instances
+          numInstances: response.data.total_impacts_returned,
         });
       })
       .catch((error) => {

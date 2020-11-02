@@ -89,14 +89,26 @@ class WaterBodies extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    const URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
+    let URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
     axios
       .get(URL)
       .then((response) => {
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: response.data.total_water_count,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      URL = `/api/water?${this.state.currentFilter}`;
+      axios
+      .get(URL)
+      .then((response) => {
+        this.setState({
+          // Update the data and number of instances
+          numInstances: response.data.total_water_returned,
         });
       })
       .catch((error) => {

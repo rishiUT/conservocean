@@ -127,7 +127,7 @@ class SpeciesGrid extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    const URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
+    let URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
     axios
       .get(URL)
       .then((response) => {
@@ -135,7 +135,20 @@ class SpeciesGrid extends Component {
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
-          numInstances: response.data.total_fish_count,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      URL = `/api/fish?${this.state.currentFilter}`;
+      axios
+      .get(URL)
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          // Update the data and number of instances
+          numInstances: response.data.total_fish_returned,
         });
       })
       .catch((error) => {
