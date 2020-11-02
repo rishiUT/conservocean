@@ -68,15 +68,15 @@ const population_trend = [
 ];
 
 const status = [
-  { value: "endanger_status=NE", label: "Not Evaluated" },
-  { value: "endanger_status=DD", label: "Data Deficient" },
-  { value: "endanger_status=LC", label: "Least Concern" },
-  { value: "endanger_status=NT", label: "Near Threatened" },
-  { value: "endanger_status=VU", label: "Vulnerable" },
-  { value: "endanger_status=EN", label: "Endangered" },
-  { value: "endanger_status=CR", label: "Critically Endangered" },
-  { value: "endanger_status=EW", label: "Extinct in the Wild" },
-  { value: "endanger_status=EX", label: "Extinct" },
+  { value: "status=NE", label: "Not Evaluated" },
+  { value: "status=DD", label: "Data Deficient" },
+  { value: "status=LC", label: "Least Concern" },
+  { value: "status=NT", label: "Near Threatened" },
+  { value: "status=VU", label: "Vulnerable" },
+  { value: "status=EN", label: "Endangered" },
+  { value: "status=CR", label: "Critically Endangered" },
+  { value: "status=EW", label: "Extinct in the Wild" },
+  { value: "status=EX", label: "Extinct" },
 ];
 
 const size = [
