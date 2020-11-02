@@ -47,18 +47,26 @@
 
 .menu-section {
   display: flex;
-  margin-left: 5rem;
+  /* margin-left: 5rem; */
+  width: 80%;
+  margin: auto;
+
+  padding-bottom: 2rem;
+
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .list-cont {
-  margin-right: 5rem;
-  margin-top: 3rem;
-  margin-left: 7rem;
+  display: flex;
+  justify-content: center;
 }
 
 .list {
   /* display: flex; */
   list-style: none;
+  padding-left: 0;
 }
 
 .list-item {
@@ -66,7 +74,7 @@
 }
 
 .text-content {
-  max-width: 35%;
+  max-width: 50%;
 }
 
 .button {
@@ -87,4 +95,15 @@
   text-decoration: none;
   background-color: #4f97b8;
   color: #fffffa;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .text-content {
+    max-width: 90%;
+  }
+
+  .button {
+    min-width: 24rem;
+  }
 }
