@@ -130,7 +130,6 @@ class SpeciesGrid extends Component {
     axios
       .get(URL)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
@@ -144,7 +143,6 @@ class SpeciesGrid extends Component {
       axios
       .get(URL)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the data and number of instances
           numInstances: response.data.total_fish_returned,
@@ -162,8 +160,6 @@ class SpeciesGrid extends Component {
 
   // Load the next page of data
   handlePageClick = (data: any) => {
-    console.log(`Go to the selected page, page ${data.selected + 1}`);
-
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
       this.loadData();
@@ -173,16 +169,12 @@ class SpeciesGrid extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
     // Call API using currently applied filters
     this.loadData();
   }
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
-    console.log("Updating Selected Filter State");
-    console.log(selectedOptions);
-
     let filters: any[] = selectedOptions;
     let queryParams: string = "";
 
@@ -192,7 +184,6 @@ class SpeciesGrid extends Component {
       }); 
     }
 
-    console.log(queryParams);
     this.setState({currentFilter: queryParams})
   }
 
@@ -230,7 +221,7 @@ class SpeciesGrid extends Component {
                   marginPagesDisplayed={1}
                   pageRangeDisplayed={3}
                   onPageChange={this.handlePageClick}
-                  containerClassName={"pagination"}
+                  containerClassName={"pagination justify-content-center"}
                   breakClassName={"break-me"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
@@ -317,11 +308,14 @@ function Species(props: any) {
       // Pass param to the API call
       const { data }: any = await axios.get(`/api/fish/${props.match.params.id}`);
       // Update state
-      console.log(data.data);
       setSpecies(data.data);
     };
     // Invoke the async function
     getSpecies();
+
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Return data
@@ -341,9 +335,6 @@ function Species(props: any) {
 
           <h3>Species Details</h3>
           <ul>
-            {/* {species.scientific_name ? (
-              <li>Scientific Name: {species.scientific_name}</li>
-            ) : null} */}
             {species.family ? (
               <li>
                 {" "}

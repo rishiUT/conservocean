@@ -102,12 +102,13 @@ class WaterBodies extends Component {
         console.log(error);
       });
 
+      // Change the total number of pages based on total results
       URL = `/api/water?${this.state.currentFilter}`;
       axios
       .get(URL)
       .then((response) => {
         this.setState({
-          // Update the data and number of instances
+          // Update the number of instances
           numInstances: response.data.total_water_returned,
         });
       })
@@ -123,8 +124,6 @@ class WaterBodies extends Component {
 
   // Go to the next page of data
   handlePageClick = (data: any) => {
-    console.log(`Go to the selected page, page ${data.selected + 1}`);
-
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
       this.loadData();
@@ -134,16 +133,12 @@ class WaterBodies extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
     // Call API using currently applied filters
     this.loadData();
   }
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
-    console.log("Updating Selected Filter State");
-    console.log(selectedOptions);
-
     let filters: any[] = selectedOptions;
     let queryParams: string = "";
 
@@ -153,8 +148,6 @@ class WaterBodies extends Component {
       }); 
     }
 
-
-    console.log(queryParams);
     this.setState({currentFilter: queryParams})
   }
 
@@ -191,7 +184,7 @@ class WaterBodies extends Component {
                   marginPagesDisplayed={1}
                   pageRangeDisplayed={3}
                   onPageChange={this.handlePageClick}
-                  containerClassName={"pagination"}
+                  containerClassName={"pagination justify-content-center"}
                   breakClassName={"break-me"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
@@ -268,11 +261,14 @@ function WaterBody(props: any) {
       // Pass param to the API call
       const { data }: any = await axios.get(`/api/water/${props.match.params.id}`);
       // Update state
-      console.log(data);
       setWaterBody(data.data);
     };
     // Invoke the async function
     getWaterBody();
+
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Return data

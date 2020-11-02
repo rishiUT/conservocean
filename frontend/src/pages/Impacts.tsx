@@ -73,7 +73,6 @@ class Impacts extends Component {
     axios
       .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
@@ -86,7 +85,6 @@ class Impacts extends Component {
       axios
       .get(`/api/human?${this.state.currentFilter}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the number of instances
           numInstances: response.data.total_impact_returned,
@@ -103,9 +101,6 @@ class Impacts extends Component {
   }
 
   handlePageClick = (data: any) => {
-    console.log(data);
-    console.log(`Go to the selected page, page ${data.selected + 1}`);
-
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
       this.loadData();
@@ -115,16 +110,12 @@ class Impacts extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
     // Call API using currently applied filters
     this.loadData();
   }
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
-    console.log("Updating Selected Filter State");
-    console.log(selectedOptions);
-
     let filters: any[] = selectedOptions;
     let queryParams: string = "";
 
@@ -134,7 +125,6 @@ class Impacts extends Component {
       }); 
     }
 
-    console.log(queryParams);
     this.setState({currentFilter: queryParams})
   }
 
@@ -181,7 +171,7 @@ class Impacts extends Component {
                     marginPagesDisplayed={1}
                     pageRangeDisplayed={3}
                     onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
+                    containerClassName={"pagination justify-content-center"}
                     breakClassName={"break-me"}
                     breakLinkClassName={"page-link"}
                     activeClassName={"active"}
@@ -210,7 +200,7 @@ function ImpactTableData({ impact }: any) {
     <tr>
       <th scope="row">
         <Link to={`/impacts/${impact.id}`} className="card-link">
-          {impact.name ? impact.name : "Plastic Pollution Sample " + impact.id}
+          {impact.name ? impact.name : `Plastic Pollution Sample ${Number.parseInt(impact.id) - 5}`}
         </Link>
       </th>
       <td>{impact.category}</td>
@@ -225,25 +215,24 @@ function ImpactTableData({ impact }: any) {
 function Impact(props: any) {
   // Set initial state
   const initialImpactState: impact = {};
-  let loading = false;
 
   // Getter and setter for impact state
-  //impact is an impact, setImpact is a function you can use to change it
+  // impact is an impact, setImpact is a function you can use to change it
   const [impact, setImpact] = useState(initialImpactState);
 
   // Use useEffect to retrieve data from API
   useEffect(() => {
     const getImpact = async () => {
       const { data }: any = await axios.get(`/api/human/${props.match.params.id}`);
+      // Update state
       setImpact(data.data);
-      loading = true;
     };
-    getImpact();
-  }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    getImpact();
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return impact ? (
     <div className="bg-light full-height">
