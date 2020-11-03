@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { Switch, Route, Link, useRouteMatch, useLocation } from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Select from "react-select";
@@ -179,8 +179,6 @@ class SpeciesGrid extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
-
     // Call API using currently applied filters
     this.loadData();
   }
@@ -321,195 +319,195 @@ function SpeciesCard(props: any) {
   );
 }
 
-class Species extends Component<any> {
-  state: {species: species} = {
-    species: {},
-  }
+// class Species extends Component<any> {
+//   state: {species: species} = {
+//     species: {},
+//   }
 
-  // Make API request for the current page of data using Axios
-  loadData() {
-    let URL = `/api/fish/${this.props.match.params.id}/`;
-    // let URL = `/api/fish?offset=${this.props.match.params.id-1}&limit=1`;
-    axios
-      .get(URL)
-      .then((response) => {
-        this.setState({
-          // Update the data and number of instances
-          species: response.data.data
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+//   // Make API request for the current page of data using Axios
+//   loadData() {
+//     let URL = `/api/fish/${this.props.match.params.id}/`;
+//     // let URL = `/api/fish?offset=${this.props.match.params.id-1}&limit=1`;
+//     axios
+//       .get(URL)
+//       .then((response) => {
+//         this.setState({
+//           // Update the data and number of instances
+//           species: response.data.data
+//         });
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   }
 
-  // Load initial data after component added to document
-  componentDidMount() {
-    this.loadData();
-  }
+//   // Load initial data after component added to document
+//   componentDidMount() {
+//     this.loadData();
+//   }
 
-  render() {
-    return (
-      <div className="bg-light full-height">
-        <main className="container py-5">
-          <h1 className="text-center">{this.state.species.common_name} </h1>
-          <div className="container" style={{ width: "80%" }}>
-            {this.state.species.picture_url ? (
-              <img
-                className="py-5"
-                src={this.state.species.picture_url}
-                width="100%"
-                alt={this.state.species.common_name}
-              ></img>
-            ) : null}
+//   render() {
+//     return (
+//       <div className="bg-light full-height">
+//         <main className="container py-5">
+//           <h1 className="text-center">{this.state.species.common_name} </h1>
+//           <div className="container" style={{ width: "80%" }}>
+//             {this.state.species.picture_url ? (
+//               <img
+//                 className="py-5"
+//                 src={this.state.species.picture_url}
+//                 width="100%"
+//                 alt={this.state.species.common_name}
+//               ></img>
+//             ) : null}
   
-            <h3>Species Details</h3>
-            <ul>
-              {this.state.species.family ? (
-                <li>
-                  {" "}
-                  Family: <i>{this.state.species.family}</i>
-                </li>
-              ) : null}
-              {this.state.species.genus ? (
-                <li>
-                  Genus: <i>{this.state.species.genus}</i>
-                </li>
-              ) : null}
-              {this.state.species.species ? (
-                <li>
-                  Species: <i>{this.state.species.species}</i>
-                </li>
-              ) : null}
-              {this.state.species.habitat ? (
-                <li>Habitat: {HABITATS[this.state.species.habitat]}</li>
-              ) : null}
-              {this.state.species.endanger_status ? (
-                <li>Endangered Status: {IUCN_STATUS[this.state.species.endanger_status]}</li>
-              ) : null}
-              {this.state.species.population_trend ? (
-                <li>Population Trend: {this.state.species.population_trend}</li>
-              ) : null}
-              {this.state.species.average_size ? (
-                <li>Average Size: {this.state.species.average_size} cm</li>
-              ) : null}
-              {this.state.species.description ? (
-                <li>Description: {this.state.species.description}</li>
-              ) : null}
-              {this.state.species.speccode ? <li>Spec. Code: {this.state.species.speccode}</li> : null}
-              {this.state.species.catch_year ? (
-                <li>Catch Year: {this.state.species.catch_year}</li>
-              ) : null}
-              {this.state.species.catch_rate ? (
-                <li>Catch Rate: {this.state.species.catch_rate}</li>
-              ) : null}
-              {/* {species.human_impact_ids ? (
-                <li>
-                  Human Impacts that Affect the Species:{" "}
-                  {species.human_impact_ids}
-                </li>
-              ) : null} */}
-            </ul>
-          </div>
-        </main>
-      </div>
-    );
-  }
+//             <h3>Species Details</h3>
+//             <ul>
+//               {this.state.species.family ? (
+//                 <li>
+//                   {" "}
+//                   Family: <i>{this.state.species.family}</i>
+//                 </li>
+//               ) : null}
+//               {this.state.species.genus ? (
+//                 <li>
+//                   Genus: <i>{this.state.species.genus}</i>
+//                 </li>
+//               ) : null}
+//               {this.state.species.species ? (
+//                 <li>
+//                   Species: <i>{this.state.species.species}</i>
+//                 </li>
+//               ) : null}
+//               {this.state.species.habitat ? (
+//                 <li>Habitat: {HABITATS[this.state.species.habitat]}</li>
+//               ) : null}
+//               {this.state.species.endanger_status ? (
+//                 <li>Endangered Status: {IUCN_STATUS[this.state.species.endanger_status]}</li>
+//               ) : null}
+//               {this.state.species.population_trend ? (
+//                 <li>Population Trend: {this.state.species.population_trend}</li>
+//               ) : null}
+//               {this.state.species.average_size ? (
+//                 <li>Average Size: {this.state.species.average_size} cm</li>
+//               ) : null}
+//               {this.state.species.description ? (
+//                 <li>Description: {this.state.species.description}</li>
+//               ) : null}
+//               {this.state.species.speccode ? <li>Spec. Code: {this.state.species.speccode}</li> : null}
+//               {this.state.species.catch_year ? (
+//                 <li>Catch Year: {this.state.species.catch_year}</li>
+//               ) : null}
+//               {this.state.species.catch_rate ? (
+//                 <li>Catch Rate: {this.state.species.catch_rate}</li>
+//               ) : null}
+//               {/* {species.human_impact_ids ? (
+//                 <li>
+//                   Human Impacts that Affect the Species:{" "}
+//                   {species.human_impact_ids}
+//                 </li>
+//               ) : null} */}
+//             </ul>
+//           </div>
+//         </main>
+//       </div>
+//     );
+//   }
 
-}
-
-// // Display content for an individual species page
-// function Species(props: any) {
-//   // Set initial state
-//   const initialSpeciesState: species = {};
-
-//   // Getter and setter for species state
-//   const [species, setSpecies] = useState(initialSpeciesState);
-
-//   // Use useEffect to retrieve data from API
-//   useEffect(() => {
-//     const getSpecies = async () => {
-//       // Pass param to the API call
-//       const { data }: any = await axios.get(`/api/fish/${props.match.params.id}`);
-//       // Update state
-//       setSpecies(data.data);
-//     };
-//     // Invoke the async function
-//     getSpecies();
-
-//     // Let the linter know that there are no dependencies that will require 
-//     // calling this function again
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
-
-//   // Return data
-  // return species ? (
-  //   <div className="bg-light full-height">
-  //     <main className="container py-5">
-  //       <h1 className="text-center">{species.common_name} </h1>
-  //       <div className="container" style={{ width: "80%" }}>
-  //         {species.picture_url ? (
-  //           <img
-  //             className="py-5"
-  //             src={species.picture_url}
-  //             width="100%"
-  //             alt={species.common_name}
-  //           ></img>
-  //         ) : null}
-
-  //         <h3>Species Details</h3>
-  //         <ul>
-  //           {species.family ? (
-  //             <li>
-  //               {" "}
-  //               Family: <i>{species.family}</i>
-  //             </li>
-  //           ) : null}
-  //           {species.genus ? (
-  //             <li>
-  //               Genus: <i>{species.genus}</i>
-  //             </li>
-  //           ) : null}
-  //           {species.species ? (
-  //             <li>
-  //               Species: <i>{species.species}</i>
-  //             </li>
-  //           ) : null}
-  //           {species.habitat ? (
-  //             <li>Habitat: {HABITATS[species.habitat]}</li>
-  //           ) : null}
-  //           {species.endanger_status ? (
-  //             <li>Endangered Status: {IUCN_STATUS[species.endanger_status]}</li>
-  //           ) : null}
-  //           {species.population_trend ? (
-  //             <li>Population Trend: {species.population_trend}</li>
-  //           ) : null}
-  //           {species.average_size ? (
-  //             <li>Average Size: {species.average_size} cm</li>
-  //           ) : null}
-  //           {species.description ? (
-  //             <li>Description: {species.description}</li>
-  //           ) : null}
-  //           {species.speccode ? <li>Spec. Code: {species.speccode}</li> : null}
-  //           {species.catch_year ? (
-  //             <li>Catch Year: {species.catch_year}</li>
-  //           ) : null}
-  //           {species.catch_rate ? (
-  //             <li>Catch Rate: {species.catch_rate}</li>
-  //           ) : null}
-  //           {/* {species.human_impact_ids ? (
-  //             <li>
-  //               Human Impacts that Affect the Species:{" "}
-  //               {species.human_impact_ids}
-  //             </li>
-  //           ) : null} */}
-  //         </ul>
-  //       </div>
-  //     </main>
-  //   </div>
-  // ) : (
-  //   <div>Loading...</div>
-  // );
 // }
+
+// Display content for an individual species page
+function Species(props: any) {
+  // Set initial state
+  const initialSpeciesState: species = {};
+
+  // Getter and setter for species state
+  const [species, setSpecies] = useState(initialSpeciesState);
+
+  // Use useEffect to retrieve data from API
+  useEffect(() => {
+    const getSpecies = async () => {
+      // Pass param to the API call
+      const { data }: any = await axios.get(`/api/fish/${props.match.params.id}/`);
+      // Update state
+      setSpecies(data.data);
+    };
+    // Invoke the async function
+    getSpecies();
+
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Return data
+  return species ? (
+    <div className="bg-light full-height">
+      <main className="container py-5">
+        <h1 className="text-center">{species.common_name} </h1>
+        <div className="container" style={{ width: "80%" }}>
+          {species.picture_url ? (
+            <img
+              className="py-5"
+              src={species.picture_url}
+              width="100%"
+              alt={species.common_name}
+            ></img>
+          ) : null}
+
+          <h3>Species Details</h3>
+          <ul>
+            {species.family ? (
+              <li>
+                {" "}
+                Family: <i>{species.family}</i>
+              </li>
+            ) : null}
+            {species.genus ? (
+              <li>
+                Genus: <i>{species.genus}</i>
+              </li>
+            ) : null}
+            {species.species ? (
+              <li>
+                Species: <i>{species.species}</i>
+              </li>
+            ) : null}
+            {species.habitat ? (
+              <li>Habitat: {HABITATS[species.habitat]}</li>
+            ) : null}
+            {species.endanger_status ? (
+              <li>Endangered Status: {IUCN_STATUS[species.endanger_status]}</li>
+            ) : null}
+            {species.population_trend ? (
+              <li>Population Trend: {species.population_trend}</li>
+            ) : null}
+            {species.average_size ? (
+              <li>Average Size: {species.average_size} cm</li>
+            ) : null}
+            {species.description ? (
+              <li>Description: {species.description}</li>
+            ) : null}
+            {species.speccode ? <li>Spec. Code: {species.speccode}</li> : null}
+            {species.catch_year ? (
+              <li>Catch Year: {species.catch_year}</li>
+            ) : null}
+            {species.catch_rate ? (
+              <li>Catch Rate: {species.catch_rate}</li>
+            ) : null}
+            {/* {species.human_impact_ids ? (
+              <li>
+                Human Impacts that Affect the Species:{" "}
+                {species.human_impact_ids}
+              </li>
+            ) : null} */}
+          </ul>
+        </div>
+      </main>
+    </div>
+  ) : (
+    <div>Loading...</div>
+  );
+}
 
 export default SpeciesGrid;

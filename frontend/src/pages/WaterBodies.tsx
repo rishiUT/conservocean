@@ -282,7 +282,7 @@ function WaterBody(props: any) {
   useEffect(() => {
     const getWaterBody = async () => {
       // Pass param to the API call
-      const { data }: any = await axios.get(`/api/water/${props.match.params.id}`);
+      const { data }: any = await axios.get(`/api/water/${props.match.params.id}/`);
       // Update state
       setWaterBody(data.data);
     };

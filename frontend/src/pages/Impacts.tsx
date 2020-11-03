@@ -101,7 +101,7 @@ class Impacts extends Component {
         console.log(response);
         this.setState({
           // Update the number of instances
-          numInstances: response.data.total_impacts_returned,
+          numInstances: response.data.total_impact_returned,
         });
       })
       .catch((error) => {
@@ -115,9 +115,6 @@ class Impacts extends Component {
   }
 
   handlePageClick = (data: any) => {
-    console.log(data);
-    console.log(`Go to the selected page, page ${data.selected + 1}`);
-
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
       this.loadData();
@@ -127,16 +124,12 @@ class Impacts extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
     // Call API using currently applied filters
     this.loadData();
   }
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
-    console.log("Updating Selected Filter State");
-    console.log(selectedOptions);
-
     let filters: any[] = selectedOptions;
     let queryParams: string = "";
 
@@ -146,7 +139,6 @@ class Impacts extends Component {
       }); 
     }
 
-    console.log(queryParams);
     this.setState({currentFilter: queryParams})
   }
 
@@ -237,7 +229,7 @@ function ImpactTableData({ impact }: any) {
     <tr>
       <th scope="row">
         <Link to={`/impacts/${impact.id}`} className="card-link">
-          {impact.name ? impact.name : "Plastic Pollution Sample " + impact.id}
+          {impact.name ? impact.name : `Plastic Pollution Sample ${impact.id - 5}`}
         </Link>
       </th>
       <td>{impact.category}</td>
@@ -261,16 +253,15 @@ function Impact(props: any) {
   // Use useEffect to retrieve data from API
   useEffect(() => {
     const getImpact = async () => {
-      const { data }: any = await axios(`/api/human/${props.match.params.id}`);
+      const { data }: any = await axios(`/api/human/${props.match.params.id}/`);
       setImpact(data.data);
-      loading = true;
     };
     getImpact();
-  }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return impact ? (
     <div className="bg-light full-height">
