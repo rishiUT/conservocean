@@ -328,8 +328,8 @@ class Species extends Component<any> {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    // let URL = `/api/fish/${this.props.match.params.id}`;
-    let URL = `/api/fish?offset=${this.props.match.params.id-1}&limit=1`;
+    let URL = `/api/fish/${this.props.match.params.id}/`;
+    // let URL = `/api/fish?offset=${this.props.match.params.id-1}&limit=1`;
     axios
       .get(URL)
       .then((response) => {
