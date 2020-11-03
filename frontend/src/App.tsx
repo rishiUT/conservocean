@@ -9,7 +9,9 @@ import SpeciesGrid from "./pages/Species";
 import Impacts from "./pages/Impacts";
 import WaterBodies from "./pages/WaterBodies";
 
+
 import Navbar from "./parts/Navbar";
+
 
 function App() {
   return (
@@ -28,6 +30,10 @@ function App() {
         </Switch>
       </div>
     </Router>
+
+ 
+
+      
   );
 }
 

@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import waves from "./Media/waves.png";
 import fish from "./Media/fish.png";
 import drops from "./Media/water-drops.png";
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+
+const searchClient = algoliasearch('VEMEIF8QHL', 'e211f5541054cdb5177282492d4a90c8');
+
 
 function Home() {
   return (
@@ -19,6 +24,7 @@ function Home() {
             awareness to how human activity impacts bodies of water and aquatic
             animals.{" "}
           </h2>
+    
         </div>
         <div className="img-cont">
           <img className="image" src={waves} alt="waves" />
@@ -57,6 +63,13 @@ function Home() {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="search-section">
+        <h2 className="heading">Get started by searching.</h2>
+        <InstantSearch searchClient={searchClient} indexName="conservocean">
+            <SearchBox />
+            <Hits />
+          </InstantSearch>
       </div>
     </div>
   );
