@@ -61,9 +61,9 @@ const groupedFiltering = [
 
 // Defines the categories and API calls for sorting
 const groupedSorting = [
-  { label: "Name", options: [{value: "sort=name", label: "A to Z"}, {value: "sort=sort=name&ascending=false", label: "Z to A"}]},
-  { label: "Longitude", options: [{value: "sort=long", label: "Ascending"}, {value: "sort=long&ascending=false", label: "Descending"}]},
-  { label: "Latitude", options: [{value: "sort=lat", label: "Ascending"}, {value: "sort=lat&ascending=false", label: "Descending"}]},
+  { label: "Name", options: [{value: "sort=name", label: "A to Z"}, {value: "sort=name&ascending=false", label: "Z to A"}]},
+  { label: "Longitude", options: [{value: "sort=longitude", label: "Ascending"}, {value: "sort=longitude&ascending=false", label: "Descending"}]},
+  { label: "Latitude", options: [{value: "sort=latitude", label: "Ascending"}, {value: "sort=latitude&ascending=false", label: "Descending"}]},
   { label: "Subcategory", options: [{value: "sort=subcategory", label: "A to Z"}, {value: "sort=subcategory&ascending=false", label: "Z to A"}]},
   { label: "Count Density (only applicable to plastic pollution)", options: [{value: "sort=count_density_1", label: "Ascending"}, {value: "sort=count_density_1&ascending=false", label: "Descending"}]},
 ];

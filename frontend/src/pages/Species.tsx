@@ -114,6 +114,15 @@ const groupedFiltering = [
   { label: "Habitat", options: habitat },
 ];
 
+// Defines the categories and API calls for sorting
+const groupedSorting = [
+  { label: "Name", options: [{value: "sort=common_name", label: "A to Z"}, {value: "sort=common_name&ascending=false", label: "Z to A"}]},
+  { label: "Genus", options: [{value: "sort=genus", label: "A to Z"}, {value: "sort=genus&ascending=false", label: "Z to A"}]},
+  { label: "Species", options: [{value: "sort=species", label: "A to Z"}, {value: "sort=species&ascending=false", label: "Z to A"}]},
+  { label: "Endangered Status", options: [{value: "sort=status", label: "A to Z"}, {value: "sort=status&ascending=false", label: "Z to A"}]},
+  { label: "Average Size", options: [{value: "sort=average_size", label: "Ascending"}, {value: "sort=average_size&ascending=false", label: "Descending"}]},
+];
+
 // Display a grid of all available species
 class SpeciesGrid extends Component {
   state = {
@@ -121,12 +130,13 @@ class SpeciesGrid extends Component {
     offset: 0,
     perPage: 12,
     numInstances: 500,
-    currentFilter: ""
+    currentFilter: "",
+    currentSort: ""
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
-    let URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
+    let URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`;
     axios
       .get(URL)
       .then((response) => {
@@ -169,6 +179,8 @@ class SpeciesGrid extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
+    console.log("Filtering...");
+
     // Call API using currently applied filters
     this.loadData();
   }
@@ -187,6 +199,13 @@ class SpeciesGrid extends Component {
     this.setState({currentFilter: queryParams})
   }
 
+  handleSortSelectChange = (selectedOption: any) => {
+    console.log(selectedOption)
+    if (selectedOption) {
+      this.setState({currentSort: selectedOption.value});
+    }
+  }
+
   render() {
     return (
       <Switch>
@@ -202,6 +221,14 @@ class SpeciesGrid extends Component {
                   isMulti
                 />
                 <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
+
+                <Select
+                options={groupedSorting}
+                onChange={this.handleSortSelectChange}
+                />
+
+                <button type="button" className="btn btn-primary" onClick={this.filter}>Sort</button>
+
 
               </div>
 

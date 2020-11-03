@@ -76,6 +76,15 @@ const groupedFiltering = [
   { label: "Type", options: type },
 ];
 
+// Defines the categories and API calls for sorting
+const groupedSorting = [
+  { label: "Name", options: [{value: "sort=name", label: "A to Z"}, {value: "sort=name&ascending=false", label: "Z to A"}]},
+  { label: "Longitude", options: [{value: "sort=longitude", label: "Ascending"}, {value: "sort=longitude&ascending=false", label: "Descending"}]},
+  { label: "Latitude", options: [{value: "sort=latitude", label: "Ascending"}, {value: "sort=latitude&ascending=false", label: "Descending"}]},
+  { label: "Temperature", options: [{value: "sort=water_temp", label: "Ascending"}, {value: "sort=water_temp&ascending=false", label: "Descending"}]},
+  { label: "Size", options: [{value: "sort=size", label: "Ascending"}, {value: "sort=size&ascending=false", label: "Descending"}]},
+];
+
 
 // Display a grid of all bodies of water
 class WaterBodies extends Component {
@@ -84,12 +93,13 @@ class WaterBodies extends Component {
     offset: 0,
     perPage: 12,
     numInstances: 500,
-    currentFilter: ""
+    currentFilter: "",
+    currentSort: ""
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
-    let URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
+    let URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`;
     axios
       .get(URL)
       .then((response) => {
@@ -151,6 +161,12 @@ class WaterBodies extends Component {
     this.setState({currentFilter: queryParams})
   }
 
+  handleSortSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      this.setState({currentSort: selectedOption.value});
+    }
+  }
+
   render() {
     return (
       <Switch>
@@ -167,6 +183,13 @@ class WaterBodies extends Component {
                 />
                 
                 <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
+                <Select
+                options={groupedSorting}
+                onChange={this.handleSortSelectChange}
+              />
+
+            <button type="button" className="btn btn-primary" onClick={this.filter}>Sort</button>
+
               </div>
               <div className="row">
                 {this.state.data.map((body) => (
@@ -239,8 +262,8 @@ function WBCard({ body }: any) {
           <li className="list-group-item">Latitude: {Number.parseFloat(body.latitude).toFixed(3)}</li>
           <li className="list-group-item">Longitude: {Number.parseFloat(body.longitude).toFixed(3)}</li>
           <li className="list-group-item">Size: {Number.parseFloat(body.size).toFixed(3)} sq. km</li>
-          <li className="list-group-item">Average Temperature: {body.water_temp}°C</li>
-          <li className="list-group-item">Local Wind Speed: {body.wind_speedkmph} km/h</li>
+          {body.water_temp ? <li className="list-group-item">Average Temperature: {body.water_temp}°C</li> : null}
+          {body.wind_speedkmph ? <li className="list-group-item">Local Wind Speed: {body.wind_speedkmph} km/h</li> : null}
         </ul>
       </div>
     </div>
