@@ -335,7 +335,7 @@ class Species extends Component<any> {
       .then((response) => {
         this.setState({
           // Update the data and number of instances
-          species: response.data.data[0]
+          species: response.data.data
         });
       })
       .catch((error) => {
