@@ -76,6 +76,15 @@ const groupedFiltering = [
   { label: "Type", options: type },
 ];
 
+// Defines the categories and API calls for sorting
+const groupedSorting = [
+  { label: "Name", options: [{value: "sort=name", label: "A to Z"}, {value: "sort=name&ascending=false", label: "Z to A"}]},
+  { label: "Longitude", options: [{value: "sort=longitude", label: "Ascending"}, {value: "sort=longitude&ascending=false", label: "Descending"}]},
+  { label: "Latitude", options: [{value: "sort=latitude", label: "Ascending"}, {value: "sort=latitude&ascending=false", label: "Descending"}]},
+  { label: "Temperature", options: [{value: "sort=water_temp", label: "Ascending"}, {value: "sort=water_temp&ascending=false", label: "Descending"}]},
+  { label: "Size", options: [{value: "sort=size", label: "Ascending"}, {value: "sort=size&ascending=false", label: "Descending"}]},
+];
+
 
 // Display a grid of all bodies of water
 class WaterBodies extends Component {
@@ -84,12 +93,13 @@ class WaterBodies extends Component {
     offset: 0,
     perPage: 12,
     numInstances: 500,
-    currentFilter: ""
+    currentFilter: "",
+    currentSort: ""
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
-    let URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
+    let URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`;
     axios
       .get(URL)
       .then((response) => {
@@ -102,12 +112,13 @@ class WaterBodies extends Component {
         console.log(error);
       });
 
+      // Change the total number of pages based on total results
       URL = `/api/water?${this.state.currentFilter}`;
       axios
       .get(URL)
       .then((response) => {
         this.setState({
-          // Update the data and number of instances
+          // Update the number of instances
           numInstances: response.data.total_water_returned,
         });
       })
@@ -123,8 +134,6 @@ class WaterBodies extends Component {
 
   // Go to the next page of data
   handlePageClick = (data: any) => {
-    console.log(`Go to the selected page, page ${data.selected + 1}`);
-
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
       this.loadData();
@@ -134,16 +143,12 @@ class WaterBodies extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
     // Call API using currently applied filters
     this.loadData();
   }
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
-    console.log("Updating Selected Filter State");
-    console.log(selectedOptions);
-
     let filters: any[] = selectedOptions;
     let queryParams: string = "";
 
@@ -153,9 +158,13 @@ class WaterBodies extends Component {
       }); 
     }
 
-
-    console.log(queryParams);
     this.setState({currentFilter: queryParams})
+  }
+
+  handleSortSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      this.setState({currentSort: selectedOption.value});
+    }
   }
 
   render() {
@@ -174,6 +183,13 @@ class WaterBodies extends Component {
                 />
                 
                 <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
+                <Select
+                options={groupedSorting}
+                onChange={this.handleSortSelectChange}
+              />
+
+            <button type="button" className="btn btn-primary" onClick={this.filter}>Sort</button>
+
               </div>
               <div className="row">
                 {this.state.data.map((body) => (
@@ -191,7 +207,7 @@ class WaterBodies extends Component {
                   marginPagesDisplayed={1}
                   pageRangeDisplayed={3}
                   onPageChange={this.handlePageClick}
-                  containerClassName={"pagination"}
+                  containerClassName={"pagination justify-content-center"}
                   breakClassName={"break-me"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
@@ -243,11 +259,11 @@ function WBCard({ body }: any) {
           <h5 className="card-title">{body.name}</h5>
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Latitude: {body.latitude}</li>
-          <li className="list-group-item">Longitude: {body.longitude}</li>
-          <li className="list-group-item">Size: {body.size} miles</li>
-          <li className="list-group-item">Tide Height: {body.tide_height}</li>
-          <li className="list-group-item">Temperature {body.water_temp}°C</li>
+          <li className="list-group-item">Latitude: {Number.parseFloat(body.latitude).toFixed(3)}</li>
+          <li className="list-group-item">Longitude: {Number.parseFloat(body.longitude).toFixed(3)}</li>
+          <li className="list-group-item">Size: {Number.parseFloat(body.size).toFixed(3)} sq. km</li>
+          {body.water_temp ? <li className="list-group-item">Average Temperature: {body.water_temp}°C</li> : null}
+          {body.wind_speedkmph ? <li className="list-group-item">Local Wind Speed: {body.wind_speedkmph} km/h</li> : null}
         </ul>
       </div>
     </div>
@@ -266,13 +282,16 @@ function WaterBody(props: any) {
   useEffect(() => {
     const getWaterBody = async () => {
       // Pass param to the API call
-      const { data }: any = await axios(`/api/water/${props.match.params.id}`);
+      const { data }: any = await axios.get(`/api/water/${props.match.params.id}/`);
       // Update state
-      console.log(data);
       setWaterBody(data.data);
     };
     // Invoke the async function
     getWaterBody();
+
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Return data

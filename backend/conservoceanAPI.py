@@ -40,6 +40,8 @@ class FishList(Resource):
     fish_parser.add_argument('family', type=str)
     fish_parser.add_argument('sort', type=str)
     fish_parser.add_argument('ascending', type=str)
+    fish_parser.add_argument('size_min', type=int)
+    fish_parser.add_argument('size_max', type=int)
 
 
     def get(self):
@@ -56,7 +58,8 @@ class FishList(Resource):
         # Validate the passed parameters to make sure they are handleable
         validateArgs({'species':0, 'scientific_name':0, 'common_name':0,
                     'status':0, 'population_trend':0, 'location':0,
-                    'genus':0, 'habitat':0, 'family':0}, args)
+                    'genus':0, 'habitat':0, 'family':0,
+                    'size_min':0, 'size_max':0}, args)
 
         # Check for if we need to sort or filter
         if args['sort'] != None:
@@ -173,18 +176,19 @@ class HumanList(Resource):
 
     # Query parameter registration
     human_parser = reqparse.RequestParser()
-    human_parser.add_argument('category', type=str)
     human_parser.add_argument('subcategory', type=str)
     human_parser.add_argument('lat_max', type=float)
     human_parser.add_argument('long_max', type=float)
     human_parser.add_argument('lat_min', type=float)
     human_parser.add_argument('long_min', type=float)
-    human_parser.add_argument('num_fish_min', type=int)
-    human_parser.add_argument('num_fish_max', type=int)
     human_parser.add_argument('sort', type=str)
     human_parser.add_argument('ascending', type=str)
     human_parser.add_argument('limit', type=int)
     human_parser.add_argument('offset', type=int)
+    human_parser.add_argument('oil_amount_min', type=int)
+    human_parser.add_argument('oil_amount_max', type=int)
+    human_parser.add_argument('CD_1_min', type=float)
+    human_parser.add_argument('CD_1_max', type=float)
 
     def get(self):
         """
@@ -198,9 +202,9 @@ class HumanList(Resource):
             args['ascending'] = "True"
 
         # Validate the passed parameters to make sure they are handleable
-        validateArgs({'category':0, 'subcategory':0, 'lat_max':0,
-                      'lat_min':0, 'long_max':0, 'long_min':0,
-                      'num_fish_min':0, 'num_fish_max':0}, args)
+        validateArgs({'subcategory':0, 'lat_max':0, 'lat_min':0, 'long_max':0,
+                      'long_min':0, 'oil_amount_min':0, 'CD_1_min':0,
+                      'oil_amount_max':0, 'CD_1_max':0}, args)
 
         # Check for if we need to sort or filter
         if args['sort'] != None:

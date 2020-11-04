@@ -58,6 +58,17 @@ const groupedFiltering = [
   { label: "Latitude", options: latitude },
 ];
 
+
+// Defines the categories and API calls for sorting
+const groupedSorting = [
+  { label: "Name", options: [{value: "sort=name", label: "A to Z"}, {value: "sort=name&ascending=false", label: "Z to A"}]},
+  { label: "Longitude", options: [{value: "sort=longitude", label: "Ascending"}, {value: "sort=longitude&ascending=false", label: "Descending"}]},
+  { label: "Latitude", options: [{value: "sort=latitude", label: "Ascending"}, {value: "sort=latitude&ascending=false", label: "Descending"}]},
+  { label: "Subcategory", options: [{value: "sort=subcategory", label: "A to Z"}, {value: "sort=subcategory&ascending=false", label: "Z to A"}]},
+  { label: "Count Density (only applicable to plastic pollution)", options: [{value: "sort=count_density_1", label: "Ascending"}, {value: "sort=count_density_1&ascending=false", label: "Descending"}]},
+];
+
+
 // Display a table of all available impacts
 class Impacts extends Component {
   state = {
@@ -65,13 +76,14 @@ class Impacts extends Component {
     offset: 0,
     perPage: 9,
     numInstances: 500,
-    currentFilter: ""
+    currentFilter: "",
+    currentSort: ""
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
     axios
-      .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`)
+      .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -89,7 +101,7 @@ class Impacts extends Component {
         console.log(response);
         this.setState({
           // Update the number of instances
-          numInstances: response.data.total_impacts_returned,
+          numInstances: response.data.total_impact_returned,
         });
       })
       .catch((error) => {
@@ -103,9 +115,6 @@ class Impacts extends Component {
   }
 
   handlePageClick = (data: any) => {
-    console.log(data);
-    console.log(`Go to the selected page, page ${data.selected + 1}`);
-
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
       this.loadData();
@@ -115,16 +124,12 @@ class Impacts extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
     // Call API using currently applied filters
     this.loadData();
   }
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
-    console.log("Updating Selected Filter State");
-    console.log(selectedOptions);
-
     let filters: any[] = selectedOptions;
     let queryParams: string = "";
 
@@ -134,8 +139,13 @@ class Impacts extends Component {
       }); 
     }
 
-    console.log(queryParams);
     this.setState({currentFilter: queryParams})
+  }
+
+  handleSortSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      this.setState({currentSort: selectedOption.value});
+    }
   }
 
   render() {
@@ -151,7 +161,16 @@ class Impacts extends Component {
                 onChange={this.handleFilterSelectChange}
                 isMulti
               />
+
             <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
+
+            <Select
+                options={groupedSorting}
+                onChange={this.handleSortSelectChange}
+              />
+
+            <button type="button" className="btn btn-primary" onClick={this.filter}>Sort</button>
+
 
               <div className="table-responsive">
                 <table className="table">
@@ -210,7 +229,7 @@ function ImpactTableData({ impact }: any) {
     <tr>
       <th scope="row">
         <Link to={`/impacts/${impact.id}`} className="card-link">
-          {impact.name ? impact.name : "Plastic Pollution Sample " + impact.id}
+          {impact.name ? impact.name : `Plastic Pollution Sample ${impact.id - 5}`}
         </Link>
       </th>
       <td>{impact.category}</td>
@@ -234,16 +253,15 @@ function Impact(props: any) {
   // Use useEffect to retrieve data from API
   useEffect(() => {
     const getImpact = async () => {
-      const { data }: any = await axios(`/api/human/${props.match.params.id}`);
+      const { data }: any = await axios(`/api/human/${props.match.params.id}/`);
       setImpact(data.data);
-      loading = true;
     };
     getImpact();
-  }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return impact ? (
     <div className="bg-light full-height">

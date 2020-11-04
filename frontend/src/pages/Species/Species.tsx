@@ -3,7 +3,6 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Select from "react-select";
-import { stat } from "fs";
 
 interface species {
   id?: number;
@@ -68,15 +67,15 @@ const population_trend = [
 ];
 
 const status = [
-  { value: "endanger_status=NE", label: "Not Evaluated" },
-  { value: "endanger_status=DD", label: "Data Deficient" },
-  { value: "endanger_status=LC", label: "Least Concern" },
-  { value: "endanger_status=NT", label: "Near Threatened" },
-  { value: "endanger_status=VU", label: "Vulnerable" },
-  { value: "endanger_status=EN", label: "Endangered" },
-  { value: "endanger_status=CR", label: "Critically Endangered" },
-  { value: "endanger_status=EW", label: "Extinct in the Wild" },
-  { value: "endanger_status=EX", label: "Extinct" },
+  { value: "status=NE", label: "Not Evaluated" },
+  { value: "status=DD", label: "Data Deficient" },
+  { value: "status=LC", label: "Least Concern" },
+  { value: "status=NT", label: "Near Threatened" },
+  { value: "status=VU", label: "Vulnerable" },
+  { value: "status=EN", label: "Endangered" },
+  { value: "status=CR", label: "Critically Endangered" },
+  { value: "status=EW", label: "Extinct in the Wild" },
+  { value: "status=EX", label: "Extinct" },
 ];
 
 const size = [
@@ -115,6 +114,15 @@ const groupedFiltering = [
   { label: "Habitat", options: habitat },
 ];
 
+// Defines the categories and API calls for sorting
+const groupedSorting = [
+  { label: "Name", options: [{value: "sort=common_name", label: "A to Z"}, {value: "sort=common_name&ascending=false", label: "Z to A"}]},
+  { label: "Genus", options: [{value: "sort=genus", label: "A to Z"}, {value: "sort=genus&ascending=false", label: "Z to A"}]},
+  { label: "Species", options: [{value: "sort=species", label: "A to Z"}, {value: "sort=species&ascending=false", label: "Z to A"}]},
+  { label: "Endangered Status", options: [{value: "sort=status", label: "A to Z"}, {value: "sort=status&ascending=false", label: "Z to A"}]},
+  { label: "Average Size", options: [{value: "sort=average_size", label: "Ascending"}, {value: "sort=average_size&ascending=false", label: "Descending"}]},
+];
+
 // Display a grid of all available species
 class SpeciesGrid extends Component {
   state = {
@@ -122,16 +130,16 @@ class SpeciesGrid extends Component {
     offset: 0,
     perPage: 12,
     numInstances: 500,
-    currentFilter: ""
+    currentFilter: "",
+    currentSort: ""
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
-    let URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}`;
+    let URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`;
     axios
       .get(URL)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
@@ -145,7 +153,6 @@ class SpeciesGrid extends Component {
       axios
       .get(URL)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the data and number of instances
           numInstances: response.data.total_fish_returned,
@@ -163,8 +170,6 @@ class SpeciesGrid extends Component {
 
   // Load the next page of data
   handlePageClick = (data: any) => {
-    console.log(`Go to the selected page, page ${data.selected + 1}`);
-
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
       this.loadData();
@@ -174,16 +179,12 @@ class SpeciesGrid extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    console.log("Filtering...");
     // Call API using currently applied filters
     this.loadData();
   }
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
-    console.log("Updating Selected Filter State");
-    console.log(selectedOptions);
-
     let filters: any[] = selectedOptions;
     let queryParams: string = "";
 
@@ -193,8 +194,14 @@ class SpeciesGrid extends Component {
       }); 
     }
 
-    console.log(queryParams);
     this.setState({currentFilter: queryParams})
+  }
+
+  handleSortSelectChange = (selectedOption: any) => {
+    console.log(selectedOption)
+    if (selectedOption) {
+      this.setState({currentSort: selectedOption.value});
+    }
   }
 
   render() {
@@ -213,11 +220,19 @@ class SpeciesGrid extends Component {
                 />
                 <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
 
+                <Select
+                options={groupedSorting}
+                onChange={this.handleSortSelectChange}
+                />
+
+                <button type="button" className="btn btn-primary" onClick={this.filter}>Sort</button>
+
+
               </div>
 
               <div className="row">
                 {this.state.data.map((species: species) => (
-                  <SpeciesCard key={species.common_name} sp={species} />
+                  <SpeciesCard key={species.id} sp={species} />
                 ))}
               </div>
 
@@ -231,7 +246,7 @@ class SpeciesGrid extends Component {
                   marginPagesDisplayed={1}
                   pageRangeDisplayed={3}
                   onPageChange={this.handlePageClick}
-                  containerClassName={"pagination"}
+                  containerClassName={"pagination justify-content-center"}
                   breakClassName={"break-me"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
@@ -248,7 +263,7 @@ class SpeciesGrid extends Component {
             </div>
           </div>
         </Route>
-        <Route path={`/species/:id`} component={Species} />
+        <Route path={`/species/:id`} component={Species}/>
       </Switch>
     );
   }
@@ -304,6 +319,103 @@ function SpeciesCard(props: any) {
   );
 }
 
+// class Species extends Component<any> {
+//   state: {species: species} = {
+//     species: {},
+//   }
+
+//   // Make API request for the current page of data using Axios
+//   loadData() {
+//     let URL = `/api/fish/${this.props.match.params.id}/`;
+//     // let URL = `/api/fish?offset=${this.props.match.params.id-1}&limit=1`;
+//     axios
+//       .get(URL)
+//       .then((response) => {
+//         this.setState({
+//           // Update the data and number of instances
+//           species: response.data.data
+//         });
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   }
+
+//   // Load initial data after component added to document
+//   componentDidMount() {
+//     this.loadData();
+//   }
+
+//   render() {
+//     return (
+//       <div className="bg-light full-height">
+//         <main className="container py-5">
+//           <h1 className="text-center">{this.state.species.common_name} </h1>
+//           <div className="container" style={{ width: "80%" }}>
+//             {this.state.species.picture_url ? (
+//               <img
+//                 className="py-5"
+//                 src={this.state.species.picture_url}
+//                 width="100%"
+//                 alt={this.state.species.common_name}
+//               ></img>
+//             ) : null}
+  
+//             <h3>Species Details</h3>
+//             <ul>
+//               {this.state.species.family ? (
+//                 <li>
+//                   {" "}
+//                   Family: <i>{this.state.species.family}</i>
+//                 </li>
+//               ) : null}
+//               {this.state.species.genus ? (
+//                 <li>
+//                   Genus: <i>{this.state.species.genus}</i>
+//                 </li>
+//               ) : null}
+//               {this.state.species.species ? (
+//                 <li>
+//                   Species: <i>{this.state.species.species}</i>
+//                 </li>
+//               ) : null}
+//               {this.state.species.habitat ? (
+//                 <li>Habitat: {HABITATS[this.state.species.habitat]}</li>
+//               ) : null}
+//               {this.state.species.endanger_status ? (
+//                 <li>Endangered Status: {IUCN_STATUS[this.state.species.endanger_status]}</li>
+//               ) : null}
+//               {this.state.species.population_trend ? (
+//                 <li>Population Trend: {this.state.species.population_trend}</li>
+//               ) : null}
+//               {this.state.species.average_size ? (
+//                 <li>Average Size: {this.state.species.average_size} cm</li>
+//               ) : null}
+//               {this.state.species.description ? (
+//                 <li>Description: {this.state.species.description}</li>
+//               ) : null}
+//               {this.state.species.speccode ? <li>Spec. Code: {this.state.species.speccode}</li> : null}
+//               {this.state.species.catch_year ? (
+//                 <li>Catch Year: {this.state.species.catch_year}</li>
+//               ) : null}
+//               {this.state.species.catch_rate ? (
+//                 <li>Catch Rate: {this.state.species.catch_rate}</li>
+//               ) : null}
+//               {/* {species.human_impact_ids ? (
+//                 <li>
+//                   Human Impacts that Affect the Species:{" "}
+//                   {species.human_impact_ids}
+//                 </li>
+//               ) : null} */}
+//             </ul>
+//           </div>
+//         </main>
+//       </div>
+//     );
+//   }
+
+// }
+
 // Display content for an individual species page
 function Species(props: any) {
   // Set initial state
@@ -316,13 +428,16 @@ function Species(props: any) {
   useEffect(() => {
     const getSpecies = async () => {
       // Pass param to the API call
-      const { data }: any = await axios(`/api/fish/${props.match.params.id}`);
+      const { data }: any = await axios.get(`/api/fish/${props.match.params.id}/`);
       // Update state
-      console.log(data.data);
       setSpecies(data.data);
     };
     // Invoke the async function
     getSpecies();
+
+    // Let the linter know that there are no dependencies that will require 
+    // calling this function again
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Return data
@@ -342,9 +457,6 @@ function Species(props: any) {
 
           <h3>Species Details</h3>
           <ul>
-            {/* {species.scientific_name ? (
-              <li>Scientific Name: {species.scientific_name}</li>
-            ) : null} */}
             {species.family ? (
               <li>
                 {" "}
