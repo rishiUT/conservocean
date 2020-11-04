@@ -75,7 +75,7 @@ def validateArgs(keys: dict, args: dict):
     keys["sort"] = 0
     keys["ascending"] = 0
     for entry in args:
-        if keys[entry] is None:
+        if entry not in keys:
             abort(404, description="Bad input")
 
 

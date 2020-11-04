@@ -18,7 +18,6 @@ def filterFish(args, fish_list):
             fish returned in this filter query, and a list of fish matching
             parameters, listed under "data"
     """
-    print(type(fish_list))
     # Save limit and offset, adjusting offset if it is None in args
     limit = args['limit']
     offset = args['offset'] if not None else 0
@@ -31,6 +30,9 @@ def filterFish(args, fish_list):
         args['habitat'].lower() not in habitatDict:
         abort(422, description="Habitat not valid")
 
+    if checkArgs(args, 'size_min', 'size_max'):
+        return {"message": "Please specify both ends of the range"}
+
     return_list = []
 
     # Check each fish in our database against provided parameters in args
@@ -41,6 +43,15 @@ def filterFish(args, fish_list):
         for entry in args:
             if eval("fish."+entry) != args[entry]:
                 add = False
+        Look into completely removing dict entries for sort, ascending.
+        Also include something like:
+
+        if entry.contains('_max'):
+            pass
+        else:
+            <main code block>
+
+        Doing this avoids checking min/max entries twice
         """
 
         if args['species'] != None:
@@ -69,6 +80,14 @@ def filterFish(args, fish_list):
                 
         if args['family'] != None:
             if fish.family != args['family']:
+                add = False
+
+        if args['size_min'] != None:
+            if fish.average_size is not None:
+                if (fish.average_size < args['size_min']) \
+                    or (fish.average_size > args['size_max']):
+                    add = False
+            else:
                 add = False
 
         if args['habitat'] != None:
@@ -122,8 +141,7 @@ def filterHuman(args, human_list):
 
     # Check for matching min and max pairs
     if checkArgs(args, "lat_min", "lat_max") or \
-       checkArgs(args, "long_min", "long_max") or \
-       checkArgs(args, "num_fish_min", "num_fish_max"):
+       checkArgs(args, "long_min", "long_max"):
         return {"message": "Please specify both ends of the range"}
 
     return_list = []
@@ -131,9 +149,6 @@ def filterHuman(args, human_list):
     # Check each impact in our database against provided parameters in args
     for impact in human_list:
         add = True
-        if args['category'] != None:
-            if impact.category != args['category']:
-                add = False
 
         if args['subcategory'] != None:
             if impact.subcategory != args['subcategory']:
@@ -149,10 +164,20 @@ def filterHuman(args, human_list):
                 or (impact.longitude > args['long_max']):
                 add = False
 
-        if args['num_fish_min'] != None:
-            num_fish = len(impact.get_fish)
-            if (num_fish < args['num_fish_min']) \
-                or (num_fish > args['num_fish_max']):
+        if args['oil_amount_min'] != None:
+            if impact.oil_amount is not None:
+                if (impact.oil_amount < args['oil_amount_min']) \
+                        or (impact.oil_amount > args['oil_amount_max']):
+                    add = False
+            else:
+                add = False
+
+        if args['CD_1_min'] != None:
+            if impact.count_density_1 is not None:
+                if (impact.count_density_1 < args['CD_1_min']) \
+                    or (impact.count_density_1 > args['CD_1_max']):
+                    add = False
+            else:
                 add = False
 
         # Calculate for limit and offset, and leave early if limit is reached

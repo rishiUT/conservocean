@@ -86,6 +86,7 @@ class Fish(db.Model):
             'speccode': self.speccode,
             'catch_year': self.catch_year,
             'catch_rate': self.catch_rate,
+            'model': 'fish'
         }
 
     def get_water(self):
@@ -167,7 +168,8 @@ class BodiesOfWater(db.Model):
             'max_longitude': self.max_longitude,
             'water_temp': self.water_temp,
             'wind_speedkmph': self.wind_speedkmph,
-            'size': float(self.size)
+            'size': float(self.size),
+            'model': "bodies_of_water"
         }
 
     def get_human(self):
@@ -265,6 +267,7 @@ class HumanImpact(db.Model):
             'plant_rating': self.plant_rating,
             'plant_location': self.plant_location,
             'plant_water_source': self.plant_water_source,
+            'model': 'human_impact'
         }
 
     def get_water(self):
