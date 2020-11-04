@@ -556,7 +556,7 @@
 								"exec": [
 									"pm.test(\"Check Data in Response Body\", function () {",
 									"    const jsonData = pm.response.json();",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'scientific_name', 'common_name', 'species', 'genus', 'family', 'habitat', 'endanger_status', 'population_trend', 'average_size', 'picture_url', 'description', 'speccode', 'catch_year', 'catch_rate', 'model', 'model')",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'scientific_name', 'common_name', 'species', 'genus', 'family', 'habitat', 'endanger_status', 'population_trend', 'average_size', 'picture_url', 'description', 'speccode', 'catch_year', 'catch_rate', 'model')",
 									"});",
 									"",
 									"pm.test(\"Check Data in Response Body\", function () {",
@@ -3119,7 +3119,7 @@
 	],
 	"variable": [
 		{
-			"id": "654a1d7a-2bb9-40fc-8b45-a6cf125dd711",
+			"id": "f98edb42-4541-4ea4-996e-a3db1a50b6ec",
 			"key": "base_url",
 			"value": "https://www.conservocean.me"
 		}
