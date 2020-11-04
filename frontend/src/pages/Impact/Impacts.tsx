@@ -4,7 +4,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 
-import Map from "../parts/Map";
+import Map from "../../parts/Map";
 
 import PPHM from "./Media/PlasticPollutionHeatMap.png";
 
