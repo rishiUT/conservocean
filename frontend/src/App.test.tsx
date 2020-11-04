@@ -1,5 +1,6 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
+import About from './pages/About'
 import Home from './pages/Home/Home'
 import Species from './pages/Species/Species'
 import { render, unmountComponentAtNode } from "react-dom";
@@ -24,6 +25,13 @@ afterEach(() => {
   container.remove();
   container = null;
 });
+
+it("Renders About Page", () => {
+  act(() => {
+    render(<About />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
 
 it("Renders Home Page", () => {
   act(() => {
