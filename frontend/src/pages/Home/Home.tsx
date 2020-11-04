@@ -7,12 +7,7 @@ import Hit from "./HomeSearch"
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch,
   Hits,
-  SearchBox,
-  Pagination,
-  Highlight,
-  ClearRefinements,
-  RefinementList,
-  Configure, } from 'react-instantsearch-dom';
+  SearchBox } from 'react-instantsearch-dom';
 
   const searchClient = algoliasearch('VEMEIF8QHL', 'e211f5541054cdb5177282492d4a90c8');
 
