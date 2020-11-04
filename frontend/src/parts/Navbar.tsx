@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css"
 
 export default function Navbar() {
@@ -24,24 +24,24 @@ export default function Navbar() {
       <div className={"collapse navbar-collapse"} id="navbarSupportedContent">
         <ul className={"navbar-nav mr-auto"}>
           <li className={"nav-item"}>
-            <Link to="/about" className={"nav-link"}>
+            <NavLink to="/about" className={"nav-link"} activeClassName="active">
               About
-            </Link>
+            </NavLink>
           </li>
           <li className={"nav-item"}>
-            <Link to="/species" className={"nav-link"}>
+            <NavLink to="/species" className={"nav-link"} activeClassName="active">
               Species
-            </Link>
+            </NavLink>
           </li>
           <li className={"nav-item"}>
-            <Link to="/water-bodies" className={"nav-link"}>
+            <NavLink to="/water-bodies" className={"nav-link"} activeClassName="active">
               Bodies of Water
-            </Link>
+            </NavLink>
           </li>
           <li className={"nav-item"}>
-            <Link to="/impacts" className={"nav-link"}>
+            <NavLink to="/impacts" className={"nav-link"} activeClassName="active">
               Human Impacts
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
