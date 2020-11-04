@@ -8,7 +8,7 @@
 .navbar-custom .navbar-nav .nav-link {
     color: rgba(255,255,255,.5);
 }/* change the color of active or hovered links */
-.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item .nav-link.active,
 .navbar-custom .nav-item:hover .nav-link {
     color: #387e9f;
 }

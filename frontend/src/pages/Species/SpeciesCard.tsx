@@ -44,6 +44,7 @@ const IUCN_STATUS: { [key: string]: string } = {
   };
   
 function SpeciesCard(props: any) {
+    console.log(props);
     let match = useRouteMatch();
     return (
       <div className="col-lg-4 col-md-6 col-sm-12">
