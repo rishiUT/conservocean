@@ -1,6 +1,7 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import Home from './pages/Home/Home'
+import Species from './pages/Species/Species'
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
@@ -31,11 +32,9 @@ it("Renders Home Page", () => {
   expect(container.textContent).not.toBe(null);
 })
 
-/*
 it("Renders Impacts Page", () => {
   act(() => {
-    render(<Impact />, container);
+    render(<Species />, container);
   });
   expect(container.textContent).not.toBe(null);
 })
-*/
