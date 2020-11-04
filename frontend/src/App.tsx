@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // Page Components
 import Home from "./pages/Home/Home";
 import About from "./pages/About";
-import SpeciesGrid from "./pages/Species/Species";
-import Impacts from "./pages/Impact/Impacts";
+import SpeciesGrid from "./pages/Species";
+import Impacts from "./pages/Impacts";
 import WaterBodies from "./pages/WaterBodies";
 
 

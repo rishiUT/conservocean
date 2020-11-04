@@ -1,9 +1,9 @@
 import React from "react";
 import "./Home.css";
-import { Link } from "react-router-dom";
-import waves from "./Media/waves.png";
-import fish from "./Media/fish.png";
-import drops from "./Media/water-drops.png";
+import "react-router-dom";
+import waves from "../Media/waves.png";
+import fish from "../Media/fish.png";
+import drops from "../Media/water-drops.png";
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch,
   Hits,
@@ -68,19 +68,19 @@ function Home() {
         <div className="list-cont">
           <ul className="list">
             <li className="list-item">
-              <Link to="/water-bodies" className="button">
+              <a href="/water-bodies" className="button">
                 Bodies of Water
-              </Link>
+              </a>
             </li>
             <li className="list-item">
-              <Link to="/species" className="button">
+              <a href="/species" className="button">
                 Aquatic Animals
-              </Link>
+              </a>
             </li>
             <li className="list-item">
-              <Link to="/impacts" className="button">
+              <a href="/impacts" className="button">
                 Human Impacts
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

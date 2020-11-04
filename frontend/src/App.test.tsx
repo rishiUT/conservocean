@@ -1,7 +1,7 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-import Larry from './pages/larry'
-import Impact from './pages/Impact/Impacts'
+import Impact from './pages/Impacts'
+import Home from './pages/Home/Home'
 
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
@@ -26,9 +26,9 @@ afterEach(() => {
   container = null;
 });
 
-it("renders with or without a name", () => {
+it("Renders Home Page", () => {
   act(() => {
-    render(<Larry />, container);
+    render(<Home />, container);
   });
   expect(container.textContent).not.toBe(null);
 })
