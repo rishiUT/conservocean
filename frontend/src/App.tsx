@@ -7,7 +7,7 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import SpeciesGrid from "./pages/Species/SpeciesGrid";
 import Impacts from "./pages/Impact/Impacts";
-import WaterBodies from "./pages/WaterBodies";
+import WaterBodies from "./pages/WaterBodies/WaterBodyGrid";
 
 
 import Navbar from "./parts/Navbar";

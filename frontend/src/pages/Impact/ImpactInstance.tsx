@@ -30,7 +30,6 @@ interface impact {
 function Impact(props: any) {
     // Set initial state
     const initialImpactState: impact = {};
-    let loading = false;
   
     // Getter and setter for impact state
     //impact is an impact, setImpact is a function you can use to change it
