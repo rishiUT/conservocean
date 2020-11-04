@@ -1,9 +1,9 @@
 import React from "react";
 import "./Home.css";
-import "react-router-dom";
 import waves from "../Media/waves.png";
 import fish from "../Media/fish.png";
 import drops from "../Media/water-drops.png";
+import Hit from "./HomeSearch"
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch,
   Hits,
@@ -14,22 +14,7 @@ import { InstantSearch,
   RefinementList,
   Configure, } from 'react-instantsearch-dom';
 
-const searchClient = algoliasearch('VEMEIF8QHL', 'e211f5541054cdb5177282492d4a90c8');
-
-function Hit(props: any) {
-  return (
-    <div>
-      <img src={props.hit.picture_url} alt={props.hit.name} />
-      <div className="hit-name">
-        <Highlight attribute="name" hit={props.hit} />
-      </div>
-      <div className="hit-description">
-        <Highlight attribute="description" hit={props.hit} />
-      </div>
-    </div>
-  );
-}
-
+  const searchClient = algoliasearch('VEMEIF8QHL', 'e211f5541054cdb5177282492d4a90c8');
 
 function Home() {
   return (

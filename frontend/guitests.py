@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import time
-PATH = "test\chromedriver.exe"
+PATH = "__test__\chromedriver.exe"
 
 options = Options()
 options.binary_location = "C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\\brave.exe"
@@ -26,7 +26,7 @@ link = driver.find_element_by_link_text("About")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "http://conservocean.me/about"
+    assert driver.current_url == "https://conservocean.me/about"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
@@ -39,7 +39,7 @@ link = driver.find_element_by_link_text("Bodies of Water")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "http://conservocean.me/water-bodies"
+    assert driver.current_url == "https://conservocean.me/water-bodies"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
@@ -59,7 +59,7 @@ link = driver.find_element_by_link_text("Species")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "http://conservocean.me/species"
+    assert driver.current_url == "https://conservocean.me/species"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
@@ -79,7 +79,7 @@ link = driver.find_element_by_link_text("Human Impacts")
 link.click()
 print(driver.current_url)
 try:
-    assert driver.current_url == "http://conservocean.me/impacts"
+    assert driver.current_url == "https://conservocean.me/impacts"
 except:
     print("Assert failed, url = " + driver.current_url)
     driver.quit()
