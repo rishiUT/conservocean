@@ -1,6 +1,6 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-import About from './pages/About'
+import About from './pages/About/About'
 import Home from './pages/Home/Home'
 import Species from './pages/Species/Species'
 import { render, unmountComponentAtNode } from "react-dom";
