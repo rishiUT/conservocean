@@ -32,7 +32,7 @@ interface impact {
 }
 
 const subcategories = [
-  { value: "subcategory=plastic_pollition", label: "Plastic Pollution" },
+  { value: "subcategory=plastic_pollution", label: "Plastic Pollution" },
   { value: "subcategory=coal_power_plants", label: "Coal Power Plants" },
   { value: "subcategory=offshore_oil_spills", label: "Offshore Oil Spills" },
   { value: "subcategory=tanker_oil_spills", label: "Tanker Oil Spills" },
