@@ -1,16 +1,24 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-import About from './pages/About/About'
-import Home from './pages/Home/Home'
-import Species from './pages/Species/Species'
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
+import About from './pages/About/About'
+import UserCard from './pages/About/AboutUsers'
 
-/*
-it('renders without crashing', () => {
-  TestRenderer.create(<larry/>);
-}); */
+import Home from './pages/Home/Home'
+import Hit from './pages/Home/HomeSearch'
+
+import Species from './pages/Species/Species'
+import SpeciesCard from './pages/Species/SpeciesCard';
+import SpeciesGrid from './pages/Species/SpeciesGrid';
+
+//import WaterBody from './pages/WaterBodies/WaterBodies'
+import WBCard from './pages/WaterBodies/WaterBodyCard';
+//import WaterBodies from './pages/WaterBodies/WaterBodyGrid';
+
+//import Impact from './pages/Impact/ImpactInstance'
+//import Impacts from './pages/Impact/Impacts'
 
 let container = null;
 beforeEach(() => {
@@ -43,6 +51,28 @@ it("Renders Home Page", () => {
 it("Renders Impacts Page", () => {
   act(() => {
     render(<Species />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+
+it("Renders SpeciesGrid", () => {
+  act(() => {
+    render(<SpeciesGrid />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+
+
+it("Renders SpeciesCard", () => {
+  act(() => {
+    render(<SpeciesCard />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+
+it("Renders WBCard", () => {
+  act(() => {
+    render(<WBCard />, container);
   });
   expect(container.textContent).not.toBe(null);
 })

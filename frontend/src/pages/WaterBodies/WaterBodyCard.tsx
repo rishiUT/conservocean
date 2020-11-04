@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 function WBCard({ body }: any) {
     let match = useRouteMatch();
@@ -7,7 +7,7 @@ function WBCard({ body }: any) {
       <div className="col-lg-4 col-md-6 col-sm-12">
         <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
           {/* Link card to instance page */}
-          <Link to={`${match.url}/${body.id}`} className="card-link">
+          <a href={`${match.url}/${body.id}`} className="card-link">
             <span
               style={{
                 position: "absolute",
@@ -18,7 +18,7 @@ function WBCard({ body }: any) {
                 zIndex: 1,
               }}
             ></span>
-          </Link>
+          </a>
   
           <img
             className="card-image"
