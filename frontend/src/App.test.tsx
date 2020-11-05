@@ -13,12 +13,12 @@ import Species from './pages/Species/Species'
 import SpeciesCard from './pages/Species/SpeciesCard';
 import SpeciesGrid from './pages/Species/SpeciesGrid';
 
-//import WaterBody from './pages/WaterBodies/WaterBodies'
-import WBCard from './pages/WaterBodies/WaterBodyCard';
-//import WaterBodies from './pages/WaterBodies/WaterBodyGrid';
+import WaterBody from './pages/WaterBody/WaterBody'
+import WBCard from './pages/WaterBody/WaterBodyCard';
+import WaterBodies from './pages/WaterBody/WaterBodyGrid';
 
-//import Impact from './pages/Impact/ImpactInstance'
-//import Impacts from './pages/Impact/Impacts'
+import Impact from './pages/Impact/ImpactInstance'
+import Impacts from './pages/Impact/Impacts'
 
 let container = null;
 beforeEach(() => {
@@ -34,12 +34,9 @@ afterEach(() => {
   container = null;
 });
 
-it("Renders About Page", () => {
-  act(() => {
-    render(<About />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
+jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
+  Map: () => ({}),
+}));
 
 it("Renders Home Page", () => {
   act(() => {
@@ -48,31 +45,30 @@ it("Renders Home Page", () => {
   expect(container.textContent).not.toBe(null);
 })
 
-it("Renders Impacts Page", () => {
+it("Renders About Page", () => {
+  act(() => {
+    render(<About />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+
+it("Renders Species Page", () => {
   act(() => {
     render(<Species />, container);
   });
   expect(container.textContent).not.toBe(null);
 })
 
-it("Renders SpeciesGrid", () => {
+it("Renders Water Bodies Page", () => {
   act(() => {
-    render(<SpeciesGrid />, container);
+    render(<WaterBody />, container);
   });
   expect(container.textContent).not.toBe(null);
 })
 
-
-it("Renders SpeciesCard", () => {
+it("Renders Impacts Instance Page", () => {
   act(() => {
-    render(<SpeciesCard />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-
-it("Renders WBCard", () => {
-  act(() => {
-    render(<WBCard />, container);
+    render(<Impact />, container);
   });
   expect(container.textContent).not.toBe(null);
 })

@@ -44,12 +44,10 @@ const IUCN_STATUS: { [key: string]: string } = {
   };
   
 function SpeciesCard(props: any) {
-    console.log(props);
-    let match = useRouteMatch();
     return (
-      <div className="col-lg-4 col-md-6 col-sm-12">
+      <div className={`col-lg-4 col-md-6 col-sm-12 ${props.className}`}>
         <div className="card mb-4 shadow-sm" style={{ position: "relative" }}>
-          <a href={`${match.url}/${props.sp.id}`} className="card-link">
+          <a href={`species/${props.sp.id}`} className="card-link">
             <span
               style={{
                 position: "absolute",

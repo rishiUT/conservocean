@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
-import WaterBody from "./WaterBodies"
+import WaterBody from "./WaterBody"
 import WBCard from "./WaterBodyCard"
 
 
