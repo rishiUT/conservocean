@@ -1,7 +1,7 @@
 from conservoceanAPI import *
 from unittest import main, TestCase
 from database import Fish, BodiesOfWater, HumanImpact
-from APIHelper import makeFish, makeHuman, makeWater
+from api.APIHelper import makeFish, makeHuman, makeWater
 
 
 fish_list = Fish.query.all()
