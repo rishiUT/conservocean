@@ -70,8 +70,15 @@ function Home() {
         <InstantSearch searchClient={searchClient} indexName="conservocean">
           <div className="right-panel">
             <SearchBox />
-            <Hits hitComponent={Hit} />
+
+        <div className="row-cont">
+                
+        <Hits hitComponent={Hit}/>
           </div>
+          
+
+              
+              </div>
         </InstantSearch>
       </div>
     </div>
