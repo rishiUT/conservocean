@@ -3,19 +3,18 @@ before_script:
   - uname -a
   - printenv | sort
 
-# python:
-#   image: gpdowning/python
-#   script:
-#     - ls -al
-#     - cat makefile
-#     - make versions
-#     - make run
-#     - make test
-#     - make tests
-#     - make check
-
 stages:
   - test
+ 
+
+python:
+  image: 
+    name: gpdowning/python
+    entrypoint: [""]
+  script:
+    - cd backend
+    - pip install -r requirements.txt
+    - python test.py
 
 postman_tests:
   stage: test
@@ -25,10 +24,11 @@ postman_tests:
   script:
     - newman --version
     - newman run postman.json
-
+    
 frontend_tests:
   stage: test
   image: 
   script:
     - cd frontend
+    - npm install
     - npm run test
