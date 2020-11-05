@@ -1,6 +1,7 @@
 import React from "react";
 import "./About.css";
 import UserCard from "./AboutUsers"
+import ToolCard from "./AboutTools"
 import joe from "../Media/joe_profile.jpg";
 import rishi from "../Media/rishi.png";
 import serena from "../Media/serena.jpg";
@@ -9,6 +10,18 @@ import christine from "../Media/christine.jpg";
 import dane from "../Media/dane.jpg";
 import fishwatch from "../Media/fishwatch.jpg";
 import stormglass from "../Media/stormglass.svg";
+import slack from "./AboutPageMedia/Slack.png";
+import postman from "./AboutPageMedia/postman.png";
+import gitlab from "./AboutPageMedia/gitlab.png";
+import reactImg from "./AboutPageMedia/react.png";
+import docker from "./AboutPageMedia/docker.jpeg";
+import node from "./AboutPageMedia/node.png";
+import ec2 from "./AboutPageMedia/ec2.png";
+import algolia from "./AboutPageMedia/algolia.png";
+
+
+
+
 
 interface user {
   name: string;
@@ -19,8 +32,72 @@ interface user {
   image: string;
 }
 
+interface tool {
+  name: string;
+  image: string;
+  description: string;
+  link: string;
+}
+
 class About extends React.Component {
   state = {
+
+    tools: [
+      {
+        name: "Postman",
+        image: postman,
+        description: "Postman was used by our backend team to design our API.",
+        link: "https://www.postman.com/"
+      },
+      {
+        name: "Slack",
+        image: slack,
+        description: "Slack is used for all official team communication.",
+        link: "https://www.slack.com/"
+      },
+      {
+        name: "Gitlab",
+        image: gitlab,
+        description: "Gitlab is used for version control for our project's code.",
+        link: "https://www.gitlab.com/"
+      },
+      {
+        name: "React",
+        image: reactImg,
+        description: "React is used for development by our frontend team",
+        link: "https://www.reactjs.org/"
+      },
+      {
+        name: "Docker",
+        image: docker,
+        description: "Docker is used to create similar environments for us to work within, making working seperately much easier.",
+        link: "https://www.docker.com/"
+      },
+      {
+        name: "Node.js and npm",
+        image: node,
+        description: "Node.js and npm are used to manage the project's installations and dependencies.",
+        link: "https://www.nodejs.org/"
+      },
+      {
+        name: "EC2",
+        image: ec2,
+        description: "EC2 is used to host and deploy our project.",
+        link: "https://aws.amazon.com/ec2/"
+      },
+      {
+        name: "Algolia",
+        image: algolia,
+        description: "Algolia was use to implement searching.",
+        link: "https://algolia.com"
+      },
+      {
+        name: "React-select",
+        image: reactImg,
+        description: "React-select was used to implement the drop-down menu interfaces for filtering and searching on the model pages.",
+        link: "https://react-select.com"
+      }
+    ],
     users: [
       {
         name: "Joe Wallery",
@@ -177,6 +254,11 @@ class About extends React.Component {
       return <UserCard key={index} user={user} />;
     });
 
+    const { tools }: any = this.state;
+    const resultTools = tools.map((tool: tool, index: number) => {
+      return <ToolCard key={index} tool={tool} />;
+    });
+
     return (
       <div className="container">
         <h2 className="header">About</h2>
@@ -313,74 +395,7 @@ class About extends React.Component {
           </li>
         </ul>
         <h2 className="header">Tools</h2>
-        <ul>
-          <li>
-            <a href="https://www.postman.com/" className="theme-link">
-              {" "}
-              Postman
-            </a>
-            <p>Postman was used by our backend team to design our API.</p>
-          </li>
-          <li>
-            <a href="https://slack.com/" className="theme-link">
-              {" "}
-              Slack
-            </a>
-            <p>Slack is used for all official team communication.</p>
-          </li>
-          <li>
-            <a href="https://gitlab.com/explore" className="theme-link">
-              {" "}
-              Gitlab
-            </a>
-            <p>Gitlab is used for version control for our project's code.</p>
-          </li>
-          <li>
-            <a href="https://reactjs.org/" className="theme-link">
-              {" "}
-              React
-            </a>
-            <p>React is used for development by our frontend team</p>
-          </li>
-          <li>
-            <a href="https://www.docker.com/" className="theme-link">
-              {" "}
-              Docker
-            </a>
-            <p>
-              Docker is used to create similar environments for us to work
-              within, making working seperately much easier.{" "}
-            </p>
-          </li>
-          <li>
-            <a href="https://nodejs.org/en/" className="theme-link">
-              {" "}
-              Node.js and npm
-            </a>
-            <p>
-              Node.js and npm are used to manage the project's installations and
-              dependencies.
-            </p>
-          </li>
-          <li>
-            <a href="https://aws.amazon.com/amplify/" className="theme-link">
-              AWS Amplify
-            </a>
-            <p>AWS Amplify is used to host and deploy our project.</p>
-          </li>
-          <li>
-            <a href="https://www.algolia.com/" className="theme-link">
-              Algolia
-            </a>
-            <p>Algolia was use to implement searching.</p>
-          </li>
-          <li>
-            <a href="https://react-select.com/home" className="theme-link">
-              React-select
-            </a>
-            <p>React-select was used to implement the drop-down menu interfaces for filtering and searching on the model pages.</p>
-          </li>
-        </ul>
+        <div className="row py-5"> {resultTools}</div>
       </div>
     );
   }
