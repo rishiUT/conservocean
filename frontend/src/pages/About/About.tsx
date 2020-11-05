@@ -368,6 +368,18 @@ class About extends React.Component {
             </a>
             <p>AWS Amplify is used to host and deploy our project.</p>
           </li>
+          <li>
+            <a href="https://www.algolia.com/" className="theme-link">
+              Algolia
+            </a>
+            <p>Algolia was use to implement searching.</p>
+          </li>
+          <li>
+            <a href="https://react-select.com/home" className="theme-link">
+              React-select
+            </a>
+            <p>React-select was used to implement the drop-down menu interfaces for filtering and searching on the model pages.</p>
+          </li>
         </ul>
       </div>
     );
