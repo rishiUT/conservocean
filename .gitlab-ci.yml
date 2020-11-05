@@ -3,16 +3,12 @@ before_script:
   - uname -a
   - printenv | sort
 
-# python:
-#   image: gpdowning/python
-#   script:
-#     - ls -al
-#     - cat makefile
-#     - make versions
-#     - make run
-#     - make test
-#     - make tests
-#     - make check
+python:
+  image: 
+    name: gpdowning/python
+    entrypoint: ["/backend/"]
+  script:
+    - python test.py
 
 node:
   image: joewallery/node
