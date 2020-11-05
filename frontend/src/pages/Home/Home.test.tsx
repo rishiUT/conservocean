@@ -1,10 +1,10 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
+import React from "react";
+import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import Home from './Home'
-import Hit from './HomeSearch'
+import Home from "./Home";
+import Hit from "./HomeSearch";
 
 let container = null;
 beforeEach(() => {
@@ -25,7 +25,7 @@ it("Renders Home Page", () => {
     render(<Home />, container);
   });
   expect(container.textContent).not.toBe(null);
-})
+});
 
 /*
 it("Renders a Search Hit", () => {

@@ -1,11 +1,11 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
+import React from "react";
+import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import Species from './Species'
-import SpeciesCard from './SpeciesCard';
-import SpeciesGrid from './SpeciesGrid';
+import Species from "./Species";
+import SpeciesCard from "./SpeciesCard";
+import SpeciesGrid from "./SpeciesGrid";
 
 let container = null;
 beforeEach(() => {
@@ -26,7 +26,7 @@ it("Renders Species Instance", () => {
     render(<Species />, container);
   });
   expect(container.textContent).not.toBe(null);
-})
+});
 
 /*
 it("Renders Species Card", () => {

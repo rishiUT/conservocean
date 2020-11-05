@@ -11,7 +11,7 @@ function Hit(props: any) {
   } else if (props.hit.model === "bodies_of_water") {
     return <WBCard className="card-cont" body={props.hit} />;
   } else {
-    return <ImpactCard impact={props.hit} />
+    return <ImpactCard impact={props.hit} />;
   }
 }
 

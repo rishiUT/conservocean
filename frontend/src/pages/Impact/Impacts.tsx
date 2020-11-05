@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
-import Impact from "./ImpactInstance"
+import Impact from "./ImpactInstance";
 import algoliasearch from "algoliasearch/lite";
 
 const searchClient = algoliasearch(
@@ -46,14 +46,14 @@ const longitude = [
   { value: "long_min=0&long_max=89", label: "longitude = 0 - 89" },
   { value: "long_min=90&long_max=180", label: "longitude = 90 - 180" },
   { value: "long_min=-180&long_max=-91", label: "longitude = -180 - -91" },
-  { value: "long_min=-90&long_max=-1", label: "longitude = -90 - -1" }
+  { value: "long_min=-90&long_max=-1", label: "longitude = -90 - -1" },
 ];
 
 const latitude = [
   { value: "lat_min=-30&lat_max=-1", label: "latitude = -30 - -1" },
   { value: "lat_min=0&lat_max=29", label: "latitude = 0 - 29" },
   { value: "lat_min=30&lat_max=59", label: "latitude = 30 - 59" },
-  { value: "lat_min=60&lat_max=90", label: "latitude = 60 - 90" }
+  { value: "lat_min=60&lat_max=90", label: "latitude = 60 - 90" },
 ];
 
 const groupedFiltering = [
@@ -62,16 +62,44 @@ const groupedFiltering = [
   { label: "Latitude", options: latitude },
 ];
 
-
 // Defines the categories and API calls for sorting
 const groupedSorting = [
-  { label: "Name", options: [{value: "sort=name", label: "A to Z"}, {value: "sort=name&ascending=false", label: "Z to A"}]},
-  { label: "Longitude", options: [{value: "sort=longitude", label: "Ascending"}, {value: "sort=longitude&ascending=false", label: "Descending"}]},
-  { label: "Latitude", options: [{value: "sort=latitude", label: "Ascending"}, {value: "sort=latitude&ascending=false", label: "Descending"}]},
-  { label: "Subcategory", options: [{value: "sort=subcategory", label: "A to Z"}, {value: "sort=subcategory&ascending=false", label: "Z to A"}]},
-  { label: "Count Density (only applicable to plastic pollution)", options: [{value: "sort=count_density_1", label: "Ascending"}, {value: "sort=count_density_1&ascending=false", label: "Descending"}]},
+  {
+    label: "Name",
+    options: [
+      { value: "sort=name", label: "A to Z" },
+      { value: "sort=name&ascending=false", label: "Z to A" },
+    ],
+  },
+  {
+    label: "Longitude",
+    options: [
+      { value: "sort=longitude", label: "Ascending" },
+      { value: "sort=longitude&ascending=false", label: "Descending" },
+    ],
+  },
+  {
+    label: "Latitude",
+    options: [
+      { value: "sort=latitude", label: "Ascending" },
+      { value: "sort=latitude&ascending=false", label: "Descending" },
+    ],
+  },
+  {
+    label: "Subcategory",
+    options: [
+      { value: "sort=subcategory", label: "A to Z" },
+      { value: "sort=subcategory&ascending=false", label: "Z to A" },
+    ],
+  },
+  {
+    label: "Count Density (only applicable to plastic pollution)",
+    options: [
+      { value: "sort=count_density_1", label: "Ascending" },
+      { value: "sort=count_density_1&ascending=false", label: "Descending" },
+    ],
+  },
 ];
-
 
 // Display a table of all available impacts
 class Impacts extends Component {
@@ -84,13 +112,15 @@ class Impacts extends Component {
     currentSort: "",
     currentSearch: "",
     usingSearchData: false,
-    highlightableAttributes: ["name", "category", "subcategory"]
+    highlightableAttributes: ["name", "category", "subcategory"],
   };
 
   // Make API request for the current page of data using Axios
   loadData() {
     axios
-      .get(`/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`)
+      .get(
+        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`
+      )
       .then((response) => {
         console.log(response);
         this.setState({
@@ -102,7 +132,7 @@ class Impacts extends Component {
         console.log(error);
       });
 
-      axios
+    axios
       .get(`/api/human?${this.state.currentFilter}`)
       .then((response) => {
         console.log(response);
@@ -135,11 +165,14 @@ class Impacts extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    this.setState({
-      currentSearch: "",
-      usingSearchData: false,
-      offset: 0
-    }, () => this.loadData());
+    this.setState(
+      {
+        currentSearch: "",
+        usingSearchData: false,
+        offset: 0,
+      },
+      () => this.loadData()
+    );
   };
 
   // Update the filter state when selections change
@@ -148,43 +181,48 @@ class Impacts extends Component {
     let queryParams: string = "";
 
     if (filters) {
-      filters.forEach(filter => {
+      filters.forEach((filter) => {
         queryParams += filter.value;
-      }); 
+      });
     }
 
-    this.setState({currentFilter: queryParams})
-  }
+    this.setState({ currentFilter: queryParams });
+  };
 
   handleSortSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      this.setState({currentSort: selectedOption.value});
+      this.setState({ currentSort: selectedOption.value });
     }
-  }
+  };
 
   search(query: string) {
-    index.search(query, {
-      hitsPerPage: this.state.perPage,
-      page: this.state.offset / this.state.perPage,
-      attributesToHighlight: this.state.highlightableAttributes,
-      highlightPreTag: '<em class="search-highlight">',
-      highlightPostTag: '</em>'
-    }
-    ).then(({ hits, nbHits }) => {
-      // Apply highlighting to returned results
-      hits.forEach((hit: any) => {
-        let result: any = hit._highlightResult;
-        if (result) {
-          Object.keys(result).forEach((key) => {
-            if (result[key].value !== "none") {
-              hit[key] = result[key].value;
-            }
-          });
-        }
-      });
+    index
+      .search(query, {
+        hitsPerPage: this.state.perPage,
+        page: this.state.offset / this.state.perPage,
+        attributesToHighlight: this.state.highlightableAttributes,
+        highlightPreTag: '<em class="search-highlight">',
+        highlightPostTag: "</em>",
+      })
+      .then(({ hits, nbHits }) => {
+        // Apply highlighting to returned results
+        hits.forEach((hit: any) => {
+          let result: any = hit._highlightResult;
+          if (result) {
+            Object.keys(result).forEach((key) => {
+              if (result[key].value !== "none") {
+                hit[key] = result[key].value;
+              }
+            });
+          }
+        });
 
-      this.setState({data: hits, numInstances: nbHits, currentSearch: query})
-    });
+        this.setState({
+          data: hits,
+          numInstances: nbHits,
+          currentSearch: query,
+        });
+      });
   }
 
   // Handle search events when search form is submitted
@@ -195,13 +233,13 @@ class Impacts extends Component {
     const form = document.getElementById("searchForm") as HTMLFormElement;
 
     if (query.value !== "") {
-      this.setState({usingSearchData: true});
-      
+      this.setState({ usingSearchData: true });
+
       this.search(query.value);
-      
+
       form.reset();
     } else {
-      this.setState({usingSearchData: false});
+      this.setState({ usingSearchData: false });
       this.loadData();
     }
   }
@@ -214,28 +252,47 @@ class Impacts extends Component {
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
               <div>
-              <Select
-                closeMenuOnSelect={false}
-                options={groupedFiltering}
-                onChange={this.handleFilterSelectChange}
-                isMulti
-              />
+                <Select
+                  closeMenuOnSelect={false}
+                  options={groupedFiltering}
+                  onChange={this.handleFilterSelectChange}
+                  isMulti
+                />
 
-            <button type="button" className="btn btn-primary" onClick={this.filter}>Filter</button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={this.filter}
+                >
+                  Filter
+                </button>
 
-            <Select
-                options={groupedSorting}
-                onChange={this.handleSortSelectChange}
-              />
+                <Select
+                  options={groupedSorting}
+                  onChange={this.handleSortSelectChange}
+                />
 
-            <button type="button" className="btn btn-primary" onClick={this.filter}>Sort</button>
-            <form className="form" id="searchForm">
-                    <input type="text" className="input form-control" id="search" placeholder="Search" />
-                    <button type="button" className="btn btn-primary" onClick={(e) => this.handleSearch(e)}>
-                      Search
-                    </button>
-                  </form>
-</div>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={this.filter}
+                >
+                  Sort
+                </button>
+                <input
+                  type="text"
+                  className="input form-control"
+                  id="search"
+                  placeholder="Search"
+                />
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={(e) => this.handleSearch(e)}
+                >
+                  Search
+                </button>
+              </div>
               <div className="table-responsive">
                 <table className="table">
                   <thead>
@@ -293,11 +350,23 @@ function ImpactTableData({ impact }: any) {
     <tr>
       <th scope="row">
         <a href={`/impacts/${impact.id}`} className="card-link">
-          {impact.name ? <span dangerouslySetInnerHTML={{__html: impact.name}}></span>: `Plastic Pollution Sample ${impact.id - 5}`}
+          {impact.name ? (
+            <span dangerouslySetInnerHTML={{ __html: impact.name }}></span>
+          ) : (
+            `Plastic Pollution Sample ${impact.id - 5}`
+          )}
         </a>
       </th>
-      <td><span dangerouslySetInnerHTML={{__html: impact.category}}></span></td>
-      <td><span dangerouslySetInnerHTML={{__html: impact.subcategory?.toLowerCase()}}></span></td>
+      <td>
+        <span dangerouslySetInnerHTML={{ __html: impact.category }}></span>
+      </td>
+      <td>
+        <span
+          dangerouslySetInnerHTML={{
+            __html: impact.subcategory?.toLowerCase(),
+          }}
+        ></span>
+      </td>
       <td>{impact.latitude}</td>
       <td>{impact.longitude}</td>
     </tr>

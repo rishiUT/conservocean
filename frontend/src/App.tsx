@@ -9,9 +9,7 @@ import SpeciesGrid from "./pages/Species/SpeciesGrid";
 import Impacts from "./pages/Impact/Impacts";
 import WaterBodies from "./pages/WaterBody/WaterBodyGrid";
 
-
 import Navbar from "./parts/Navbar";
-
 
 function App() {
   return (

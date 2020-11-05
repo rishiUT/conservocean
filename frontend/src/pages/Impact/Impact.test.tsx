@@ -1,11 +1,11 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
+import React from "react";
+import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import Impact from './ImpactInstance'
-import ImpactCard from './ImpactCard'
-import Impacts from './Impacts'
+import Impact from "./ImpactInstance";
+import ImpactCard from "./ImpactCard";
+import Impacts from "./Impacts";
 
 let container = null;
 beforeEach(() => {
@@ -21,7 +21,7 @@ afterEach(() => {
   container = null;
 });
 
-jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
+jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
   Map: () => ({}),
 }));
 
@@ -30,7 +30,7 @@ it("Renders an Impact Instance Page", () => {
     render(<Impact />, container);
   });
   expect(container.textContent).not.toBe(null);
-})
+});
 
 /*
 it("Renders an Impact Card", () => {

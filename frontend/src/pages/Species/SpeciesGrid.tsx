@@ -149,7 +149,7 @@ class SpeciesGrid extends Component {
     currentSort: "",
     currentSearch: "",
     usingSearchData: false,
-    highlightableAttributes: ["common_name", "genus", "species"]
+    highlightableAttributes: ["common_name", "genus", "species"],
   };
 
   // Make API request for the current page of data using Axios
@@ -201,11 +201,14 @@ class SpeciesGrid extends Component {
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    this.setState({
-      currentSearch: "",
-      usingSearchData: false,
-      offset: 0
-    }, () => this.loadData());
+    this.setState(
+      {
+        currentSearch: "",
+        usingSearchData: false,
+        offset: 0,
+      },
+      () => this.loadData()
+    );
   };
 
   // Update the filter state when selections change
@@ -229,28 +232,33 @@ class SpeciesGrid extends Component {
   };
 
   search(query: string) {
-    index.search(query, {
-      hitsPerPage: this.state.perPage,
-      page: this.state.offset / this.state.perPage,
-      attributesToHighlight: this.state.highlightableAttributes,
-      highlightPreTag: '<em class="search-highlight">',
-      highlightPostTag: '</em>'
-    }
-    ).then(({ hits, nbHits }) => {
-      // Apply highlighting to returned results
-      hits.forEach((hit: any) => {
-        let result: any = hit._highlightResult;
-        if (result) {
-          Object.keys(result).forEach((key) => {
-            if (result[key].value !== "none") {
-              hit[key] = result[key].value;
-            }
-          });
-        }
+    index
+      .search(query, {
+        hitsPerPage: this.state.perPage,
+        page: this.state.offset / this.state.perPage,
+        attributesToHighlight: this.state.highlightableAttributes,
+        highlightPreTag: '<em class="search-highlight">',
+        highlightPostTag: "</em>",
+      })
+      .then(({ hits, nbHits }) => {
+        // Apply highlighting to returned results
+        hits.forEach((hit: any) => {
+          let result: any = hit._highlightResult;
+          if (result) {
+            Object.keys(result).forEach((key) => {
+              if (result[key].value !== "none") {
+                hit[key] = result[key].value;
+              }
+            });
+          }
+        });
+
+        this.setState({
+          data: hits,
+          numInstances: nbHits,
+          currentSearch: query,
+        });
       });
-    
-      this.setState({data: hits, numInstances: nbHits, currentSearch: query})
-    });
   }
 
   // Handle search events when search form is submitted
@@ -261,13 +269,13 @@ class SpeciesGrid extends Component {
     const form = document.getElementById("searchForm") as HTMLFormElement;
 
     if (query.value !== "") {
-      this.setState({usingSearchData: true});
-      
+      this.setState({ usingSearchData: true });
+
       this.search(query.value);
-      
+
       form.reset();
     } else {
-      this.setState({usingSearchData: false});
+      this.setState({ usingSearchData: false });
       this.loadData();
     }
   }
@@ -310,12 +318,19 @@ class SpeciesGrid extends Component {
                     Sort
                   </button>
 
-                  <form className="form" id="searchForm">
-                    <input type="text" className="input form-control" id="search" placeholder="Search" />
-                    <button type="button" className="btn btn-primary" onClick={(e) => this.handleSearch(e)}>
-                      Search
-                    </button>
-                  </form>
+                  <input
+                    type="text"
+                    className="input form-control"
+                    id="search"
+                    placeholder="Search"
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={(e) => this.handleSearch(e)}
+                  >
+                    Search
+                  </button>
                 </div>
               </div>
 

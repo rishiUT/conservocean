@@ -1,9 +1,12 @@
 import React from "react";
 
 export default function ImpactCard(props: any) {
-    return (
+  return (
     <div className="col-lg-4 col-md-6 col-sm-12">
-      <div className="card mb-4 shadow-sm card-cont" style={{ position: "relative" }}>
+      <div
+        className="card mb-4 shadow-sm card-cont"
+        style={{ position: "relative" }}
+      >
         {/* Link card to instance page */}
         <a href={`impact/${props.impact.id}`} className="card-link">
           <span
@@ -25,15 +28,30 @@ export default function ImpactCard(props: any) {
           alt=""
         ></img>
         <div className="card-body">
-          <h5 className="card-title" dangerouslySetInnerHTML={{__html: props.impact.name}}></h5>
+          <h5
+            className="card-title"
+            dangerouslySetInnerHTML={{ __html: props.impact.name }}
+          ></h5>
         </div>
         <ul className="list-group list-group-flush">
-        {props.impact.category ? <li className="list-group-item">Category: <span dangerouslySetInnerHTML={{__html: props.impact.category}}></span></li> : null}
-             {props.impact.subcategory ? (
-            <li className="list-group-item" >Subcategory: <span dangerouslySetInnerHTML={{__html: props.impact.subcategory}}></span></li>
-             ) : null}
+          {props.impact.category ? (
+            <li className="list-group-item">
+              Category:{" "}
+              <span
+                dangerouslySetInnerHTML={{ __html: props.impact.category }}
+              ></span>
+            </li>
+          ) : null}
+          {props.impact.subcategory ? (
+            <li className="list-group-item">
+              Subcategory:{" "}
+              <span
+                dangerouslySetInnerHTML={{ __html: props.impact.subcategory }}
+              ></span>
+            </li>
+          ) : null}
         </ul>
       </div>
     </div>
-    );
+  );
 }

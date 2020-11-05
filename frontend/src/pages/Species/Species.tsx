@@ -66,14 +66,16 @@ function Species(props: any) {
   useEffect(() => {
     const getSpecies = async () => {
       // Pass param to the API call
-      const { data }: any = await axios.get(`/api/fish/${props.match.params.id}/`);
+      const { data }: any = await axios.get(
+        `/api/fish/${props.match.params.id}/`
+      );
       // Update state
       setSpecies(data.data);
     };
     // Invoke the async function
     getSpecies();
 
-    // Let the linter know that there are no dependencies that will require 
+    // Let the linter know that there are no dependencies that will require
     // calling this function again
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

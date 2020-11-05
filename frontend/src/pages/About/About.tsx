@@ -1,7 +1,7 @@
 import React from "react";
 import "./About.css";
-import UserCard from "./AboutUsers"
-import ToolCard from "./AboutTools"
+import UserCard from "./AboutUsers";
+import ToolCard from "./AboutTools";
 import joe from "../Media/joe_profile.jpg";
 import rishi from "../Media/rishi.png";
 import serena from "../Media/serena.jpg";
@@ -26,7 +26,6 @@ import openfish from "./AboutPageMedia/openfish.jpeg";
 import arcgis from "./AboutPageMedia/arcgis.png";
 import opendata from "./AboutPageMedia/opendata.png";
 
-
 interface user {
   name: string;
   id: string;
@@ -45,112 +44,117 @@ interface tool {
 
 class About extends React.Component {
   state = {
-
     tools: [
       {
         name: "Postman",
         image: postman,
         description: "Postman was used by our backend team to design our API.",
-        link: "https://www.postman.com/"
+        link: "https://www.postman.com/",
       },
       {
         name: "Slack",
         image: slack,
         description: "Slack is used for all official team communication.",
-        link: "https://www.slack.com/"
+        link: "https://www.slack.com/",
       },
       {
         name: "Gitlab",
         image: gitlab,
-        description: "Gitlab is used for version control for our project's code.",
-        link: "https://www.gitlab.com/"
+        description:
+          "Gitlab is used for version control for our project's code.",
+        link: "https://www.gitlab.com/",
       },
       {
         name: "React",
         image: reactImg,
         description: "React is used for development by our frontend team",
-        link: "https://www.reactjs.org/"
+        link: "https://www.reactjs.org/",
       },
       {
         name: "Docker",
         image: docker,
-        description: "Docker is used to create similar environments for us to work within, making working seperately much easier.",
-        link: "https://www.docker.com/"
+        description:
+          "Docker is used to create similar environments for us to work within, making working seperately much easier.",
+        link: "https://www.docker.com/",
       },
       {
         name: "Node.js and npm",
         image: node,
-        description: "Node.js and npm are used to manage the project's installations and dependencies.",
-        link: "https://www.nodejs.org/"
+        description:
+          "Node.js and npm are used to manage the project's installations and dependencies.",
+        link: "https://www.nodejs.org/",
       },
       {
         name: "EC2",
         image: ec2,
         description: "EC2 is used to host and deploy our project.",
-        link: "https://aws.amazon.com/ec2/"
+        link: "https://aws.amazon.com/ec2/",
       },
       {
         name: "Algolia",
         image: algolia,
         description: "Algolia was use to implement searching.",
-        link: "https://algolia.com"
+        link: "https://algolia.com",
       },
       {
         name: "React-select",
         image: reactImg,
-        description: "React-select was used to implement the drop-down menu interfaces for filtering and searching on the model pages.",
-        link: "https://react-select.com"
-      }
+        description:
+          "React-select was used to implement the drop-down menu interfaces for filtering and searching on the model pages.",
+        link: "https://react-select.com",
+      },
     ],
     data: [
       {
         name: "FishBase API",
         image: fishbase,
-        description: "FishBase stores basic information about fish, such as species, common name, genus, etc.",
-        link: "https://fishbaseapi.readme.io"
-
+        description:
+          "FishBase stores basic information about fish, such as species, common name, genus, etc.",
+        link: "https://fishbaseapi.readme.io",
       },
       {
         name: "IUCN Red List API",
         image: iucn,
-        description: "The IUCN Red List database stores information on the risk levels of several species, indicating their risk of extinction.",
-        link: "https://apiv3.iucnredlist.org/"
-
+        description:
+          "The IUCN Red List database stores information on the risk levels of several species, indicating their risk of extinction.",
+        link: "https://apiv3.iucnredlist.org/",
       },
       {
         name: "Bison USGS",
         image: bison,
-        description: "Bison USGS stores information about the geographic location of fish around the United States.",
-        link: "https://bison.usgs.gov/#home"
-
+        description:
+          "Bison USGS stores information about the geographic location of fish around the United States.",
+        link: "https://bison.usgs.gov/#home",
       },
       {
         name: "Marine Regions",
         image: marine,
-        description: "Marine Regions contains a large variety of information about various geographic features, primarily features found in and around water.",
-        link: "https://marineregions.org"
-
+        description:
+          "Marine Regions contains a large variety of information about various geographic features, primarily features found in and around water.",
+        link: "https://marineregions.org",
       },
       {
         name: "Open Fisheries",
         image: openfish,
-        description: "Open Fisheries has information regarding the yearly catch rate of various fish, given a species name for the fish.",
-        link: "https://openfisheries.org"
-
+        description:
+          "Open Fisheries has information regarding the yearly catch rate of various fish, given a species name for the fish.",
+        link: "https://openfisheries.org",
       },
       {
         name: "ArcGIS Hub",
         image: arcgis,
-        description: "Arcgis Hub stores many API’s, one of which has information about the microplastic density present in many major bodies of water.",
-        link: "https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic%20-pollution-in-the-worlds-oceans-km2-200-mm/geoservice"
-
+        description:
+          "Arcgis Hub stores many API’s, one of which has information about the microplastic density present in many major bodies of water.",
+        link:
+          "https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic%20-pollution-in-the-worlds-oceans-km2-200-mm/geoservice",
       },
       {
         name: "OpenDataSoft",
         image: opendata,
-        description: "OpenDataSoft contains many API’s, one of which contains information about world power plants, separated by category, such as coal plants.",
-        link: "https://data.opendatasoft.com/explore/dataset/world-power%20-plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive%20.plant_state&disjunctive.plant_status&disjunctive.%20plant_type_of_ownership&disjunctive.plant_operating_company&%20disjunctive.type"
-
+        description:
+          "OpenDataSoft contains many API’s, one of which contains information about world power plants, separated by category, such as coal plants.",
+        link:
+          "https://data.opendatasoft.com/explore/dataset/world-power%20-plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive%20.plant_state&disjunctive.plant_status&disjunctive.%20plant_type_of_ownership&disjunctive.plant_operating_company&%20disjunctive.type",
       },
     ],
     users: [

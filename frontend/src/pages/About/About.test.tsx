@@ -1,11 +1,11 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
+import React from "react";
+import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import About from './About'
-import UserCard from './AboutUsers'
-import ToolCard from './AboutTools'
+import About from "./About";
+import UserCard from "./AboutUsers";
+import ToolCard from "./AboutTools";
 
 let container = null;
 beforeEach(() => {
@@ -26,7 +26,7 @@ it("Renders About Page", () => {
     render(<About />, container);
   });
   expect(container.textContent).not.toBe(null);
-})
+});
 
 /*
 it("Renders a User Card", () => {

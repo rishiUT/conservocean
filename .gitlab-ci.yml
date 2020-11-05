@@ -7,7 +7,7 @@ stages:
   - test
 
 python:
-  image: 
+  image:
     name: gpdowning/python
     entrypoint: [""]
   script:
@@ -23,7 +23,7 @@ postman_tests:
   script:
     - newman --version
     - newman run postman.json
-    
+
 frontend_tests:
   stage: test
   image: joewallery/node
