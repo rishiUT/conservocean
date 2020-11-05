@@ -12,7 +12,6 @@ api = Api(app)
 def index(path):
     return render_template("index.html")
 
-
 # Endpoints for the API
 api.add_resource(FishList, "/api/fish")
 api.add_resource(FishID, "/api/fish/<int:id>/")

@@ -168,7 +168,8 @@ class BodiesOfWater(db.Model):
     min_longitude = db.Column(db.Float)
     max_latitude = db.Column(db.Float)
     max_longitude = db.Column(db.Float)
-
+    locationname = db.Column(db.String(200))
+    imageurl = db.Column(db.String(200))
     # Degrees C
     water_temp = db.Column(db.Float)
 
@@ -196,6 +197,8 @@ class BodiesOfWater(db.Model):
             "max_longitude": self.max_longitude,
             "water_temp": self.water_temp,
             "wind_speedkmph": self.wind_speedkmph,
+            "locationname": self.locationname,
+            "imageurl": self.imageurl,
             "size": float(self.size),
             "model": "bodies_of_water",
         }
@@ -275,6 +278,9 @@ class HumanImpact(db.Model):
     plant_location = db.Column(db.String(200))
     plant_water_source = db.Column(db.String(200))
 
+    locationname = db.Column(db.String(200))
+    imageurl = db.Column(db.String(200))
+
     # Relationships
     water_relationship = db.relationship(
         "BodiesOfWater",
@@ -305,6 +311,8 @@ class HumanImpact(db.Model):
             "plant_rating": self.plant_rating,
             "plant_location": self.plant_location,
             "plant_water_source": self.plant_water_source,
+            "locationname": self.locationname,
+            "imageurl": self.imageurl,
             "model": "human_impact",
         }
 
