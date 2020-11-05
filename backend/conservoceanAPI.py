@@ -7,10 +7,10 @@ from api.APIFish import *
 
 api = Api(app)
 
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def index(path):
-#     return render_template("index.html")
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    return render_template("index.html")
 
 # Endpoints for the API
 api.add_resource(FishList, "/api/fish")
