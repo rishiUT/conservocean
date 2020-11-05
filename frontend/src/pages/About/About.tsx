@@ -18,9 +18,13 @@ import docker from "./AboutPageMedia/docker.jpeg";
 import node from "./AboutPageMedia/node.png";
 import ec2 from "./AboutPageMedia/ec2.png";
 import algolia from "./AboutPageMedia/algolia.png";
-
-
-
+import fishbase from "./AboutPageMedia/fishbase.gif";
+import iucn from "./AboutPageMedia/iucn.png";
+import bison from "./AboutPageMedia/bison.jpg";
+import marine from "./AboutPageMedia/marine.jpg";
+import openfish from "./AboutPageMedia/openfish.jpeg";
+import arcgis from "./AboutPageMedia/arcgis.png";
+import opendata from "./AboutPageMedia/opendata.png";
 
 
 interface user {
@@ -97,6 +101,57 @@ class About extends React.Component {
         description: "React-select was used to implement the drop-down menu interfaces for filtering and searching on the model pages.",
         link: "https://react-select.com"
       }
+    ],
+    data: [
+      {
+        name: "FishBase API",
+        image: fishbase,
+        description: "FishBase stores basic information about fish, such as species, common name, genus, etc.",
+        link: "https://fishbaseapi.readme.io"
+
+      },
+      {
+        name: "IUCN Red List API",
+        image: iucn,
+        description: "The IUCN Red List database stores information on the risk levels of several species, indicating their risk of extinction.",
+        link: "https://apiv3.iucnredlist.org/"
+
+      },
+      {
+        name: "Bison USGS",
+        image: bison,
+        description: "Bison USGS stores information about the geographic location of fish around the United States.",
+        link: "https://bison.usgs.gov/#home"
+
+      },
+      {
+        name: "Marine Regions",
+        image: marine,
+        description: "Marine Regions contains a large variety of information about various geographic features, primarily features found in and around water.",
+        link: "https://marineregions.org"
+
+      },
+      {
+        name: "Open Fisheries",
+        image: openfish,
+        description: "Open Fisheries has information regarding the yearly catch rate of various fish, given a species name for the fish.",
+        link: "https://openfisheries.org"
+
+      },
+      {
+        name: "ArcGIS Hub",
+        image: arcgis,
+        description: "Arcgis Hub stores many API’s, one of which has information about the microplastic density present in many major bodies of water.",
+        link: "https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic%20-pollution-in-the-worlds-oceans-km2-200-mm/geoservice"
+
+      },
+      {
+        name: "OpenDataSoft",
+        image: opendata,
+        description: "OpenDataSoft contains many API’s, one of which contains information about world power plants, separated by category, such as coal plants.",
+        link: "https://data.opendatasoft.com/explore/dataset/world-power%20-plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive%20.plant_state&disjunctive.plant_status&disjunctive.%20plant_type_of_ownership&disjunctive.plant_operating_company&%20disjunctive.type"
+
+      },
     ],
     users: [
       {
@@ -247,7 +302,6 @@ class About extends React.Component {
         console.log("error: " + err);
       });
   }
-
   render() {
     const { users }: any = this.state;
     const result = users.map((user: user, index: number) => {
@@ -256,6 +310,11 @@ class About extends React.Component {
 
     const { tools }: any = this.state;
     const resultTools = tools.map((tool: tool, index: number) => {
+      return <ToolCard key={index} tool={tool} />;
+    });
+
+    const { data }: any = this.state;
+    const resultData = data.map((tool: tool, index: number) => {
       return <ToolCard key={index} tool={tool} />;
     });
 
@@ -289,7 +348,6 @@ class About extends React.Component {
         <h3 className="description">
           Total Unit Tests: {this.state.totalUnitTests}
         </h3>
-
         <a
           href="https://documenter.getpostman.com/view/12800288/TVKJxaRw"
           className="theme-link"
@@ -304,96 +362,10 @@ class About extends React.Component {
           Link to the GitLab Repository
         </a>
 
-        {/* <h2>Total Unit Tests: 0</h2> */}
         <h2 className="header">Our Team</h2>
         <div className="row py-5"> {result}</div>
-
         <h2 className="header">Data Sources</h2>
-        <ul>
-          <li>
-            <a href="https://fishbaseapi.readme.io/" className="theme-link">
-              {" "}
-              FishBase API
-            </a>
-            <p>
-              FishBase stores basic information about fish, such as species,
-              common name, genus, etc.
-            </p>
-          </li>
-          <li>
-            <a href="https://apiv3.iucnredlist.org/" className="theme-link">
-              {" "}
-              IUCN Red List API
-            </a>
-            <p>
-              The IUCN Red List database stores information on the risk levels
-              of several species, indicating their risk of extinction.
-            </p>
-          </li>
-          <li>
-            <a href="https://bison.usgs.gov/" className="theme-link">
-              {" "}
-              Bison USGS
-            </a>
-            <p>
-              Bison USGS stores information about the geographic location of
-              fish around the United States.
-            </p>
-          </li>
-          <li>
-            <a href="https://www.marineregions.org/" className="theme-link">
-              {" "}
-              Marine Regions
-            </a>
-            <p>
-              Marine Regions contains a large variety of information about
-              various geographic features, primarily features found in and
-              around water.
-            </p>
-          </li>
-          <li>
-            <a href="http://www.openfisheries.org/" className="theme-link">
-              {" "}
-              Open Fisheries
-            </a>
-            <p>
-              Open Fisheries has information regarding the yearly catch rate of
-              various fish, given a species name for the fish.
-            </p>
-          </li>
-          <li>
-            <a
-              href="https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic
-            -pollution-in-the-worlds-oceans-km2-200-mm/geoservice"
-              className="theme-link"
-            >
-              {" "}
-              ArcGIS Hub
-            </a>
-            <p>
-              Arcgis Hub stores many API’s, one of which has information about
-              the microplastic density present in many major bodies of water.
-            </p>
-          </li>
-          <li>
-            <a
-              href="https://data.opendatasoft.com/explore/dataset/world-power
-            -plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive
-            .plant_state&disjunctive.plant_status&disjunctive.
-            plant_type_of_ownership&disjunctive.plant_operating_company&
-            disjunctive.type"
-              className="theme-link"
-            >
-              {" "}
-              OpenDataSoft
-            </a>
-            <p>
-              OpenDataSoft contains many API’s, one of which contains
-              information about world power plants, separated by category, such
-              as coal plants.
-            </p>
-          </li>
-        </ul>
+        <div className="row py-5"> {resultData}</div>
         <h2 className="header">Tools</h2>
         <div className="row py-5"> {resultTools}</div>
       </div>
