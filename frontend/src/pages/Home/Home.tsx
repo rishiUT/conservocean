@@ -65,20 +65,18 @@ function Home() {
           </ul>
         </div>
       </div>
+
       <div className="search-section">
         <h2 className="heading">Get started by searching.</h2>
         <InstantSearch searchClient={searchClient} indexName="conservocean">
           <div className="right-panel">
             <SearchBox />
 
-        <div className="row-cont">
+            <div className="row-cont">     
+             <Hits hitComponent={Hit}/>
+            </div>
                 
-        <Hits hitComponent={Hit}/>
           </div>
-          
-
-              
-              </div>
         </InstantSearch>
       </div>
     </div>

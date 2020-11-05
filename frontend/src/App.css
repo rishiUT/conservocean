@@ -2,3 +2,8 @@
   height: 100vh;
   overflow: auto;
 }
+
+.search-highlight {
+  font-style: normal;
+  background-color: yellow;
+}

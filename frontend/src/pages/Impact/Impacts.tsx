@@ -84,6 +84,7 @@ class Impacts extends Component {
     currentSort: "",
     currentSearch: "",
     usingSearchData: false,
+    highlightableAttributes: ["name", "category", "subcategory"]
   };
 
   // Make API request for the current page of data using Axios
@@ -164,10 +165,24 @@ class Impacts extends Component {
   search(query: string) {
     index.search(query, {
       hitsPerPage: this.state.perPage,
-      page: this.state.offset / this.state.perPage
+      page: this.state.offset / this.state.perPage,
+      attributesToHighlight: this.state.highlightableAttributes,
+      highlightPreTag: '<em class="search-highlight">',
+      highlightPostTag: '</em>'
     }
     ).then(({ hits, nbHits }) => {
-      console.log(hits);
+      // Apply highlighting to returned results
+      hits.forEach((hit: any) => {
+        let result: any = hit._highlightResult;
+        if (result) {
+          Object.keys(result).forEach((key) => {
+            if (result[key].value !== "none") {
+              hit[key] = result[key].value;
+            }
+          });
+        }
+      });
+
       this.setState({data: hits, numInstances: nbHits, currentSearch: query})
     });
   }
@@ -180,13 +195,14 @@ class Impacts extends Component {
     const form = document.getElementById("searchForm") as HTMLFormElement;
 
     if (query.value !== "") {
-      this.state.usingSearchData = true;
+      this.setState({usingSearchData: true});
       
       this.search(query.value);
       
       form.reset();
     } else {
-      this.state.usingSearchData = false;
+      this.setState({usingSearchData: false});
+      this.loadData();
     }
   }
 
@@ -277,11 +293,11 @@ function ImpactTableData({ impact }: any) {
     <tr>
       <th scope="row">
         <a href={`/impacts/${impact.id}`} className="card-link">
-          {impact.name ? impact.name : `Plastic Pollution Sample ${impact.id - 5}`}
+          {impact.name ? <span dangerouslySetInnerHTML={{__html: impact.name}}></span>: `Plastic Pollution Sample ${impact.id - 5}`}
         </a>
       </th>
-      <td>{impact.category}</td>
-      <td>{impact.subcategory?.toLowerCase()}</td>
+      <td><span dangerouslySetInnerHTML={{__html: impact.category}}></span></td>
+      <td><span dangerouslySetInnerHTML={{__html: impact.subcategory?.toLowerCase()}}></span></td>
       <td>{impact.latitude}</td>
       <td>{impact.longitude}</td>
     </tr>

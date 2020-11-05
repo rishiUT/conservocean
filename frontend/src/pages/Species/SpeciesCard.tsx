@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouteMatch } from "react-router-dom";
 
 interface species {
   id?: number;
@@ -66,14 +65,14 @@ function SpeciesCard(props: any) {
             alt=""
           ></img>
           <div className="card-body">
-            <h5 className="card-title">{props.sp.common_name}</h5>
+            <h5 className="card-title" dangerouslySetInnerHTML={{__html: props.sp.common_name}}></h5>
           </div>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
-              Genus: <span className="font-italic">{props.sp.genus}</span>
+              Genus: <span className="font-italic" dangerouslySetInnerHTML={{__html: props.sp.genus}}></span>
             </li>
             <li className="list-group-item">
-              Species: <span className="font-italic">{props.sp.species}</span>
+              Species: <span className="font-italic" dangerouslySetInnerHTML={{__html: props.sp.species}}></span>
             </li>
             <li className="list-group-item">
               Endangered Status:{" "}

@@ -25,7 +25,7 @@ function WBCard(props: any) {
             alt=""
           ></img>
           <div className="card-body">
-            <h5 className="card-title">{props.body.name}</h5>
+            <h5 className="card-title"><span dangerouslySetInnerHTML={{__html: props.body.name}}></span></h5>
           </div>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">Latitude: {Number.parseFloat(props.body.latitude).toFixed(3)}</li>

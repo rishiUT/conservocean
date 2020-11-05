@@ -149,6 +149,7 @@ class SpeciesGrid extends Component {
     currentSort: "",
     currentSearch: "",
     usingSearchData: false,
+    highlightableAttributes: ["common_name", "genus", "species"]
   };
 
   // Make API request for the current page of data using Axios
@@ -230,9 +231,24 @@ class SpeciesGrid extends Component {
   search(query: string) {
     index.search(query, {
       hitsPerPage: this.state.perPage,
-      page: this.state.offset / this.state.perPage
+      page: this.state.offset / this.state.perPage,
+      attributesToHighlight: this.state.highlightableAttributes,
+      highlightPreTag: '<em class="search-highlight">',
+      highlightPostTag: '</em>'
     }
     ).then(({ hits, nbHits }) => {
+      // Apply highlighting to returned results
+      hits.forEach((hit: any) => {
+        let result: any = hit._highlightResult;
+        if (result) {
+          Object.keys(result).forEach((key) => {
+            if (result[key].value !== "none") {
+              hit[key] = result[key].value;
+            }
+          });
+        }
+      });
+    
       this.setState({data: hits, numInstances: nbHits, currentSearch: query})
     });
   }
@@ -245,13 +261,14 @@ class SpeciesGrid extends Component {
     const form = document.getElementById("searchForm") as HTMLFormElement;
 
     if (query.value !== "") {
-      this.state.usingSearchData = true;
+      this.setState({usingSearchData: true});
       
       this.search(query.value);
       
       form.reset();
     } else {
-      this.state.usingSearchData = false;
+      this.setState({usingSearchData: false});
+      this.loadData();
     }
   }
 

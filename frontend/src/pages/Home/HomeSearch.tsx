@@ -1,5 +1,4 @@
 import React from "react";
-import { Highlight } from "react-instantsearch-dom";
 
 import WBCard from "../WaterBody/WaterBodyCard";
 import SpeciesCard from "../Species/SpeciesCard";
