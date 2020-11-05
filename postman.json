@@ -1214,8 +1214,8 @@
 									"pm.test(\"Check Data Values in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
 									"    const data = jsonData.data[0];\r",
-									"    pm.expect(data.name).to.eql('Paiko Lagoon')\r",
-									"    pm.expect(data.type).to.eql('Lagoon')\r",
+									"    pm.expect(data.name).to.eql('Mitchell Bay')\r",
+									"    pm.expect(data.type).to.eql('Bay')\r",
 									"});\r",
 									"pm.test(\"Check Returned Number\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
@@ -1224,7 +1224,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model')\r",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model', 'imageurl', 'locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1293,7 +1293,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:12:09 GMT"
+									"value": "Thu, 05 Nov 2020 22:05:48 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -1301,7 +1301,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "1045"
+									"value": "1337"
 								},
 								{
 									"key": "Connection",
@@ -1317,7 +1317,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 2,\n    \"data\": [\n        {\n            \"id\": 5,\n            \"name\": \"Paiko Lagoon\",\n            \"type\": \"Lagoon\",\n            \"latitude\": 21.28611,\n            \"longitude\": -157.72778,\n            \"min_latitude\": 21.28146,\n            \"min_longitude\": -157.72798,\n            \"max_latitude\": 21.28486,\n            \"max_longitude\": -157.72196,\n            \"water_temp\": 26,\n            \"wind_speedkmph\": 18,\n            \"size\": 36.30590796279737,\n            \"model\": \"bodies_of_water\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Sharks cove\",\n            \"type\": \"Bay\",\n            \"latitude\": 21.65472,\n            \"longitude\": -158.065,\n            \"min_latitude\": 21.65046,\n            \"min_longitude\": -158.06192,\n            \"max_latitude\": 21.65256,\n            \"max_longitude\": -158.06329,\n            \"water_temp\": 25.5,\n            \"wind_speedkmph\": 15,\n            \"size\": 15.707569167728147,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
+							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 2,\n    \"data\": [\n        {\n            \"id\": 73,\n            \"name\": \"Mitchell Bay\",\n            \"type\": \"Bay\",\n            \"latitude\": 44.944386,\n            \"longitude\": -62.189322,\n            \"min_latitude\": 44.93093,\n            \"min_longitude\": -62.1955,\n            \"max_latitude\": 44.95529,\n            \"max_longitude\": -62.1841,\n            \"water_temp\": 19.5,\n            \"wind_speedkmph\": 27,\n            \"locationname\": \"Moser River, NS\",\n            \"imageurl\": \"https://tse2.mm.bing.net/th?id=OIP.4aofua_yOLWOYJbISq7VmgHaFj&pid=Api\",\n            \"size\": 160.6758255211256,\n            \"model\": \"bodies_of_water\"\n        },\n        {\n            \"id\": 76,\n            \"name\": \"Hardwood Island Shoal\",\n            \"type\": \"Shoal\",\n            \"latitude\": 44.836413,\n            \"longitude\": -62.282322,\n            \"min_latitude\": 44.8367,\n            \"min_longitude\": -62.28825,\n            \"max_latitude\": 44.83902,\n            \"max_longitude\": -62.28451,\n            \"water_temp\": 19.5,\n            \"wind_speedkmph\": 27,\n            \"locationname\": \"Halifax, NS\",\n            \"imageurl\": \"https://tse4.mm.bing.net/th?id=OIP.J9E2eJVwlOMAmr_H-XQ0RwHaEK&pid=Api\",\n            \"size\": 21.509051726177436,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1337,7 +1337,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'fish', 'human_impact_ids', 'model')\r",
+									"    pm.expect(jsonData.data).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'fish', 'human_impact_ids', 'model', 'imageurl', 'locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1400,7 +1400,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:12:33 GMT"
+									"value": "Thu, 05 Nov 2020 22:06:49 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -1408,7 +1408,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "5214"
+									"value": "762"
 								},
 								{
 									"key": "Connection",
@@ -1424,7 +1424,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Biscayne Bay\",\n        \"type\": \"Bay\",\n        \"latitude\": 25.55,\n        \"longitude\": -80.2167,\n        \"min_latitude\": 25.38,\n        \"min_longitude\": -80.36,\n        \"max_latitude\": 25.77,\n        \"max_longitude\": -80.11,\n        \"water_temp\": 29,\n        \"wind_speedkmph\": 21,\n        \"size\": 2863.49360457247,\n        \"model\": \"bodies_of_water\",\n        \"fish\": [\n            1,\n            5,\n            8,\n            12,\n            13,\n            17,\n            20,\n            23,\n            26,\n            45,\n            51,\n            54,\n            57,\n            60,\n            61,\n            69,\n            72,\n            73,\n            78,\n            98,\n            99,\n            102,\n            113,\n            114,\n            115,\n            120,\n            124,\n            135,\n            136,\n            137,\n            139,\n            148,\n            151,\n            152,\n            154,\n            156,\n            157,\n            158,\n            159,\n            170,\n            171,\n            172,\n            175,\n            181,\n            207,\n            208,\n            212,\n            215,\n            223,\n            238,\n            240,\n            248,\n            250,\n            259,\n            260,\n            266,\n            284,\n            285,\n            291,\n            293,\n            294,\n            299,\n            314,\n            325,\n            329,\n            332,\n            343,\n            344,\n            346,\n            350,\n            377,\n            380,\n            384,\n            387,\n            389,\n            400,\n            407,\n            409,\n            411,\n            412,\n            419,\n            424,\n            445,\n            449,\n            450,\n            452,\n            461,\n            468,\n            485,\n            495,\n            508,\n            512,\n            514,\n            523,\n            524,\n            527,\n            531,\n            532,\n            548,\n            550,\n            556,\n            560,\n            561,\n            587,\n            588,\n            593,\n            595,\n            598,\n            606,\n            607,\n            625,\n            628,\n            629,\n            630,\n            631,\n            632,\n            641,\n            644,\n            667,\n            670,\n            671,\n            695,\n            696,\n            700,\n            701,\n            702,\n            703,\n            705,\n            718,\n            719,\n            723,\n            724,\n            726,\n            728,\n            733,\n            734,\n            735,\n            736,\n            743,\n            745,\n            746,\n            753,\n            755,\n            756,\n            771,\n            772,\n            773,\n            776,\n            780,\n            787,\n            793,\n            802,\n            813,\n            815,\n            816,\n            826,\n            831,\n            837,\n            843,\n            846,\n            849,\n            861,\n            869,\n            870,\n            873,\n            876,\n            880,\n            881,\n            885,\n            888,\n            890,\n            899,\n            902,\n            904,\n            905,\n            906,\n            907,\n            915,\n            916,\n            918,\n            919,\n            922,\n            923,\n            938,\n            943,\n            956,\n            957,\n            962,\n            963,\n            964,\n            967,\n            968,\n            970,\n            971,\n            973,\n            976,\n            977,\n            982,\n            987,\n            988,\n            991,\n            995,\n            996,\n            997,\n            998,\n            999,\n            1000,\n            1001,\n            1004,\n            1005,\n            1008,\n            1017,\n            1026,\n            1027,\n            1028,\n            1029,\n            1030,\n            1034,\n            1036,\n            1039,\n            1048,\n            1050,\n            1053,\n            1063,\n            1064,\n            1065,\n            1066,\n            1087,\n            1088,\n            1089,\n            1092,\n            1123,\n            1132,\n            1137,\n            1138,\n            1140,\n            1142,\n            1143,\n            1148,\n            1151,\n            1157,\n            1159,\n            1163,\n            1170,\n            1176,\n            1178,\n            1180,\n            1181,\n            1183,\n            1191,\n            1192,\n            1195,\n            1200,\n            1218,\n            1221,\n            1222,\n            1224,\n            1227,\n            1231,\n            1232,\n            1244,\n            1248,\n            1255,\n            1256,\n            1258,\n            1259,\n            1261,\n            1269,\n            1270,\n            1277,\n            1284,\n            1290,\n            1302\n        ],\n        \"human_impact_ids\": [\n            195,\n            215,\n            238\n        ]\n    }\n}"
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Biscayne Bay\",\n        \"type\": \"Bay\",\n        \"latitude\": 25.55,\n        \"longitude\": -80.2167,\n        \"min_latitude\": 25.38,\n        \"min_longitude\": -80.36,\n        \"max_latitude\": 25.77,\n        \"max_longitude\": -80.11,\n        \"water_temp\": 29,\n        \"wind_speedkmph\": 21,\n        \"locationname\": \"Homestead, FL\",\n        \"imageurl\": \"https://tse1.mm.bing.net/th?id=OIP.KZGOdcWNXKChutLSdBN65wHaFj&pid=Api\",\n        \"size\": 2863.49360457247,\n        \"model\": \"bodies_of_water\",\n        \"fish\": [\n            1,\n            5,\n            8,\n            12,\n            13,\n            17,\n            20,\n            23,\n            26,\n            45\n        ],\n        \"human_impact_ids\": []\n    }\n}"
 						}
 					]
 				},
@@ -1439,7 +1439,7 @@
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
 									"    const data = jsonData.data[0];\r",
-									"    pm.expect(data.name).to.eql('Sharks cove')\r",
+									"    pm.expect(data.name).to.eql('Mitchell Bay')\r",
 									"    pm.expect(data.type).to.eql('Bay')\r",
 									"});\r",
 									"pm.test(\"Check Returned Number\", function () {\r",
@@ -1449,7 +1449,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model')\r",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model', 'imageurl', 'locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1518,7 +1518,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:12:51 GMT"
+									"value": "Thu, 05 Nov 2020 22:07:16 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -1526,7 +1526,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "562"
+									"value": "706"
 								},
 								{
 									"key": "Connection",
@@ -1542,7 +1542,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 6,\n            \"name\": \"Sharks cove\",\n            \"type\": \"Bay\",\n            \"latitude\": 21.65472,\n            \"longitude\": -158.065,\n            \"min_latitude\": 21.65046,\n            \"min_longitude\": -158.06192,\n            \"max_latitude\": 21.65256,\n            \"max_longitude\": -158.06329,\n            \"water_temp\": 25.5,\n            \"wind_speedkmph\": 15,\n            \"size\": 15.707569167728147,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
+							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 73,\n            \"name\": \"Mitchell Bay\",\n            \"type\": \"Bay\",\n            \"latitude\": 44.944386,\n            \"longitude\": -62.189322,\n            \"min_latitude\": 44.93093,\n            \"min_longitude\": -62.1955,\n            \"max_latitude\": 44.95529,\n            \"max_longitude\": -62.1841,\n            \"water_temp\": 19.5,\n            \"wind_speedkmph\": 27,\n            \"locationname\": \"Moser River, NS\",\n            \"imageurl\": \"https://tse2.mm.bing.net/th?id=OIP.4aofua_yOLWOYJbISq7VmgHaFj&pid=Api\",\n            \"size\": 160.6758255211256,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1567,7 +1567,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model')\r",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model','imageurl','locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1626,7 +1626,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:13:36 GMT"
+									"value": "Thu, 05 Nov 2020 22:07:28 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -1634,7 +1634,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "544"
+									"value": "686"
 								},
 								{
 									"key": "Connection",
@@ -1650,7 +1650,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Biscayne Bay\",\n            \"type\": \"Bay\",\n            \"latitude\": 25.55,\n            \"longitude\": -80.2167,\n            \"min_latitude\": 25.38,\n            \"min_longitude\": -80.36,\n            \"max_latitude\": 25.77,\n            \"max_longitude\": -80.11,\n            \"water_temp\": 29,\n            \"wind_speedkmph\": 21,\n            \"size\": 2863.49360457247,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
+							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Biscayne Bay\",\n            \"type\": \"Bay\",\n            \"latitude\": 25.55,\n            \"longitude\": -80.2167,\n            \"min_latitude\": 25.38,\n            \"min_longitude\": -80.36,\n            \"max_latitude\": 25.77,\n            \"max_longitude\": -80.11,\n            \"water_temp\": 29,\n            \"wind_speedkmph\": 21,\n            \"locationname\": \"Homestead, FL\",\n            \"imageurl\": \"https://tse1.mm.bing.net/th?id=OIP.KZGOdcWNXKChutLSdBN65wHaFj&pid=Api\",\n            \"size\": 2863.49360457247,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1675,7 +1675,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model')\r",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model', 'imageurl','locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1750,7 +1750,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:41:34 GMT"
+									"value": "Thu, 05 Nov 2020 22:07:42 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -1758,7 +1758,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "549"
+									"value": "688"
 								},
 								{
 									"key": "Connection",
@@ -1774,7 +1774,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 29,\n            \"name\": \"Laguna Madre\",\n            \"type\": \"Lake\",\n            \"latitude\": 26.797,\n            \"longitude\": -97.45943,\n            \"min_latitude\": 26.03,\n            \"min_longitude\": -97.1,\n            \"max_latitude\": 26.91,\n            \"max_longitude\": -97.67,\n            \"water_temp\": 29.5,\n            \"wind_speedkmph\": 24,\n            \"size\": 5437.5007298161045,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
+							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 29,\n            \"name\": \"Laguna Madre\",\n            \"type\": \"Lake\",\n            \"latitude\": 26.797,\n            \"longitude\": -97.45943,\n            \"min_latitude\": 26.03,\n            \"min_longitude\": -97.1,\n            \"max_latitude\": 26.91,\n            \"max_longitude\": -97.67,\n            \"water_temp\": 29.5,\n            \"wind_speedkmph\": 24,\n            \"locationname\": \"Sarita, TX\",\n            \"imageurl\": \"https://tse1.mm.bing.net/th?id=OIP.cK53SjP5z2tSorKq6nyJlAHaGH&pid=Api\",\n            \"size\": 5437.5007298161045,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1789,8 +1789,8 @@
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
 									"    const data = jsonData.data[0];\r",
-									"    pm.expect(data.name).to.eql('Paiko Lagoon')\r",
-									"    pm.expect(data.type).to.eql('Lagoon')\r",
+									"    pm.expect(data.name).to.eql('Hardwood Island Shoal')\r",
+									"    pm.expect(data.type).to.eql('Shoal')\r",
 									"});\r",
 									"pm.test(\"Check Returned Number\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
@@ -1799,7 +1799,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model')\r",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model','imageurl','locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1876,7 +1876,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:41:58 GMT"
+									"value": "Thu, 05 Nov 2020 22:08:01 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -1884,7 +1884,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "567"
+									"value": "715"
 								},
 								{
 									"key": "Connection",
@@ -1900,7 +1900,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 5,\n            \"name\": \"Paiko Lagoon\",\n            \"type\": \"Lagoon\",\n            \"latitude\": 21.28611,\n            \"longitude\": -157.72778,\n            \"min_latitude\": 21.28146,\n            \"min_longitude\": -157.72798,\n            \"max_latitude\": 21.28486,\n            \"max_longitude\": -157.72196,\n            \"water_temp\": 26,\n            \"wind_speedkmph\": 18,\n            \"size\": 36.30590796279737,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
+							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 76,\n            \"name\": \"Hardwood Island Shoal\",\n            \"type\": \"Shoal\",\n            \"latitude\": 44.836413,\n            \"longitude\": -62.282322,\n            \"min_latitude\": 44.8367,\n            \"min_longitude\": -62.28825,\n            \"max_latitude\": 44.83902,\n            \"max_longitude\": -62.28451,\n            \"water_temp\": 19.5,\n            \"wind_speedkmph\": 27,\n            \"locationname\": \"Halifax, NS\",\n            \"imageurl\": \"https://tse4.mm.bing.net/th?id=OIP.J9E2eJVwlOMAmr_H-XQ0RwHaEK&pid=Api\",\n            \"size\": 21.509051726177436,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1915,8 +1915,8 @@
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
 									"    const data = jsonData.data[0];\r",
-									"    pm.expect(data.name).to.eql('Paiko Lagoon')\r",
-									"    pm.expect(data.type).to.eql('Lagoon')\r",
+									"    pm.expect(data.name).to.eql('Mitchell Bay')\r",
+									"    pm.expect(data.type).to.eql('Bay')\r",
 									"});\r",
 									"pm.test(\"Check Returned Number\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
@@ -1925,7 +1925,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model')\r",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model','imageurl','locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2002,7 +2002,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:42:11 GMT"
+									"value": "Thu, 05 Nov 2020 22:08:14 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -2010,7 +2010,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "567"
+									"value": "706"
 								},
 								{
 									"key": "Connection",
@@ -2026,7 +2026,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 5,\n            \"name\": \"Paiko Lagoon\",\n            \"type\": \"Lagoon\",\n            \"latitude\": 21.28611,\n            \"longitude\": -157.72778,\n            \"min_latitude\": 21.28146,\n            \"min_longitude\": -157.72798,\n            \"max_latitude\": 21.28486,\n            \"max_longitude\": -157.72196,\n            \"water_temp\": 26,\n            \"wind_speedkmph\": 18,\n            \"size\": 36.30590796279737,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
+							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 73,\n            \"name\": \"Mitchell Bay\",\n            \"type\": \"Bay\",\n            \"latitude\": 44.944386,\n            \"longitude\": -62.189322,\n            \"min_latitude\": 44.93093,\n            \"min_longitude\": -62.1955,\n            \"max_latitude\": 44.95529,\n            \"max_longitude\": -62.1841,\n            \"water_temp\": 19.5,\n            \"wind_speedkmph\": 27,\n            \"locationname\": \"Moser River, NS\",\n            \"imageurl\": \"https://tse2.mm.bing.net/th?id=OIP.4aofua_yOLWOYJbISq7VmgHaFj&pid=Api\",\n            \"size\": 160.6758255211256,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -2051,7 +2051,7 @@
 									"});\r",
 									"pm.test(\"Check Data in Response Body\", function () {\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model')\r",
+									"    pm.expect(jsonData.data[0]).that.has.all.keys('id', 'name', 'type', 'latitude', 'longitude', 'min_latitude', 'min_longitude', 'max_latitude', 'max_longitude', 'water_temp', 'wind_speedkmph', 'size', 'model','imageurl','locationname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2130,7 +2130,7 @@
 							"header": [
 								{
 									"key": "Date",
-									"value": "Wed, 04 Nov 2020 01:42:20 GMT"
+									"value": "Thu, 05 Nov 2020 22:08:25 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -2138,7 +2138,7 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "572"
+									"value": "713"
 								},
 								{
 									"key": "Connection",
@@ -2154,7 +2154,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 256,\n            \"name\": \"Cow Ledge Shoal\",\n            \"type\": \"Shoal\",\n            \"latitude\": 44.2843357,\n            \"longitude\": -66.3351775,\n            \"min_latitude\": 44.28397,\n            \"min_longitude\": -66.33554,\n            \"max_latitude\": 44.28471,\n            \"max_longitude\": -66.33482,\n            \"water_temp\": null,\n            \"wind_speedkmph\": null,\n            \"size\": 6.434795831228201,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
+							"body": "{\n    \"total_water_count\": 315,\n    \"total_water_returned\": 1,\n    \"data\": [\n        {\n            \"id\": 256,\n            \"name\": \"Cow Ledge Shoal\",\n            \"type\": \"Shoal\",\n            \"latitude\": 44.2843357,\n            \"longitude\": -66.3351775,\n            \"min_latitude\": 44.28397,\n            \"min_longitude\": -66.33554,\n            \"max_latitude\": 44.28471,\n            \"max_longitude\": -66.33482,\n            \"water_temp\": null,\n            \"wind_speedkmph\": null,\n            \"locationname\": \"Freeport, NS\",\n            \"imageurl\": \"https://tse2.mm.bing.net/th?id=OIP.6bNLoJcEf4NG7sU498HRxgHaE6&pid=Api\",\n            \"size\": 6.434795831228201,\n            \"model\": \"bodies_of_water\"\n        }\n    ]\n}"
 						}
 					]
 				}
@@ -3119,7 +3119,7 @@
 	],
 	"variable": [
 		{
-			"id": "f98edb42-4541-4ea4-996e-a3db1a50b6ec",
+			"id": "3b845e5e-6c05-4646-ad2a-1e344f0d90ab",
 			"key": "base_url",
 			"value": "https://www.conservocean.me"
 		}
