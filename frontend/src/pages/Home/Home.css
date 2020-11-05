@@ -5,6 +5,8 @@
 
 .card-cont{
   min-width: 20rem !important;
+  width: 100%;
+  padding: 0 !important;
 }
 
 .heading {
@@ -113,17 +115,21 @@
 }
 
 body { font-family: sans-serif; }
-.ais-SearchBox { margin: 1em 0; }
+.ais-SearchBox { margin: 1em 0; margin-top: 5rem; }
 .ais-Pagination { margin-top: 1em }
 .left-panel { float: left; width: 250px; }
-.right-panel { margin-left: 260px; }
+.right-panel { margin-left: 15rem; margin-right: 15rem; } */
 .ais-InstantSearch { max-width: 960px; overflow: hidden; margin: 0 auto }
-.ais-Hits-item { margin-bottom: 1em; width: calc(50% - 1rem) }
+.ais-Hits-item { margin: 0 !important; width: calc(33.3% - 1rem) !important; border: none !important; padding: 0 !important; box-shadow: none !important;}
 .ais-Hits-item img { margin-right: 1em }
+.ais-Hits-list{
+  margin-top: 4rem !important;
+  margin-left: 8rem !important;
+}
 .hit-name { margin-bottom: .5em }
 .hit-description { color: #888; font-size: 14px; margin-bottom: .5em }
 
-.row-cont{
+/* .row-cont{
   display: flex !important;
   overflow: wrap;
-}
+} */
