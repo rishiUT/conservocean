@@ -6,7 +6,7 @@ before_script:
 python:
   image: 
     name: gpdowning/python
-    entrypoint: ["/backend/"]
+    entrypoint: ["backend/"]
   script:
     - python test.py
 
