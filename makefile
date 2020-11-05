@@ -2,39 +2,58 @@
 MAKEFLAGS += --no-builtin-rules
 SHELL         := bash
 
-# ifeq ($(shell uname -s), Darwin)
-#     BLACK         := black
-#     CHECKTESTDATA := checktestdata
-#     COVERAGE      := coverage3
-#     MYPY          := mypy
-#     PYDOC         := pydoc3
-#     PYLINT        := pylint
-#     PYTHON        := python3
-# else ifeq ($(shell uname -p), unknown)
-#     BLACK         := black
-#     CHECKTESTDATA := checktestdata
-#     COVERAGE      := coverage
-#     MYPY          := mypy
-#     PYDOC         := pydoc
-#     PYLINT        := pylint
-#     PYTHON        := python
-# else
-#     BLACK         := black
-#     CHECKTESTDATA := checktestdata
-#     COVERAGE      := coverage3
-#     MYPY          := mypy
-#     PYDOC         := pydoc3
-#     PYLINT        := pylint3
-#     PYTHON        := python3
-# endif
+ifeq ($(shell uname -s), Darwin)
+    BLACK         := black
+    CHECKTESTDATA := checktestdata
+    COVERAGE      := coverage3
+    MYPY          := mypy
+    PYDOC         := pydoc3
+    PYLINT        := pylint
+    PYTHON        := python3
+else ifeq ($(shell uname -p), unknown)
+    BLACK         := black
+    CHECKTESTDATA := checktestdata
+    COVERAGE      := coverage
+    MYPY          := mypy
+    PYDOC         := pydoc
+    PYLINT        := pylint
+    PYTHON        := python
+else
+    BLACK         := black
+    CHECKTESTDATA := checktestdata
+    COVERAGE      := coverage3
+    MYPY          := mypy
+    PYDOC         := pydoc3
+    PYLINT        := pylint3
+    PYTHON        := python3
+endif
 
-# # run docker
+# run docker
 docker-front:
 	docker run -it -p 3000:3000 -v ${PWD}/frontend:/usr/src/app joewallery/node
 	# In Windows, switch to frontend and run: docker run -it -p 3000:3000 -v ${PWD}:/usr/src/app joewallery/node
 
 docker-back:
 	docker run -it -p 5000:5000 -v ${PWD}/backend:/conservocean joewallery/python
+
+docker-deployment:
+	docker build --no-cache -t joewallery/conservocean . 
+	docker push joewallery/conservocean 
+
+# deploy on EC2 instance
+deploy:
+	sudo docker container stop $(sudo docker container list -q)
+	sudo docker pull joewallery/conservocean
+	sudo docker run -d -p 80:80 joewallery/conservocean
+
+# run development servers
+develop: develop-front develop-back
+
+develop-front:
+	npm start --prefix frontend
+
+develop-back:
+	sudo $(PYTHON) backend/conservoceanAPI.py
 
 # get git config
 config:
@@ -73,12 +92,9 @@ push:
 
 all:
 
-# # auto format the code
+# auto format the code
 format:
 	npx prettier --write .
-# 	$(BLACK) Collatz.py
-# 	$(BLACK) RunCollatz.py
-# 	$(BLACK) TestCollatz.py
 
 # remove temporary files
 clean:
