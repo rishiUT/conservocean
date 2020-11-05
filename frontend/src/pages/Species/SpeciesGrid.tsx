@@ -5,12 +5,12 @@ import ReactPaginate from "react-paginate";
 import Select from "react-select";
 import Species from "./Species";
 import SpeciesCard from "./SpeciesCard";
-import Hit from "../Home/HomeSearch"
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch,
-  Hits,
-  SearchBox } from 'react-instantsearch-dom';
-  const searchClient = algoliasearch('VEMEIF8QHL', 'e211f5541054cdb5177282492d4a90c8');
+
+  
+const searchClient = algoliasearch('VEMEIF8QHL', 'e211f5541054cdb5177282492d4a90c8');
+const index = searchClient.initIndex('conservocean-fish');
+
 
 interface species {
   id?: number;
@@ -218,6 +218,13 @@ class SpeciesGrid extends Component {
     }
   };
 
+  search() {
+    let query = 'shark';
+    index.search(query).then(({ hits }) => {
+      console.log(hits);
+    });
+  }
+
   render() {
     return (
       <Switch>
@@ -256,20 +263,18 @@ class SpeciesGrid extends Component {
                     Sort
                   </button>
 
-                  <div className="search-section">
-                    <InstantSearch
-                      searchClient={searchClient}
-                      indexName="conservocean-fish"
-                    >
-                      <div className="right-panel">
-                        <SearchBox />
-
-                        <div className="row-cont">
-                          <Hits hitComponent={Hit} />
-                        </div>
-                      </div>
-                    </InstantSearch>
+                  <div>
+                    <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
                   </div>
+
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={this.search}
+                  >
+                    Search
+                  </button>
+
                 </div>
               </div>
 
