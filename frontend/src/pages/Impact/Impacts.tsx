@@ -4,6 +4,13 @@ import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 import Impact from "./ImpactInstance"
+import algoliasearch from "algoliasearch/lite";
+
+const searchClient = algoliasearch(
+  "VEMEIF8QHL",
+  "e211f5541054cdb5177282492d4a90c8"
+);
+const index = searchClient.initIndex("conservocean-impacts");
 
 interface impact {
   id?: string;
@@ -74,7 +81,9 @@ class Impacts extends Component {
     perPage: 9,
     numInstances: 500,
     currentFilter: "",
-    currentSort: ""
+    currentSort: "",
+    currentSearch: "",
+    usingSearchData: false,
   };
 
   // Make API request for the current page of data using Axios
@@ -114,16 +123,23 @@ class Impacts extends Component {
   handlePageClick = (data: any) => {
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
-      this.loadData();
+      if (this.state.usingSearchData) {
+        this.search(this.state.currentSearch);
+      } else {
+        this.loadData();
+      }
     });
   };
 
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
-    // Call API using currently applied filters
-    this.loadData();
-  }
+    this.setState({
+      currentSearch: "",
+      usingSearchData: false,
+      offset: 0
+    }, () => this.loadData());
+  };
 
   // Update the filter state when selections change
   handleFilterSelectChange = (selectedOptions: any) => {
@@ -145,6 +161,35 @@ class Impacts extends Component {
     }
   }
 
+  search(query: string) {
+    index.search(query, {
+      hitsPerPage: this.state.perPage,
+      page: this.state.offset / this.state.perPage
+    }
+    ).then(({ hits, nbHits }) => {
+      console.log(hits);
+      this.setState({data: hits, numInstances: nbHits, currentSearch: query})
+    });
+  }
+
+  // Handle search events when search form is submitted
+  handleSearch(e: any) {
+    e.preventDefault();
+
+    const query = document.getElementById("search") as HTMLInputElement;
+    const form = document.getElementById("searchForm") as HTMLFormElement;
+
+    if (query.value !== "") {
+      this.state.usingSearchData = true;
+      
+      this.search(query.value);
+      
+      form.reset();
+    } else {
+      this.state.usingSearchData = false;
+    }
+  }
+
   render() {
     return (
       <Switch>
@@ -152,6 +197,7 @@ class Impacts extends Component {
           <div className="bg-light full-height">
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
+              <div>
               <Select
                 closeMenuOnSelect={false}
                 options={groupedFiltering}
@@ -167,8 +213,13 @@ class Impacts extends Component {
               />
 
             <button type="button" className="btn btn-primary" onClick={this.filter}>Sort</button>
-
-
+            <form className="form" id="searchForm">
+                    <input type="text" className="input form-control" id="search" placeholder="Search" />
+                    <button type="button" className="btn btn-primary" onClick={(e) => this.handleSearch(e)}>
+                      Search
+                    </button>
+                  </form>
+</div>
               <div className="table-responsive">
                 <table className="table">
                   <thead>

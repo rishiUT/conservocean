@@ -125,8 +125,8 @@ const groupedSorting = [
   {
     label: "Endangered Status",
     options: [
-      { value: "sort=status", label: "A to Z" },
-      { value: "sort=status&ascending=false", label: "Z to A" },
+      { value: "sort=status", label: "LC to EX" },
+      { value: "sort=status&ascending=false", label: "EX to LC" },
     ],
   },
   {
@@ -204,9 +204,7 @@ class SpeciesGrid extends Component {
       currentSearch: "",
       usingSearchData: false,
       offset: 0
-    })
-    // Call API using currently applied filters
-    this.loadData();
+    }, () => this.loadData());
   };
 
   // Update the filter state when selections change
@@ -246,7 +244,7 @@ class SpeciesGrid extends Component {
     const query = document.getElementById("search") as HTMLInputElement;
     const form = document.getElementById("searchForm") as HTMLFormElement;
 
-    if (query.value != "") {
+    if (query.value !== "") {
       this.state.usingSearchData = true;
       
       this.search(query.value);

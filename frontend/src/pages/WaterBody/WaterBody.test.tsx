@@ -3,7 +3,9 @@ import TestRenderer from 'react-test-renderer';
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import App from './App'
+import WaterBody from './WaterBody'
+import WBCard from './WaterBodyCard';
+import WaterBodies from './WaterBodyGrid';
 
 let container = null;
 beforeEach(() => {
@@ -23,9 +25,28 @@ jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
   Map: () => ({}),
 }));
 
-it("Renders the App as a Whole", () => {
+it("Renders a Water Body Instance", () => {
   act(() => {
-    render(<App />, container);
+    render(<WaterBody />, container);
   });
   expect(container.textContent).not.toBe(null);
 })
+
+/*
+it("Renders a Water Body Card", () => {
+  act(() => {
+    //Needs a dummy WaterBody
+    render(<WBCard />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+
+
+it("Renders a Water Body Grid", () => {
+  act(() => {
+    //Switch inside a router
+    render(<WaterBodies />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+*/

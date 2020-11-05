@@ -76,7 +76,7 @@ function SpeciesCard(props: any) {
               Species: <span className="font-italic">{props.sp.species}</span>
             </li>
             <li className="list-group-item">
-              IUCN Status:{" "}
+              Endangered Status:{" "}
               {
                 IUCN_STATUS[
                   props.sp.endanger_status ? props.sp.endanger_status : "DD"

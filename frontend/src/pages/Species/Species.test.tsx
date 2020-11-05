@@ -3,7 +3,9 @@ import TestRenderer from 'react-test-renderer';
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import App from './App'
+import Species from './Species'
+import SpeciesCard from './SpeciesCard';
+import SpeciesGrid from './SpeciesGrid';
 
 let container = null;
 beforeEach(() => {
@@ -19,13 +21,28 @@ afterEach(() => {
   container = null;
 });
 
-jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
-  Map: () => ({}),
-}));
-
-it("Renders the App as a Whole", () => {
+it("Renders Species Instance", () => {
   act(() => {
-    render(<App />, container);
+    render(<Species />, container);
   });
   expect(container.textContent).not.toBe(null);
 })
+
+/*
+it("Renders Species Card", () => {
+  act(() => {
+    //Make a dummy species
+    render(<SpeciesCard />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+
+
+it("Renders Species Grid", () => {
+  act(() => {
+    //Switch inside router error
+    render(<SpeciesGrid />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+*/
