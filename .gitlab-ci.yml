@@ -9,6 +9,7 @@ python:
     entrypoint: [""]
   script:
     - cd backend
+    - pip install -r requirements.txt
     - python test.py
 
 node:
