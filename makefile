@@ -42,7 +42,7 @@ docker-deployment:
 
 # deploy on EC2 instance
 deploy:
-	sudo docker container stop $(sudo docker container list -q)
+	sudo docker container stop $(sudo docker ps -a -q)
 	sudo docker pull joewallery/conservocean
 	sudo docker run -d -p 80:80 joewallery/conservocean
 
