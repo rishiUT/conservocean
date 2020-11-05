@@ -1,6 +1,7 @@
-from APIHelper import makeFish, makeWater, makeHuman
+from api.APIHelper import makeFish, makeWater, makeHuman
 from database import Fish, BodiesOfWater, HumanImpact
 from flask import abort
+
 
 def sortFish(sortBy, ascending):
     """
@@ -20,7 +21,8 @@ def sortFish(sortBy, ascending):
     """
 
     # Check for valid sortBy value
-    if sortBy not in ['common_name', 'genus', 'species', 'status', 'average_size']:
+    if sortBy not in ["common_name", "genus", "species",
+                      "status", "average_size"]:
         abort(422, description="Sort category invalid")
 
     # Code block for if we are sorting by status code
@@ -47,8 +49,11 @@ def sortFish(sortBy, ascending):
 
     # UNSAFE, used to easily sort fish by the other categories
     # Using very carefully with checking in multiple places for proper input
-    return eval('Fish.query.order_by(Fish.' + sortBy \
-                + (')' if ascending else '.desc())'))
+    return eval(
+        "Fish.query.order_by(Fish."
+        + sortBy
+        + (")" if ascending else ".desc())")
+    )
 
 
 def sortWater(sortBy, ascending):
@@ -74,8 +79,11 @@ def sortWater(sortBy, ascending):
 
     # UNSAFE, used to easily sort water by the other categories
     # Using very carefully with checking in multiple places for proper input
-    return eval('BodiesOfWater.query.order_by(BodiesOfWater.' + sortBy \
-                + (')' if ascending else '.desc())'))
+    return eval(
+        "BodiesOfWater.query.order_by(BodiesOfWater."
+        + sortBy
+        + (")" if ascending else ".desc())")
+    )
 
 
 def sortHuman(sortBy, ascending):
@@ -96,11 +104,19 @@ def sortHuman(sortBy, ascending):
     """
 
     # Check for valid sortBy value
-    if sortBy not in ["longitude", "latitude", "subcategory",
-                      "name", "count_density_1"]:
+    if sortBy not in [
+        "longitude",
+        "latitude",
+        "subcategory",
+        "name",
+        "count_density_1",
+    ]:
         abort(422, description="Sort category invalid")
 
     # UNSAFE, used to easily sort human impact by the other categories
     # Using very carefully with checking in multiple places for proper input
-    return eval('HumanImpact.query.order_by(HumanImpact.'+ sortBy \
-                + (')' if ascending else '.desc())'))
+    return eval(
+        "HumanImpact.query.order_by(HumanImpact."
+        + sortBy
+        + (")" if ascending else ".desc())")
+    )

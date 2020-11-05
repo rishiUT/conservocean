@@ -1,10 +1,10 @@
-from flask import  jsonify, abort
+from flask import jsonify, abort
 from database import app
 
 
 # Some data used for matching input data and index values across the database
-habitatDict = {'freshwater':0, 'brackish':1, 'saltwater':2}
-endangerCodes = ['DD', 'LC', 'NT', 'VU', 'EN', 'CR', 'EW', 'EX']
+habitatDict = {"freshwater": 0, "brackish": 1, "saltwater": 2}
+endangerCodes = ["DD", "LC", "NT", "VU", "EN", "CR", "EW", "EX"]
 
 
 def checkArgs(args, string1, string2):
@@ -15,15 +15,16 @@ def checkArgs(args, string1, string2):
             - args: (dict) Arguments to check values in.
             - string1: (str) key 1 to check in dictionary.
             - string2: (str) key 2 to check in dictionary.
-        
+
         Returns:
             True if args[string1] or args[string2] is None,
             False if both are None or both are populated. (XOR)
     """
 
     # Check that both entries in args are not None
-    if (args[string1] != None and args[string2] is None) or \
-       (args[string1] is None and args[string2] != None):
+    if (args[string1] != None and args[string2] is None) or (
+        args[string1] is None and args[string2] != None
+    ):
         return True
     return False
 
@@ -41,6 +42,7 @@ def resource_not_found(e):
     """
 
     return jsonify(error=str(e)), 404
+
 
 @app.errorhandler(422)
 def bad_input(e):
@@ -81,7 +83,7 @@ def validateArgs(keys: dict, args: dict):
 
 def makeWater(water, link):
     """
-    Transform a Water object into a dictionary. 
+    Transform a Water object into a dictionary.
     RECOMMENDED: Only call with link=1 for very few total water objects.
     Otherwise the running time will drastically slow down.
 
@@ -107,9 +109,10 @@ def makeWater(water, link):
 
     return water_dict
 
+
 def makeHuman(human, link):
     """
-    Transform a Human Impact object into a dictionary. 
+    Transform a Human Impact object into a dictionary.
     RECOMMENDED: Only call with link=1 for very few total human objects.
     Otherwise the running time will drastically slow down.
 
@@ -134,9 +137,10 @@ def makeHuman(human, link):
         human_dict["fish"] = human.get_fish()
     return human_dict
 
+
 def makeFish(fish, link):
     """
-    Transform a Fish object into a dictionary. 
+    Transform a Fish object into a dictionary.
     RECOMMENDED: Only call with link=1 for very few total fish objects.
     Otherwise the running time will drastically slow down.
 
