@@ -37,7 +37,7 @@ def sortFish(sortBy, ascending):
                         "VU":4, "NT":5, "LC":6, "DD":7}
 
         # Create a ragged matrix where rows are status codes
-        buckets = [[]] * 8
+        buckets = [[], [], [], [], [], [], [], []]
         fishList = Fish.query.all()
         for fish in fishList:
             buckets[codeDict[fish.endanger_status]].append(fish)
