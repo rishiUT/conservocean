@@ -5,12 +5,13 @@ import ReactPaginate from "react-paginate";
 import Select from "react-select";
 import Species from "./Species";
 import SpeciesCard from "./SpeciesCard";
-import algoliasearch from 'algoliasearch/lite';
+import algoliasearch from "algoliasearch/lite";
 
-  
-const searchClient = algoliasearch('VEMEIF8QHL', 'e211f5541054cdb5177282492d4a90c8');
-const index = searchClient.initIndex('conservocean-fish');
-
+const searchClient = algoliasearch(
+  "VEMEIF8QHL",
+  "e211f5541054cdb5177282492d4a90c8"
+);
+const index = searchClient.initIndex("conservocean-fish");
 
 interface species {
   id?: number;
@@ -143,9 +144,11 @@ class SpeciesGrid extends Component {
     data: [],
     offset: 0,
     perPage: 12,
-    numInstances: 500,
+    numInstances: 0,
     currentFilter: "",
     currentSort: "",
+    currentSearch: "",
+    usingSearchData: false,
   };
 
   // Make API request for the current page of data using Axios
@@ -186,13 +189,22 @@ class SpeciesGrid extends Component {
   handlePageClick = (data: any) => {
     // Change Offset: offset = (page number) x (# per page)
     this.setState({ offset: data.selected * this.state.perPage }, () => {
-      this.loadData();
+      if (this.state.usingSearchData) {
+        this.search(this.state.currentSearch);
+      } else {
+        this.loadData();
+      }
     });
   };
 
   // Filter button handler that creates API path
   // Queries API for the filter's selections
   filter = () => {
+    this.setState({
+      currentSearch: "",
+      usingSearchData: false,
+      offset: 0
+    })
     // Call API using currently applied filters
     this.loadData();
   };
@@ -212,17 +224,37 @@ class SpeciesGrid extends Component {
   };
 
   handleSortSelectChange = (selectedOption: any) => {
-    console.log(selectedOption);
     if (selectedOption) {
       this.setState({ currentSort: selectedOption.value });
     }
   };
 
-  search() {
-    let query = 'shark';
-    index.search(query).then(({ hits }) => {
-      console.log(hits);
+  search(query: string) {
+    index.search(query, {
+      hitsPerPage: this.state.perPage,
+      page: this.state.offset / this.state.perPage
+    }
+    ).then(({ hits, nbHits }) => {
+      this.setState({data: hits, numInstances: nbHits, currentSearch: query})
     });
+  }
+
+  // Handle search events when search form is submitted
+  handleSearch(e: any) {
+    e.preventDefault();
+
+    const query = document.getElementById("search") as HTMLInputElement;
+    const form = document.getElementById("searchForm") as HTMLFormElement;
+
+    if (query.value != "") {
+      this.state.usingSearchData = true;
+      
+      this.search(query.value);
+      
+      form.reset();
+    } else {
+      this.state.usingSearchData = false;
+    }
   }
 
   render() {
@@ -263,18 +295,12 @@ class SpeciesGrid extends Component {
                     Sort
                   </button>
 
-                  <div>
-                    <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
-                  </div>
-
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={this.search}
-                  >
-                    Search
-                  </button>
-
+                  <form className="form" id="searchForm">
+                    <input type="text" className="input form-control" id="search" placeholder="Search" />
+                    <button type="button" className="btn btn-primary" onClick={(e) => this.handleSearch(e)}>
+                      Search
+                    </button>
+                  </form>
                 </div>
               </div>
 
@@ -306,6 +332,7 @@ class SpeciesGrid extends Component {
                   nextClassName={"page-item"}
                   nextLinkClassName={"page-link"}
                   disabledClassName={"disabled"}
+                  forcePage={this.state.offset / this.state.perPage}
                 />
               </nav>
             </div>

@@ -3,6 +3,9 @@ before_script:
   - uname -a
   - printenv | sort
 
+stages:
+  - test
+
 python:
   image: 
     name: gpdowning/python
@@ -12,17 +15,6 @@ python:
     - pip install -r requirements.txt
     - python test.py
 
-node:
-  image: joewallery/node
-  script:
-    - ls -al
-#   - cat makefile
-#   - make versions
-#   - make test
-
-stages:
-  - test
-
 postman_tests:
   stage: test
   image:
@@ -31,3 +23,11 @@ postman_tests:
   script:
     - newman --version
     - newman run postman.json
+    
+frontend_tests:
+  stage: test
+  image: joewallery/node
+  script:
+    - cd frontend
+    - npm install
+    - npm run test
