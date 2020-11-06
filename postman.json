@@ -2931,7 +2931,7 @@
 									"    const jsonData = pm.response.json();\r",
 									"    const data = jsonData.data[0];\r",
 									"    const keys = ['id', 'category', 'subcategory', 'latitude', 'longitude', 'date','description','name','oil_amount', 'count_density_1','count_density_2','count_density_3', 'count_density_4','plant_rating','plant_location', 'plant_water_source', 'location', 'fish', 'locationname', 'imageurl', 'model'];\r",
-									"    pm.expect(data.name).to.eql('Braer')\r",
+									"    pm.expect(data.name).to.eql('Odyssey')\r",
 									"    pm.expect(data.subcategory).to.eql('tanker_oil_spills')\r",
 									"});\r",
 									"pm.test(\"Check Returned Number\", function () {\r",
@@ -3119,7 +3119,7 @@
 	],
 	"variable": [
 		{
-			"id": "5ccec68a-0980-4264-8471-f40d83205f2e",
+			"id": "ce2806e1-42b9-4dd5-bd40-5d2c32b844ca",
 			"key": "base_url",
 			"value": "https://www.conservocean.me"
 		}
