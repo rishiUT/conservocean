@@ -16,6 +16,9 @@ interface waterBody {
   size?: number;
   type?: string;
   water_temp?: string;
+
+  fish?: number[];
+  human_impact_ids?: number[];
 }
 
 // Display data page on a particular body of water
@@ -74,11 +77,37 @@ function WaterBody(props: any) {
             {body.salinity ? (
               <li>Salinity: {body.salinity} g salt per kg water</li>
             ) : null}
-            {/* (fish: body.fish) => (
-                      <li><Link to=`species/${fish.id}` className="card-link"> 
-                          {fish.scientific_name}</Link><li>
-                    ) */}
           </ul>
+          <div className="related-items">
+            {body.fish && body.fish.length > 0 ? (
+              <div className="related-fish">
+                <h4>Related Species:</h4>
+                <ul>
+                  {body.fish?.map((id) => {
+                    return (
+                      <li>
+                        <a href={`/species/${id}`}>Species #{id} </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
+            {body.human_impact_ids && body.human_impact_ids.length > 0 ? (
+              <div className="related-impacts">
+                <h4>Related impacts:</h4>
+                <ul>
+                  {body.fish?.map((id) => {
+                    return (
+                      <li>
+                        <a href={`/impacts/${id}`}>Impact #{id} </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
+          </div>
         </div>
       </main>
     </div>

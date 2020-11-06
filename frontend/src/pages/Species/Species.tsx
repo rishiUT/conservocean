@@ -19,16 +19,6 @@ interface species {
   catch_rate?: string;
   human_impact_ids?: any;
   location?: any[];
-
-  region?: string;
-  fishingRate?: string;
-  populationStatus?: string;
-  habitatDescription?: string;
-  physicalDescription?: string;
-  fishingImpacts?: string;
-  harvest?: string;
-  biology?: string;
-  imagePath?: string;
 }
 
 // Map each IUCN status code into its text description
@@ -153,26 +143,55 @@ function Species(props: any) {
               </div>
             ) : null}
 
+            {/* Display links to any related impact instances */}
             {species.human_impact_ids &&
             (species.human_impact_ids.plastic_pollution.length > 0 ||
-            species.human_impact_ids.coal_power_plants.length > 0  ||
-            species.human_impact_ids.offshore_oil_spills.length > 0  ||
-            species.human_impact_ids.tanker_oil_spills.length > 0 ) ? (
+              species.human_impact_ids.coal_power_plants.length > 0 ||
+              species.human_impact_ids.offshore_oil_spills.length > 0 ||
+              species.human_impact_ids.tanker_oil_spills.length > 0) ? (
               <div className="related-impacts">
                 <h4>Impacting factors:</h4>
                 <ul>
-                  {species.human_impact_ids?.plastic_pollution.sort().map((id: any) => {
-                  return <li><a href={`/impacts/${id}`}>Plastic Pollution (Sampling Location {id})</a></li>
-                })}
-                {species.human_impact_ids?.coal_power_plants.sort().map((id: any) => {
-                  return <li><a href={`/impacts/${id}`}>Coal Power Plant #{id}</a></li>
-                })}
-                {species.human_impact_ids?.offshore_oil_spills.sort().map((id: any) => {
-                  return <li><a href={`/impacts/${id}`}>Offshore Oil Spill #{id}</a></li>
-                })}
-                {species.human_impact_ids?.tanker_oil_spills.sort().map((id: any) => {
-                  return <li><a href={`/impacts/${id}`}>Tanker Oil Spill #{id}</a></li>
-                })}
+                  {species.human_impact_ids?.plastic_pollution
+                    .sort()
+                    .map((id: any) => {
+                      return (
+                        <li>
+                          <a href={`/impacts/${id}`}>
+                            Plastic Pollution (Sampling Location {id})
+                          </a>
+                        </li>
+                      );
+                    })}
+                  {species.human_impact_ids?.coal_power_plants
+                    .sort()
+                    .map((id: any) => {
+                      return (
+                        <li>
+                          <a href={`/impacts/${id}`}>Coal Power Plant #{id}</a>
+                        </li>
+                      );
+                    })}
+                  {species.human_impact_ids?.offshore_oil_spills
+                    .sort()
+                    .map((id: any) => {
+                      return (
+                        <li>
+                          <a href={`/impacts/${id}`}>
+                            Offshore Oil Spill #{id}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  {species.human_impact_ids?.tanker_oil_spills
+                    .sort()
+                    .map((id: any) => {
+                      return (
+                        <li>
+                          <a href={`/impacts/${id}`}>Tanker Oil Spill #{id}</a>
+                        </li>
+                      );
+                    })}
                 </ul>
               </div>
             ) : null}

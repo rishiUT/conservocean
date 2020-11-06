@@ -21,9 +21,8 @@ interface impact {
   plant_location?: string;
   plant_water_source?: string;
 
-  location?: string;
-  capacity?: string;
-  mapImgPath?: string;
+  location?: any[];
+  fish?: any[];
 }
 
 // Display an information page for a specific impact
@@ -118,6 +117,37 @@ function Impact(props: any) {
               <li>Plant Water Source: {impact.plant_water_source}</li>
             ) : null}
           </ul>
+          <div className="related-items">
+            {impact.location && impact.location.length > 0 ? (
+              <div className="related-locations">
+                <h4>Impacted Locations:</h4>
+                <ul>
+                  {impact.location?.map((loc) => {
+                    return (
+                      <li>
+                        <a href={`/water-bodies/${loc.id}`}>{loc.name} </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
+
+            {impact.fish && impact.fish.length > 0 ? (
+              <div className="related-locations">
+                <h4>Impacted Species:</h4>
+                <ul>
+                  {impact.fish?.map((f) => {
+                    return (
+                      <li>
+                        <a href={`/species/${f.id}`}>{f.scientific_name} </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
+          </div>
         </div>
       </main>
     </div>
