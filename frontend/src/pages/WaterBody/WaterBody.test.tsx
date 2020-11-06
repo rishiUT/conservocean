@@ -21,32 +21,15 @@ afterEach(() => {
   container = null;
 });
 
+//Mocks the missing mapbox-gl functions required by water body instances
 jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
   Map: () => ({}),
 }));
 
+//Tests water bodies to ensure they return something
 it("Renders a Water Body Instance", () => {
   act(() => {
     render(<WaterBody />, container);
   });
   expect(container.textContent).not.toBe(null);
 });
-
-/*
-it("Renders a Water Body Card", () => {
-  act(() => {
-    //Needs a dummy WaterBody
-    render(<WBCard />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-
-
-it("Renders a Water Body Grid", () => {
-  act(() => {
-    //Switch inside a router
-    render(<WaterBodies />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-*/

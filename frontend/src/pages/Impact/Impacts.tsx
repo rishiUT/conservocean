@@ -6,12 +6,14 @@ import Select from "react-select";
 import Impact from "./ImpactInstance";
 import algoliasearch from "algoliasearch/lite";
 
+// Keys to access Alggolia search
 const searchClient = algoliasearch(
   "VEMEIF8QHL",
   "e211f5541054cdb5177282492d4a90c8"
 );
 const index = searchClient.initIndex("conservocean-impacts");
 
+// The interface describes the expected attributes of an impact object
 interface impact {
   id?: string;
   name?: string;
@@ -35,6 +37,7 @@ interface impact {
   mapImgPath?: string;
 }
 
+// Defines labels and values for the filtering categories in the dropdown menu
 const subcategories = [
   { value: "subcategory=plastic_pollution", label: "Plastic Pollution" },
   { value: "subcategory=coal_power_plants", label: "Coal Power Plants" },
@@ -119,7 +122,8 @@ class Impacts extends Component {
   loadData() {
     axios
       .get(
-        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`
+        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&
+        ${this.state.currentFilter}&${this.state.currentSort}`
       )
       .then((response) => {
         console.log(response);
@@ -189,6 +193,7 @@ class Impacts extends Component {
     this.setState({ currentFilter: queryParams });
   };
 
+  // Update the sorting state when selections change
   handleSortSelectChange = (selectedOption: any) => {
     if (selectedOption) {
       this.setState({ currentSort: selectedOption.value });
@@ -251,34 +256,38 @@ class Impacts extends Component {
           <div className="bg-light full-height">
             <div className="container">
               <h2 className="py-5 text-center">Human Impacts</h2>
-              <div>
-                <Select
-                  closeMenuOnSelect={false}
-                  options={groupedFiltering}
-                  onChange={this.handleFilterSelectChange}
-                  isMulti
-                />
+              <div className="form-group">
+                <div>
+                  <Select
+                    closeMenuOnSelect={false}
+                    options={groupedFiltering}
+                    onChange={this.handleFilterSelectChange}
+                    isMulti
+                    className="form-select mb-2"
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-primary mb-2"
+                    onClick={this.filter}
+                  >
+                    Filter
+                  </button>
+                </div>
+                <div>
+                  <Select
+                    options={groupedSorting}
+                    onChange={this.handleSortSelectChange}
+                    className="form-select mb-2"
+                  />
 
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.filter}
-                >
-                  Filter
-                </button>
-
-                <Select
-                  options={groupedSorting}
-                  onChange={this.handleSortSelectChange}
-                />
-
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.filter}
-                >
-                  Sort
-                </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary mb-2"
+                    onClick={this.filter}
+                  >
+                    Sort
+                  </button>
+                </div>
                 <form
                   className="form"
                   id="searchForm"
@@ -286,11 +295,11 @@ class Impacts extends Component {
                 >
                   <input
                     type="text"
-                    className="input form-control"
                     id="search"
                     placeholder="Search"
+                    className="input form-control mb-2"
                   />
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary mb-2">
                     Search
                   </button>
                 </form>
@@ -347,6 +356,7 @@ class Impacts extends Component {
   }
 }
 
+// Function returns markup for impact info in table
 function ImpactTableData({ impact }: any) {
   return (
     <tr>

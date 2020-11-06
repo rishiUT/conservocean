@@ -1,5 +1,6 @@
 import React from "react";
 
+// prints information about a given water body in a card
 function WBCard(props: any) {
   return (
     <div className={`col-lg-4 col-md-6 col-sm-12 ${props.className}`}>

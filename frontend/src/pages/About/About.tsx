@@ -8,8 +8,6 @@ import serena from "../Media/serena.jpg";
 import andy from "../Media/andy.jpg";
 import christine from "../Media/christine.jpg";
 import dane from "../Media/dane.jpg";
-import fishwatch from "../Media/fishwatch.jpg";
-import stormglass from "../Media/stormglass.svg";
 import slack from "./AboutPageMedia/Slack.png";
 import postman from "./AboutPageMedia/postman.png";
 import gitlab from "./AboutPageMedia/gitlab.png";
@@ -26,6 +24,7 @@ import openfish from "./AboutPageMedia/openfish.jpeg";
 import arcgis from "./AboutPageMedia/arcgis.png";
 import opendata from "./AboutPageMedia/opendata.png";
 
+//The interface describes the expected attributes of a user object
 interface user {
   name: string;
   id: string;
@@ -35,6 +34,7 @@ interface user {
   image: string;
 }
 
+//The interface describes the expected attributes of a tool object
 interface tool {
   name: string;
   image: string;
@@ -44,6 +44,8 @@ interface tool {
 
 class About extends React.Component {
   state = {
+
+    // Defining the information in tools, data, and users to be displayed later
     tools: [
       {
         name: "Postman",
@@ -74,14 +76,16 @@ class About extends React.Component {
         name: "Docker",
         image: docker,
         description:
-          "Docker is used to create similar environments for us to work within, making working seperately much easier.",
+          "Docker is used to create similar environments for us to work "+
+          "within, making working seperately much easier.",
         link: "https://www.docker.com/",
       },
       {
         name: "Node.js and npm",
         image: node,
         description:
-          "Node.js and npm are used to manage the project's installations and dependencies.",
+          "Node.js and npm are used to manage the project's installations and "+
+          "dependencies.",
         link: "https://www.nodejs.org/",
       },
       {
@@ -100,7 +104,8 @@ class About extends React.Component {
         name: "React-select",
         image: reactImg,
         description:
-          "React-select was used to implement the drop-down menu interfaces for filtering and searching on the model pages.",
+          "React-select was used to implement the drop-down menu interfaces "+
+          "for filtering and searching on the model pages.",
         link: "https://react-select.com",
       },
     ],
@@ -109,52 +114,66 @@ class About extends React.Component {
         name: "FishBase API",
         image: fishbase,
         description:
-          "FishBase stores basic information about fish, such as species, common name, genus, etc.",
+          "FishBase stores basic information about fish, such as species, "+
+          "common name, genus, etc.",
         link: "https://fishbaseapi.readme.io",
       },
       {
         name: "IUCN Red List API",
         image: iucn,
         description:
-          "The IUCN Red List database stores information on the risk levels of several species, indicating their risk of extinction.",
+          "The IUCN Red List database stores information on the risk levels "+
+          "of several species, indicating their risk of extinction.",
         link: "https://apiv3.iucnredlist.org/",
       },
       {
         name: "Bison USGS",
         image: bison,
         description:
-          "Bison USGS stores information about the geographic location of fish around the United States.",
+          "Bison USGS stores information about the geographic location of "+
+          "fish around the United States.",
         link: "https://bison.usgs.gov/#home",
       },
       {
         name: "Marine Regions",
         image: marine,
         description:
-          "Marine Regions contains a large variety of information about various geographic features, primarily features found in and around water.",
+          "Marine Regions contains a large variety of information about "+
+          "various geographic features, primarily features found in and "+
+          "around water.",
         link: "https://marineregions.org",
       },
       {
         name: "Open Fisheries",
         image: openfish,
         description:
-          "Open Fisheries has information regarding the yearly catch rate of various fish, given a species name for the fish.",
+          "Open Fisheries has information regarding the yearly catch rate of "+
+          "various fish, given a species name for the fish.",
         link: "https://openfisheries.org",
       },
       {
         name: "ArcGIS Hub",
         image: arcgis,
         description:
-          "Arcgis Hub stores many API’s, one of which has information about the microplastic density present in many major bodies of water.",
+          "Arcgis Hub stores many API’s, one of which has information about "+
+          "the microplastic density present in many major bodies of water.",
         link:
-          "https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic%20-pollution-in-the-worlds-oceans-km2-200-mm/geoservice",
+          "https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic%20-"+
+          "pollution-in-the-worlds-oceans-km2-200-mm/geoservice",
       },
       {
         name: "OpenDataSoft",
         image: opendata,
         description:
-          "OpenDataSoft contains many API’s, one of which contains information about world power plants, separated by category, such as coal plants.",
+          "OpenDataSoft contains many API’s, one of which contains "+
+          "information about world power plants, separated by category, such "+
+          "as coal plants.",
         link:
-          "https://data.opendatasoft.com/explore/dataset/world-power%20-plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive%20.plant_state&disjunctive.plant_status&disjunctive.%20plant_type_of_ownership&disjunctive.plant_operating_company&%20disjunctive.type",
+          "https://data.opendatasoft.com/explore/dataset/world-power%20-"+
+          "plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive"+
+          "%20.plant_state&disjunctive.plant_status&disjunctive.%20"+
+          "plant_type_of_ownership&disjunctive.plant_operating_company&"+
+          "%20disjunctive.type",
       },
     ],
     users: [
@@ -167,9 +186,9 @@ class About extends React.Component {
         unitTests: 0,
         image: joe,
         bio:
-          " Hi, I’m Joe! I’m a junior CS and math major from Houston. " +
-          "For ConservOcean, I am primarily working on front-end development." +
-          " In my free time, I also enjoy reading, cooking, and " +
+          " Hi, I’m Joe! I’m a junior CS and math major from Houston. "+
+          "For ConservOcean, I am primarily working on front-end development."+
+          " In my free time, I also enjoy reading, cooking, and "+
           "watching movies!",
       },
       {
@@ -239,16 +258,6 @@ class About extends React.Component {
           "I like listening to music and playing games in my free time.",
       },
     ],
-    dataSource: [
-      {
-        name: "FishWatch",
-        image: fishwatch,
-      },
-      {
-        name: "Storm Glass",
-        image: stormglass,
-      },
-    ],
     totalIssues: 0,
     totalCommits: 0,
     totalUnitTests: 0,
@@ -307,6 +316,8 @@ class About extends React.Component {
       });
   }
   render() {
+
+    // Returns html output based on the information in the data structures
     const { users }: any = this.state;
     const result = users.map((user: user, index: number) => {
       return <UserCard key={index} user={user} />;

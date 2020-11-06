@@ -23,6 +23,7 @@ jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
   Map: () => ({}),
 }));
 
+//Tests the entire app to ensure it renders something
 it("Renders the App as a Whole", () => {
   act(() => {
     render(<App />, container);

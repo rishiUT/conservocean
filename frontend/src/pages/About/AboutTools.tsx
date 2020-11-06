@@ -8,6 +8,7 @@ interface tool {
   link: string;
 }
 
+// Uses information passed in to create an return a "toolcard"
 function ToolCard({ tool }: any) {
   if (tool) {
     return (

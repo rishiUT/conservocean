@@ -7,11 +7,13 @@ import Hit from "./HomeSearch";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, Hits, SearchBox } from "react-instantsearch-dom";
 
+// Keys to access Alggolia search 
 const searchClient = algoliasearch(
   "VEMEIF8QHL",
   "e211f5541054cdb5177282492d4a90c8"
 );
 
+// Returns mark-up for the home page
 function Home() {
   return (
     <div>
@@ -41,10 +43,12 @@ function Home() {
             Water covers over 70% of Earth's surface.{" "}
           </h2>
           <h2 className="subheading">
-            Explore Earth's oceans, marine life, and the impact of human factors
+            Explore Earth's oceans, marine life, and the impact of human 
+            factors
           </h2>
         </div>
 
+        {/* These are links to the model pages. */}
         <div className="list-cont">
           <ul className="list">
             <li className="list-item">
@@ -66,12 +70,16 @@ function Home() {
         </div>
       </div>
 
-      <div className="search-section">
+      {/* This allows users to search the entire site. */}
+      <div className="search-section bg-light">
+        <div className="container">
         <h2 className="heading">Get started by searching.</h2>
+        </div>
         <InstantSearch searchClient={searchClient} indexName="conservocean">
-          <div className="right-panel">
-            <SearchBox />
-
+          <div>
+            <div className="container">
+              <SearchBox />
+            </div>
             <div className="row-cont">
               <Hits hitComponent={Hit} />
             </div>

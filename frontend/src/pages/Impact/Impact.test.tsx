@@ -21,31 +21,15 @@ afterEach(() => {
   container = null;
 });
 
+//This mocks the map modules, which are not implemented by JSX
 jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
   Map: () => ({}),
 }));
 
+//This tests the impacts to ensure they load
 it("Renders an Impact Instance Page", () => {
   act(() => {
     render(<Impact />, container);
   });
   expect(container.textContent).not.toBe(null);
 });
-
-/*
-it("Renders an Impact Card", () => {
-  act(() => {
-    //Needs dummy value
-    render(<ImpactCard />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-
-it("Renders an Impact Table", () => {
-  act(() => {
-    //Switch inside router
-    render(<Impacts />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-*/

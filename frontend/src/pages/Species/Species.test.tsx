@@ -21,28 +21,10 @@ afterEach(() => {
   container = null;
 });
 
+//Tests a species instance to make sure it renders something
 it("Renders Species Instance", () => {
   act(() => {
     render(<Species />, container);
   });
   expect(container.textContent).not.toBe(null);
 });
-
-/*
-it("Renders Species Card", () => {
-  act(() => {
-    //Make a dummy species
-    render(<SpeciesCard />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-
-
-it("Renders Species Grid", () => {
-  act(() => {
-    //Switch inside router error
-    render(<SpeciesGrid />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-*/

@@ -1,5 +1,7 @@
 import React from "react";
 
+//Wraps a human impact in a card that displays 
+//image, name, category, and subcategory
 export default function ImpactCard(props: any) {
   return (
     <div className="col-lg-4 col-md-6 col-sm-12">

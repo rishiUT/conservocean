@@ -20,19 +20,10 @@ afterEach(() => {
   container = null;
 });
 
+//Tests the Home Page
 it("Renders Home Page", () => {
   act(() => {
     render(<Home />, container);
   });
   expect(container.textContent).not.toBe(null);
 });
-
-/*
-it("Renders a Search Hit", () => {
-  //Pass in an example prop that has a hit that has a model
-  act(() => {
-    render(<Hit />, container);
-  });
-  expect(container.textContent).not.toBe(null);
-})
-*/

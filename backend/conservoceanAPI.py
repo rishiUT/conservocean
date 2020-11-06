@@ -1,4 +1,5 @@
-from flask import render_template
+import os 
+from flask import render_template, send_from_directory
 from flask_restful import Api
 from database import app
 from api.APIHuman import *
@@ -11,6 +12,10 @@ api = Api(app)
 @app.route('/<path:path>')
 def index(path):
     return render_template("index.html")
+
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
 
 # Endpoints for the API
 api.add_resource(FishList, "/api/fish")

@@ -1,5 +1,6 @@
 import React from "react";
 
+// Defines information expected from a species object
 interface species {
   id?: number;
   scientific_name?: string;
@@ -42,6 +43,7 @@ const IUCN_STATUS: { [key: string]: string } = {
   EX: "Extinct",
 };
 
+//Wraps a species in a card that displays the fish's information
 function SpeciesCard(props: any) {
   return (
     <div className={`col-lg-4 col-md-6 col-sm-12 ${props.className}`}>

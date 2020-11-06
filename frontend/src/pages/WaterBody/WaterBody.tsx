@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Map from "../../parts/Map";
 
+// Iterface defines what information to expect in waterbody object
 interface waterBody {
   id?: number;
   latitude?: string;

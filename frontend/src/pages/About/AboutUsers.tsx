@@ -10,6 +10,7 @@ interface user {
   image: string;
 }
 
+// Uses information passed in to create an return a "usercard"
 function UserCard({ user }: any) {
   if (user) {
     return (

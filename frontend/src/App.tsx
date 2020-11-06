@@ -20,15 +20,22 @@ function App() {
 
         {/* <Switch> renders the first route that matches current URL */}
         <Switch>
+          <Route exact path="/" children={<Home />} />
           <Route path="/species" children={<SpeciesGrid />} />
           <Route path="/water-bodies" children={<WaterBodies />} />
           <Route path="/impacts" children={<Impacts />} />
           <Route path="/about" children={<About />} />
-          <Route exact path="/" children={<Home />} />
+          <Route path="*">
+            <NoMatch />
+          </Route>
         </Switch>
       </div>
     </Router>
   );
+}
+
+function NoMatch() {
+  return <div className="container"><h1>Page not found.</h1></div>
 }
 
 export default App;

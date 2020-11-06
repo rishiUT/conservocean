@@ -13,6 +13,7 @@ const searchClient = algoliasearch(
 );
 const index = searchClient.initIndex("conservocean-fish");
 
+// Defines information expected from a species object
 interface species {
   id?: number;
   scientific_name?: string;
@@ -43,6 +44,7 @@ interface species {
 }
 
 // Filtering Categories
+// Defines the categories and API calls for sorting
 
 const population_trend = [
   { value: "population_trend=Unknown", label: "Unknown" },
@@ -154,7 +156,9 @@ class SpeciesGrid extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    let URL = `/api/fish?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`;
+    let URL = `/api/fish?offset=${this.state.offset}&limit=
+    ${this.state.perPage}&${this.state.currentFilter}&
+    ${this.state.currentSort}`;
     axios
       .get(URL)
       .then((response) => {
@@ -225,12 +229,14 @@ class SpeciesGrid extends Component {
     this.setState({ currentFilter: queryParams });
   };
 
+  // Update the sort state when selections change
   handleSortSelectChange = (selectedOption: any) => {
     if (selectedOption) {
       this.setState({ currentSort: selectedOption.value });
     }
   };
 
+  // Searches for instances of a string in the species pages
   search(query: string) {
     index
       .search(query, {
@@ -296,10 +302,11 @@ class SpeciesGrid extends Component {
                     options={groupedFiltering}
                     onChange={this.handleFilterSelectChange}
                     isMulti
+                    className="mb-2"
                   />
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-primary mb-2"
                     onClick={this.filter}
                   >
                     Filter
@@ -308,11 +315,12 @@ class SpeciesGrid extends Component {
                   <Select
                     options={groupedSorting}
                     onChange={this.handleSortSelectChange}
+                    className="mb-2"
                   />
 
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-primary mb-2"
                     onClick={this.filter}
                   >
                     Sort
@@ -325,11 +333,11 @@ class SpeciesGrid extends Component {
                   >
                     <input
                       type="text"
-                      className="input form-control"
+                      className="input form-control mb-2"
                       id="search"
                       placeholder="Search"
                     />
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary mb-2">
                       Search
                     </button>
                   </form>

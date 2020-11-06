@@ -7,12 +7,14 @@ import WaterBody from "./WaterBody";
 import WBCard from "./WaterBodyCard";
 import algoliasearch from "algoliasearch/lite";
 
+// Keys for Algolia search
 const searchClient = algoliasearch(
   "VEMEIF8QHL",
   "e211f5541054cdb5177282492d4a90c8"
 );
 const index = searchClient.initIndex("conservocean-water");
 
+// Defines info expected in a waterbody client
 interface waterBody {
   id?: number;
   latitude?: string;
@@ -30,8 +32,7 @@ interface waterBody {
 
 const BODIES: waterBody[] = [];
 
-// Filtering Categories
-
+// Filtering Categories and API calls
 const longitude = [
   { value: "long_min=0&long_max=89", label: "longitude = 0 - 89" },
   { value: "long_min=90&long_max=180", label: "longitude = 90 - 180" },
@@ -138,7 +139,9 @@ class WaterBodies extends Component {
 
   // Make API request for the current page of data using Axios
   loadData() {
-    let URL = `/api/water?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`;
+    let URL = `/api/water?offset=${this.state.offset}&limit=
+    ${this.state.perPage}&${this.state.currentFilter}&
+    ${this.state.currentSort}`;
     axios
       .get(URL)
       .then((response) => {
@@ -210,12 +213,14 @@ class WaterBodies extends Component {
     this.setState({ currentFilter: queryParams });
   };
 
+  // Update the sorting state when selections change
   handleSortSelectChange = (selectedOption: any) => {
     if (selectedOption) {
       this.setState({ currentSort: selectedOption.value });
     }
   };
 
+  // Returns a search for a term given by a user
   search(query: string) {
     index
       .search(query, {
@@ -281,11 +286,12 @@ class WaterBodies extends Component {
                     options={groupedFiltering}
                     onChange={this.handleFilterSelectChange}
                     isMulti
+                    className="mb-2"
                   />
 
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-primary mb-2"
                     onClick={this.filter}
                   >
                     Filter
@@ -293,11 +299,12 @@ class WaterBodies extends Component {
                   <Select
                     options={groupedSorting}
                     onChange={this.handleSortSelectChange}
+                    className="mb-2"
                   />
 
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-primary mb-2"
                     onClick={this.filter}
                   >
                     Sort
@@ -309,11 +316,11 @@ class WaterBodies extends Component {
                   >
                     <input
                       type="text"
-                      className="input form-control"
+                      className="input form-control mb-2"
                       id="search"
                       placeholder="Search"
                     />
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary mb-2">
                       Search
                     </button>
                   </form>

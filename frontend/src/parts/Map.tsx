@@ -2,16 +2,19 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import "./Map.css";
 
+// The access token gives us permission to access the mapbox-gl API.
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam9ld2FsbGVyeSIsImEiOiJja2dmdHd6bDMxbzB3MnptaXY0dDVxbW9tIn0." +
   "jBu51H8cQiBL8zeq6a81uQ";
 
+// This tells us what data a map can have.
 interface MapState {
   lng: number;
   lat: number;
   zoom: number;
 }
 
+// Make a map and return it.
 export default class Map extends React.Component<MapState, MapState> {
   mapContainer: any;
   constructor(props: any) {
