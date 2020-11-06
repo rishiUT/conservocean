@@ -17,7 +17,8 @@ interface species {
   speccode?: string;
   catch_year?: string;
   catch_rate?: string;
-  human_impact_ids?: string;
+  human_impact_ids?: any;
+  location?: any[];
 
   region?: string;
   fishingRate?: string;
@@ -135,13 +136,47 @@ function Species(props: any) {
             {species.catch_rate ? (
               <li>Catch Rate: {species.catch_rate}</li>
             ) : null}
-            {/* {species.human_impact_ids ? (
-              <li>
-                Human Impacts that Affect the Species:{" "}
-                {species.human_impact_ids}
-              </li>
-            ) : null} */}
           </ul>
+          <div className="related-items">
+            {species.location && species.location.length > 0 ? (
+              <div className="related-locations">
+                <h4>Locations:</h4>
+                <ul>
+                  {species.location?.map((loc) => {
+                    return (
+                      <li>
+                        <a href={`/water-bodies/${loc.id}`}>{loc.name} </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
+
+            {species.human_impact_ids &&
+            (species.human_impact_ids.plastic_pollution.length > 0 ||
+            species.human_impact_ids.coal_power_plants.length > 0  ||
+            species.human_impact_ids.offshore_oil_spills.length > 0  ||
+            species.human_impact_ids.tanker_oil_spills.length > 0 ) ? (
+              <div className="related-impacts">
+                <h4>Impacting factors:</h4>
+                <ul>
+                  {species.human_impact_ids?.plastic_pollution.sort().map((id: any) => {
+                  return <li><a href={`/impacts/${id}`}>Plastic Pollution (Sampling Location {id})</a></li>
+                })}
+                {species.human_impact_ids?.coal_power_plants.sort().map((id: any) => {
+                  return <li><a href={`/impacts/${id}`}>Coal Power Plant #{id}</a></li>
+                })}
+                {species.human_impact_ids?.offshore_oil_spills.sort().map((id: any) => {
+                  return <li><a href={`/impacts/${id}`}>Offshore Oil Spill #{id}</a></li>
+                })}
+                {species.human_impact_ids?.tanker_oil_spills.sort().map((id: any) => {
+                  return <li><a href={`/impacts/${id}`}>Tanker Oil Spill #{id}</a></li>
+                })}
+                </ul>
+              </div>
+            ) : null}
+          </div>
         </div>
       </main>
     </div>

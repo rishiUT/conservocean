@@ -47,7 +47,7 @@ deploy:
 	sudo docker run -d -p 80:80 joewallery/conservocean
 
 # run development servers
-develop: develop-front develop-back
+develop: develop-back develop-front
 
 develop-front:
 	npm start --prefix frontend
