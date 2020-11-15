@@ -36,6 +36,15 @@ export default function Navbar() {
           </li>
           <li className={"nav-item"}>
             <NavLink
+              to="/visualizations"
+              className={"nav-link"}
+              activeClassName="active"
+            >
+              Visualizations
+            </NavLink>
+          </li>
+          <li className={"nav-item"}>
+            <NavLink
               to="/species"
               className={"nav-link"}
               activeClassName="active"

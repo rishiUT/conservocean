@@ -8,6 +8,7 @@ import About from "./pages/About/About";
 import SpeciesGrid from "./pages/Species/SpeciesGrid";
 import Impacts from "./pages/Impact/Impacts";
 import WaterBodies from "./pages/WaterBody/WaterBodyGrid";
+import Visualizations from "./pages/Visualizations/Visualizations";
 
 import Navbar from "./parts/Navbar";
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/water-bodies" children={<WaterBodies />} />
           <Route path="/impacts" children={<Impacts />} />
           <Route path="/about" children={<About />} />
+          <Route path="/visualizations" children={<Visualizations />} />
           <Route path="*">
             <NoMatch />
           </Route>
