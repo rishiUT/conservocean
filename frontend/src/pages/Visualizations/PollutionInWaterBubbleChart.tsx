@@ -41,7 +41,7 @@ class PollutionInWaterBubbleChart extends React.Component {
           }
           
           var diameter = 600,
-              color = d3.scaleOrdinal(d3.schemeCategory10);
+              color = d3.scaleOrdinal(["#042938", "#0f3f55", "#1b5269", "#26617b", "#2f6f8c", "#387e9f", "#387e9f"]);
           
           var bubble = d3.pack()
             .size([diameter, diameter])
@@ -88,7 +88,7 @@ class PollutionInWaterBubbleChart extends React.Component {
             .style("fill", "#000000");
     }
     render() {
-        return <div id="stateCompanyBubbleChart"></div>
+        return <div className="vis-container" id="stateCompanyBubbleChart"></div>
     }
 }
 export default PollutionInWaterBubbleChart;

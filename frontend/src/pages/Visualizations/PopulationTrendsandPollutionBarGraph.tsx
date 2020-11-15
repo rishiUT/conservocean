@@ -2,7 +2,7 @@ import React from 'react';
 import * as d3 from 'd3';
 import { ReactComponent } from '*.svg';
 
-class TempAndPlantsBar extends React.Component {
+class PopulationTrendsandPollutionBarGraph extends React.Component {
     constructor(props: any) {
         super(props);
         this.createBarChart = this.createBarChart.bind(this);
@@ -19,7 +19,7 @@ class TempAndPlantsBar extends React.Component {
             height = 400 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
-        var svg = d3.select("#tempAndPlantsBar")
+        var svg = d3.select("#PopulationTrendsandPollutionBarGraph")
         .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -29,26 +29,14 @@ class TempAndPlantsBar extends React.Component {
 
         
         var data = [
-            {'range': "25 - 29" ,'value': 11},
-            {'range': '30 - 34', 'value': 148},
-            {'range': '35 - 39', 'value': 93},
-            {'range': '40 - 44', 'value': 160},
-            {'range': '45 - 49', 'value': 213},
-            {'range': '50 - 54', 'value': 317},
-            {'range': '55 - 59', 'value': 291},
-            {'range': '60 - 64', 'value': 513},
-            {'range': '65 - 69', 'value': 266},
-            {'range': '70 - 74', 'value': 278},
-            {'range': '75 - 79', 'value': 143},
-            {'range': '80 - 84', 'value': 102},
-            {'range': '85 - 89', 'value': 84},
-            {'range': '90 - 94', 'value': 15},
-            
+            {'trend': "Stable" ,'value': 11},
+            {'trend': "Increasing", 'value': 148},
+            {'trend': "Decreasing", 'value': 93},
         ]
 
         // X axis: scale and draw:
         var x = d3.scaleBand()
-            .domain(data.map(function(d){ return d.range;}))   
+            .domain(data.map(function(d){ return d.trend;}))   
             .range([0, width]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -57,7 +45,7 @@ class TempAndPlantsBar extends React.Component {
         // Y axis: scale and draw:
         var y = d3.scaleLinear()
             .range([height, 0]);
-            y.domain([0, 550]);   // d3.hist has to be called before the Y axis obviously
+            y.domain([0, 200]);   // d3.hist has to be called before the Y axis obviously
         svg.append("g")
             .call(d3.axisLeft(y));
 
@@ -67,16 +55,16 @@ class TempAndPlantsBar extends React.Component {
             .enter()
             .append("rect")
                 .attr("x", 1)
-                .attr("transform", function(d) { return "translate(" + x(d.range) + "," + y(d.value) + ")"; })
+                .attr("transform", function(d) { return "translate(" + x(d.trend) + "," + y(d.value) + ")"; })
                 .attr("width", function(d) { return width / data.length ; })
                 .attr("height", function(d) { return height - y(d.value); })
-                .style("fill", "#69b3a2")
+                .style("fill", "#4b97c9")
 
         }
 
     render() {
-        return <div className="vis-container" id="tempAndPlantsBar"></div>
+        return <div className="vis-container" id="PopulationTrendsandPollutionBarGraph"></div>
     }
     
 }
-export default TempAndPlantsBar
+export default PopulationTrendsandPollutionBarGraph

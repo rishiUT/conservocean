@@ -141,7 +141,7 @@ class RecipesPerFamilyPie extends React.Component {
   }
 
   render() {
-    return <div id="recipesPerFamilyPieChart"></div>;
+    return <div className="vis-container" id="recipesPerFamilyPieChart"></div>;
   }
 }
 

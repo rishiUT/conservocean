@@ -13,7 +13,7 @@ class RecipesAndCaloriesBubble extends React.Component {
     }
 
     render() {
-        return <div id="recipeCalorieBubbleChart"></div>
+        return <div className="vis-container" id="recipeCalorieBubbleChart"></div>
     }
 
     createBubbleChart(){
