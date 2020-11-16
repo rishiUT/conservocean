@@ -1,6 +1,9 @@
 from flask import request
 from flask_restful import Resource, reqparse
-from database import db, Fish, BodiesOfWater, HumanImpact
+from database import db
+from models.ModelFish import Fish
+from models.ModelWater import BodiesOfWater
+from models.ModelHuman import HumanImpact
 from api.APIHelper import *
 from api.APIFilter import filterHuman
 from api.APISort import sortHuman

@@ -1,6 +1,8 @@
 from conservoceanAPI import *
 from unittest import main, TestCase
-from database import Fish, BodiesOfWater, HumanImpact
+from models.ModelFish import Fish
+from models.ModelWater import BodiesOfWater
+from models.ModelHuman import HumanImpact
 from api.APIHelper import makeFish, makeHuman, makeWater
 
 

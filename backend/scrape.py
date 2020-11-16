@@ -1,4 +1,7 @@
-from database import db, Fish, BodiesOfWater, HumanImpact
+from database import db
+from models.ModelFish import Fish
+from models.ModelWater import BodiesOfWater
+from models.ModelHuman import HumanImpact
 import requests
 from math import radians, cos, sin, asin, sqrt
 import time
