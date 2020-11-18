@@ -180,7 +180,7 @@ class About extends React.Component {
       {
         name: "Joe Wallery",
         id: "Joe Wallery",
-        maj_resp: "Frontend",
+        maj_resp: "Frontend, Leader for phase I",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -194,7 +194,7 @@ class About extends React.Component {
       {
         name: "Rishi Salem",
         id: "Rishi Salem",
-        maj_resp: "Frontend",
+        maj_resp: "Frontend, Leader for phase II",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -207,7 +207,7 @@ class About extends React.Component {
       {
         name: "Serena Zamarripa",
         id: "Serena Zamarripa",
-        maj_resp: "Frontend",
+        maj_resp: "Frontend, Leader for phase IV",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -220,7 +220,7 @@ class About extends React.Component {
       {
         name: "Andy Weng",
         id: "AndyWeng33252",
-        maj_resp: "Backend",
+        maj_resp: "Backend, Leader for phase III",
         commits: 0,
         issues: 0,
         unitTests: 0,
