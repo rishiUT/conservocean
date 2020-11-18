@@ -12,3 +12,8 @@
 .navbar-custom .nav-item:hover .nav-link {
   color: #387e9f;
 }
+.icon {
+  width: 2rem;
+  margin-right: 1rem;
+  margin-left: 5px;
+}

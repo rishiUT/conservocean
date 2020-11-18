@@ -6,7 +6,9 @@ from api.APIHelper import (
     endangerCodes,
     habitatDict,
 )
-from database import Fish, BodiesOfWater, HumanImpact
+from models.ModelFish import Fish
+from models.ModelWater import BodiesOfWater
+from models.ModelHuman import HumanImpact
 from flask import abort
 
 

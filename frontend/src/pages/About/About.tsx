@@ -45,7 +45,21 @@ interface tool {
 class About extends React.Component {
   state = {
 
-    // Defining the information in tools, data, and users to be displayed later
+    // Defining the information in stats, tools, data, and users to be displayed later
+    stats: [
+      {
+        name: "API Documentation",
+        image: postman,
+        description: "Link to the Conservocean API Documentation on Postman.",
+        link: "https://documenter.getpostman.com/view/12800288/TVKJxaRw",
+      },
+      {
+        name: "Gitlab Repository",
+        image: gitlab,
+        description: "Link to the project's repository on Gitlab.",
+        link: "https://gitlab.com/joewallery/cs373-group12",
+      },
+    ],
     tools: [
       {
         name: "Postman",
@@ -180,7 +194,7 @@ class About extends React.Component {
       {
         name: "Joe Wallery",
         id: "Joe Wallery",
-        maj_resp: "Frontend",
+        maj_resp: "Frontend, Leader for phase I",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -194,7 +208,7 @@ class About extends React.Component {
       {
         name: "Rishi Salem",
         id: "Rishi Salem",
-        maj_resp: "Frontend",
+        maj_resp: "Frontend, Leader for phase II",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -207,7 +221,7 @@ class About extends React.Component {
       {
         name: "Serena Zamarripa",
         id: "Serena Zamarripa",
-        maj_resp: "Frontend",
+        maj_resp: "Frontend, Leader for phase IV",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -220,7 +234,7 @@ class About extends React.Component {
       {
         name: "Andy Weng",
         id: "AndyWeng33252",
-        maj_resp: "Backend",
+        maj_resp: "Backend, Leader for phase III",
         commits: 0,
         issues: 0,
         unitTests: 0,
@@ -333,6 +347,11 @@ class About extends React.Component {
       return <ToolCard key={index} tool={tool} />;
     });
 
+    const { stats }: any = this.state;
+    const resultStats = stats.map((tool: tool, index: number) => {
+      return <ToolCard key={index} tool={tool} />;
+    });
+
     return (
       <div className="container">
         <h2 className="header">About</h2>
@@ -363,19 +382,8 @@ class About extends React.Component {
         <h3 className="description">
           Total Unit Tests: {this.state.totalUnitTests}
         </h3>
-        <a
-          href="https://documenter.getpostman.com/view/12800288/TVKJxaRw"
-          className="theme-link"
-        >
-          Link to API Documentation
-        </a>
-        <br />
-        <a
-          href="https://gitlab.com/joewallery/cs373-group12"
-          className="theme-link"
-        >
-          Link to the GitLab Repository
-        </a>
+        <div className="row py-5"> {resultStats}</div>
+
 
         <h2 className="header">Our Team</h2>
         <div className="row py-5"> {result}</div>
