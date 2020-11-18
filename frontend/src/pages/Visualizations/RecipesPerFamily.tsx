@@ -58,7 +58,6 @@ class RecipesPerFamilyPie extends React.Component {
     };
 
     var keys = Object.keys(data);
-    console.log(d3.schemeBlues[7]);
     // set the color scale
     var color = d3
       .scaleOrdinal()
@@ -125,7 +124,6 @@ class RecipesPerFamilyPie extends React.Component {
       .enter()
       .append("text")
       .text(function (d: any) {
-        console.log(d.data.key);
         return d.data.key;
       })
       .attr("transform", function (d: any): any {

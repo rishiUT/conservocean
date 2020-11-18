@@ -27,3 +27,15 @@ it("Renders Home Page", () => {
   });
   expect(container.textContent).not.toBe(null);
 });
+
+/*
+//Tests a search Hit
+it("Renders Search Hit", () => {
+  act(() => {
+    
+    render(<Hit />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+});
+
+*/

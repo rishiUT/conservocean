@@ -119,7 +119,6 @@ class EndangeredStatusPieChart extends React.Component {
     //   .enter()
     //   .append("text")
     //   .text(function (d: any) {
-    //     console.log(d.data.key);
     //     return d.data.key;
     //   })
     //   .attr("transform", function (d: any): any {

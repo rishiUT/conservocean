@@ -126,7 +126,6 @@ class Impacts extends Component {
         ${this.state.currentFilter}&${this.state.currentSort}`
       )
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
@@ -139,7 +138,6 @@ class Impacts extends Component {
     axios
       .get(`/api/human?${this.state.currentFilter}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the number of instances
           numInstances: response.data.total_impact_returned,
