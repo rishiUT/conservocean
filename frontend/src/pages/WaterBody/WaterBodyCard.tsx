@@ -21,10 +21,11 @@ function WBCard(props: any) {
 
         <img
           className="card-image"
-          src={props.body.mapImgPath}
+          src={props.body.imageurl}
           width="100%"
           alt=""
         ></img>
+
         <div className="card-body">
           <h5 className="card-title">
             <span dangerouslySetInnerHTML={{ __html: props.body.name }}></span>

@@ -29,7 +29,24 @@ jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
 //Tests water bodies to ensure they return something
 it("Renders a Water Body Instance", () => {
   act(() => {
-    render(<WaterBody />, container);
+    const test: any = { params: { id: 1 } };
+    render(<WaterBody match={test} />, container);
   });
+  expect(container.textContent).not.toBe(null);
+});
+
+it("Renders a Water Body Card", () => {
+  const test: any = { params: { id: 1 } };
+  act(() => {
+    render(<WBCard body={<WaterBody match={test} />} />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+});
+
+it("Renders a Water Body Grid", () => {
+  act(() => {
+    render(<WaterBodies />, container);
+  });
+  //switch inside router
   expect(container.textContent).not.toBe(null);
 });

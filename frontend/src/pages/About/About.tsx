@@ -44,7 +44,6 @@ interface tool {
 
 class About extends React.Component {
   state = {
-
     // Defining the information in stats, tools, data, and users to be displayed later
     stats: [
       {
@@ -90,7 +89,7 @@ class About extends React.Component {
         name: "Docker",
         image: docker,
         description:
-          "Docker is used to create similar environments for us to work "+
+          "Docker is used to create similar environments for us to work " +
           "within, making working seperately much easier.",
         link: "https://www.docker.com/",
       },
@@ -98,7 +97,7 @@ class About extends React.Component {
         name: "Node.js and npm",
         image: node,
         description:
-          "Node.js and npm are used to manage the project's installations and "+
+          "Node.js and npm are used to manage the project's installations and " +
           "dependencies.",
         link: "https://www.nodejs.org/",
       },
@@ -118,7 +117,7 @@ class About extends React.Component {
         name: "React-select",
         image: reactImg,
         description:
-          "React-select was used to implement the drop-down menu interfaces "+
+          "React-select was used to implement the drop-down menu interfaces " +
           "for filtering and searching on the model pages.",
         link: "https://react-select.com",
       },
@@ -128,7 +127,7 @@ class About extends React.Component {
         name: "FishBase API",
         image: fishbase,
         description:
-          "FishBase stores basic information about fish, such as species, "+
+          "FishBase stores basic information about fish, such as species, " +
           "common name, genus, etc.",
         link: "https://fishbaseapi.readme.io",
       },
@@ -136,7 +135,7 @@ class About extends React.Component {
         name: "IUCN Red List API",
         image: iucn,
         description:
-          "The IUCN Red List database stores information on the risk levels "+
+          "The IUCN Red List database stores information on the risk levels " +
           "of several species, indicating their risk of extinction.",
         link: "https://apiv3.iucnredlist.org/",
       },
@@ -144,7 +143,7 @@ class About extends React.Component {
         name: "Bison USGS",
         image: bison,
         description:
-          "Bison USGS stores information about the geographic location of "+
+          "Bison USGS stores information about the geographic location of " +
           "fish around the United States.",
         link: "https://bison.usgs.gov/#home",
       },
@@ -152,8 +151,8 @@ class About extends React.Component {
         name: "Marine Regions",
         image: marine,
         description:
-          "Marine Regions contains a large variety of information about "+
-          "various geographic features, primarily features found in and "+
+          "Marine Regions contains a large variety of information about " +
+          "various geographic features, primarily features found in and " +
           "around water.",
         link: "https://marineregions.org",
       },
@@ -161,7 +160,7 @@ class About extends React.Component {
         name: "Open Fisheries",
         image: openfish,
         description:
-          "Open Fisheries has information regarding the yearly catch rate of "+
+          "Open Fisheries has information regarding the yearly catch rate of " +
           "various fish, given a species name for the fish.",
         link: "https://openfisheries.org",
       },
@@ -169,24 +168,24 @@ class About extends React.Component {
         name: "ArcGIS Hub",
         image: arcgis,
         description:
-          "Arcgis Hub stores many API’s, one of which has information about "+
+          "Arcgis Hub stores many API’s, one of which has information about " +
           "the microplastic density present in many major bodies of water.",
         link:
-          "https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic%20-"+
+          "https://hub.arcgis.com/datasets/CESJ::estimate-of-plastic%20-" +
           "pollution-in-the-worlds-oceans-km2-200-mm/geoservice",
       },
       {
         name: "OpenDataSoft",
         image: opendata,
         description:
-          "OpenDataSoft contains many API’s, one of which contains "+
-          "information about world power plants, separated by category, such "+
+          "OpenDataSoft contains many API’s, one of which contains " +
+          "information about world power plants, separated by category, such " +
           "as coal plants.",
         link:
-          "https://data.opendatasoft.com/explore/dataset/world-power%20-"+
-          "plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive"+
-          "%20.plant_state&disjunctive.plant_status&disjunctive.%20"+
-          "plant_type_of_ownership&disjunctive.plant_operating_company&"+
+          "https://data.opendatasoft.com/explore/dataset/world-power%20-" +
+          "plants-list%40kapsarc/table/?disjunctive.plant_country&disjunctive" +
+          "%20.plant_state&disjunctive.plant_status&disjunctive.%20" +
+          "plant_type_of_ownership&disjunctive.plant_operating_company&" +
           "%20disjunctive.type",
       },
     ],
@@ -200,9 +199,9 @@ class About extends React.Component {
         unitTests: 0,
         image: joe,
         bio:
-          " Hi, I’m Joe! I’m a junior CS and math major from Houston. "+
-          "For ConservOcean, I am primarily working on front-end development."+
-          " In my free time, I also enjoy reading, cooking, and "+
+          " Hi, I’m Joe! I’m a junior CS and math major from Houston. " +
+          "For ConservOcean, I am primarily working on front-end development." +
+          " In my free time, I also enjoy reading, cooking, and " +
           "watching movies!",
       },
       {
@@ -330,7 +329,6 @@ class About extends React.Component {
       });
   }
   render() {
-
     // Returns html output based on the information in the data structures
     const { users }: any = this.state;
     const result = users.map((user: user, index: number) => {
@@ -383,7 +381,6 @@ class About extends React.Component {
           Total Unit Tests: {this.state.totalUnitTests}
         </h3>
         <div className="row py-5"> {resultStats}</div>
-
 
         <h2 className="header">Our Team</h2>
         <div className="row py-5"> {result}</div>

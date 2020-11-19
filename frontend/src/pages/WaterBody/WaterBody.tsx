@@ -18,8 +18,8 @@ interface waterBody {
   type?: string;
   water_temp?: string;
 
-  fish?: number[];
-  human_impact_ids?: number[];
+  fish?: any[];
+  human_impact_ids?: any[];
 }
 
 // Display data page on a particular body of water
@@ -84,10 +84,10 @@ function WaterBody(props: any) {
               <div className="related-fish">
                 <h4>Related Species:</h4>
                 <ul>
-                  {body.fish?.map((id) => {
+                  {body.fish?.map((fish) => {
                     return (
                       <li>
-                        <a href={`/species/${id}`}>Species #{id} </a>
+                        <a href={`/species/${fish.id}`}>Species #{fish.id} </a>
                       </li>
                     );
                   })}
@@ -98,10 +98,12 @@ function WaterBody(props: any) {
               <div className="related-impacts">
                 <h4>Related impacts:</h4>
                 <ul>
-                  {body.fish?.map((id) => {
+                  {body.human_impact_ids?.map((impact) => {
                     return (
                       <li>
-                        <a href={`/impacts/${id}`}>Impact #{id} </a>
+                        <a href={`/impacts/${impact.id}`}>
+                          Impact #{impact.id}{" "}
+                        </a>
                       </li>
                     );
                   })}

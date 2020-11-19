@@ -154,41 +154,45 @@ function Species(props: any) {
                 <ul>
                   {species.human_impact_ids?.plastic_pollution
                     .sort()
-                    .map((id: any) => {
+                    .map((impact: any) => {
                       return (
                         <li>
-                          <a href={`/impacts/${id}`}>
-                            Plastic Pollution (Sampling Location {id})
+                          <a href={`/impacts/${impact.id}`}>
+                            Plastic Pollution (Sampling Location {impact.id})
                           </a>
                         </li>
                       );
                     })}
                   {species.human_impact_ids?.coal_power_plants
                     .sort()
-                    .map((id: any) => {
+                    .map((impact: any) => {
                       return (
                         <li>
-                          <a href={`/impacts/${id}`}>Coal Power Plant #{id}</a>
+                          <a href={`/impacts/${impact.id}`}>
+                            Coal Power Plant #{impact.id}
+                          </a>
                         </li>
                       );
                     })}
                   {species.human_impact_ids?.offshore_oil_spills
                     .sort()
-                    .map((id: any) => {
+                    .map((impact: any) => {
                       return (
                         <li>
-                          <a href={`/impacts/${id}`}>
-                            Offshore Oil Spill #{id}
+                          <a href={`/impacts/${impact.id}`}>
+                            Offshore Oil Spill #{impact.id}
                           </a>
                         </li>
                       );
                     })}
                   {species.human_impact_ids?.tanker_oil_spills
                     .sort()
-                    .map((id: any) => {
+                    .map((impact: any) => {
                       return (
                         <li>
-                          <a href={`/impacts/${id}`}>Tanker Oil Spill #{id}</a>
+                          <a href={`/impacts/${impact.id}`}>
+                            Tanker Oil Spill #{impact.id}
+                          </a>
                         </li>
                       );
                     })}

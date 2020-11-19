@@ -61,10 +61,13 @@ class BodiesOfWater(db.Model):
         """
 
         human_list = []
+        added = []
         limit = 0
         for human_impact in self.humanimpact:
-            if human_impact.id not in human_list:
-                human_list.append(human_impact.id)
+            if human_impact.id not in added:
+                human_list.append({"id": human_impact.id, "name": \
+                human_impact.name, "image": human_impact.imageurl })
+                added.append(human_impact.id)
                 limit += 1
                 if limit >= 10:
                     return human_list
@@ -81,7 +84,8 @@ class BodiesOfWater(db.Model):
         limit = 0
         for fish in self.fish:
             if fish.id not in fish_list:
-                fish_list.append(fish.id)
+                fish_list.append({"id": fish.id, \
+                    "name": fish.scientific_name, "image": fish.picture_url})
                 limit += 1
                 if limit >= 10:
                     return fish_list

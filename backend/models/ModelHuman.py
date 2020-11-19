@@ -86,7 +86,8 @@ class HumanImpact(db.Model):
         return_list = []
         limit = 0
         for water in self.water_relationship:
-            return_list.append({"id": water.id, "name": water.name})
+            return_list.append({"id": water.id, "name": water.name \
+                ,"image": water.imageurl})
             limit += 1
             if limit >= 10:
                 return return_list
@@ -108,7 +109,8 @@ class HumanImpact(db.Model):
             for fish in water.fish:
                 if fish.id not in added:
                     return_list.append(
-                        {"id": fish.id, "scientific_name": fish.scientific_name}
+                        {"id": fish.id, "scientific_name": \
+                        fish.scientific_name, "image": fish.picture_url}
                     )
                     added.append(fish.id)
                     limit += 1

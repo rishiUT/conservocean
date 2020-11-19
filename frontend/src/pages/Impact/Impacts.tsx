@@ -122,11 +122,9 @@ class Impacts extends Component {
   loadData() {
     axios
       .get(
-        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&
-        ${this.state.currentFilter}&${this.state.currentSort}`
+        `/api/human?offset=${this.state.offset}&limit=${this.state.perPage}&${this.state.currentFilter}&${this.state.currentSort}`
       )
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the data and number of instances
           data: response.data.data,
@@ -139,7 +137,6 @@ class Impacts extends Component {
     axios
       .get(`/api/human?${this.state.currentFilter}`)
       .then((response) => {
-        console.log(response);
         this.setState({
           // Update the number of instances
           numInstances: response.data.total_impact_returned,

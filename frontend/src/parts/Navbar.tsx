@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className={"navbar navbar-expand-lg navbar-custom sticky-top"}>
       <Link to="/" className={"navbar-brand"}>
-      <img className="icon" src={fish} alt="fish" />
+        <img className="icon" src={fish} alt="fish" />
         ConservOcean
       </Link>
 

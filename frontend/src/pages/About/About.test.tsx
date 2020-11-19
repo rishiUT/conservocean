@@ -28,34 +28,32 @@ it("Renders About Page", () => {
   expect(container.textContent).not.toBe(null);
 });
 
-/*
 it("Renders a User Card", () => {
   act(() => {
-    user = {
+    const user: any = {
       name: "test",
       id: "test",
-      commits: 0,
+      commits: 12,
       issues: 12,
       unitTests: 15,
-      image: "string"
-    }
-    render(<UserCard />, container);
+      image: "string",
+    };
+    render(<UserCard user />, container);
   });
   expect(container.textContent).not.toBe(null);
-})
+});
 
 it("Renders a Tool Card", () => {
   act(() => {
-    tool = {
+    const tool: any = {
       name: "test",
       id: "test",
       commits: 0,
       issues: 12,
       unitTests: 15,
-      image: "string"
-    }
-    render(<ToolCard />, container);
+      image: "string",
+    };
+    render(<ToolCard tool />, container);
   });
   expect(container.textContent).not.toBe(null);
-})
-*/
+});

@@ -27,3 +27,15 @@ it("Renders Home Page", () => {
   });
   expect(container.textContent).not.toBe(null);
 });
+
+//Tests a search Hit
+it("Renders Search Hit", () => {
+  act(() => {
+    const test: any = {
+      model: "fish",
+      match: { params: { id: 1 } },
+    };
+    render(<Hit hit={test} />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+});

@@ -7,7 +7,7 @@ import Impact from "./ImpactInstance";
 import ImpactCard from "./ImpactCard";
 import Impacts from "./Impacts";
 
-let container = null;
+let container: any = null;
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement("div");
@@ -26,10 +26,28 @@ jest.mock("mapbox-gl/dist/mapbox-gl", () => ({
   Map: () => ({}),
 }));
 
-//This tests the impacts to ensure they load
 it("Renders an Impact Instance Page", () => {
   act(() => {
-    render(<Impact />, container);
+    const test: any = { params: { id: 1 } };
+    render(<Impact match={test} />, container);
   });
   expect(container.textContent).not.toBe(null);
 });
+
+it("Renders an Impact Card", () => {
+  act(() => {
+    const test: any = { params: { id: 1 } };
+    render(<ImpactCard impact={<Impact match={test} />} />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+});
+
+/*
+it("Renders an Impact Table", () => {
+  act(() => {
+    //Switch inside router
+    render(<Impacts />, container);
+  });
+  expect(container.textContent).not.toBe(null);
+})
+*/

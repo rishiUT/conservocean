@@ -4,7 +4,7 @@ import WBCard from "../WaterBody/WaterBodyCard";
 import SpeciesCard from "../Species/SpeciesCard";
 import ImpactCard from "../Impact/ImpactCard";
 
-// Returns the search "hits" in the form of cards 
+// Returns the search "hits" in the form of cards
 // so the styling will match the rest of the site
 function Hit(props: any) {
   // Load a different card based on what type of model the hit is

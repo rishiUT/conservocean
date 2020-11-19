@@ -1,6 +1,5 @@
 import React from "react";
 import * as d3 from "d3";
-import { ReactComponent } from "*.svg";
 
 class PopulationTrendsandPollutionBarGraph extends React.Component {
   constructor(props: any) {
@@ -28,9 +27,9 @@ class PopulationTrendsandPollutionBarGraph extends React.Component {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     let data = [
-      { trend: "Stable", value: 23 },
-      { trend: "Increasing", value: 148 },
-      { trend: "Decreasing", value: 93 },
+      { trend: "Stable", value: 5 },
+      { trend: "Increasing", value: 6 },
+      { trend: "Decreasing", value: 16 },
     ];
 
     // X axis: scale and draw:
@@ -49,7 +48,7 @@ class PopulationTrendsandPollutionBarGraph extends React.Component {
 
     // Y axis: scale and draw:
     let y = d3.scaleLinear().range([height, 0]);
-    y.domain([0, 200]); // d3.hist has to be called before the Y axis obviously
+    y.domain([0, 20]); // d3.hist has to be called before the Y axis obviously
     svg.append("g").call(d3.axisLeft(y));
 
     // append the bar rectangles to the svg element

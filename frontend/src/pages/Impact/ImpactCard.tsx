@@ -1,6 +1,5 @@
 import React from "react";
-
-//Wraps a human impact in a card that displays 
+//Wraps a human impact in a card that displays
 //image, name, category, and subcategory
 export default function ImpactCard(props: any) {
   return (
@@ -25,10 +24,11 @@ export default function ImpactCard(props: any) {
 
         <img
           className="card-image"
-          src={props.impact.mapImgPath}
+          src={props.impact.imgurl}
           width="100%"
           alt=""
         ></img>
+
         <div className="card-body">
           <h5
             className="card-title"

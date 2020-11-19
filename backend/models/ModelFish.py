@@ -87,7 +87,8 @@ class Fish(db.Model):
         return_list = []
         limit = 0
         for water in self.location:
-            return_list.append({"id": water.id, "name": water.name})
+            return_list.append({"id": water.id, "name": water.name,\
+                "image": water.imageurl})
             limit += 1
             if limit >= 10:
                 return return_list
@@ -115,7 +116,9 @@ class Fish(db.Model):
             for human_impact in water.humanimpact:
                 if human_impact.id not in added:
                     return_dict[human_impact.subcategory]\
-                        .append(human_impact.id)
+                        .append({"id": human_impact.id, "name": \
+                            human_impact.name, "image": \
+                            human_impact.imageurl })
                     added.append(human_impact.id)
                     limit += 1
                     if limit >= 10:

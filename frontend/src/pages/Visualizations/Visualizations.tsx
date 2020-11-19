@@ -4,7 +4,7 @@ import EndangeredStatusPieChart from "./EndangeredStatusPieChart";
 import RecipesAndCaloriesBubble from "./RecipesAndCaloriesBubble";
 import TempAndPlants from "./TempAndPlants";
 import RecipesPerFamilyPie from "./RecipesPerFamily";
-import PopulationTrendsandPollutionBarGraph from "./PopulationTrendsandPollutionBarGraph"
+import PopulationTrendsandPollutionBarGraph from "./PopulationTrendsandPollutionBarGraph";
 
 export default function Visualizations() {
   return (
@@ -17,7 +17,7 @@ export default function Visualizations() {
         <h4>Species Per Endangered Status</h4>
         <EndangeredStatusPieChart />
 
-        <h4>Population Trend vs Amount of Pollution</h4>
+        <h4>Species Size vs Average Number of Impacting Pollution Instances</h4>
         <PopulationTrendsandPollutionBarGraph />
       </div>
       <div className="mb-5">
@@ -29,8 +29,8 @@ export default function Visualizations() {
         <TempAndPlants />
 
         <h4>Number of Recipes Per Plant Family</h4>
-        <RecipesPerFamilyPie/>
-        </div>
+        <RecipesPerFamilyPie />
+      </div>
     </div>
   );
 }

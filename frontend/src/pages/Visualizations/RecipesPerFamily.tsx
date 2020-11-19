@@ -12,9 +12,9 @@ class RecipesPerFamilyPie extends React.Component {
   }
 
   entries(map: any) {
-      var entries = [];
-      for (var key in map) entries.push({key: key, value: map[key]});
-      return entries;
+    var entries = [];
+    for (var key in map) entries.push({ key: key, value: map[key] });
+    return entries;
   }
 
   createPieChart() {
@@ -36,34 +36,53 @@ class RecipesPerFamilyPie extends React.Component {
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     // Conservocean Data
-    var data =
-    {
-      'Fabaceae': 51,
-      'Brassicaceae': 9,
-      'Amaranthaceae': 7,
-      'Lamiaceae': 31,
-      'Apiaceae': 40,
-      'Cucurbitaceae': 14,
-      'Solanaceae': 22,
-      'Euphorbiaceae': 8,
-      'Zingiberaceae': 24,
-      'Costaceae': 10,
-      'Poaceae': 11,
-      'Amaryllidaceae': 53,
-      'Ericaceae': 31,
-      'Rosaceae': 9,
-      'Asteraceae': 10,
-      'Dioscoreaceae': 8,
-      'Other': 16
+    var data = {
+      Fabaceae: 51,
+      Brassicaceae: 9,
+      Amaranthaceae: 7,
+      Lamiaceae: 31,
+      Apiaceae: 40,
+      Cucurbitaceae: 14,
+      Solanaceae: 22,
+      Euphorbiaceae: 8,
+      Zingiberaceae: 24,
+      Costaceae: 10,
+      Poaceae: 11,
+      Amaryllidaceae: 53,
+      Ericaceae: 31,
+      Rosaceae: 9,
+      Asteraceae: 10,
+      Dioscoreaceae: 8,
+      Other: 16,
     };
 
     var keys = Object.keys(data);
-    console.log(d3.schemeBlues[7]);
     // set the color scale
     var color = d3
       .scaleOrdinal()
       .domain(keys)
-      .range(["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"]);
+      .range([
+        "#3366cc",
+        "#dc3912",
+        "#ff9900",
+        "#109618",
+        "#990099",
+        "#0099c6",
+        "#dd4477",
+        "#66aa00",
+        "#b82e2e",
+        "#316395",
+        "#994499",
+        "#22aa99",
+        "#aaaa11",
+        "#6633cc",
+        "#e67300",
+        "#8b0707",
+        "#651067",
+        "#329262",
+        "#5574a6",
+        "#3b3eac",
+      ]);
 
     // Compute the position of each group on the pie:
     var pie = d3
@@ -98,7 +117,7 @@ class RecipesPerFamilyPie extends React.Component {
       })
       .attr("stroke", "white")
       .style("stroke-width", "2px")
-      .style("opacity", .75);
+      .style("opacity", 0.75);
 
     // Add the polylines between chart and labels:
     svg
@@ -112,7 +131,7 @@ class RecipesPerFamilyPie extends React.Component {
       .attr("points", function (d: any): any {
         var posA = arc.centroid(d); // line insertion in the slice
         var posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
-        var posC = outerArc.centroid(d) ; // Label position = almost the same as posB
+        var posC = outerArc.centroid(d); // Label position = almost the same as posB
         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
         posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
         return [posA, posB, posC];
@@ -125,13 +144,12 @@ class RecipesPerFamilyPie extends React.Component {
       .enter()
       .append("text")
       .text(function (d: any) {
-        console.log(d.data.key);
         return d.data.key;
       })
       .attr("transform", function (d: any): any {
         var pos = outerArc.centroid(d);
         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        pos[0] = radius * .8 * (midangle < Math.PI ? 1 : -1);
+        pos[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1);
         return "translate(" + pos + ")";
       })
       .style("text-anchor", function (d) {
