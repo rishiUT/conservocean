@@ -45,13 +45,13 @@ class EndangeredStatusPieChart extends React.Component {
 
     // helper that returns a color based on an ID
     let color = d3.scaleOrdinal([
-      "#042938",
-      "#0f3f55",
-      "#1b5269",
-      "#26617b",
-      "#2f6f8c",
-      "#387e9f",
-      "#387e9f",
+      "#015b5b",
+      "#015b5b",
+      "#c79002",
+      "#c75b2a",
+      "#c7292a",
+      "#010101",
+      "#aaaaaa",
     ]);
 
     let svg = d3
@@ -71,7 +71,8 @@ class EndangeredStatusPieChart extends React.Component {
       .attr("d", arc)
       .attr("fill", function (d: any) {
         return color(d.data.status);
-      });
+      })
+      .attr("stroke", "white");
 
     // building a legend is as simple as binding
     // more elements to the same data. in this case,

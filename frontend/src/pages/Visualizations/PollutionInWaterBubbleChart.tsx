@@ -14,33 +14,20 @@ class PollutionInWaterBubbleChart extends React.Component {
   createBubbleChart() {
     let json = {
       children: [
-        { name: "New York", value: 8 },
-        { name: "California", value: 31 },
-        { name: "Texas", value: 8 },
-        { name: "Illinois", value: 5 },
-        { name: "Pennsylvania", value: 6 },
-        { name: "Arizona", value: 1 },
-        { name: "Indiana", value: 1 },
-        { name: "Florida", value: 4 },
-        { name: "Ohio", value: 5 },
-        { name: "North Carolina", value: 3 },
-        { name: "Michigan", value: 1 },
-        { name: "Tennessee", value: 1 },
-        { name: "Washington", value: 4 },
-        { name: "District Of Columbia", value: 1 },
-        { name: "Massachusetts", value: 7 },
-        { name: "Missouri", value: 1 },
-        { name: "Maryland", value: 1 },
-        { name: "Oregon", value: 1 },
-        { name: "Wisconsin", value: 1 },
-        { name: "Virginia", value: 2 },
-        { name: "Georgia", value: 4 },
-        { name: "Minnesota", value: 3 },
-        { name: "New Jersey", value: 4 },
+        { name: "Bay (16)", value: 16 },
+        { name: "Coast (8)", value: 8 },
+        { name: "Delta (5)", value: 5 },
+        { name: "Escarpment (9)", value: 9 },
+        { name: "Fan (6)", value: 6 },
+        { name: "Lagoon (39)", value: 39 },
+        { name: "Lake (10)", value: 10 },
+        { name: "Reef (11)", value: 11 },
+        { name: "Shoal (12)", value: 12 },
+        { name: "Large Marine Ecosystem (17)", value: 17 },
       ],
     };
 
-    let diameter = 600,
+    let diameter = 800,
       color = d3.scaleOrdinal([
         "#042938",
         "#0f3f55",
@@ -109,8 +96,7 @@ class PollutionInWaterBubbleChart extends React.Component {
       .text(function (d: any) {
         return d.data.name;
       })
-      .style("fill", "#000000");
-  }
+      .style("fill", "#FFF");}
   render() {
     return <div className="vis-container" id="stateCompanyBubbleChart"></div>;
   }

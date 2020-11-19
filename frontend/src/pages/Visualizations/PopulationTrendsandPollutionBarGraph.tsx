@@ -27,9 +27,11 @@ class PopulationTrendsandPollutionBarGraph extends React.Component {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     let data = [
-      { trend: "Stable", value: 5 },
-      { trend: "Increasing", value: 6 },
-      { trend: "Decreasing", value: 16 },
+      { trend: "Least Concern", value: 23 },
+      { trend: "Vulnerable", value: 24 },
+      { trend: "Near Threatened", value: 17 },
+      { trend: "Endangered", value: 9 },
+      { trend: "Critically Endangered", value: 25 },
     ];
 
     // X axis: scale and draw:
@@ -48,7 +50,7 @@ class PopulationTrendsandPollutionBarGraph extends React.Component {
 
     // Y axis: scale and draw:
     let y = d3.scaleLinear().range([height, 0]);
-    y.domain([0, 20]); // d3.hist has to be called before the Y axis obviously
+    y.domain([0, 30]); // d3.hist has to be called before the Y axis obviously
     svg.append("g").call(d3.axisLeft(y));
 
     // append the bar rectangles to the svg element
@@ -67,7 +69,8 @@ class PopulationTrendsandPollutionBarGraph extends React.Component {
       .attr("height", function (d) {
         return height - y(d.value);
       })
-      .style("fill", "#4b97c9");
+      .style("fill", "#4b97c9")
+      .attr("stroke", "black");
   }
 
   render() {

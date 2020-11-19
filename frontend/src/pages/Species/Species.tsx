@@ -71,6 +71,20 @@ function Species(props: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const details = [
+    {label: "Family", value: <i>{species.family}</i>},
+    {label: "Genus", value: <i>{species.genus}</i>},
+    {label: "Species", value: <i>{species.species}</i>},
+    {label: "Habitat", value: HABITATS[species.habitat as string]},
+    {label: "Endangered Status", value: IUCN_STATUS[species.endanger_status as string]},
+    {label: "Population Trend", value: species.population_trend},
+    {label: "Average Size", value: species.average_size, unit: "cm"},
+    {label: "Description", value: species.description},
+    {label: "Spec. Code", value: species.speccode},
+    {label: "Catch Year", value: species.catch_year},
+    {label: "Catch Rate", value: species.catch_rate},
+  ];
+
   // Return data
   return species ? (
     <div className="bg-light full-height">
@@ -88,44 +102,15 @@ function Species(props: any) {
 
           <h3>Species Details</h3>
           <ul>
-            {species.family ? (
-              <li>
-                {" "}
-                Family: <i>{species.family}</i>
-              </li>
-            ) : null}
-            {species.genus ? (
-              <li>
-                Genus: <i>{species.genus}</i>
-              </li>
-            ) : null}
-            {species.species ? (
-              <li>
-                Species: <i>{species.species}</i>
-              </li>
-            ) : null}
-            {species.habitat ? (
-              <li>Habitat: {HABITATS[species.habitat]}</li>
-            ) : null}
-            {species.endanger_status ? (
-              <li>Endangered Status: {IUCN_STATUS[species.endanger_status]}</li>
-            ) : null}
-            {species.population_trend ? (
-              <li>Population Trend: {species.population_trend}</li>
-            ) : null}
-            {species.average_size ? (
-              <li>Average Size: {species.average_size} cm</li>
-            ) : null}
-            {species.description ? (
-              <li>Description: {species.description}</li>
-            ) : null}
-            {species.speccode ? <li>Spec. Code: {species.speccode}</li> : null}
-            {species.catch_year ? (
-              <li>Catch Year: {species.catch_year}</li>
-            ) : null}
-            {species.catch_rate ? (
-              <li>Catch Rate: {species.catch_rate}</li>
-            ) : null}
+            {details.map((attribute) => {
+              if (attribute.value) {
+                return (
+                  <li>{attribute.label + ": "}{attribute.value}{attribute.unit}</li>
+                );
+              } else {
+                return null;
+              }
+            })}
           </ul>
           <div className="related-items">
             {species.location && species.location.length > 0 ? (

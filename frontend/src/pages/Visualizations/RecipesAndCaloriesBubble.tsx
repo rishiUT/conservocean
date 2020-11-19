@@ -36,7 +36,7 @@ class RecipesAndCaloriesBubble extends React.Component {
       ],
     };
 
-    var diameter = 600,
+    var diameter = 850,
       color = d3.scaleOrdinal(d3.schemeCategory10);
 
     var bubble = d3.pack().size([diameter, diameter]).padding(5);
