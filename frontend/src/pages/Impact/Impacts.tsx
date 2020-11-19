@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 import Impact from "./ImpactInstance";
@@ -248,107 +248,109 @@ class Impacts extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route exact path="/impacts">
-          <div className="bg-light full-height">
-            <div className="container">
-              <h2 className="py-5 text-center">Human Impacts</h2>
-              <div className="form-group">
-                <div>
-                  <Select
-                    closeMenuOnSelect={false}
-                    options={groupedFiltering}
-                    onChange={this.handleFilterSelectChange}
-                    isMulti
-                    className="form-select mb-2"
-                  />
-                  <button
-                    type="button"
-                    className="btn btn-primary mb-2"
-                    onClick={this.filter}
-                  >
-                    Filter
-                  </button>
-                </div>
-                <div>
-                  <Select
-                    options={groupedSorting}
-                    onChange={this.handleSortSelectChange}
-                    className="form-select mb-2"
-                  />
+      <Router>
+        <Switch>
+          <Route exact path="/impacts">
+            <div className="bg-light full-height">
+              <div className="container">
+                <h2 className="py-5 text-center">Human Impacts</h2>
+                <div className="form-group">
+                  <div>
+                    <Select
+                      closeMenuOnSelect={false}
+                      options={groupedFiltering}
+                      onChange={this.handleFilterSelectChange}
+                      isMulti
+                      className="form-select mb-2"
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-primary mb-2"
+                      onClick={this.filter}
+                    >
+                      Filter
+                    </button>
+                  </div>
+                  <div>
+                    <Select
+                      options={groupedSorting}
+                      onChange={this.handleSortSelectChange}
+                      className="form-select mb-2"
+                    />
 
-                  <button
-                    type="button"
-                    className="btn btn-primary mb-2"
-                    onClick={this.filter}
+                    <button
+                      type="button"
+                      className="btn btn-primary mb-2"
+                      onClick={this.filter}
+                    >
+                      Sort
+                    </button>
+                  </div>
+                  <form
+                    className="form"
+                    id="searchForm"
+                    onSubmit={(e) => this.handleSearch(e)}
                   >
-                    Sort
-                  </button>
+                    <input
+                      type="text"
+                      id="search"
+                      placeholder="Search"
+                      className="input form-control mb-2"
+                    />
+                    <button type="submit" className="btn btn-primary mb-2">
+                      Search
+                    </button>
+                  </form>
                 </div>
-                <form
-                  className="form"
-                  id="searchForm"
-                  onSubmit={(e) => this.handleSearch(e)}
-                >
-                  <input
-                    type="text"
-                    id="search"
-                    placeholder="Search"
-                    className="input form-control mb-2"
-                  />
-                  <button type="submit" className="btn btn-primary mb-2">
-                    Search
-                  </button>
-                </form>
-              </div>
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Impact</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Latitude</th>
-                      <th scope="col">Longitude</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state.data.map((impact: impact) => (
-                      <ImpactTableData key={impact.id} impact={impact} />
-                    ))}
-                  </tbody>
-                </table>
+                <div className="table-responsive">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Impact</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Latitude</th>
+                        <th scope="col">Longitude</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.data.map((impact: impact) => (
+                        <ImpactTableData key={impact.id} impact={impact} />
+                      ))}
+                    </tbody>
+                  </table>
 
-                {/* Pagination */}
-                <nav>
-                  <ReactPaginate
-                    previousLabel={"previous"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    pageCount={this.state.numInstances / this.state.perPage}
-                    marginPagesDisplayed={1}
-                    pageRangeDisplayed={3}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    breakClassName={"break-me"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                    activeLinkClassName={"page-link"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-item"}
-                    previousLinkClassName={"page-link"}
-                    nextClassName={"page-item"}
-                    nextLinkClassName={"page-link"}
-                    disabledClassName={"disabled"}
-                  />
-                </nav>
+                  {/* Pagination */}
+                  <nav>
+                    <ReactPaginate
+                      previousLabel={"previous"}
+                      nextLabel={"next"}
+                      breakLabel={"..."}
+                      pageCount={this.state.numInstances / this.state.perPage}
+                      marginPagesDisplayed={1}
+                      pageRangeDisplayed={3}
+                      onPageChange={this.handlePageClick}
+                      containerClassName={"pagination"}
+                      breakClassName={"break-me"}
+                      breakLinkClassName={"page-link"}
+                      activeClassName={"active"}
+                      activeLinkClassName={"page-link"}
+                      pageClassName={"page-item"}
+                      pageLinkClassName={"page-link"}
+                      previousClassName={"page-item"}
+                      previousLinkClassName={"page-link"}
+                      nextClassName={"page-item"}
+                      nextLinkClassName={"page-link"}
+                      disabledClassName={"disabled"}
+                    />
+                  </nav>
+                </div>
               </div>
             </div>
-          </div>
-        </Route>
-        <Route path={`/impacts/:id`} component={Impact} />
-      </Switch>
+          </Route>
+          <Route path={`/impacts/:id`} component={Impact} />
+        </Switch>
+      </Router>
     );
   }
 }

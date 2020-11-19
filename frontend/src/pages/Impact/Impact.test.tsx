@@ -42,12 +42,9 @@ it("Renders an Impact Card", () => {
   expect(container.textContent).not.toBe(null);
 });
 
-/*
 it("Renders an Impact Table", () => {
   act(() => {
-    //Switch inside router
     render(<Impacts />, container);
   });
   expect(container.textContent).not.toBe(null);
 })
-*/

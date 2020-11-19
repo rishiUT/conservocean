@@ -38,7 +38,6 @@ it("Renders a Species Card", () => {
   expect(container.textContent).not.toBe(null);
 });
 
-/*
 it("Renders a Species Grid", () => {
   act(() => {
     render(<SpeciesGrid />, container);
@@ -46,4 +45,3 @@ it("Renders a Species Grid", () => {
   //switch inside router
   expect(container.textContent).not.toBe(null);
 });
-*/

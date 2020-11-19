@@ -105,7 +105,7 @@ function Species(props: any) {
             {details.map((attribute) => {
               if (attribute.value) {
                 return (
-                  <li>{attribute.label + ": "}{attribute.value}{attribute.unit}</li>
+                  <li key={attribute.label}>{attribute.label + ": "}{attribute.value}{attribute.unit}</li>
                 );
               } else {
                 return null;
