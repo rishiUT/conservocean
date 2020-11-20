@@ -34,6 +34,10 @@ export default class Map extends React.Component<MapState, MapState> {
       zoom: this.props.zoom,
     });
 
+    var marker = new mapboxgl.Marker()
+      .setLngLat([this.props.lng, this.props.lat])
+      .addTo(map);
+
     map.on("move", () => {
       this.setState({
         lng: Number(map.getCenter().lng.toFixed(4)),
