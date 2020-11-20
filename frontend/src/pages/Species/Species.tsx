@@ -90,7 +90,7 @@ function Species(props: any) {
     <div className="bg-light full-height">
       <main className="container py-5">
         <h1 className="text-center">{species.common_name} </h1>
-        <div className="container" style={{ width: "80%" }}>
+        <div className="container" >
           {species.picture_url ? (
             <img
               className="py-5"
@@ -112,6 +112,7 @@ function Species(props: any) {
               }
             })}
           </ul>
+
           <div className="related-items">
             {species.location && species.location.length > 0 ? (
               <div className="related-locations">

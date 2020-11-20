@@ -2,12 +2,13 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import WaterBody from "./WaterBody";
 import WBCard from "./WaterBodyCard";
 import WaterBodies from "./WaterBodyGrid";
 
-let container = null;
+let container: any = null;
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement("div");
@@ -45,7 +46,7 @@ it("Renders a Water Body Card", () => {
 
 it("Renders a Water Body Grid", () => {
   act(() => {
-    render(<WaterBodies />, container);
+    render(<Router><WaterBodies /></Router>, container);
   });
   //switch inside router
   expect(container.textContent).not.toBe(null);

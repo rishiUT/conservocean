@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Select from "react-select";
@@ -286,100 +286,98 @@ class SpeciesGrid extends Component {
 
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route exact path="/species">
-            <div className="bg-light full-height">
-              <div className="container">
-                <h2 className="py-5 text-center">Species</h2>
-                <div>
-                  <div
-                    style={{ zIndex: 100, position: "relative", width: "100%" }}
-                  >
-                    <Select
-                      closeMenuOnSelect={false}
-                      options={groupedFiltering}
-                      onChange={this.handleFilterSelectChange}
-                      isMulti
-                      className="mb-2"
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-primary mb-2"
-                      onClick={this.filter}
-                    >
-                      Filter
-                    </button>
-
-                    <Select
-                      options={groupedSorting}
-                      onChange={this.handleSortSelectChange}
-                      className="mb-2"
-                    />
-
-                    <button
-                      type="button"
-                      className="btn btn-primary mb-2"
-                      onClick={this.filter}
-                    >
-                      Sort
-                    </button>
-
-                    <form
-                      className="form"
-                      id="searchForm"
-                      onSubmit={(e) => this.handleSearch(e)}
-                    >
-                      <input
-                        type="text"
-                        className="input form-control mb-2"
-                        id="search"
-                        placeholder="Search"
-                      />
-                      <button type="submit" className="btn btn-primary mb-2">
-                        Search
-                      </button>
-                    </form>
-                  </div>
-                </div>
-
-                <div className="row">
-                  {this.state.data.map((species: species) => (
-                    <SpeciesCard key={species.id} sp={species} />
-                  ))}
-                </div>
-
-                {/* Pagination */}
-                <nav className="mb-4">
-                  <ReactPaginate
-                    previousLabel={"previous"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    pageCount={this.state.numInstances / this.state.perPage}
-                    marginPagesDisplayed={1}
-                    pageRangeDisplayed={3}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    breakClassName={"break-me"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                    activeLinkClassName={"page-link"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-item"}
-                    previousLinkClassName={"page-link"}
-                    nextClassName={"page-item"}
-                    nextLinkClassName={"page-link"}
-                    disabledClassName={"disabled"}
-                    forcePage={this.state.offset / this.state.perPage}
+      <Switch>
+        <Route exact path="/species">
+          <div className="bg-light full-height">
+            <div className="container">
+              <h2 className="py-5 text-center">Species</h2>
+              <div>
+                <div
+                  style={{ zIndex: 100, position: "relative", width: "100%" }}
+                >
+                  <Select
+                    closeMenuOnSelect={false}
+                    options={groupedFiltering}
+                    onChange={this.handleFilterSelectChange}
+                    isMulti
+                    className="mb-2"
                   />
-                </nav>
+                  <button
+                    type="button"
+                    className="btn btn-primary mb-2"
+                    onClick={this.filter}
+                  >
+                    Filter
+                  </button>
+
+                  <Select
+                    options={groupedSorting}
+                    onChange={this.handleSortSelectChange}
+                    className="mb-2"
+                  />
+
+                  <button
+                    type="button"
+                    className="btn btn-primary mb-2"
+                    onClick={this.filter}
+                  >
+                    Sort
+                  </button>
+
+                  <form
+                    className="form"
+                    id="searchForm"
+                    onSubmit={(e) => this.handleSearch(e)}
+                  >
+                    <input
+                      type="text"
+                      className="input form-control mb-2"
+                      id="search"
+                      placeholder="Search"
+                    />
+                    <button type="submit" className="btn btn-primary mb-2">
+                      Search
+                    </button>
+                  </form>
+                </div>
               </div>
+
+              <div className="row">
+                {this.state.data.map((species: species) => (
+                  <SpeciesCard key={species.id} sp={species} />
+                ))}
+              </div>
+
+              {/* Pagination */}
+              <nav className="mb-4">
+                <ReactPaginate
+                  previousLabel={"previous"}
+                  nextLabel={"next"}
+                  breakLabel={"..."}
+                  pageCount={this.state.numInstances / this.state.perPage}
+                  marginPagesDisplayed={1}
+                  pageRangeDisplayed={3}
+                  onPageChange={this.handlePageClick}
+                  containerClassName={"pagination justify-content-center"}
+                  breakClassName={"break-me"}
+                  breakLinkClassName={"page-link"}
+                  activeClassName={"active"}
+                  activeLinkClassName={"page-link"}
+                  pageClassName={"page-item"}
+                  pageLinkClassName={"page-link"}
+                  previousClassName={"page-item"}
+                  previousLinkClassName={"page-link"}
+                  nextClassName={"page-item"}
+                  nextLinkClassName={"page-link"}
+                  disabledClassName={"disabled"}
+                  forcePage={this.state.offset / this.state.perPage}
+                />
+              </nav>
             </div>
-          </Route>
-          <Route path={`/species/:id`} component={Species} />
-        </Switch>
-      </Router>
+          </div>
+        </Route>
+        <Route path={`/species/:id`} component={Species} />
+      </Switch>
     );
   }
 }

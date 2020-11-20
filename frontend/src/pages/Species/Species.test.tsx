@@ -2,7 +2,7 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Species from "./Species";
 import SpeciesCard from "./SpeciesCard";
 import SpeciesGrid from "./SpeciesGrid";
@@ -40,7 +40,7 @@ it("Renders a Species Card", () => {
 
 it("Renders a Species Grid", () => {
   act(() => {
-    render(<SpeciesGrid />, container);
+    render(<Router><SpeciesGrid /></Router>, container);
   });
   //switch inside router
   expect(container.textContent).not.toBe(null);

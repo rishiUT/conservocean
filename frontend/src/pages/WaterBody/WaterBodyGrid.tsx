@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 import WaterBody from "./WaterBody";
@@ -270,7 +270,6 @@ class WaterBodies extends Component {
 
   render() {
     return (
-      <Router>
         <Switch>
           <Route exact path="/water-bodies">
             <div className="bg-light full-height">
@@ -360,7 +359,6 @@ class WaterBodies extends Component {
           </Route>
           <Route path={`/water-bodies/:id`} component={WaterBody} />
         </Switch>
-      </Router>
     );
   }
 }

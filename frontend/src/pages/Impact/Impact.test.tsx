@@ -2,6 +2,7 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Impact from "./ImpactInstance";
 import ImpactCard from "./ImpactCard";
@@ -44,7 +45,7 @@ it("Renders an Impact Card", () => {
 
 it("Renders an Impact Table", () => {
   act(() => {
-    render(<Impacts />, container);
+    render(<Router><Impacts /></Router>, container);
   });
   expect(container.textContent).not.toBe(null);
 })
