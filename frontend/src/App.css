@@ -1,6 +1,6 @@
 .full-height {
-  height: 100vh;
-  overflow: auto;
+  min-height: 100vh;
+  overflow: visible;
 }
 
 .search-highlight {
@@ -14,4 +14,40 @@
 
 .vis-container {
   text-align: center;
+}
+
+body {
+  font-family: "Raleway", sans-serif !important;
+}
+
+.btn-primary {
+  background-color: #387e9f !important;
+  border-color: #387e9f !important;
+}
+
+.btn-primary:hover {
+  background-color: #3494c0 !important;
+  border-color: #3494c0 !important;
+}
+
+.page-item.active .page-link {
+  background-color: #387e9f !important;
+  border-color: #387e9f !important;
+  color: white !important;
+}
+
+.card-link {
+  color: #3494c0 !important;
+}
+
+.card-link:hover {
+  color: #387e9f !important;
+}
+
+.page-item.disabled .page-link {
+  color: darkgray !important;
+}
+
+.page-link {
+  color: #387e9f !important;
 }

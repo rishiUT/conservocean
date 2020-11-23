@@ -3,6 +3,9 @@ import "./Home.css";
 import waves from "../Media/waves.png";
 import fish from "../Media/fish.png";
 import drops from "../Media/water-drops.png";
+import fish2 from "../Media/fish.svg";
+import water from "../Media/sea.svg";
+import factory from "../Media/factory.svg";
 import Hit from "./HomeSearch";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, Hits, SearchBox } from "react-instantsearch-dom";
@@ -15,6 +18,28 @@ const searchClient = algoliasearch(
 
 // Returns mark-up for the home page
 function Home() {
+  const buttons = [
+    { link: "/species", text: "\nAquatic Animals", img: fish2, alt: "fish" },
+    {
+      link: "/water-bodies",
+      text: "\nBodies of Water",
+      img: water,
+      alt: "water",
+    },
+    { link: "/impacts", text: "\nHuman Impacts", img: factory, alt: "factory" },
+  ];
+
+  function makeButtons() {
+    return buttons.map((button) => (
+      <li key={button.text} className="list-item">
+        <a href={button.link} className="button">
+          <img className="image-2" src={button.img} alt={button.alt} />
+          {button.text}
+        </a>
+      </li>
+    ));
+  }
+
   return (
     <div>
       <div className="hero-section">
@@ -49,23 +74,7 @@ function Home() {
 
         {/* These are links to the model pages. */}
         <div className="list-cont">
-          <ul className="list">
-            <li className="list-item">
-              <a href="/water-bodies" className="button">
-                Bodies of Water
-              </a>
-            </li>
-            <li className="list-item">
-              <a href="/species" className="button">
-                Aquatic Animals
-              </a>
-            </li>
-            <li className="list-item">
-              <a href="/impacts" className="button">
-                Human Impacts
-              </a>
-            </li>
-          </ul>
+          <ul className="list">{makeButtons()}</ul>
         </div>
       </div>
 

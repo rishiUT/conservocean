@@ -20,9 +20,7 @@ function ToolCard({ tool }: any) {
               <h5 className="card-title">{tool.name}</h5>
             </div>
             <ul className="list-group list-group-flush">
-              <li className="list-group-item">
-                Description: {tool.description}
-              </li>
+              <li className="list-group-item">{tool.description}</li>
             </ul>
           </a>
         </div>

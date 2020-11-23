@@ -1,4 +1,5 @@
 import React from "react";
+import { roundFloat } from "../../util/format";
 
 // prints information about a given water body in a card
 function WBCard(props: any) {
@@ -33,13 +34,13 @@ function WBCard(props: any) {
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
-            Latitude: {Number.parseFloat(props.body.latitude).toFixed(3)}
+            Latitude: {roundFloat(props.body.latitude, 3)}
           </li>
           <li className="list-group-item">
-            Longitude: {Number.parseFloat(props.body.longitude).toFixed(3)}
+            Longitude: {roundFloat(props.body.longitude, 3)}
           </li>
           <li className="list-group-item">
-            Size: {Number.parseFloat(props.body.size).toFixed(3)} sq. km
+            Size: {roundFloat(props.body.size, 3)} sq. km
           </li>
           {props.body.water_temp ? (
             <li className="list-group-item">

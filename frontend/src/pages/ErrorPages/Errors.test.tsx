@@ -2,10 +2,10 @@ import React from "react";
 import TestRenderer from "react-test-renderer";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Species from "./Species";
-import SpeciesCard from "./SpeciesCard";
-import SpeciesGrid from "./SpeciesGrid";
+import Error404 from "./Error404";
+import MysteryError from "./NoErrorCode";
+import NoResponseError from "./NoResponse";
+import ErrorPage from "./UnknownError";
 
 let container: any = null;
 beforeEach(() => {
@@ -22,31 +22,34 @@ afterEach(() => {
 });
 
 //Tests a species instance to make sure it renders something
-it("Renders Species Instance", () => {
+it("Renders Error Page for 404", () => {
   act(() => {
     const test: any = { params: { id: 1 } };
-    render(<Species match={test} />, container);
+    render(<Error404 />, container);
   });
   expect(container.textContent).not.toBe(null);
 });
 
-it("Renders a Species Card", () => {
+it("Renders Error Page for Unknown Error", () => {
   act(() => {
     const test: any = { params: { id: 1 } };
-    render(<SpeciesCard sp={<Species match={test} />} />, container);
+    render(<MysteryError />, container);
   });
   expect(container.textContent).not.toBe(null);
 });
 
-it("Renders a Species Grid", () => {
+it("Renders Page for No Response", () => {
   act(() => {
-    render(
-      <Router>
-        <SpeciesGrid />
-      </Router>,
-      container
-    );
+    render(<NoResponseError />, container);
   });
-  //switch inside router
+  expect(container.textContent).not.toBe(null);
+});
+
+//Tests a species instance to make sure it renders something
+it("Renders Error Page for Most Error Codes", () => {
+  act(() => {
+    const test: any = { errorid: 300 };
+    render(<ErrorPage test />, container);
+  });
   expect(container.textContent).not.toBe(null);
 });

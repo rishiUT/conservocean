@@ -51,8 +51,7 @@ class PollutionInWaterBubbleChart extends React.Component {
       .select("#stateCompanyBubbleChart")
       .append("svg")
       .attr("viewBox", "0 0 " + (diameter + margin.right) + " " + diameter)
-      .attr("width", diameter + margin.right)
-      .attr("height", diameter)
+      .attr("preserveAspectRatio", "xMinYMin meet")
       .attr("class", "chart-svg");
 
     let root: any = d3
@@ -96,7 +95,8 @@ class PollutionInWaterBubbleChart extends React.Component {
       .text(function (d: any) {
         return d.data.name;
       })
-      .style("fill", "#FFF");}
+      .style("fill", "#FFF");
+  }
   render() {
     return <div className="vis-container" id="stateCompanyBubbleChart"></div>;
   }

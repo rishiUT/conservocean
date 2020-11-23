@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
 import { Switch, Route } from "react-router-dom";
 import axios from "axios";
-import Select from "react-select";
 import Impact from "./ImpactInstance";
 import algoliasearch from "algoliasearch/lite";
+import PageContainer from "../../parts/PageContainer";
+import Form from "../../parts/Form";
+import ErrorPage from "../ErrorPages/UnknownError";
+import NoResponseError from "../ErrorPages/NoResponse";
+import MysteryError from "../ErrorPages/NoErrorCode";
 
 // Keys to access Alggolia search
 const searchClient = algoliasearch(
@@ -118,6 +122,19 @@ class Impacts extends Component {
     highlightableAttributes: ["name", "category", "subcategory"],
   };
 
+  axiosErrorCatch(error: any) {
+    if (error.response) {
+      //client received an error response (4xx or 5xx)
+      return ErrorPage({ errorid: error.response.status });
+    } else if (error.request) {
+      //client never received a response, or the request never left
+      return NoResponseError();
+    } else {
+      //something else, unrelated to axios
+      return MysteryError();
+    }
+  }
+
   // Make API request for the current page of data using Axios
   loadData() {
     axios
@@ -130,9 +147,7 @@ class Impacts extends Component {
           data: response.data.data,
         });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => this.axiosErrorCatch(error));
 
     axios
       .get(`/api/human?${this.state.currentFilter}`)
@@ -142,9 +157,7 @@ class Impacts extends Component {
           numInstances: response.data.total_impact_returned,
         });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => this.axiosErrorCatch(error));
   }
 
   // Component initially loads
@@ -246,106 +259,75 @@ class Impacts extends Component {
     }
   }
 
+  thelems = [
+    { text: "Impact" },
+    { text: "Category" },
+    { text: "Type" },
+    { text: "Latitude" },
+    { text: "Longitude" },
+  ];
+
+  makeTableHeaders() {
+    return this.thelems.map((thelem) => (
+      <th key={thelem.text} scope="col">
+        {thelem.text}
+      </th>
+    ));
+  }
+
   render() {
     return (
       <Switch>
         <Route exact path="/impacts">
-          <div className="bg-light full-height">
-            <div className="container">
-              <h2 className="py-5 text-center">Human Impacts</h2>
-              <div className="form-group">
-                <div>
-                  <Select
-                    closeMenuOnSelect={false}
-                    options={groupedFiltering}
-                    onChange={this.handleFilterSelectChange}
-                    isMulti
-                    className="form-select mb-2"
-                  />
-                  <button
-                    type="button"
-                    className="btn btn-primary mb-2"
-                    onClick={this.filter}
-                  >
-                    Filter
-                  </button>
-                </div>
-                <div>
-                  <Select
-                    options={groupedSorting}
-                    onChange={this.handleSortSelectChange}
-                    className="form-select mb-2"
-                  />
+          <PageContainer>
+            <h2 className="py-5 text-center">Human Impacts</h2>
+            <Form
+              filterOptions={groupedFiltering}
+              sortOptions={groupedSorting}
+              handleFilterSelectChange={this.handleFilterSelectChange}
+              handleSortSelectChange={this.handleSortSelectChange}
+              filter={this.filter}
+              handleSearch={(e: any) => this.handleSearch(e)}
+            />
 
-                  <button
-                    type="button"
-                    className="btn btn-primary mb-2"
-                    onClick={this.filter}
-                  >
-                    Sort
-                  </button>
-                </div>
-                <form
-                  className="form"
-                  id="searchForm"
-                  onSubmit={(e) => this.handleSearch(e)}
-                >
-                  <input
-                    type="text"
-                    id="search"
-                    placeholder="Search"
-                    className="input form-control mb-2"
-                  />
-                  <button type="submit" className="btn btn-primary mb-2">
-                    Search
-                  </button>
-                </form>
-              </div>
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Impact</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Latitude</th>
-                      <th scope="col">Longitude</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state.data.map((impact: impact) => (
-                      <ImpactTableData key={impact.id} impact={impact} />
-                    ))}
-                  </tbody>
-                </table>
+            <div className="table-responsive">
+              <table className="table">
+                <thead>
+                  <tr>{this.makeTableHeaders()}</tr>
+                </thead>
+                <tbody>
+                  {this.state.data.map((impact: impact) => (
+                    <ImpactTableData key={impact.id} impact={impact} />
+                  ))}
+                </tbody>
+              </table>
 
-                {/* Pagination */}
-                <nav>
-                  <ReactPaginate
-                    previousLabel={"previous"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    pageCount={this.state.numInstances / this.state.perPage}
-                    marginPagesDisplayed={1}
-                    pageRangeDisplayed={3}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    breakClassName={"break-me"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                    activeLinkClassName={"page-link"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-item"}
-                    previousLinkClassName={"page-link"}
-                    nextClassName={"page-item"}
-                    nextLinkClassName={"page-link"}
-                    disabledClassName={"disabled"}
-                  />
-                </nav>
-              </div>
+              {/* Pagination */}
+              <nav>
+                <ReactPaginate
+                  previousLabel={"previous"}
+                  nextLabel={"next"}
+                  breakLabel={"..."}
+                  pageCount={this.state.numInstances / this.state.perPage}
+                  marginPagesDisplayed={1}
+                  pageRangeDisplayed={3}
+                  onPageChange={this.handlePageClick}
+                  containerClassName={"pagination"}
+                  breakClassName={"break-me"}
+                  breakLinkClassName={"page-link"}
+                  activeClassName={"active"}
+                  activeLinkClassName={"page-link"}
+                  pageClassName={"page-item"}
+                  pageLinkClassName={"page-link"}
+                  previousClassName={"page-item"}
+                  previousLinkClassName={"page-link"}
+                  nextClassName={"page-item"}
+                  nextLinkClassName={"page-link"}
+                  disabledClassName={"disabled"}
+                />
+              </nav>
             </div>
-          </div>
+          </PageContainer>
         </Route>
         <Route path={`/impacts/:id`} component={Impact} />
       </Switch>

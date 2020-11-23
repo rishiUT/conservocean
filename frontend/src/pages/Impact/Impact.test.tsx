@@ -45,7 +45,12 @@ it("Renders an Impact Card", () => {
 
 it("Renders an Impact Table", () => {
   act(() => {
-    render(<Router><Impacts /></Router>, container);
+    render(
+      <Router>
+        <Impacts />
+      </Router>,
+      container
+    );
   });
   expect(container.textContent).not.toBe(null);
-})
+});

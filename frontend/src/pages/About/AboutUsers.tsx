@@ -4,10 +4,12 @@ import "./About.css";
 interface user {
   name: string;
   id: string;
+  maj_resp: string;
   commits: number;
   issues: number;
   unitTests: number;
   image: string;
+  bio: string;
 }
 
 // Uses information passed in to create an return a "usercard"

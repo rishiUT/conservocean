@@ -34,7 +34,7 @@ export default class Map extends React.Component<MapState, MapState> {
       zoom: this.props.zoom,
     });
 
-    var marker = new mapboxgl.Marker()
+    new mapboxgl.Marker()
       .setLngLat([this.props.lng, this.props.lat])
       .addTo(map);
 

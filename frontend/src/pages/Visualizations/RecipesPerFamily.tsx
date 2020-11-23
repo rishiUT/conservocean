@@ -21,7 +21,7 @@ class RecipesPerFamilyPie extends React.Component {
     // set the dimensions and margins of the graph
     var width = 1000,
       height = 1000,
-      margin = 200;
+      margin = 120;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     var radius = Math.min(width, height) / 2 - margin;
@@ -30,30 +30,30 @@ class RecipesPerFamilyPie extends React.Component {
     var svg = d3
       .select("#recipesPerFamilyPieChart")
       .append("svg")
-      .attr("width", width)
-      .attr("height", height)
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("preserveAspectRatio", "xMinYMin meet")
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     // Conservocean Data
     var data = {
-      Fabaceae: 51,
-      Brassicaceae: 9,
-      Amaranthaceae: 7,
-      Lamiaceae: 31,
-      Apiaceae: 40,
-      Cucurbitaceae: 14,
-      Solanaceae: 22,
       Euphorbiaceae: 8,
-      Zingiberaceae: 24,
-      Costaceae: 10,
-      Poaceae: 11,
       Amaryllidaceae: 53,
-      Ericaceae: 31,
-      Rosaceae: 9,
-      Asteraceae: 10,
       Dioscoreaceae: 8,
+      Brassicaceae: 9,
+      Rosaceae: 9,
+      Costaceae: 10,
+      Asteraceae: 10,
+      Poaceae: 11,
+      Cucurbitaceae: 14,
       Other: 16,
+      Solanaceae: 22,
+      Zingiberaceae: 24,
+      Lamiaceae: 31,
+      Ericaceae: 31,
+      Apiaceae: 40,
+      Fabaceae: 51,
+      Amaranthaceae: 7,
     };
 
     var keys = Object.keys(data);
@@ -97,13 +97,13 @@ class RecipesPerFamilyPie extends React.Component {
     var arc = d3
       .arc()
       .innerRadius(radius * 0)
-      .outerRadius(radius * 1);
+      .outerRadius(radius * 0.8);
 
     // This arc exists for label positioning
     var outerArc = d3
       .arc()
       .innerRadius(radius * 0.9)
-      .outerRadius(radius * 1.7);
+      .outerRadius(radius * 0.9);
 
     // Build pie chart
     svg
@@ -149,7 +149,7 @@ class RecipesPerFamilyPie extends React.Component {
       .attr("transform", function (d: any): any {
         var pos = outerArc.centroid(d);
         var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        pos[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1);
+        pos[0] = radius * (midangle < Math.PI ? 1 : -1);
         return "translate(" + pos + ")";
       })
       .style("text-anchor", function (d) {

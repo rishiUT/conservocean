@@ -43,7 +43,7 @@ const IUCN_STATUS: { [key: string]: string } = {
   EX: "Extinct",
 };
 
-//Wraps a species in a card that displays the fish's information
+// Wraps a species in a card that displays the fish's information
 function SpeciesCard(props: any) {
   return (
     <div className={`col-lg-4 col-md-6 col-sm-12 ${props.className}`}>
@@ -63,7 +63,7 @@ function SpeciesCard(props: any) {
         <img
           className="card-img-top"
           width="100%"
-          src={props.sp.picture_url}
+          src={props.sp.picture_url ? props.sp.picture_url : props.sp.imageurl}
           alt=""
         ></img>
         <div className="card-body">

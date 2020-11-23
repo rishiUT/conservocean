@@ -57,8 +57,8 @@ class EndangeredStatusPieChart extends React.Component {
     let svg = d3
       .select("#endangeredStatusPieChart")
       .append("svg")
-      .attr("width", width)
-      .attr("height", height);
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("preserveAspectRatio", "xMinYMin meet");
     let g = svg
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");

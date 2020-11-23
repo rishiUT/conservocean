@@ -52,8 +52,7 @@ class RecipesAndCaloriesBubble extends React.Component {
       .select("#recipeCalorieBubbleChart")
       .append("svg")
       .attr("viewBox", "0 0 " + (diameter + margin.right) + " " + diameter)
-      .attr("width", diameter + margin.right)
-      .attr("height", diameter)
+      .attr("preserveAspectRatio", "xMinYMin meet")
       .attr("class", "chart-svg");
 
     var root: any = d3

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import Map from "../../parts/Map";
+import { roundFloat } from "../../util/format";
 
-// Iterface defines what information to expect in waterbody object
+import Map from "../../parts/Map";
+import PageContainer from "../../parts/PageContainer";
+
+// Interface defines what information to expect in waterbody object
 interface waterBody {
   id?: number;
   latitude?: string;
@@ -17,6 +20,9 @@ interface waterBody {
   size?: number;
   type?: string;
   water_temp?: string;
+  wind_speedkmph?: string;
+  locationname?: string;
+  imageurl?: string;
 
   fish?: any[];
   human_impact_ids?: any[];
@@ -34,9 +40,8 @@ function WaterBody(props: any) {
   useEffect(() => {
     const getWaterBody = async () => {
       // Pass param to the API call
-      const { data }: any = await axios.get(
-        `/api/water/${props.match.params.id}/`
-      );
+      //const { data }: any = await useAxios(
+      const { data }: any = await axios(`/api/water/${props.match.params.id}/`);
       // Update state
       setWaterBody(data.data);
     };
@@ -48,72 +53,160 @@ function WaterBody(props: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const details = body
+    ? [
+        { label: "Name", value: body.name },
+        { label: "Location", value: body.locationname },
+        { label: "Type", value: body.type },
+        { label: "Latitude", value: roundFloat(String(body.latitude), 3) },
+        { label: "Longitude", value: roundFloat(String(body.longitude), 3) },
+        {
+          label: "Size",
+          value: roundFloat(String(body.size), 3),
+          unit: " sq. km",
+        },
+        {
+          label: "Water Temperature",
+          value: body.water_temp,
+          unit: "°C",
+        },
+        {
+          label: "Average Wind Speed",
+          value: body.wind_speedkmph,
+          unit: " km/h",
+        },
+      ]
+    : [];
+
   // Return data
   return body ? (
-    <div className="bg-light full-height">
-      <main className="container py-5" style={{ height: "100%" }}>
-        <h1 className="text-center">{body.name} </h1>
-        <div className="container" style={{ width: "80%" }}>
-          {body.latitude && body.longitude ? (
-            <div style={{ width: "100%", height: "500px" }}>
-              <Map
-                lat={Number(body.latitude)}
-                lng={Number(body.longitude)}
-                zoom={4}
-              />
-            </div>
-          ) : (
-            <div></div>
-          )}
+    <PageContainer>
+      <h1 className="text-center">{body.name} </h1>
+      {body.latitude && body.longitude ? (
+        <div style={{ width: "100%", height: "500px" }}>
+          <Map
+            lat={Number(body.latitude)}
+            lng={Number(body.longitude)}
+            zoom={4}
+          />
+        </div>
+      ) : (
+        <div></div>
+      )}
 
+      <div className="row my-2">
+        <div className="col-md my-2">
+          <img
+            className="rounded"
+            src={body.imageurl}
+            alt={body.name}
+            width="100%"
+          />
+        </div>
+        <div className="col-md py-2">
           <h3>Region Data</h3>
           <ul>
-            {body.name ? <li>Name: {body.name}</li> : null}
-            {body.type ? <li>Type: {body.type}</li> : null}
-            {body.latitude ? <li>Latitude: {body.latitude}</li> : null}
-            {body.longitude ? <li>Longitude: {body.longitude}</li> : null}
-            {body.water_temp ? (
-              <li>Water Temperature: {body.water_temp}°C</li>
-            ) : null}
-            {body.salinity ? (
-              <li>Salinity: {body.salinity} g salt per kg water</li>
-            ) : null}
+            {details.map((attribute) => {
+              if (attribute.value) {
+                return (
+                  <li key={attribute.label}>
+                    {attribute.label + ": "}
+                    {attribute.value}
+                    {attribute.unit}
+                  </li>
+                );
+              } else {
+                return null;
+              }
+            })}
           </ul>
-          <div className="related-items">
-            {body.fish && body.fish.length > 0 ? (
-              <div className="related-fish">
-                <h4>Related Species:</h4>
-                <ul>
-                  {body.fish?.map((fish) => {
-                    return (
-                      <li>
-                        <a href={`/species/${fish.id}`}>Species #{fish.id} </a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ) : null}
-            {body.human_impact_ids && body.human_impact_ids.length > 0 ? (
-              <div className="related-impacts">
-                <h4>Related impacts:</h4>
-                <ul>
-                  {body.human_impact_ids?.map((impact) => {
-                    return (
-                      <li>
-                        <a href={`/impacts/${impact.id}`}>
-                          Impact #{impact.id}{" "}
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ) : null}
-          </div>
         </div>
-      </main>
-    </div>
+      </div>
+      <div className="related-items">
+        {body.fish && body.fish.length > 0 ? (
+          <div className="related-fish">
+            <h4 style={{ textAlign: "center" }} className="pt-5 pb-3">
+              Related Species:
+            </h4>
+            <div className="card-columns">
+              {body.fish?.map((species: any) => (
+                <div
+                  key={species.id}
+                  className="card bg-dark"
+                  style={{ color: "white" }}
+                >
+                  <a href={`/species/${species.id}`} className="card-link">
+                    <span
+                      style={{
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                        top: "0",
+                        left: "0",
+                        zIndex: 1,
+                      }}
+                    ></span>
+                  </a>
+                  <img className="card-img" src={species.image} alt="Card" />
+                  <div
+                    className="card-img-overlay"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to top, rgba(255, 255, 255, 0), rgba(56, 126, 159, 0.5)",
+                    }}
+                  >
+                    <h5 className="card-title">{species.name}</h5>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+        {body.human_impact_ids && body.human_impact_ids.length > 0 ? (
+          <div className="related-impacts">
+            <h4 style={{ textAlign: "center" }} className="pt-5 pb-3">
+              Related Impacts:
+            </h4>
+            <div className="card-columns">
+              {body.human_impact_ids?.map((impact: any) => (
+                <div
+                  key={impact.id}
+                  className="card bg-dark"
+                  style={{ color: "white" }}
+                >
+                  <a href={`/impacts/${impact.id}`} className="card-link">
+                    <span
+                      style={{
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                        top: "0",
+                        left: "0",
+                        zIndex: 1,
+                      }}
+                    ></span>
+                  </a>
+                  <img className="card-img" src={impact.image} alt="Card" />
+                  <div
+                    className="card-img-overlay"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to top, rgba(255, 255, 255, 0), rgba(56, 126, 159, 0.5)",
+                    }}
+                  >
+                    <h5 className="card-title">
+                      {impact.name
+                        ? impact.name
+                        : "Plastic Pollution Sample #" + impact.id}
+                    </h5>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </PageContainer>
   ) : (
     <div>Loading...</div>
   );
